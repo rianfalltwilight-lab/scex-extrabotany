@@ -1,0 +1,16 @@
+{
+  "category": "botania:baubles",
+  "icon": "extrabotany:jackie_chan_ring",
+  "name": "extrabotany.entry.jackie_chan_ring",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.jackie_chan_ring0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:jackie_chan_ring",
+      "text": "extrabotany.page.jackie_chan_ring1"
+    }
+  ]
+}

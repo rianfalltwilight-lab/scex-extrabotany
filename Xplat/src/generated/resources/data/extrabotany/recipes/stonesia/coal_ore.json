@@ -1,0 +1,21 @@
+{
+  "type": "extrabotany:stonesia",
+  "input": {
+    "type": "compound",
+    "ingredients": [
+      {
+        "type": "tag",
+        "tag": "minecraft:coal_ores"
+      },
+      {
+        "type": "tag",
+        "tag": "c:ores/coal"
+      },
+      {
+        "type": "tag",
+        "tag": "forge:ores/coal"
+      }
+    ]
+  },
+  "outputMana": 305
+}

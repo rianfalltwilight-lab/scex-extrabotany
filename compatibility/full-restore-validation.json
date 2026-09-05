@@ -1,0 +1,42 @@
+{
+  "version": "2.0-scex.5-dev",
+  "gametest": {
+    "required": 19,
+    "passed": 19
+  },
+  "resource_audit_errors": 0,
+  "old_world_items_identical": 242,
+  "entity_codec_roundtrips": 34,
+  "physical_client": {
+    "item_renderers": 243,
+    "entity_renderers": 34,
+    "armor_sets": 3
+  },
+  "reproducible_artifacts": {
+    "extrabotany-neoforge-1.21.1-2.0-scex.5-dev-sources.jar": {
+      "bytes": 5760562,
+      "sha256": "26cdaf889579758810accaebeb364b7b6340db15b961d7195868dbdea67733b0"
+    },
+    "extrabotany-neoforge-1.21.1-2.0-scex.5-dev.jar": {
+      "bytes": 6474768,
+      "sha256": "8d385776211f1a449f1c7c25c480286c1cb46c8d050145b9d5c7014216a6218a"
+    }
+  },
+  "scex4_frozen_unchanged": {
+    "extrabotany-neoforge-1.21.1-2.0-scex.4-dev.jar": "9b55f02f6ba72b395dcb9eaa650b0b5268faaaf0e7eb530dcbe8bdffae644f35",
+    "extrabotany-neoforge-1.21.1-2.0-scex.4-dev-sources.jar": "190d1a406cd06c354cab25beb8880f268ef886cb76964f979425ff04de624a0a",
+    "extrabotany-neoforge-1.21.1-scex.4-dev-source-20260905-legacy-compat.zip": "97f0505877bd5020de2b0f8d60167554ea5fd7de4ae6ef665bac997b35505352",
+    "manifest.json": "1cd5e8ac899f60bda1a1e43a6a1ffef06f766d97e5c58241846c54f584d6db18"
+  },
+  "production_release_approved": false,
+  "remaining_acceptance": "Frozen scex.5 wand/full-pack integration, followed by maintenance backup/deployment acceptance.",
+  "baseline_limitations": [
+    "Archived flamescion weapon item uses its original palette texture.",
+    "Archived music.ego has no audio and no active caller.",
+    "Archived butterfly projectile has no completed hit action."
+  ],
+  "model_source": {
+    "archive_sha256": "8051956c2b045b9f28e78fe9c25b36235c83d118ab4823bcc31dc3c188857f42",
+    "method": "Original texture bytes and numeric mesh/UV/animation mappings; no generated replacement artwork."
+  }
+}

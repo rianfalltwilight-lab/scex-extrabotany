@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${mod_version}",
+
+  "name": "${mod_name}",
+  "description": "${mod_description}",
+  "authors": [
+    "Lounode",
+    "ExtraMeteorP(Original)"
+  ],
+  "contributors": [
+    "Urranium(Texture)",
+    "Keletu(Armor Model)"
+  ],
+  "contact": {
+    "issues": "https://github.com/Lounode/ExtraBotany/issues",
+    "sources": "https://github.com/lounode/ExtraBotany"
+  },
+
+  "license": "${mod_license}",
+  "icon": "assets/extrabotany/textures/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "client": ["io.github.lounode.extrabotany.fabric.client.FabricClientInitializer"],
+    "main": ["io.github.lounode.extrabotany.fabric.FabricCommonInitializer"],
+    "fabric-gametest": [
+    
+    ],
+    "fabric-datagen": [
+      "io.github.lounode.extrabotany.fabric.data.FabricDatagenInitializer"
+    ],
+    "jei_mod_plugin": [
+      "io.github.lounode.extrabotany.client.integration.jei.JEIExtraBotanyPlugin"
+    ]
+  },
+
+  "mixins": [
+    "extrabotany_xplat.mixins.json",
+    "extrabotany_fabric.mixins.json"
+  ],
+  
+  "accessWidener": "extrabotany.accesswidener",
+
+  "depends": {
+    "fabricloader": ">=${fabric_loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}",
+    "botania": ">=${botania_version}-FABRIC",
+    "java": ">=17",
+    "fabric-api": "*",
+    "eventwrapper": ">=${eventwrapper_version}"
+  }
+}

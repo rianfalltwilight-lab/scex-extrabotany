@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "0": {
+      "item": "extrabotany:aerialite_ingot"
+    },
+    "1": {
+      "item": "botania:gaia_spirit"
+    },
+    "2": {
+      "item": "extrabotany:the_origin"
+    },
+    "3": {
+      "item": "botania:starcaller"
+    }
+  },
+  "pattern": [
+    "  0",
+    "12 ",
+    "31 "
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:star_wrath"
+  }
+}

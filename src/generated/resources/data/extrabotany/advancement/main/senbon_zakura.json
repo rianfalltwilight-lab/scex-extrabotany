@@ -1,0 +1,27 @@
+{
+  "parent": "extrabotany:main/root",
+  "criteria": {
+    "code_triggered": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:senbon_zakura.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:mana_reader"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:senbon_zakura"
+    }
+  },
+  "requirements": [
+    [
+      "code_triggered"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

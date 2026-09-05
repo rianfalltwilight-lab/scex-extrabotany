@@ -1,0 +1,16 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:sun_ring",
+  "name": "extrabotany.entry.sunring",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.sunring0"
+    },
+    {
+      "type": "botania:runic_altar",
+      "text": "extrabotany.page.sunring1",
+      "recipe": "extrabotany:runic_altar/sun_ring"
+    }
+  ]
+}

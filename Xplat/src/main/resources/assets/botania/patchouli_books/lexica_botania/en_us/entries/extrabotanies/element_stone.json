@@ -1,0 +1,31 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:aero_stone",
+  "name": "extrabotany.entry.elementstone",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.elementstone0"
+    },
+    {
+      "type": "botania:runic_altar",
+      "text": "extrabotany.page.elementstone1",
+      "recipe": "extrabotany:runic_altar/aero_stone"
+    },
+    {
+      "type": "botania:runic_altar",
+      "text": "extrabotany.page.elementstone2",
+      "recipe": "extrabotany:runic_altar/earth_stone"
+    },
+    {
+      "type": "botania:runic_altar",
+      "text": "extrabotany.page.elementstone3",
+      "recipe": "extrabotany:runic_altar/aqua_stone"
+    },
+    {
+      "type": "botania:runic_altar",
+      "text": "extrabotany.page.elementstone4",
+      "recipe": "extrabotany:runic_altar/ignis_stone"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:fried_chicken",
+  "name": "extrabotany.entry.fried_chicken",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.fried_chicken0"
+    },
+    {
+      "type": "botania:mana_infusion",
+      "recipes": "extrabotany:mana_infusion/fried_chicken",
+      "text": "extrabotany.page.fried_chicken1"
+    }
+  ]
+}

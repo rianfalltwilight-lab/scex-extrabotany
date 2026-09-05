@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "E": {
+      "tag": "c:ingots/elementium"
+    },
+    "O": {
+      "item": "extrabotany:the_origin"
+    },
+    "P": {
+      "item": "botania:pixie_dust"
+    },
+    "W": {
+      "item": "botania:manaweave_cloth"
+    }
+  },
+  "pattern": [
+    "PEP",
+    "WOW",
+    " W "
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:uuz_fan"
+  }
+}

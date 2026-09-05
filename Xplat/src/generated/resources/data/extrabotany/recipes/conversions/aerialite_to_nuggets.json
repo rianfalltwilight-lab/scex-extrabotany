@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "extrabotany:aerialite_ingots"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "extrabotany:aerialite_nugget"
+  }
+}

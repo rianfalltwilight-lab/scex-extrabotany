@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "botania:mana_ring"
+    },
+    {
+      "item": "botania:rune_mana"
+    }
+  ],
+  "result": {
+    "item": "extrabotany:dispersive_ring"
+  }
+}

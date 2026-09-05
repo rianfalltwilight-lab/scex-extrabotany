@@ -1,0 +1,42 @@
+{
+  "type": "botania:terra_plate",
+  "ingredients": [
+    {
+      "item": "extrabotany:manasteel_hammer"
+    },
+    {
+      "item": "extrabotany:elementium_hammer"
+    },
+    {
+      "item": "extrabotany:terrasteel_hammer"
+    },
+    {
+      "item": "extrabotany:gaia_hammer"
+    },
+    {
+      "item": "extrabotany:photonium_hammer"
+    },
+    {
+      "item": "extrabotany:shadowium_hammer"
+    },
+    {
+      "item": "extrabotany:aerialite_hammer"
+    },
+    {
+      "item": "extrabotany:orichalcos_hammer"
+    },
+    {
+      "item": "extrabotany:das_rheingold"
+    },
+    {
+      "item": "extrabotany:the_universe"
+    }
+  ],
+  "mana": 4000000,
+  "result": {
+    "item": "extrabotany:rhein_hammer",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

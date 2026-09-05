@@ -1,0 +1,127 @@
+{
+  "source": "extrabotany-neoforge-1.21.1-2.0-scex.1-gaia3-hotfix.jar (archived baseline; not included)",
+  "sha256": "8051956c2b045b9f28e78fe9c25b36235c83d118ab4823bcc31dc3c188857f42",
+  "license_evidence": "META-INF/neoforge.mods.toml: MIT License; existing upstream MIT notice retained",
+  "files": [
+    {
+      "path": "assets/extrabotany/models/item/candy_bag.json",
+      "sha256": "314f3a0f53f883cf9e42fd7e151b10c6154681215f0b7e6f139dcee8e8936e27"
+    },
+    {
+      "path": "assets/extrabotany/models/item/candy_bag_christmas.json",
+      "sha256": "a8c9b5ed7b7570519780ef84b0aa73c12e0ab95fa6cfe11a9d85a0ae44babfb5"
+    },
+    {
+      "path": "assets/extrabotany/models/item/candy_drei.json",
+      "sha256": "36fe1b57ae0963607f378fc68e5a97f7e374cbd3e69e6a2f808d454b085582a7"
+    },
+    {
+      "path": "assets/extrabotany/models/item/candy_drei_christmas.json",
+      "sha256": "6f2338ba4a7fbf9e47919e8028b8ecc5ae227261b22d15a542788ed34b7ed28a"
+    },
+    {
+      "path": "assets/extrabotany/models/item/candy_eins.json",
+      "sha256": "6498fef0d664092e155f96cb7877bcc2f0fa4bf4da419d2d08ae5aa48e50610a"
+    },
+    {
+      "path": "assets/extrabotany/models/item/candy_eins_christmas.json",
+      "sha256": "dd37118412dfeee8730bd81167b4d73eb82cc502508ec5427bc9f9abbb813efa"
+    },
+    {
+      "path": "assets/extrabotany/models/item/candy_zwei.json",
+      "sha256": "4a311176c6f71bd0fd32bac260a4dd7d7f7e0187d37c23adc3c5ecce48530a68"
+    },
+    {
+      "path": "assets/extrabotany/models/item/candy_zwei_christmas.json",
+      "sha256": "1d30479fc0f04b088dd72748ea104da705f12a17be967e16d1c2e4a11d0bccf8"
+    },
+    {
+      "path": "assets/extrabotany/textures/item/candy_bag.png",
+      "sha256": "0f1d2b5e4c209280c28f4b8f5359cd500ec0cfaa2d7255c90fabf11bb2264a46"
+    },
+    {
+      "path": "assets/extrabotany/textures/item/candy_bag_christmas.png",
+      "sha256": "c12130b757e53b2234ce1a6edaef352d69f806b17023113d50254ba1922a93e6"
+    },
+    {
+      "path": "assets/extrabotany/textures/item/candy_drei.png",
+      "sha256": "8ee8aa1ed89082f465c3f82748aa6b1892ed9d42c00ba852b3e4f20b752b392f"
+    },
+    {
+      "path": "assets/extrabotany/textures/item/candy_drei_christmas.png",
+      "sha256": "591ad866c2bcc1a68d69b896f269db357730495b59b467086e869fd0a893be97"
+    },
+    {
+      "path": "assets/extrabotany/textures/item/candy_eins.png",
+      "sha256": "cccc6159bda79c8fe10c38bde117cc008fd3b57e36808705aee1064f731324c9"
+    },
+    {
+      "path": "assets/extrabotany/textures/item/candy_eins_christmas.png",
+      "sha256": "dd1c0d19b7752cce11a01da5253019b7df6c9d57c9c410c4bc308bc751bbd22d"
+    },
+    {
+      "path": "assets/extrabotany/textures/item/candy_zwei.png",
+      "sha256": "3d824743134f21def1f6b5f6633cfd9f52e8311fc5c773f128d11fa5582440af"
+    },
+    {
+      "path": "assets/extrabotany/textures/item/candy_zwei_christmas.png",
+      "sha256": "84c6116d715e7c850a5b6276e24413045e5250bc432a8d84fc7830db573b84a4"
+    },
+    {
+      "path": "data/extrabotany/advancement/recipes/food/candy_drei.json",
+      "sha256": "e3d41747a05442dc77788795a66f7c05a075f753dc94289617b00457613e13ba"
+    },
+    {
+      "path": "data/extrabotany/advancement/recipes/food/candy_eins.json",
+      "sha256": "474afab8f3d6af96a9ec39e4cf35abef1ec5f614e8204032dda274b7e5e21e19"
+    },
+    {
+      "path": "data/extrabotany/advancement/recipes/food/candy_zwei.json",
+      "sha256": "c7ca56d406ba5d3718f643926ec6ffb41362c7301e61c415706952ef2f6a1dd5"
+    },
+    {
+      "path": "data/extrabotany/advancement/recipes/misc/candy_bag.json",
+      "sha256": "73be10a350e5fa927f6a263b08e9677a9fd2eb1faed622fdf3bfcb268ca16699"
+    },
+    {
+      "path": "data/extrabotany/loot_table/reward_bags/candy.json",
+      "sha256": "49a48f3d2f4e21f11aaeda1d89989aae02870c8a1033ae557c62eadf5e3a5c56"
+    },
+    {
+      "path": "data/extrabotany/recipe/candy_bag.json",
+      "sha256": "329524fe023a1a538db2c630a81fb928b698f9c696d0cf278e77497f5caf716b"
+    },
+    {
+      "path": "data/extrabotany/recipe/candy_drei.json",
+      "sha256": "443d0888dfa9eb3cafa2154dc77a8f896f642d7b59ddb5b6a0a73d3ed6616a51"
+    },
+    {
+      "path": "data/extrabotany/recipe/candy_eins.json",
+      "sha256": "1a8dbd93a909b6d4b58ceaf360f88e938a6132f04f85087a7c405a6235e1c4ee"
+    },
+    {
+      "path": "data/extrabotany/recipe/candy_zwei.json",
+      "sha256": "d370dc56b7f66eeadce3923eb6c31a5836ec5c3b174c002b32b6958196823a6a"
+    }
+  ],
+  "en_us": {
+    "item.extrabotany.candy_bag": "Halloween Candy Night",
+    "item.extrabotany.candy_bag.christmas": "Christmas Candy Night",
+    "item.extrabotany.candy_eins": "Halloween Candy Eins",
+    "item.extrabotany.candy_eins.christmas": "Christmas Candy Eins",
+    "item.extrabotany.candy_zwei": "Halloween Candy Zwei",
+    "item.extrabotany.candy_zwei.christmas": "Christmas Candy Zwei",
+    "item.extrabotany.candy_drei": "Halloween Candy Drei",
+    "item.extrabotany.candy_drei.christmas": "Christmas Candy Drei"
+  },
+  "zh_cn": {
+    "item.extrabotany.candy_bag": "万圣糖惊魂夜",
+    "item.extrabotany.candy_bag.christmas": "圣诞糖惊魂夜",
+    "item.extrabotany.candy_eins": "万圣节糖果Eins",
+    "item.extrabotany.candy_eins.christmas": "圣诞节糖果Eins",
+    "item.extrabotany.candy_zwei": "万圣节糖果Zwei",
+    "item.extrabotany.candy_zwei.christmas": "圣诞节糖果Zwei",
+    "item.extrabotany.candy_drei": "万圣节糖果Drei",
+    "item.extrabotany.candy_drei.christmas": "圣诞节糖果Drei"
+  }
+}

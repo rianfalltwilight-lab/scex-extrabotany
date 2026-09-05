@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "S": {
+      "item": "extrabotany:shadowium_ingot"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "S S",
+    "S S"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:shadow_warrior_leggings"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "category": "botania:extrabotanies",
+  "extra_recipe_mappings": {
+    "extrabotany:mana_cocktail": 2
+  },
+  "icon": "extrabotany:mana_cocktail{brewKey:\"extrabotany:mana_cocktail\",swigsLeft:1}",
+  "name": "extrabotany.entry.mana_cocktail",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.mana_cocktail0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:mana_glass_bottle",
+      "text": "extrabotany.page.mana_cocktail1"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "extrabotany:mana_cocktail{brewKey:\"extrabotany:mana_cocktail\",swigsLeft:1}",
+      "link_recipe": true,
+      "text": "extrabotany.page.mana_cocktail2"
+    },
+    {
+      "type": "extrabotany:craft_manual",
+      "input1": "extrabotany:mana_cocktail{brewKey:\"extrabotany:mana_cocktail\",swigsLeft:1}",
+      "input2": "botania:brew_flask{brewKey:\"botania:strength\"}",
+      "output": "extrabotany:mana_cocktail{brewKey:\"botania:strength\"}",
+      "shapeless": true,
+      "text": "extrabotany.page.mana_cocktail3"
+    }
+  ]
+}

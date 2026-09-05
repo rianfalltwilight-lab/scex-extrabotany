@@ -1,0 +1,6 @@
+{
+  "parent": "extrabotany:item/template/shield_blocking",
+  "textures": {
+    "layer0": "extrabotany:item/terrasteel_shield"
+  }
+}

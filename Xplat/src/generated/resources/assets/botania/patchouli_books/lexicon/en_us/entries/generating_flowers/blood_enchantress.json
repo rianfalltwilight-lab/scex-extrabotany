@@ -1,0 +1,19 @@
+{
+  "category": "botania:generating_flowers",
+  "extra_recipe_mappings": {
+    "extrabotany:floating_blood_enchantress": 1
+  },
+  "icon": "extrabotany:blood_enchantress",
+  "name": "extrabotany.entry.blood_enchantress",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.blood_enchantress0"
+    },
+    {
+      "type": "botania:petal_apothecary",
+      "recipe": "extrabotany:petal_apothecary/blood_enchantress",
+      "text": "extrabotany.page.blood_enchantress1"
+    }
+  ]
+}

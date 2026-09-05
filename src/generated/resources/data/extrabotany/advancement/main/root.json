@@ -1,0 +1,33 @@
+{
+  "criteria": {
+    "use_lexicon": {
+      "conditions": {
+        "item": {
+          "items": "botania:lexica_botania"
+        }
+      },
+      "trigger": "botania:use_item_success"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "background": "extrabotany:textures/block/photonium_block.png",
+    "description": {
+      "translate": "extrabotany.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:zadkiel"
+    },
+    "show_toast": false,
+    "title": {
+      "translate": "itemGroup.extrabotany"
+    }
+  },
+  "requirements": [
+    [
+      "use_lexicon"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

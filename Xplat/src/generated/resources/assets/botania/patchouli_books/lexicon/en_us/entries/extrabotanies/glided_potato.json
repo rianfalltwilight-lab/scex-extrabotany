@@ -1,0 +1,16 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:gilded_potato",
+  "name": "extrabotany.entry.glided_potato",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.glided_potato0"
+    },
+    {
+      "type": "botania:runic_altar",
+      "recipe": "extrabotany:runic_altar/gilded_potato",
+      "text": "extrabotany.page.glided_potato1"
+    }
+  ]
+}

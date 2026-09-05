@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "extrabotany:block/elementium_quartz_pillar_top",
+    "side": "extrabotany:block/elementium_quartz_pillar"
+  }
+}

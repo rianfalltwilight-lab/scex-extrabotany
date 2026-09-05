@@ -1,0 +1,52 @@
+{
+  "type": "minecraft:entity",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "botania:enable_relics"
+        },
+        {
+          "condition": "botania:killed_by_player"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "botania:bind_uuid"
+            }
+          ],
+          "name": "extrabotany:pandoras_box"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "botania:killed_by_player"
+        },
+        {
+          "chance": 0.2,
+          "condition": "minecraft:random_chance"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "extrabotany:music_disc_gaia3"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "extrabotany:music_disc_herrscher_of_the_void"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "extrabotany:entities/gaia_3rd"
+}

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "E": {
+      "item": "botania:pure_ender_essence"
+    },
+    "M": {
+      "tag": "c:ingots/manasteel"
+    },
+    "P": {
+      "item": "minecraft:ender_eye"
+    },
+    "T": {
+      "item": "extrabotany:the_origin"
+    }
+  },
+  "pattern": [
+    "EPE",
+    "MTM",
+    "MMM"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:cosmic_car_key"
+  }
+}

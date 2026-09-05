@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "extrabotany:item/mana_cocktail",
+    "layer1": "extrabotany:item/mana_cocktail_2"
+  }
+}

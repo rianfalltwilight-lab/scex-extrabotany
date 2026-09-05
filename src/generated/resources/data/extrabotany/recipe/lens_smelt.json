@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "botania:mana_lens"
+    },
+    {
+      "item": "botania:rune_of_fire"
+    },
+    {
+      "tag": "c:dusts/mana"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:lens_smelt"
+  }
+}

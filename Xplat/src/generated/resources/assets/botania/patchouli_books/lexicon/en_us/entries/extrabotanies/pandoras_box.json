@@ -1,0 +1,29 @@
+{
+  "advancement": "extrabotany:main/gaia_trial",
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:pandoras_box",
+  "name": "extrabotany.entry.pandoras_box",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "extrabotany:pandoras_box",
+      "link_recipe": true,
+      "text": "extrabotany.page.pandoras_box0"
+    },
+    {
+      "type": "patchouli:crafting"
+    },
+    {
+      "type": "patchouli:text",
+      "advancement": "extrabotany:main/the_source_of_honkai",
+      "text": "extrabotany.page.pandoras_box1"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "advancement": "extrabotany:main/the_source_of_honkai",
+      "item": "extrabotany:hero_medal",
+      "link_recipe": true,
+      "text": "extrabotany.page.pandoras_box2"
+    }
+  ]
+}

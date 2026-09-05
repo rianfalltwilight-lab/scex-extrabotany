@@ -1,0 +1,83 @@
+{
+  "type": "minecraft:empty",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "botania:white_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:orange_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:magenta_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:light_blue_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:yellow_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:lime_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:pink_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:gray_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:light_gray_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:cyan_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:purple_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:blue_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:brown_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:green_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:red_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:black_petal"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 6.0,
+          "function": "minecraft:set_count"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "extrabotany:reward_bags/eins"
+}

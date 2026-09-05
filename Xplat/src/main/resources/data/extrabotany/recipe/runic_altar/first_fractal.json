@@ -1,0 +1,50 @@
+{
+  "type": "botania:runic_altar",
+  "catalysts": [],
+  "ingredients": [
+    {
+      "item": "extrabotany:true_shadow_katana"
+    },
+    {
+      "item": "extrabotany:true_terrablade"
+    },
+    {
+      "item": "extrabotany:influx_waver"
+    },
+    {
+      "item": "extrabotany:star_wrath"
+    },
+    {
+      "item": "extrabotany:excalibur"
+    },
+    {
+      "item": "minecraft:wooden_sword"
+    },
+    {
+      "item": "minecraft:diamond_sword"
+    },
+    {
+      "item": "minecraft:netherite_sword"
+    },
+    {
+      "item": "botania:manasteel_sword"
+    },
+    {
+      "item": "botania:elementium_sword"
+    },
+    {
+      "item": "extrabotany:gilded_potato_mashed"
+    },
+    {
+      "item": "extrabotany:the_universe"
+    }
+  ],
+  "mana": 500000,
+  "output": {
+    "count": 1,
+    "id": "extrabotany:first_fractal"
+  },
+  "reagent": {
+    "item": "botania:livingrock"
+  }
+}

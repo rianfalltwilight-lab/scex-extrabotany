@@ -1,0 +1,17 @@
+{
+  "type": "extrabotany:stonesia",
+  "input": {
+    "type": "compound",
+    "ingredients": [
+      {
+        "type": "tag",
+        "tag": "c:ores/zinc"
+      },
+      {
+        "type": "tag",
+        "tag": "forge:ores/zinc"
+      }
+    ]
+  },
+  "outputMana": 340
+}

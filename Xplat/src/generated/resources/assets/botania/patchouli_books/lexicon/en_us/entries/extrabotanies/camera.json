@@ -1,0 +1,21 @@
+{
+  "advancement": "extrabotany:main/stygian_twins",
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:camera",
+  "name": "extrabotany.entry.camera",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.camera0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.camera1"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:camera",
+      "text": "extrabotany.page.camera2"
+    }
+  ]
+}

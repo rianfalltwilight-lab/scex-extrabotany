@@ -1,0 +1,16 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:death_ring",
+  "name": "extrabotany.entry.deathring",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.deathring0"
+    },
+    {
+      "type": "botania:runic_altar",
+      "text": "extrabotany.page.deathring1",
+      "recipe": "extrabotany:runic_altar/death_ring"
+    }
+  ]
+}

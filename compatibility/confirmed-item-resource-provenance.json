@@ -1,0 +1,63 @@
+{
+  "source": "extrabotany-neoforge-1.21.1-2.0-scex.1-gaia3-hotfix.jar (archived baseline; not included)",
+  "source_sha256": "8051956c2b045b9f28e78fe9c25b36235c83d118ab4823bcc31dc3c188857f42",
+  "files": [
+    {
+      "path": "assets/extrabotany/models/item/element_rune.json",
+      "sha256": "426acb43ef52903da7a4e3c09c7dae6c04f258b3cb6ab6f9c4a0f14c49eabdfe"
+    },
+    {
+      "path": "assets/extrabotany/models/item/music_disc_herrscher_of_the_void.json",
+      "sha256": "c46a68dda9fa07b96d2bb5fad2dca56e6af7542762980553665c46282b98cca0"
+    },
+    {
+      "path": "assets/extrabotany/models/item/sin_rune.json",
+      "sha256": "74258720a2079d455519243b216d4277b13142b45082761ee0680fe9bffdb03c"
+    },
+    {
+      "path": "assets/extrabotany/textures/item/element_rune.png",
+      "sha256": "4a44cde57169573b1445018aa0378ce2515aecef21435fec13adf3eb7b84dd51"
+    },
+    {
+      "path": "assets/extrabotany/textures/item/music_disc_herrscher_of_the_void.png",
+      "sha256": "999357cdf8e0ae97b28a1734e551d985c0038e9d89c45534d1c0feccf92689b4"
+    },
+    {
+      "path": "assets/extrabotany/textures/item/sin_rune.png",
+      "sha256": "518e036e2499a949829459c288f2f943aee541dd178ecbd6073ed6e261d7ab0b"
+    },
+    {
+      "path": "data/extrabotany/advancement/recipes/misc/element_rune.json",
+      "sha256": "5775e13090bc0710a453f046f49c010e3fff4c7f5f03b4a86e6ee41c76f171ea"
+    },
+    {
+      "path": "data/extrabotany/advancement/recipes/misc/sin_rune.json",
+      "sha256": "38bb29ab2b52fa0166c35b3764e16ff389af99763059c1a65154dcb673e3786a"
+    },
+    {
+      "path": "data/extrabotany/jukebox_song/herrscher_of_the_void.json",
+      "sha256": "21dc34637c7835626e40f9c7349cd56f0c05814f0a0780c222285463701b1b28"
+    },
+    {
+      "path": "data/extrabotany/recipe/element_rune.json",
+      "sha256": "e2840a303da778f6f230e5e724db38d39bc3a5c2eab2e7215b11eb5987fb62d4"
+    },
+    {
+      "path": "data/extrabotany/recipe/sin_rune.json",
+      "sha256": "8eb9db5e39e469384f7173cfc69989b5eac5003d2990191d0273b4cfbe0edd7f"
+    }
+  ],
+  "existing_sound_identical_sha256": "3ed97898a3abaeb58b9ae7fc60d82300d8ac62b1ef7776678f7f1824ac009434",
+  "en_us": {
+    "item.extrabotany.element_rune": "Rune of Element",
+    "item.extrabotany.sin_rune": "Rune of Sin",
+    "item.extrabotany.music_disc_herrscher_of_the_void": "Scathed Music Disc",
+    "item.extrabotany.music_disc_herrscher_of_the_void.desc": "Salvation"
+  },
+  "zh_cn": {
+    "item.extrabotany.element_rune": "元灵符文",
+    "item.extrabotany.sin_rune": "大罪符文",
+    "item.extrabotany.music_disc_herrscher_of_the_void": "破损的唱片",
+    "item.extrabotany.music_disc_herrscher_of_the_void.desc": "Salvation"
+  }
+}

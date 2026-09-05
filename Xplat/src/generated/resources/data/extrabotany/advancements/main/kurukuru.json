@@ -1,0 +1,29 @@
+{
+  "parent": "extrabotany:main/craft_pedestal",
+  "criteria": {
+    "code_triggered": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.extrabotany:kurukuru.desc"
+    },
+    "frame": "goal",
+    "hidden": false,
+    "icon": {
+      "item": "extrabotany:pedestal_livingrock"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.extrabotany:kurukuru"
+    }
+  },
+  "requirements": [
+    [
+      "code_triggered"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

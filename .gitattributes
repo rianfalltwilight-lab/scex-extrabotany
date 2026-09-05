@@ -1,0 +1,4 @@
+# The accepted port contains a few historical mixed-EOL source files. Preserve
+# repository bytes exactly so BUILD-INFO and deterministic source archives have
+# the same tree hash on Windows and Linux checkouts.
+* -text

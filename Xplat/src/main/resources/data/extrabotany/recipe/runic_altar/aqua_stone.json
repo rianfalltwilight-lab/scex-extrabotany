@@ -1,0 +1,29 @@
+{
+  "type": "botania:runic_altar",
+  "catalysts": [],
+  "ingredients": [
+    {
+      "item": "botania:rune_of_water"
+    },
+    {
+      "item": "botania:rune_of_water"
+    },
+    {
+      "item": "botania:mana_diamond"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    },
+    {
+      "item": "minecraft:quartz"
+    }
+  ],
+  "mana": 2000,
+  "output": {
+    "count": 1,
+    "id": "extrabotany:aqua_stone"
+  },
+  "reagent": {
+    "item": "botania:livingrock"
+  }
+}

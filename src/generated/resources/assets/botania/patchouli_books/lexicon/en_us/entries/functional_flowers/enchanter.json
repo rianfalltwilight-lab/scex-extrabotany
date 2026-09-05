@@ -1,0 +1,19 @@
+{
+  "category": "botania:functional_flowers",
+  "extra_recipe_mappings": {
+    "extrabotany:floating_enchanter": 1
+  },
+  "icon": "extrabotany:enchanter",
+  "name": "extrabotany.entry.enchanter",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.enchanter0"
+    },
+    {
+      "type": "botania:petal_apothecary",
+      "recipe": "extrabotany:petal_apothecary/enchanter",
+      "text": "extrabotany.page.enchanter1"
+    }
+  ]
+}

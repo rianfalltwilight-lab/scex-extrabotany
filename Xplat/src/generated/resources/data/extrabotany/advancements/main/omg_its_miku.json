@@ -1,0 +1,54 @@
+{
+  "parent": "extrabotany:main/root",
+  "criteria": {
+    "has_armor_set": {
+      "conditions": {
+        "armor": {
+          "chest": {
+            "items": [
+              "extrabotany:starry_idol_suit"
+            ]
+          },
+          "feet": {
+            "items": [
+              "extrabotany:starry_idol_boots"
+            ]
+          },
+          "head": {
+            "items": [
+              "extrabotany:starry_idol_headgear"
+            ]
+          },
+          "legs": {
+            "items": [
+              "extrabotany:starry_idol_skirt"
+            ]
+          }
+        }
+      },
+      "trigger": "extrabotany:has_armor_set"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.extrabotany:omg_its_miku.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "extrabotany:starry_idol_headgear",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.extrabotany:omg_its_miku"
+    }
+  },
+  "requirements": [
+    [
+      "has_armor_set"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

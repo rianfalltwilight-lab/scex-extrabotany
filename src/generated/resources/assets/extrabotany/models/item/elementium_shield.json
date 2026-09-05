@@ -1,0 +1,14 @@
+{
+  "parent": "extrabotany:item/template/shield",
+  "overrides": [
+    {
+      "model": "extrabotany:item/elementium_shield_blocking",
+      "predicate": {
+        "extrabotany:blocking": 1.0
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "extrabotany:item/elementium_shield"
+  }
+}

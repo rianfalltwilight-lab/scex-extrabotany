@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "E": {
+      "tag": "c:nuggets/elementium"
+    },
+    "P": {
+      "item": "botania:pure_daisy"
+    }
+  },
+  "pattern": [
+    "PEP",
+    " P ",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:pure_daisy_pendant"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "extrabotany:stonesia",
+  "input": {
+    "type": "botania:any_of",
+    "ingredients": [
+      {
+        "type": "botania:tag",
+        "tag": "#minecraft:emerald_ores"
+      },
+      {
+        "type": "botania:tag",
+        "tag": "#c:ores/emerald"
+      }
+    ]
+  },
+  "outputMana": 690
+}

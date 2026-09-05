@@ -1,0 +1,25 @@
+{
+  "advancement": "extrabotany:main/the_source_of_honkai",
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:failnaught",
+  "name": "extrabotany.entry.failnaught",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.failnaught0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:failnaught",
+      "text": "extrabotany.page.failnaught1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.failnaught2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.failnaught3"
+    }
+  ]
+}

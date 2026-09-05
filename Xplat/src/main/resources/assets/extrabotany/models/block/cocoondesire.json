@@ -1,0 +1,82 @@
+{
+  "parent": "minecraft:block/block",
+  "elements": [
+    {
+      "faces": {
+        "down": {
+          "texture": "#bottom",
+          "uv": [
+            3.0,
+            3.0,
+            13.0,
+            13.0
+          ]
+        },
+        "east": {
+          "texture": "#east",
+          "uv": [
+            3.0,
+            1.0,
+            13.0,
+            15.0
+          ]
+        },
+        "north": {
+          "texture": "#north",
+          "uv": [
+            3.0,
+            1.0,
+            13.0,
+            15.0
+          ]
+        },
+        "south": {
+          "texture": "#south",
+          "uv": [
+            3.0,
+            1.0,
+            13.0,
+            15.0
+          ]
+        },
+        "up": {
+          "texture": "#top",
+          "uv": [
+            3.0,
+            3.0,
+            13.0,
+            13.0
+          ]
+        },
+        "west": {
+          "texture": "#west",
+          "uv": [
+            3.0,
+            1.0,
+            13.0,
+            15.0
+          ]
+        }
+      },
+      "from": [
+        3.0,
+        0.0,
+        3.0
+      ],
+      "to": [
+        13.0,
+        14.0,
+        13.0
+      ]
+    }
+  ],
+  "textures": {
+    "bottom": "extrabotany:block/cocoon_top",
+    "east": "extrabotany:block/cocoon_side",
+    "north": "extrabotany:block/cocoon_side",
+    "particle": "extrabotany:block/cocoon_side",
+    "south": "extrabotany:block/cocoon_side",
+    "top": "extrabotany:block/cocoon_top",
+    "west": "extrabotany:block/cocoon_side"
+  }
+}

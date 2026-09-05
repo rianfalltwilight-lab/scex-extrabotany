@@ -1,0 +1,16 @@
+{
+  "type": "extrabotany:copy_brew_from_flask",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "extrabotany:mana_cocktail"
+    },
+    {
+      "item": "botania:brew_flask"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:mana_cocktail"
+  }
+}

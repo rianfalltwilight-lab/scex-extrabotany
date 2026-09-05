@@ -1,0 +1,43 @@
+{
+  "parent": "extrabotany:main/stygian_twins",
+  "criteria": {
+    "has_armor_set": {
+      "conditions": {
+        "armor": {
+          "chest": {
+            "items": "extrabotany:pleiades_combat_maid_suit"
+          },
+          "feet": {
+            "items": "extrabotany:pleiades_combat_maid_boots"
+          },
+          "head": {
+            "items": "extrabotany:pleiades_combat_maid_headgear"
+          },
+          "legs": {
+            "items": "extrabotany:pleiades_combat_maid_skirt"
+          }
+        }
+      },
+      "trigger": "extrabotany:has_armor_set"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:cute_dress.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:pleiades_combat_maid_suit"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:cute_dress"
+    }
+  },
+  "requirements": [
+    [
+      "has_armor_set"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

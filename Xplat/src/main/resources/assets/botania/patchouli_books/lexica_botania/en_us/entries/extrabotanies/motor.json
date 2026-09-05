@@ -1,0 +1,20 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:motor",
+  "name": "extrabotany.entry.motor",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.motor0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.motor2"
+    },
+    {
+      "type": "patchouli:crafting",
+      "text": "extrabotany.page.motor1",
+      "recipe": "extrabotany:motor"
+    }
+  ]
+}

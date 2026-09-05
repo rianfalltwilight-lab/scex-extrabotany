@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "botania:mana_glass"
+    }
+  },
+  "pattern": [
+    "G G",
+    "G G",
+    " G "
+  ],
+  "result": {
+    "count": 3,
+    "item": "extrabotany:mana_glass_bottle"
+  },
+  "show_notification": true
+}

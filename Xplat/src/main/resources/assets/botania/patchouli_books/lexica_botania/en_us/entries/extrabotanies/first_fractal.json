@@ -1,0 +1,16 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:first_fractal",
+  "name": "extrabotany.entry.firstfractal",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.firstfractal0"
+    },
+    {
+      "type": "botania:runic_altar",
+      "text": "extrabotany.page.firstfractal1",
+      "recipe": "extrabotany:runic_altar/first_fractal"
+    }
+  ]
+}

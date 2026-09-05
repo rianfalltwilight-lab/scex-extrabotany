@@ -1,0 +1,66 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:dimension_catalyst",
+  "name": "extrabotany.entry.dimension_catalyst",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.dimension_catalyst0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:dimension_catalyst",
+      "text": "extrabotany.page.dimension_catalyst11"
+    },
+    {
+      "type": "botania:mana_infusion",
+      "recipes": "extrabotany:mana_infusion/apple_to_chorus_fruit",
+      "text": "extrabotany.page.dimension_catalyst1"
+    },
+    {
+      "type": "botania:mana_infusion",
+      "recipes": "extrabotany:mana_infusion/blaze_rod_dupe",
+      "text": "extrabotany.page.dimension_catalyst2"
+    },
+    {
+      "type": "botania:mana_infusion",
+      "recipes": "extrabotany:mana_infusion/cobblestone_to_nether_rack",
+      "text": "extrabotany.page.dimension_catalyst3"
+    },
+    {
+      "type": "botania:mana_infusion",
+      "recipes": "extrabotany:mana_infusion/diamond_horse_armor_to_shulker_shell",
+      "text": "extrabotany.page.dimension_catalyst4"
+    },
+    {
+      "type": "botania:mana_infusion",
+      "recipes": "extrabotany:mana_infusion/snowball_to_ender_pearl",
+      "text": "extrabotany.page.dimension_catalyst5"
+    },
+    {
+      "type": "botania:mana_infusion",
+      "recipes": "extrabotany:mana_infusion/iron_ore_to_quartz_ore",
+      "text": "extrabotany.page.dimension_catalyst6"
+    },
+    {
+      "type": "botania:mana_infusion",
+      "recipes": "extrabotany:mana_infusion/nether_star_to_totem_of_undying",
+      "text": "extrabotany.page.dimension_catalyst7"
+    },
+    {
+      "type": "botania:mana_infusion",
+      "recipes": "extrabotany:mana_infusion/sand_to_soul_sand",
+      "text": "extrabotany.page.dimension_catalyst8"
+    },
+    {
+      "type": "botania:mana_infusion",
+      "recipes": "extrabotany:mana_infusion/stone_to_end_stone",
+      "text": "extrabotany.page.dimension_catalyst9"
+    },
+    {
+      "type": "botania:mana_infusion",
+      "recipes": "extrabotany:mana_infusion/the_origin_to_elytra",
+      "text": "extrabotany.page.dimension_catalyst10"
+    }
+  ]
+}

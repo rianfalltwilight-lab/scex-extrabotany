@@ -1,0 +1,19 @@
+{
+  "category": "botania:generating_flowers",
+  "extra_recipe_mappings": {
+    "extrabotany:floating_edelweiss": 1
+  },
+  "icon": "extrabotany:edelweiss",
+  "name": "extrabotany.entry.edelweiss",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.edelweiss0"
+    },
+    {
+      "type": "botania:petal_apothecary",
+      "recipe": "extrabotany:petal_apothecary/edelweiss",
+      "text": "extrabotany.page.edelweiss1"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "advancement": "extrabotany:main/the_source_of_honkai",
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:feather_of_jingwei",
+  "name": "extrabotany.entry.jingwei",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.jingwei0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:feather_of_jingwei",
+      "text": "extrabotany.page.jingwei1"
+    }
+  ]
+}

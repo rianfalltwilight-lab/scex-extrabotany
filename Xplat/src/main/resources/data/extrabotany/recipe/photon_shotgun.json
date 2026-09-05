@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "D": {
+      "tag": "c:gems/mana_diamond"
+    },
+    "M": {
+      "item": "botania:mana_blaster"
+    },
+    "P": {
+      "tag": "extrabotany:photonium_ingots"
+    },
+    "S": {
+      "tag": "c:ingots/manasteel"
+    }
+  },
+  "pattern": [
+    "PPD",
+    "SM ",
+    "PPD"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:photon_shotgun"
+  }
+}

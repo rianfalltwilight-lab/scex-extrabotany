@@ -1,0 +1,35 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:the_universe",
+  "name": "extrabotany.entry.universe_medium",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.universe_medium0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.universe_medium1"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:the_origin",
+      "text": "extrabotany.page.universe_medium2"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:the_end",
+      "text": "extrabotany.page.universe_medium3"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:the_chaos",
+      "text": "extrabotany.page.universe_medium4"
+    },
+    {
+      "type": "botania:terrasteel",
+      "recipe": "extrabotany:terra_plate/the_universe",
+      "text": "extrabotany.page.universe_medium5"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "category": "botania:baubles",
+  "icon": "extrabotany:curse_ring",
+  "name": "extrabotany.entry.curse_ring",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.curse_ring0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:curse_ring",
+      "text": "extrabotany.page.curse_ring1"
+    }
+  ]
+}

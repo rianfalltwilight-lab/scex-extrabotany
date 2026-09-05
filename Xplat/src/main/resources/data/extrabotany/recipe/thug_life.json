@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "G": {
+      "item": "extrabotany:black_glasses"
+    },
+    "P": {
+      "tag": "botania:petals/black"
+    },
+    "S": {
+      "item": "minecraft:paper"
+    }
+  },
+  "pattern": [
+    "P P",
+    "SGS",
+    "P P"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:thug_life"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "extrabotany:stonesia",
+  "input": {
+    "type": "botania:tag",
+    "tag": "#c:ores/aluminum"
+  },
+  "outputMana": 390
+}

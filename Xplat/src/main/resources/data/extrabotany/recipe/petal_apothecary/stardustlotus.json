@@ -1,0 +1,36 @@
+{
+  "type": "botania:petal_apothecary",
+  "ingredients": [
+    {
+      "tag": "botania:petals/purple"
+    },
+    {
+      "tag": "botania:petals/purple"
+    },
+    {
+      "tag": "botania:petals/purple"
+    },
+    {
+      "tag": "botania:petals/magenta"
+    },
+    {
+      "tag": "botania:petals/magenta"
+    },
+    {
+      "item": "botania:rune_of_envy"
+    },
+    {
+      "item": "botania:rune_of_pride"
+    },
+    {
+      "item": "botania:gaia_spirit"
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "extrabotany:stardustlotus"
+  },
+  "reagent": {
+    "tag": "botania:seed_apothecary_reagent"
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "block.bellflower.ring": {
+    "sounds": [
+      "extrabotany:block/bellflower/ring"
+    ],
+    "subtitle": "subtitles.extrabotany:block.bellflower.ring"
+  },
+  "entity.player.hurt_backfire": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.player.hurt_freeze"
+      }
+    ],
+    "subtitle": "subtitles.extrabotany:entity.player.hurt_backfire"
+  },
+  "item.armor.equip_goblin": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "item.armor.equip_iron"
+      }
+    ],
+    "subtitle": "subtitles.extrabotany:item.armor.equip_goblin"
+  },
+  "item.armor.equip_idol": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "botania:equip_manaweave"
+      }
+    ],
+    "subtitle": "subtitles.extrabotany:item.armor.equip_idol"
+  },
+  "item.armor.equip_maid": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "botania:equip_manaweave"
+      }
+    ],
+    "subtitle": "subtitles.extrabotany:item.armor.equip_maid"
+  },
+  "item.armor.equip_warrior": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "item.armor.equip_chain"
+      }
+    ],
+    "subtitle": "subtitles.extrabotany:item.armor.equip_warrior"
+  },
+  "item.camera.charge": {
+    "sounds": [
+      "extrabotany:item/camera/charge"
+    ],
+    "subtitle": "subtitles.extrabotany:item.camera.charge"
+  },
+  "item.camera.focus": {
+    "sounds": [
+      "extrabotany:item/camera/focus"
+    ],
+    "subtitle": "subtitles.extrabotany:item.camera.focus"
+  },
+  "item.camera.use": {
+    "sounds": [
+      "extrabotany:item/camera/use"
+    ],
+    "subtitle": "subtitles.extrabotany:item.camera.use"
+  },
+  "item.excalibur.attack": {
+    "sounds": [
+      {
+        "name": "botania:terrablade",
+        "pitch": 1.4,
+        "volume": 0.4
+      }
+    ],
+    "subtitle": "subtitles.extrabotany:item.excalibur.attack"
+  },
+  "item.failnaught.shoot": {
+    "sounds": [
+      {
+        "name": "botania:terrablade",
+        "pitch": 1.4,
+        "volume": 0.4
+      }
+    ],
+    "subtitle": "subtitles.extrabotany:item.failnaught.shoot"
+  },
+  "item.feather_of_jingwei.shoot": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "block.fire.extinguish",
+        "volume": 0.2
+      }
+    ],
+    "subtitle": "subtitles.extrabotany:item.feather_of_jingwei.shoot"
+  },
+  "item.hammer.use": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "botania:terra_pick_mode"
+      }
+    ],
+    "subtitle": "subtitles.extrabotany:item.hammer.use"
+  },
+  "item.pandoras_box.open": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "item.armor.equip_chain"
+      }
+    ],
+    "subtitle": "subtitles.extrabotany:item.pandoras_box.open"
+  },
+  "item.reward_bag.open": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "item.armor.equip_leather"
+      }
+    ],
+    "subtitle": "subtitles.extrabotany:item.reward_bag.open"
+  },
+  "item.walking_cane.use": {
+    "sounds": [
+      {
+        "type": "event",
+        "name": "entity.fishing_bobber.retrieve"
+      }
+    ],
+    "subtitle": "subtitles.extrabotany:item.walking_cane.use"
+  },
+  "music.gaia3": {
+    "sounds": [
+      {
+        "name": "extrabotany:music/gaia3",
+        "stream": true,
+        "volume": 1.3
+      }
+    ]
+  }
+}

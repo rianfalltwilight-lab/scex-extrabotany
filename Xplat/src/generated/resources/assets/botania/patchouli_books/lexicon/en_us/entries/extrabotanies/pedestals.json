@@ -1,0 +1,37 @@
+{
+  "category": "botania:extrabotanies",
+  "extra_recipe_mappings": {
+    "extrabotany:pedestal_calcite": 1
+  },
+  "icon": "extrabotany:pedestal_livingrock",
+  "name": "extrabotany.entry.pedestals",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.pedestals0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:pedestal_livingrock",
+      "text": "extrabotany.page.pedestals1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.pedestals2"
+    },
+    {
+      "type": "extrabotany:pedestal_smash",
+      "recipe": "extrabotany:pedestal_smash/gilded_potato_mashed",
+      "text": "extrabotany.page.pedestals3"
+    },
+    {
+      "type": "extrabotany:pedestal_smash",
+      "recipe": "extrabotany:pedestal_smash/spirit_fragment",
+      "text": "extrabotany.page.pedestals5"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.pedestals4"
+    }
+  ]
+}

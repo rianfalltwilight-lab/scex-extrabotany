@@ -1,0 +1,16 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:rod_of_discord",
+  "name": "extrabotany.entry.rodofdiscord",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.rodofdiscord0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "text": "extrabotany.page.rodofdiscord1",
+      "recipe": "extrabotany:rod_of_discord"
+    }
+  ]
+}

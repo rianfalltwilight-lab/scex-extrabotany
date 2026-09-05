@@ -1,0 +1,16 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:moon_pendant",
+  "name": "extrabotany.entry.moonpendant",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.moonpendant0"
+    },
+    {
+      "type": "botania:runic_altar",
+      "text": "extrabotany.page.moonpendant1",
+      "recipe": "extrabotany:runic_altar/moon_pendant"
+    }
+  ]
+}

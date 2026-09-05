@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "extrabotany:elementium_quartz_slab",
+    "extrabotany:gaia_quartz_slab",
+    "extrabotany:smooth_elementium_quartz_slab",
+    "extrabotany:smooth_gaia_quartz_slab"
+  ]
+}

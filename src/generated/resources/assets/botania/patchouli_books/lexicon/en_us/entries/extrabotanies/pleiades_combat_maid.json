@@ -1,0 +1,53 @@
+{
+  "advancement": "extrabotany:main/stygian_twins",
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:pleiades_combat_maid_suit",
+  "name": "extrabotany.entry.pleiades_combat_maid",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.pleiades_combat_maid0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:pleiades_combat_maid_headgear",
+      "text": "extrabotany.page.pleiades_combat_maid1"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:pleiades_combat_maid_suit",
+      "text": "extrabotany.page.pleiades_combat_maid2"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:pleiades_combat_maid_skirt",
+      "text": "extrabotany.page.pleiades_combat_maid3"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:pleiades_combat_maid_boots",
+      "text": "extrabotany.page.pleiades_combat_maid4"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.pleiades_combat_maid5"
+    },
+    {
+      "type": "patchouli:text",
+      "advancement": "extrabotany:main/corruption",
+      "text": "extrabotany.page.pleiades_combat_maid6"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "advancement": "extrabotany:main/corruption",
+      "item": "extrabotany:sanguine_pleiades_combat_maid_suit",
+      "link_recipe": true,
+      "text": "extrabotany.page.pleiades_combat_maid7"
+    },
+    {
+      "type": "patchouli:text",
+      "flag": "otaku_mode",
+      "text": "extrabotany.page.pleiades_combat_maid8"
+    }
+  ]
+}

@@ -1,0 +1,250 @@
+{
+  "baseline": "scex.1 runtime vs frozen scex.4 runtime",
+  "evidence_sha256": {
+    "audit-full\\runs\\scex1\\registry-dump.json": "4428c2535f5d9f3c0127a6bcac5ba00bd7666cf9624f56c0218574ae395ff7f7",
+    "audit-full\\runs\\scex4\\registry-dump.json": "df1724561a9f497b348fa10a8471852cb2d13a6e209dd43cb2cadd0ed3acd078"
+  },
+  "registries": {
+    "botania:brews": {
+      "old_count": 6,
+      "scex4_count": 6,
+      "missing": {},
+      "added": {}
+    },
+    "minecraft:armor_material": {
+      "old_count": 7,
+      "scex4_count": 4,
+      "missing": {
+        "extrabotany:miku": "net.minecraft.world.item.ArmorMaterial",
+        "extrabotany:shootingguardian": "net.minecraft.world.item.ArmorMaterial",
+        "extrabotany:silentsages": "net.minecraft.world.item.ArmorMaterial"
+      },
+      "added": {}
+    },
+    "minecraft:block": {
+      "old_count": 98,
+      "scex4_count": 88,
+      "missing": {
+        "extrabotany:cocoondesire": "io.github.lounode.extrabotany.common.block.old.CocoonOfDesireBlock",
+        "extrabotany:elfjar": "io.github.lounode.extrabotany.common.block.old.LivingrockBarrelBlock",
+        "extrabotany:floating_stardustlotus": "io.github.lounode.extrabotany.common.block.flower.functional.FloatingStardustLotusBlock",
+        "extrabotany:fluidedmana": "io.github.lounode.extrabotany.forge.fluid.NeoForgeExtraBotanyFluids$ManaLiquidBlock",
+        "extrabotany:manabuffer": "io.github.lounode.extrabotany.common.block.mana.ManaBufferBlock",
+        "extrabotany:managenerator": "io.github.lounode.extrabotany.common.block.mana.ManaGeneratorBlock",
+        "extrabotany:manaliquefaction": "io.github.lounode.extrabotany.common.block.mana.ManaLiquefactionBlock",
+        "extrabotany:potted_stardustlotus": "net.minecraft.world.level.block.FlowerPotBlock",
+        "extrabotany:quantummanabuffer": "io.github.lounode.extrabotany.common.block.mana.QuantumManaBufferBlock",
+        "extrabotany:stardustlotus": "io.github.lounode.extrabotany.common.block.flower.functional.StardustLotusBlock",
+        "extrabotany:trophy": "io.github.lounode.extrabotany.common.block.old.TrophyBlock"
+      },
+      "added": {
+        "extrabotany:enchanted_soil": "io.github.lounode.extrabotany.common.block.EnchantedSoilBlock"
+      }
+    },
+    "minecraft:block_entity_type": {
+      "old_count": 30,
+      "scex4_count": 23,
+      "missing": {
+        "extrabotany:cocoondesire": "net.minecraft.world.level.block.entity.BlockEntityType",
+        "extrabotany:elfjar": "net.minecraft.world.level.block.entity.BlockEntityType",
+        "extrabotany:manabuffer": "net.minecraft.world.level.block.entity.BlockEntityType",
+        "extrabotany:managenerator": "net.minecraft.world.level.block.entity.BlockEntityType",
+        "extrabotany:manaliquefaction": "net.minecraft.world.level.block.entity.BlockEntityType",
+        "extrabotany:quantummanabuffer": "net.minecraft.world.level.block.entity.BlockEntityType",
+        "extrabotany:stardustlotus": "net.minecraft.world.level.block.entity.BlockEntityType"
+      },
+      "added": {}
+    },
+    "minecraft:creative_mode_tab": {
+      "old_count": 1,
+      "scex4_count": 1,
+      "missing": {},
+      "added": {}
+    },
+    "minecraft:entity_type": {
+      "old_count": 34,
+      "scex4_count": 9,
+      "missing": {
+        "extrabotany:bottled_star": "net.minecraft.world.entity.EntityType",
+        "extrabotany:butterfly_projectile": "net.minecraft.world.entity.EntityType",
+        "extrabotany:ego_minion": "net.minecraft.world.entity.EntityType",
+        "extrabotany:flamescion_slash": "net.minecraft.world.entity.EntityType",
+        "extrabotany:flamescion_sword": "net.minecraft.world.entity.EntityType",
+        "extrabotany:flamescion_ult": "net.minecraft.world.entity.EntityType",
+        "extrabotany:flamescion_void": "net.minecraft.world.entity.EntityType",
+        "extrabotany:flower_weapon": "net.minecraft.world.entity.EntityType",
+        "extrabotany:influx_waver_projectile": "net.minecraft.world.entity.EntityType",
+        "extrabotany:judah_oath": "net.minecraft.world.entity.EntityType",
+        "extrabotany:judah_spear": "net.minecraft.world.entity.EntityType",
+        "extrabotany:judah_sword": "net.minecraft.world.entity.EntityType",
+        "extrabotany:motor": "net.minecraft.world.entity.EntityType",
+        "extrabotany:phantom_sword": "net.minecraft.world.entity.EntityType",
+        "extrabotany:photon_shotgun_projectile": "net.minecraft.world.entity.EntityType",
+        "extrabotany:strengthen_slash": "net.minecraft.world.entity.EntityType",
+        "extrabotany:subspace": "net.minecraft.world.entity.EntityType",
+        "extrabotany:subspace_lance": "net.minecraft.world.entity.EntityType",
+        "extrabotany:subspace_spear": "net.minecraft.world.entity.EntityType",
+        "extrabotany:sword_domain": "net.minecraft.world.entity.EntityType",
+        "extrabotany:true_shadow_katana_projectile": "net.minecraft.world.entity.EntityType",
+        "extrabotany:true_terrablade_projectile": "net.minecraft.world.entity.EntityType",
+        "extrabotany:ufo": "net.minecraft.world.entity.EntityType",
+        "extrabotany:void_field": "net.minecraft.world.entity.EntityType",
+        "extrabotany:void_herrscher": "net.minecraft.world.entity.EntityType"
+      },
+      "added": {}
+    },
+    "minecraft:fluid": {
+      "old_count": 2,
+      "scex4_count": 0,
+      "missing": {
+        "extrabotany:flowing_fluidedmana": "net.neoforged.neoforge.fluids.BaseFlowingFluid$Flowing",
+        "extrabotany:fluidedmana": "net.neoforged.neoforge.fluids.BaseFlowingFluid$Source"
+      },
+      "added": {}
+    },
+    "minecraft:item": {
+      "old_count": 242,
+      "scex4_count": 163,
+      "missing": {
+        "extrabotany:aero_stone": "io.github.lounode.extrabotany.common.item.equipment.bauble.ElementalStoneItem",
+        "extrabotany:all_for_one": "io.github.lounode.extrabotany.common.item.equipment.bauble.BaubleBoxSimulatorItem",
+        "extrabotany:aqua_stone": "io.github.lounode.extrabotany.common.item.equipment.bauble.AquaStoneItem",
+        "extrabotany:binder": "io.github.lounode.extrabotany.common.item.equipment.tool.BinderItem",
+        "extrabotany:black_glasses": "io.github.lounode.extrabotany.common.item.equipment.bauble.CosmeticBaubleItem",
+        "extrabotany:bottled_flame": "io.github.lounode.extrabotany.common.item.equipment.bauble.BottledFlameItem",
+        "extrabotany:bottled_pixie": "io.github.lounode.extrabotany.common.item.equipment.tool.BottledPixieItem",
+        "extrabotany:bottled_star": "io.github.lounode.extrabotany.common.item.equipment.tool.BottledStarItem",
+        "extrabotany:cocoondesire": "net.minecraft.world.item.BlockItem",
+        "extrabotany:cosmic_car_key": "io.github.lounode.extrabotany.common.item.equipment.tool.CosmicCarKeyItem",
+        "extrabotany:cosmic_car_key_accessory": "io.github.lounode.extrabotany.common.item.equipment.bauble.MountAccessoryItem",
+        "extrabotany:death_ring": "io.github.lounode.extrabotany.common.item.equipment.bauble.DeathRingItem",
+        "extrabotany:earth_stone": "io.github.lounode.extrabotany.common.item.equipment.bauble.ElementalStoneItem",
+        "extrabotany:elfjar": "net.minecraft.world.item.BlockItem",
+        "extrabotany:elven_king": "io.github.lounode.extrabotany.common.item.equipment.bauble.BaubleBoxSimulatorItem",
+        "extrabotany:empty_core_of_the_void": "net.minecraft.world.item.Item",
+        "extrabotany:first_fractal": "io.github.lounode.extrabotany.common.item.relic.FirstFractalItem",
+        "extrabotany:flamescion_weapon": "io.github.lounode.extrabotany.common.item.equipment.tool.FlamescionWeaponItem",
+        "extrabotany:floating_stardustlotus": "vazkii.botania.common.item.block.SpecialFlowerBlockItem",
+        "extrabotany:fluidedmana_bucket": "net.minecraft.world.item.BucketItem",
+        "extrabotany:fox_ear": "io.github.lounode.extrabotany.common.item.equipment.bauble.CosmeticBaubleItem",
+        "extrabotany:fox_mask": "io.github.lounode.extrabotany.common.item.equipment.bauble.CosmeticBaubleItem",
+        "extrabotany:frost_star": "io.github.lounode.extrabotany.common.item.equipment.bauble.FrostStarItem",
+        "extrabotany:gem_of_conquest": "io.github.lounode.extrabotany.common.item.equipment.bauble.GemOfConquestItem",
+        "extrabotany:goggle_jungle": "io.github.lounode.extrabotany.common.item.equipment.bauble.CosmeticBaubleItem",
+        "extrabotany:goggle_ocean": "io.github.lounode.extrabotany.common.item.equipment.bauble.CosmeticBaubleItem",
+        "extrabotany:goggle_snowfield": "io.github.lounode.extrabotany.common.item.equipment.bauble.CosmeticBaubleItem",
+        "extrabotany:goggle_standard": "io.github.lounode.extrabotany.common.item.equipment.bauble.CosmeticBaubleItem",
+        "extrabotany:ignis_stone": "io.github.lounode.extrabotany.common.item.equipment.bauble.ElementalStoneItem",
+        "extrabotany:influx_waver": "io.github.lounode.extrabotany.common.item.relic.InfluxWaverItem",
+        "extrabotany:judah_oath": "io.github.lounode.extrabotany.common.item.relic.JudahOathItem",
+        "extrabotany:judah_oath_kira": "io.github.lounode.extrabotany.common.item.relic.JudahOathItem",
+        "extrabotany:judah_oath_sakura": "io.github.lounode.extrabotany.common.item.relic.JudahOathItem",
+        "extrabotany:king_garden": "io.github.lounode.extrabotany.common.item.equipment.tool.KingGardenItem",
+        "extrabotany:lens_superconductor": "vazkii.botania.common.item.lens.LensItem",
+        "extrabotany:limited_edition_supply_bag": "io.github.lounode.extrabotany.common.item.LimitedEditionSupplyBagItem",
+        "extrabotany:mana_drink": "io.github.lounode.extrabotany.common.item.ManaDrinkItem",
+        "extrabotany:manabuffer": "net.minecraft.world.item.BlockItem",
+        "extrabotany:managenerator": "net.minecraft.world.item.BlockItem",
+        "extrabotany:manaliquefaction": "net.minecraft.world.item.BlockItem",
+        "extrabotany:mask": "io.github.lounode.extrabotany.common.item.equipment.bauble.CosmeticBaubleItem",
+        "extrabotany:miku_boots": "io.github.lounode.extrabotany.common.item.equipment.armor.old.OldExbotanyArmorItem",
+        "extrabotany:miku_chest": "io.github.lounode.extrabotany.common.item.equipment.armor.old.OldExbotanyArmorItem",
+        "extrabotany:miku_helm": "io.github.lounode.extrabotany.common.item.equipment.armor.old.OldExbotanyArmorItem",
+        "extrabotany:miku_legs": "io.github.lounode.extrabotany.common.item.equipment.armor.old.OldExbotanyArmorItem",
+        "extrabotany:moon_pendant": "io.github.lounode.extrabotany.common.item.equipment.bauble.MoonPendantItem",
+        "extrabotany:motor": "io.github.lounode.extrabotany.common.item.equipment.tool.MotorItem",
+        "extrabotany:motor_accessory": "io.github.lounode.extrabotany.common.item.equipment.bauble.MountAccessoryItem",
+        "extrabotany:peace_amulet": "io.github.lounode.extrabotany.common.item.equipment.bauble.PeaceAmuletItem",
+        "extrabotany:photon_shotgun": "io.github.lounode.extrabotany.common.item.equipment.tool.PhotonShotgunItem",
+        "extrabotany:potato_chips": "io.github.lounode.extrabotany.common.item.equipment.bauble.PotatoChipsItem",
+        "extrabotany:power_glove": "io.github.lounode.extrabotany.common.item.equipment.bauble.AttributeBaubleItem",
+        "extrabotany:pylon": "io.github.lounode.extrabotany.common.item.equipment.bauble.CosmeticBaubleItem",
+        "extrabotany:quantummanabuffer": "net.minecraft.world.item.BlockItem",
+        "extrabotany:red_scarf": "io.github.lounode.extrabotany.common.item.equipment.bauble.CosmeticBaubleItem",
+        "extrabotany:rod_of_discord": "io.github.lounode.extrabotany.common.item.equipment.tool.RodOfDiscordItem",
+        "extrabotany:shadow_katana": "io.github.lounode.extrabotany.common.item.equipment.tool.ShadowKatanaItem",
+        "extrabotany:shootingguardian_boots": "io.github.lounode.extrabotany.common.item.equipment.armor.old.ShootingGuardianArmorItem",
+        "extrabotany:shootingguardian_chest": "io.github.lounode.extrabotany.common.item.equipment.armor.old.ShootingGuardianArmorItem",
+        "extrabotany:shootingguardian_helm": "io.github.lounode.extrabotany.common.item.equipment.armor.old.ShootingGuardianArmorItem",
+        "extrabotany:shootingguardian_legs": "io.github.lounode.extrabotany.common.item.equipment.armor.old.ShootingGuardianArmorItem",
+        "extrabotany:silent_eternity": "io.github.lounode.extrabotany.common.item.equipment.bauble.SilentEternityItem",
+        "extrabotany:silentsages_boots": "io.github.lounode.extrabotany.common.item.equipment.armor.old.OldExbotanyArmorItem",
+        "extrabotany:silentsages_chest": "io.github.lounode.extrabotany.common.item.equipment.armor.old.OldExbotanyArmorItem",
+        "extrabotany:silentsages_helm": "io.github.lounode.extrabotany.common.item.equipment.armor.old.OldExbotanyArmorItem",
+        "extrabotany:silentsages_legs": "io.github.lounode.extrabotany.common.item.equipment.armor.old.OldExbotanyArmorItem",
+        "extrabotany:silver_bullet": "io.github.lounode.extrabotany.common.item.equipment.tool.SilverBulletItem",
+        "extrabotany:spear_of_subspace": "io.github.lounode.extrabotany.common.item.relic.SpearOfSubspaceItem",
+        "extrabotany:star_wrath": "io.github.lounode.extrabotany.common.item.relic.StarWrathItem",
+        "extrabotany:stardustlotus": "vazkii.botania.common.item.block.SpecialFlowerBlockItem",
+        "extrabotany:sun_ring": "io.github.lounode.extrabotany.common.item.equipment.bauble.SunRingItem",
+        "extrabotany:super_crown": "io.github.lounode.extrabotany.common.item.equipment.bauble.CosmeticBaubleItem",
+        "extrabotany:the_community": "io.github.lounode.extrabotany.common.item.equipment.bauble.CommunityStoneItem",
+        "extrabotany:thug_life": "io.github.lounode.extrabotany.common.item.equipment.bauble.CosmeticBaubleItem",
+        "extrabotany:trophy": "net.minecraft.world.item.BlockItem",
+        "extrabotany:true_shadow_katana": "io.github.lounode.extrabotany.common.item.relic.TrueShadowKatanaItem",
+        "extrabotany:true_terrablade": "io.github.lounode.extrabotany.common.item.relic.TrueTerrabladeItem",
+        "extrabotany:universal_petal": "net.minecraft.world.item.Item",
+        "extrabotany:uuz_fan": "io.github.lounode.extrabotany.common.item.equipment.tool.UuzFanItem",
+        "extrabotany:voidcaller": "io.github.lounode.extrabotany.common.item.material.VoidCallerItem"
+      },
+      "added": {
+        "extrabotany:enchanted_soil": "net.minecraft.world.item.BlockItem"
+      }
+    },
+    "minecraft:memory_module_type": {
+      "old_count": 6,
+      "scex4_count": 6,
+      "missing": {},
+      "added": {}
+    },
+    "minecraft:mob_effect": {
+      "old_count": 11,
+      "scex4_count": 6,
+      "missing": {
+        "extrabotany:eternity": "io.github.lounode.extrabotany.common.brew.effect.EternityMobEffect",
+        "extrabotany:flamescion": "io.github.lounode.extrabotany.common.brew.effect.FlamescionMobEffect",
+        "extrabotany:incandescence": "io.github.lounode.extrabotany.common.brew.effect.IncandescenceMobEffect",
+        "extrabotany:timelock": "io.github.lounode.extrabotany.common.brew.effect.TimeLockMobEffect",
+        "extrabotany:witch_curse": "io.github.lounode.extrabotany.common.brew.effect.WitchCurseMobEffect"
+      },
+      "added": {}
+    },
+    "minecraft:recipe_serializer": {
+      "old_count": 9,
+      "scex4_count": 9,
+      "missing": {},
+      "added": {}
+    },
+    "minecraft:recipe_type": {
+      "old_count": 4,
+      "scex4_count": 4,
+      "missing": {},
+      "added": {}
+    },
+    "minecraft:sound_event": {
+      "old_count": 22,
+      "scex4_count": 18,
+      "missing": {
+        "extrabotany:entity.motor.cyclone": "net.minecraft.sounds.SoundEvent",
+        "extrabotany:item.flamescion_weapon.ult": "net.minecraft.sounds.SoundEvent",
+        "extrabotany:item.spear_of_subspace.use": "net.minecraft.sounds.SoundEvent",
+        "extrabotany:music.ego": "net.minecraft.sounds.SoundEvent"
+      },
+      "added": {}
+    },
+    "minecraft:trigger_type": {
+      "old_count": 3,
+      "scex4_count": 3,
+      "missing": {},
+      "added": {}
+    },
+    "neoforge:fluid_type": {
+      "old_count": 1,
+      "scex4_count": 0,
+      "missing": {
+        "extrabotany:fluidedmana": "net.neoforged.neoforge.fluids.FluidType"
+      },
+      "added": {}
+    }
+  }
+}

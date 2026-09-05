@@ -1,0 +1,10 @@
+{
+  "parent": "extrabotany:block/shapes/pedestal",
+  "textures": {
+    "down": "extrabotany:block/pedestal_livingrock_down",
+    "particle": "extrabotany:block/pedestal_livingrock_down",
+    "side": "extrabotany:block/pedestal_livingrock_side",
+    "top": "extrabotany:block/pedestal_livingrock_top",
+    "up": "extrabotany:block/pedestal_livingrock_up"
+  }
+}

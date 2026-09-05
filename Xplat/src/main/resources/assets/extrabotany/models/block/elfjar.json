@@ -1,0 +1,6 @@
+{
+  "parent": "extrabotany:block/shapes/elfjar",
+  "textures": {
+    "all": "botania:block/livingrock"
+  }
+}

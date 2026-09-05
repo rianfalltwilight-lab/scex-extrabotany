@@ -1,0 +1,38 @@
+{
+  "parent": "extrabotany:main/stygian_twins",
+  "criteria": {
+    "kill_gaia_3rd": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "extrabotany:gaia_3rd"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:gaia_trial.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:challenge_ticket"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:gaia_trial"
+    }
+  },
+  "requirements": [
+    [
+      "kill_gaia_3rd"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "F": {
+      "item": "extrabotany:spirit_fragment"
+    },
+    "P": {
+      "tag": "extrabotany:aerialite_ingots"
+    },
+    "S": {
+      "tag": "c:ingots/terrasteel"
+    }
+  },
+  "pattern": [
+    " S ",
+    "SFP",
+    " P "
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:the_origin"
+  }
+}

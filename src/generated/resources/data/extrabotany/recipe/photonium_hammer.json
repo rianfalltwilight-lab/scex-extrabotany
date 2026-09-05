@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "H": {
+      "tag": "extrabotany:photonium_ingots"
+    },
+    "S": {
+      "item": "botania:livingwood_twig"
+    }
+  },
+  "pattern": [
+    "HHH",
+    "HHH",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:photonium_hammer"
+  }
+}

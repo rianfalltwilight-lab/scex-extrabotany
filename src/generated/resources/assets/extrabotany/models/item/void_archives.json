@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "extrabotany:item/void_archives_fruit_of_grisaia",
+      "predicate": {
+        "extrabotany:variant": 0.01
+      }
+    },
+    {
+      "model": "extrabotany:item/void_archives_infinite_wine",
+      "predicate": {
+        "extrabotany:variant": 0.02
+      }
+    },
+    {
+      "model": "extrabotany:item/void_archives_excalibur",
+      "predicate": {
+        "extrabotany:variant": 0.03
+      }
+    },
+    {
+      "model": "extrabotany:item/failnaught",
+      "predicate": {
+        "extrabotany:variant": 0.04
+      }
+    },
+    {
+      "model": "extrabotany:item/void_archives_camera",
+      "predicate": {
+        "extrabotany:variant": 0.05
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "extrabotany:item/void_archives"
+  }
+}

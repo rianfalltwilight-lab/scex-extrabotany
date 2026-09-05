@@ -1,0 +1,23 @@
+{
+  "values": [
+    "extrabotany:excalibur",
+    "extrabotany:reverse_heal",
+    "extrabotany:backfire",
+    {
+      "id": "extrabotany:excalibur",
+      "required": false
+    },
+    {
+      "id": "extrabotany:reverse_heal",
+      "required": false
+    },
+    {
+      "id": "extrabotany:backfire",
+      "required": false
+    },
+    {
+      "id": "extrabotany:flamescion_flame",
+      "required": false
+    }
+  ]
+}

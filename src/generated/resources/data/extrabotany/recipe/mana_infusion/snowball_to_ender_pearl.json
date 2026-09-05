@@ -1,0 +1,15 @@
+{
+  "type": "botania:mana_infusion",
+  "catalyst": {
+    "type": "botania:block",
+    "block": "extrabotany:dimension_catalyst"
+  },
+  "input": {
+    "item": "minecraft:snowball"
+  },
+  "mana": 2000,
+  "output": {
+    "count": 1,
+    "id": "minecraft:ender_pearl"
+  }
+}

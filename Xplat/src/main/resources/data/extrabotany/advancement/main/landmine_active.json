@@ -1,0 +1,27 @@
+{
+  "parent": "extrabotany:main/herrscher_defeat",
+  "criteria": {
+    "code_triggered": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:landmine_active.desc"
+    },
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:voidcaller"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:landmine_active"
+    }
+  },
+  "requirements": [
+    [
+      "code_triggered"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

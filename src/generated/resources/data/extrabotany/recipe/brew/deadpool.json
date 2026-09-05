@@ -1,0 +1,18 @@
+{
+  "type": "botania:brew",
+  "brew": "extrabotany:deadpool",
+  "ingredients": [
+    {
+      "item": "minecraft:nether_wart"
+    },
+    {
+      "item": "minecraft:rotten_flesh"
+    },
+    {
+      "item": "minecraft:bone"
+    },
+    {
+      "item": "minecraft:blaze_powder"
+    }
+  ]
+}

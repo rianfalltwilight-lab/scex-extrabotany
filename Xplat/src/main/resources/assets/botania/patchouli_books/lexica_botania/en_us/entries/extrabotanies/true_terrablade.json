@@ -1,0 +1,16 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:true_terrablade",
+  "name": "extrabotany.entry.trueterrablade",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.trueterrablade0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "text": "extrabotany.page.trueterrablade1",
+      "recipe": "extrabotany:true_terrablade"
+    }
+  ]
+}

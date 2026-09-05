@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "tag": "extrabotany:aerialite_ingots"
+    },
+    "H": {
+      "item": "extrabotany:hero_medal"
+    },
+    "P": {
+      "tag": "extrabotany:photonium_ingots"
+    }
+  },
+  "pattern": [
+    "PAP",
+    "PHP",
+    "PAP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:motor"
+  }
+}

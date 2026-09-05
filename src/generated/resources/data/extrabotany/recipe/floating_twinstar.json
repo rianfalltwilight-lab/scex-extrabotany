@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "extrabotany:floating_flower",
+  "ingredients": [
+    {
+      "tag": "botania:floating_flowers"
+    },
+    {
+      "item": "extrabotany:twinstar"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:floating_twinstar"
+  }
+}

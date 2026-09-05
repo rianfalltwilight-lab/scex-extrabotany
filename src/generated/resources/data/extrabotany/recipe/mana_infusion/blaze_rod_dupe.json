@@ -1,0 +1,15 @@
+{
+  "type": "botania:mana_infusion",
+  "catalyst": {
+    "type": "botania:block",
+    "block": "extrabotany:dimension_catalyst"
+  },
+  "input": {
+    "item": "minecraft:blaze_rod"
+  },
+  "mana": 2000,
+  "output": {
+    "count": 2,
+    "id": "minecraft:blaze_rod"
+  }
+}

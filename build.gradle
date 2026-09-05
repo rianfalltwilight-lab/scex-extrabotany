@@ -1,0 +1,196 @@
+plugins {
+    id "java"
+    id "maven-publish"
+    id "net.neoforged.moddev" version "2.0.141"
+}
+
+group = mod_group_id
+version = mod_version
+
+base {
+    archivesName = "${mod_id}-neoforge-${minecraft_version}"
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+    withSourcesJar()
+}
+
+repositories {
+    mavenCentral()
+    maven { url = "https://maven.blamejared.com" }
+    exclusiveContent {
+        forRepository { maven { url = "https://maven.theillusivec4.top/" } }
+        filter { includeGroup("top.theillusivec4.curios") }
+    }
+    maven { url = "https://maven.terraformersmc.com/releases" }
+    exclusiveContent {
+        forRepository {
+            maven {
+                name = "Modrinth"
+                url = "https://api.modrinth.com/maven"
+            }
+        }
+        filter { includeGroup("maven.modrinth") }
+    }
+    maven { url = "https://maven.latvian.dev/releases" }
+    maven { url = "https://maven.saps.dev/minecraft" }
+    maven { url = "https://maven.architectury.dev" }
+}
+
+neoForge {
+    version = neoforge_version
+    accessTransformers.from(file("Xplat/src/main/resources/META-INF/accesstransformer.cfg").absolutePath)
+
+    runs {
+        configureEach {
+            systemProperty "neoforge.enabledGameTestNamespaces", mod_id
+            systemProperty "neoforge.logging.console.level", "debug"
+            gameDirectory = file("run")
+        }
+        client { client() }
+        server {
+            server()
+            programArgument "--nogui"
+        }
+        gameTestServer { type = "gameTestServer" }
+        data {
+            data()
+            programArguments.addAll "--mod", mod_id, "--all",
+                    "--output", file("src/generated/resources").absolutePath,
+                    "--existing", file("Xplat/src/main/resources").absolutePath,
+                    "--input", file("Forge/src/main/resources").absolutePath
+        }
+    }
+
+    mods {
+        "${mod_id}" { sourceSet(sourceSets.main) }
+    }
+}
+
+sourceSets {
+    main {
+        java.srcDirs = ["Xplat/src/main/java", "Forge/src/main/java"]
+        resources.srcDirs = [
+                "Xplat/src/main/resources",
+                "Forge/src/main/resources",
+                "src/generated/resources"
+        ]
+    }
+    test {
+        java.srcDirs = ["Xplat/src/test/java", "Forge/src/test/java"]
+        resources.srcDirs = ["Xplat/src/test/resources", "Forge/src/test/resources"]
+    }
+}
+
+dependencies {
+    implementation("vazkii.botania:botania-neoforge-${minecraft_version}:${botania_version}")
+    implementation("vazkii.patchouli:Patchouli:${patchouli_version}-NEOFORGE")
+
+    compileOnly("top.theillusivec4.curios:curios-neoforge:${curios_version}:api")
+    runtimeOnly("top.theillusivec4.curios:curios-neoforge:${curios_version}")
+
+    compileOnly("mezz.jei:jei-${minecraft_version}-common-api:${jei_version}")
+    compileOnly("mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}")
+    runtimeOnly("mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}")
+    // The creator Maven currently redirects to an intermittently unavailable host.
+    // Modrinth version IDs are immutable and keep this fallback reproducible.
+    compileOnly("maven.modrinth:fRiHVvU7:${emi_modrinth_version}")
+    compileOnly("dev.latvian.mods:kubejs-neoforge:${kubejs_version}")
+
+    compileOnly("com.demonwav.mcdev:annotations:2.1.0")
+    compileOnly("org.jetbrains:annotations:24.1.0")
+    compileOnly("com.google.code.findbugs:jsr305:3.0.2")
+
+    testImplementation(platform("org.junit:junit-bom:5.11.4"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+// Pin resolved transitive inputs as well as the direct versions above.
+dependencyLocking {
+    // Maven reports this timestamped artifact as 456-SNAPSHOT in its metadata.
+    // A generated SNAPSHOT lock conflicts with the exact timestamp coordinate.
+    ignoredDependencies.add("vazkii.botania:botania-neoforge-${minecraft_version}")
+}
+configurations.configureEach {
+    if (name in ["compileClasspath", "runtimeClasspath", "testCompileClasspath", "testRuntimeClasspath"]) {
+        resolutionStrategy.activateDependencyLocking()
+    }
+}
+
+def generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
+    def replaceProperties = [
+            minecraft_version: minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            neoforge_version: neoforge_version,
+            neoforge_version_range: neoforge_version_range,
+            loader_version_range: loader_version_range,
+            mod_id: mod_id,
+            mod_name: mod_name,
+            mod_license: mod_license,
+            mod_version: mod_version,
+            mod_authors: mod_authors,
+            mod_description: mod_description,
+            mod_logo: mod_logo,
+            mod_credits: mod_credits,
+            botania_version_range: botania_version_range,
+            patchouli_version_range: patchouli_version_range,
+            curios_version_range: curios_version_range,
+            jei_version_range: jei_version_range,
+            kubejs_version_range: kubejs_version_range
+    ]
+    inputs.properties(replaceProperties)
+    expand(replaceProperties)
+    from("Xplat/src/main/template")
+    from("Forge/src/main/template")
+    into(layout.buildDirectory.dir("generated/sources/modMetadata"))
+}
+
+sourceSets.main.resources.srcDir(generateModMetadata)
+neoForge.ideSyncTask(generateModMetadata)
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = "UTF-8"
+    options.release = 21
+    options.compilerArgs.addAll(["-Xlint:deprecation", "-Xmaxerrs", "2000", "-Xmaxwarns", "500"])
+}
+
+tasks.withType(Test).configureEach {
+    useJUnitPlatform()
+}
+
+tasks.withType(ProcessResources).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    includeEmptyDirs = false
+    exclude ".cache"
+}
+
+tasks.withType(Jar).configureEach {
+    includeEmptyDirs = false
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}
+
+tasks.named("jar", Jar).configure {
+    from("LICENSE")
+    manifest {
+        attributes([
+                "Specification-Title": artifact_name,
+                "Specification-Vendor": "Lounode / SCEX",
+                "Specification-Version": "1",
+                "Implementation-Title": artifact_name,
+                "Implementation-Version": archiveVersion.get(),
+                "Implementation-Vendor": "SCEX",
+                "MixinConfigs": "extrabotany_xplat.mixins.json,extrabotany_neoforge.mixins.json"
+        ])
+    }
+}
+
+publishing {
+    publications {
+        register("mavenJava", MavenPublication) {
+            from components.java
+        }
+    }
+}

@@ -1,0 +1,33 @@
+{
+  "type": "botania:crafting_shaped_mana_upgrade",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "extrabotany:the_chaos"
+    },
+    "E": {
+      "item": "extrabotany:the_end"
+    },
+    "H": {
+      "item": "extrabotany:hero_medal"
+    },
+    "O": {
+      "tag": "extrabotany:orichalcos_ingots"
+    },
+    "R": {
+      "item": "botania:greater_band_of_mana"
+    },
+    "Y": {
+      "item": "extrabotany:the_origin"
+    }
+  },
+  "pattern": [
+    "OHO",
+    "YRE",
+    "OCO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:mana_ring_master"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "Q": {
+      "item": "minecraft:quartz"
+    },
+    "T": {
+      "item": "botania:terrasteel_nugget"
+    }
+  },
+  "pattern": [
+    "QQQ",
+    "QTQ",
+    "QQQ"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:gaia_quartz"
+  }
+}

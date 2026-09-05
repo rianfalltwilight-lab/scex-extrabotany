@@ -1,0 +1,54 @@
+{
+  "category": "botania:mana",
+  "extra_recipe_mappings": {
+    "extrabotany:floating_manalink": 1
+  },
+  "icon": "extrabotany:manalink",
+  "name": "extrabotany.entry.manalink",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.manalink0"
+    },
+    {
+      "type": "patchouli:multiblock",
+      "multiblock": {
+        "mapping": {
+          "0": "extrabotany:manalink",
+          "A": "minecraft:air",
+          "D": "minecraft:grass_block",
+          "L": "minecraft:lapis_block",
+          "O": "minecraft:obsidian",
+          "Q": "minecraft:quartz_block"
+        },
+        "pattern": [
+          [
+            "AAAAA",
+            "AAAAA",
+            "AA0AA",
+            "AAAAA",
+            "AAAAA"
+          ],
+          [
+            "QQQQQ",
+            "QLOLQ",
+            "QODOQ",
+            "QLOLQ",
+            "QQQQQ"
+          ]
+        ]
+      },
+      "name": "extrabotany.multiblock.manalink"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.manalink1"
+    },
+    {
+      "type": "botania:petal_apothecary",
+      "recipe": "extrabotany:petal_apothecary/manalink",
+      "text": "extrabotany.page.manalink2"
+    }
+  ],
+  "priority": true
+}

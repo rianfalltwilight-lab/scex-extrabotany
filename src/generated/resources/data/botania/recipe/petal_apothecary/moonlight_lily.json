@@ -1,0 +1,24 @@
+{
+  "type": "botania:petal_apothecary",
+  "ingredients": [
+    {
+      "tag": "botania:petals/black"
+    },
+    {
+      "tag": "botania:petals/black"
+    },
+    {
+      "tag": "botania:petals/purple"
+    },
+    {
+      "tag": "botania:petals/gray"
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "extrabotany:moonlight_lily"
+  },
+  "reagent": {
+    "tag": "botania:seed_apothecary_reagent"
+  }
+}

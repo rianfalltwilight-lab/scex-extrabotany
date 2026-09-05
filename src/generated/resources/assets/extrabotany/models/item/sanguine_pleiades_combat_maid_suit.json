@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "extrabotany:item/sanguine_pleiades_combat_maid_suit_senketsu",
+      "predicate": {
+        "extrabotany:senketsu": 1.0
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "extrabotany:item/sanguine_pleiades_combat_maid_suit"
+  }
+}

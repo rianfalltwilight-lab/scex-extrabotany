@@ -1,0 +1,29 @@
+{
+  "type": "botania:runic_altar",
+  "catalysts": [],
+  "ingredients": [
+    {
+      "item": "botania:rune_of_wrath"
+    },
+    {
+      "item": "botania:mana_diamond"
+    },
+    {
+      "item": "botania:manaweave_cloth"
+    },
+    {
+      "item": "botania:manaweave_cloth"
+    },
+    {
+      "item": "botania:manaweave_cloth"
+    }
+  ],
+  "mana": 2000,
+  "output": {
+    "count": 1,
+    "id": "extrabotany:power_glove"
+  },
+  "reagent": {
+    "item": "botania:livingrock"
+  }
+}

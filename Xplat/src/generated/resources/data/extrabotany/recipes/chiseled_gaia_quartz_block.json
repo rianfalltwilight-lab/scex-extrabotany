@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "extrabotany:quartz_chiseled",
+  "key": {
+    "Q": {
+      "item": "extrabotany:gaia_quartz_slab"
+    }
+  },
+  "pattern": [
+    "Q",
+    "Q"
+  ],
+  "result": {
+    "item": "extrabotany:chiseled_gaia_quartz_block"
+  },
+  "show_notification": true
+}

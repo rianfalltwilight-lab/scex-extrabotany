@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "botania:mana_pool",
+    "botania:creative_pool",
+    "botania:diluted_pool",
+    "botania:fabulous_pool"
+  ]
+}

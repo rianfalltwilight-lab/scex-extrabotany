@@ -1,0 +1,34 @@
+{
+  "parent": "extrabotany:main/the_source_of_honkai",
+  "criteria": {
+    "craft_orichalcos": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#extrabotany:orichalcos_ingots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:soulsteel.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:orichalcos_ingot"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:soulsteel"
+    }
+  },
+  "requirements": [
+    [
+      "craft_orichalcos"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

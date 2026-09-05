@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "botania:gaia_spirit"
+    },
+    "F": {
+      "tag": "extrabotany:photonium_ingots"
+    },
+    "P": {
+      "item": "botania:gaia_ingot"
+    },
+    "S": {
+      "tag": "extrabotany:shadowium_ingots"
+    }
+  },
+  "pattern": [
+    "ASA",
+    "FPF",
+    "ASA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:challenge_ticket"
+  }
+}

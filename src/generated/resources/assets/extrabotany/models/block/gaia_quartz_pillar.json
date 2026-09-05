@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "extrabotany:block/gaia_quartz_pillar_top",
+    "side": "extrabotany:block/gaia_quartz_pillar"
+  }
+}

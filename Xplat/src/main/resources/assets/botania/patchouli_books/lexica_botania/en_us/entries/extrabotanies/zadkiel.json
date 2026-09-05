@@ -1,0 +1,16 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:zadkiel",
+  "name": "extrabotany.entry.zadkiel",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.zadkiel0"
+    },
+    {
+      "type": "botania:runic_altar",
+      "recipe": "extrabotany:runic_altar/zadkiel",
+      "text": "extrabotany.page.zadkiel1"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "sound_event": "extrabotany:music.herrscher",
+  "description": {
+    "translate": "item.extrabotany.music_disc_herrscher_of_the_void.desc"
+  },
+  "length_in_seconds": 201.0,
+  "comparator_output": 1
+}

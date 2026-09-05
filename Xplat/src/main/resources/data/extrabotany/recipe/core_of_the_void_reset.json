@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "extrabotany:core_of_the_void"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:core_of_the_void"
+  }
+}

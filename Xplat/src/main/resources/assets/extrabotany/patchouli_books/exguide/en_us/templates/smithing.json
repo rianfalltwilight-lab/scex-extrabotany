@@ -1,0 +1,63 @@
+{
+  "processor": "io.github.lounode.extrabotany.client.patchouli.processor.SmithingProcessor",
+  "components": [
+    {
+      "type": "patchouli:image",
+      "image": "extrabotany:textures/gui/crafting.png",
+      "x": 10,
+      "y": 12,
+      "width": 96,
+      "height": 80,
+      "u": 0,
+      "v": 0
+    },
+    {
+      "type": "patchouli:header",
+      "text": "#heading",
+      "x": -1,
+      "y": -1
+    },
+    {
+      "type": "patchouli:item",
+      "item": "#template",
+      "framed": "false",
+      "x": 14,
+      "y": 16
+    },
+    {
+      "type": "patchouli:item",
+      "item": "#base",
+      "framed": "false",
+      "x": 14,
+      "y": 35
+    },
+    {
+      "type": "patchouli:item",
+      "item": "#addition",
+      "framed": "false",
+      "x": 14,
+      "y": 54
+    },
+    
+    {
+      "type": "patchouli:item",
+      "item": "#symbol",
+      "framed": "false",
+      "x": 50,
+      "y": 35
+    },
+    {
+      "type": "patchouli:item",
+      "item": "#output",
+      "link_recipe": true,
+      "framed": "false",
+      "x": 86,
+      "y": 35
+    },
+    {
+      "type": "patchouli:text",
+      "text": "#text",
+      "y": 80
+    }
+  ]
+}

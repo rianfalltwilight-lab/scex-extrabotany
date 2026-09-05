@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "extrabotany:quartz_pillar",
+  "key": {
+    "Q": {
+      "item": "extrabotany:elementium_quartz_block"
+    }
+  },
+  "pattern": [
+    "Q",
+    "Q"
+  ],
+  "result": {
+    "count": 2,
+    "item": "extrabotany:elementium_quartz_pillar"
+  },
+  "show_notification": true
+}

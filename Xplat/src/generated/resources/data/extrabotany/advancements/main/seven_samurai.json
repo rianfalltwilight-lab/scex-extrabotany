@@ -1,0 +1,54 @@
+{
+  "parent": "extrabotany:main/stygian_twins",
+  "criteria": {
+    "has_armor_set": {
+      "conditions": {
+        "armor": {
+          "chest": {
+            "items": [
+              "extrabotany:shadow_warrior_chestplate"
+            ]
+          },
+          "feet": {
+            "items": [
+              "extrabotany:shadow_warrior_boots"
+            ]
+          },
+          "head": {
+            "items": [
+              "extrabotany:shadow_warrior_helmet"
+            ]
+          },
+          "legs": {
+            "items": [
+              "extrabotany:shadow_warrior_leggings"
+            ]
+          }
+        }
+      },
+      "trigger": "extrabotany:has_armor_set"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.extrabotany:seven_samurai.desc"
+    },
+    "frame": "challenge",
+    "hidden": false,
+    "icon": {
+      "item": "extrabotany:shadow_warrior_helmet",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.extrabotany:seven_samurai"
+    }
+  },
+  "requirements": [
+    [
+      "has_armor_set"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

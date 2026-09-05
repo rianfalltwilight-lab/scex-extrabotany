@@ -1,0 +1,16 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:silver_bullet",
+  "name": "extrabotany.entry.silverbullet",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.silverbullet0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "text": "extrabotany.page.silverbullet1",
+      "recipe": "extrabotany:silver_bullet"
+    }
+  ]
+}

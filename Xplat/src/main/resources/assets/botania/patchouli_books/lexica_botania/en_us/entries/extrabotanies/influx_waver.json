@@ -1,0 +1,16 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:influx_waver",
+  "name": "extrabotany.entry.influxwaver",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.influxwaver0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "text": "extrabotany.page.influxwaver1",
+      "recipe": "extrabotany:influx_waver"
+    }
+  ]
+}

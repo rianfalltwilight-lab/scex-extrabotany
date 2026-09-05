@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "extrabotany:quartz_slab",
+  "key": {
+    "Q": {
+      "item": "extrabotany:elementium_quartz_block"
+    }
+  },
+  "pattern": [
+    "QQQ"
+  ],
+  "result": {
+    "count": 6,
+    "id": "extrabotany:elementium_quartz_slab"
+  }
+}

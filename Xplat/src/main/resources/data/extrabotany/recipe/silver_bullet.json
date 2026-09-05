@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "combat",
+  "key": {
+    "C": {
+      "item": "extrabotany:the_chaos"
+    },
+    "M": {
+      "item": "botania:mana_blaster"
+    },
+    "P": {
+      "tag": "c:ingots/photonium"
+    },
+    "S": {
+      "tag": "c:ingots/manasteel"
+    }
+  },
+  "pattern": [
+    "PPS",
+    " MC",
+    "  P"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:silver_bullet"
+  }
+}

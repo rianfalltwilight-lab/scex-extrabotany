@@ -1,0 +1,32 @@
+{
+  "advancement": "extrabotany:main/stygian_twins",
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:goblin_slayer_helmet",
+  "name": "extrabotany.entry.goblin_slayer",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.goblin_slayer0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:goblin_slayer_helmet",
+      "text": "extrabotany.page.goblin_slayer1"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:goblin_slayer_chestplate",
+      "text": "extrabotany.page.goblin_slayer2"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:goblin_slayer_leggings",
+      "text": "extrabotany.page.goblin_slayer3"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:goblin_slayer_boots",
+      "text": "extrabotany.page.goblin_slayer4"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "advancement": "extrabotany:main/the_source_of_honkai",
+  "category": "botania:extrabotanies",
+  "extra_recipe_mappings": {
+    "extrabotany:core_of_the_void": 0
+  },
+  "icon": "extrabotany:core_of_the_void",
+  "name": "extrabotany.entry.core_of_the_void",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.core_of_the_void0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.core_of_the_void1"
+    }
+  ]
+}

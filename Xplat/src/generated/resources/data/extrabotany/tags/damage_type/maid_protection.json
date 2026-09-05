@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:cramming",
+    "minecraft:in_wall",
+    "minecraft:starve",
+    "minecraft:cactus",
+    "minecraft:fly_into_wall",
+    "minecraft:falling_anvil",
+    "#minecraft:is_fall",
+    "#minecraft:is_drowning",
+    "#minecraft:is_freezing",
+    "#minecraft:is_lightning",
+    "#minecraft:is_fire"
+  ]
+}

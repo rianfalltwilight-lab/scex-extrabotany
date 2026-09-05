@@ -1,0 +1,39 @@
+{
+  "type": "botania:petal_apothecary",
+  "ingredients": [
+    {
+      "tag": "botania:petals/purple"
+    },
+    {
+      "tag": "botania:petals/purple"
+    },
+    {
+      "tag": "botania:petals/blue"
+    },
+    {
+      "tag": "botania:petals/blue"
+    },
+    {
+      "item": "botania:rune_of_mana"
+    },
+    {
+      "item": "botania:rune_of_sloth"
+    },
+    {
+      "item": "botania:rune_of_greed"
+    },
+    {
+      "item": "botania:gaia_spirit"
+    },
+    {
+      "item": "minecraft:wither_rose"
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "extrabotany:serenitian"
+  },
+  "reagent": {
+    "tag": "botania:seed_apothecary_reagent"
+  }
+}

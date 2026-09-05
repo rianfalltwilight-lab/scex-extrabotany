@@ -1,0 +1,19 @@
+{
+  "category": "botania:functional_flowers",
+  "extra_recipe_mappings": {
+    "extrabotany:floating_mirrowtunia": 1
+  },
+  "icon": "extrabotany:mirrowtunia",
+  "name": "extrabotany.entry.mirrowtunia",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.mirrowtunia0"
+    },
+    {
+      "type": "botania:petal_apothecary",
+      "recipe": "extrabotany:petal_apothecary/mirrowtunia",
+      "text": "extrabotany.page.mirrowtunia1"
+    }
+  ]
+}

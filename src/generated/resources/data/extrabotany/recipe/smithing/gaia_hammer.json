@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "extrabotany:hero_medal"
+  },
+  "base": {
+    "item": "extrabotany:terrasteel_hammer"
+  },
+  "result": {
+    "count": 1,
+    "id": "extrabotany:gaia_hammer"
+  },
+  "template": {
+    "item": "botania:gaia_ingot"
+  }
+}

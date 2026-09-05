@@ -1,0 +1,22 @@
+{
+  "parent": "extrabotany:item/template/shield",
+  "overrides": [
+    {
+      "model": "extrabotany:item/achilles_shield_blocking",
+      "predicate": {
+        "extrabotany:blocking": 1.0,
+        "extrabotany:released": 0.0
+      }
+    },
+    {
+      "model": "extrabotany:item/achilles_shield_released",
+      "predicate": {
+        "extrabotany:blocking": 0.0,
+        "extrabotany:released": 1.0
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "extrabotany:item/achilles_shield"
+  }
+}

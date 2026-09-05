@@ -1,0 +1,41 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "minecraft:air",
+  "name": "extrabotany.entry.more_brews",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.more_brews0"
+    },
+    {
+      "type": "botania:brew",
+      "flavor": "extrabotany.page.more_brews1b",
+      "recipe": "extrabotany:brew/revolution",
+      "text": "extrabotany.page.more_brews1a"
+    },
+    {
+      "type": "botania:brew",
+      "flavor": "extrabotany.page.more_brews2b",
+      "recipe": "extrabotany:brew/shield",
+      "text": "extrabotany.page.more_brews2a"
+    },
+    {
+      "type": "botania:brew",
+      "flavor": "extrabotany.page.more_brews3b",
+      "recipe": "extrabotany:brew/all_in_one",
+      "text": "extrabotany.page.more_brews3a"
+    },
+    {
+      "type": "botania:brew",
+      "flavor": "extrabotany.page.more_brews4b",
+      "recipe": "extrabotany:brew/deadpool",
+      "text": "extrabotany.page.more_brews4a"
+    },
+    {
+      "type": "botania:brew",
+      "flavor": "extrabotany.page.more_brews5b",
+      "recipe": "extrabotany:brew/floating",
+      "text": "extrabotany.page.more_brews5a"
+    }
+  ]
+}

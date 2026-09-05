@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "extrabotany:the_chaos"
+    },
+    "P": {
+      "item": "botania:pixie_dust"
+    },
+    "T": {
+      "item": "botania:livingwood_twig"
+    }
+  },
+  "pattern": [
+    " PC",
+    " TP",
+    "T  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:rod_of_discord"
+  }
+}

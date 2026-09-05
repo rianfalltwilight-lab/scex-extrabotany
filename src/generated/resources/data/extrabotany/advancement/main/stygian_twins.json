@@ -1,0 +1,46 @@
+{
+  "parent": "extrabotany:main/goodtek",
+  "criteria": {
+    "craft_photonium": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#extrabotany:shadowium_ingots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "craft_shadowium": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#extrabotany:shadowium_ingots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:stygian_twins.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:shadowium_ingot"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:stygian_twins"
+    }
+  },
+  "requirements": [
+    [
+      "craft_shadowium"
+    ],
+    [
+      "craft_photonium"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

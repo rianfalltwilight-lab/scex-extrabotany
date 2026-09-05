@@ -1,0 +1,16 @@
+{
+  "category": "botania:baubles",
+  "icon": "extrabotany:spider_ring",
+  "name": "extrabotany.entry.spider_ring",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.spider_ring0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:spider_ring",
+      "text": "extrabotany.page.spider_ring1"
+    }
+  ]
+}

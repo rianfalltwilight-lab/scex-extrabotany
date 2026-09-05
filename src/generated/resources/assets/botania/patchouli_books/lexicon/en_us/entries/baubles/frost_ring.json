@@ -1,0 +1,16 @@
+{
+  "category": "botania:baubles",
+  "icon": "extrabotany:frost_ring",
+  "name": "extrabotany.entry.frost_ring",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.frost_ring0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:frost_ring",
+      "text": "extrabotany.page.frost_ring1"
+    }
+  ]
+}

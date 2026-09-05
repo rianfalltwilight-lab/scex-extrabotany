@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "minecraft:blaze_rod"
+    },
+    "E": {
+      "item": "extrabotany:the_end"
+    },
+    "L": {
+      "item": "botania:gaia_spirit"
+    },
+    "O": {
+      "tag": "extrabotany:orichalcos_ingots"
+    },
+    "T": {
+      "item": "botania:terra_blade"
+    },
+    "U": {
+      "item": "extrabotany:the_universe"
+    }
+  },
+  "pattern": [
+    "OUE",
+    "BTL",
+    "B O"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:flamescion_weapon"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "type": "botania:petal_apothecary",
+  "ingredients": [
+    {
+      "tag": "botania:petals/gray"
+    },
+    {
+      "tag": "botania:petals/gray"
+    },
+    {
+      "tag": "botania:petals/black"
+    },
+    {
+      "item": "botania:gaia_spirit"
+    },
+    {
+      "item": "botania:rune_of_autumn"
+    },
+    {
+      "item": "botania:rune_of_gluttony"
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "extrabotany:stonesia"
+  },
+  "reagent": {
+    "tag": "botania:seed_apothecary_reagent"
+  }
+}

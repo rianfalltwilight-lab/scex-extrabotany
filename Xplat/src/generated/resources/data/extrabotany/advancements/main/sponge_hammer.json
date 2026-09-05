@@ -1,0 +1,29 @@
+{
+  "parent": "extrabotany:main/rhein_kraft",
+  "criteria": {
+    "code_triggered": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.extrabotany:sponge_hammer.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "minecraft:sponge"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.extrabotany:sponge_hammer"
+    }
+  },
+  "requirements": [
+    [
+      "code_triggered"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

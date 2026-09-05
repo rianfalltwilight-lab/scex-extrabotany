@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": {
+      "item": "minecraft:ice"
+    },
+    "M": {
+      "tag": "botania:manasteel_ingots"
+    }
+  },
+  "pattern": [
+    "IM ",
+    "M M",
+    " M "
+  ],
+  "result": {
+    "item": "extrabotany:frost_ring"
+  },
+  "show_notification": true
+}

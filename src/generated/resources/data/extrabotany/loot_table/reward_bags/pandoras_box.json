@@ -1,0 +1,91 @@
+{
+  "type": "minecraft:empty",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 32.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "extrabotany:eins_reward_bag"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 16.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "extrabotany:zwei_reward_bag"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 10.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "extrabotany:drei_reward_bag"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 10.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "extrabotany:vier_reward_bag"
+        }
+      ],
+      "rolls": 1.0
+    },
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": 1.0,
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "extrabotany:hero_medal"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "extrabotany:reward_bags/pandoras_box"
+}

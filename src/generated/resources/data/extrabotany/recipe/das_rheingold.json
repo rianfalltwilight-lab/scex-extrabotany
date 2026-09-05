@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "botania:gaia_spirit"
+    },
+    "P": {
+      "item": "minecraft:gold_ingot"
+    },
+    "S": {
+      "item": "botania:manaweave_cloth"
+    }
+  },
+  "pattern": [
+    "ASA",
+    "SPS",
+    "ASA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:das_rheingold"
+  }
+}

@@ -1,0 +1,14 @@
+// Usage: gradlew -I scripts/isolated-review-runs.gradle runServer (or runClient)
+// Development-only directories; never points at a production installation.
+gradle.projectsEvaluated {
+    def p = gradle.rootProject
+    p.neoForge.runs.named('server') {
+        gameDirectory = p.file('audit-review/server')
+        programArguments.addAll '--port', '25577'
+        systemProperty 'com.mojang.eula.agree', 'true'
+    }
+    p.neoForge.runs.named('client') {
+        gameDirectory = p.file('audit-review/client')
+    }
+    p.tasks.named('runServer', JavaExec) { standardInput = System.in }
+}

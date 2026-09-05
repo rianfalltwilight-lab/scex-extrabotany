@@ -1,0 +1,27 @@
+{
+  "type": "botania:petal_apothecary",
+  "ingredients": [
+    {
+      "tag": "botania:petals/yellow"
+    },
+    {
+      "tag": "botania:petals/yellow"
+    },
+    {
+      "tag": "botania:petals/lime"
+    },
+    {
+      "tag": "botania:petals/lime"
+    },
+    {
+      "item": "extrabotany:spirit_fragment"
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "extrabotany:bellflower"
+  },
+  "reagent": {
+    "tag": "botania:seed_apothecary_reagent"
+  }
+}

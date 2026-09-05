@@ -1,0 +1,31 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:miku_helm",
+  "name": "extrabotany.entry.miku",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.miku0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "text": "extrabotany.page.miku1",
+      "recipe": "extrabotany:miku_helm"
+    },
+    {
+      "type": "patchouli:crafting",
+      "text": "extrabotany.page.miku2",
+      "recipe": "extrabotany:miku_chest"
+    },
+    {
+      "type": "patchouli:crafting",
+      "text": "extrabotany.page.miku3",
+      "recipe": "extrabotany:miku_legs"
+    },
+    {
+      "type": "patchouli:crafting",
+      "text": "extrabotany.page.miku4",
+      "recipe": "extrabotany:miku_boots"
+    }
+  ]
+}

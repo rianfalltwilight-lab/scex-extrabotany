@@ -1,0 +1,29 @@
+{
+  "type": "botania:runic_altar",
+  "catalysts": [],
+  "ingredients": [
+    {
+      "item": "botania:rune_of_mana"
+    },
+    {
+      "item": "botania:manasteel_ingot"
+    },
+    {
+      "item": "botania:manasteel_ingot"
+    },
+    {
+      "item": "minecraft:ice"
+    },
+    {
+      "item": "minecraft:ice"
+    }
+  ],
+  "mana": 2000,
+  "output": {
+    "count": 1,
+    "id": "extrabotany:frost_star"
+  },
+  "reagent": {
+    "item": "botania:livingrock"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "extrabotany:orichalcos_ingots"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "id": "extrabotany:orichalcos_nugget"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "extrabotany:stonesia",
+  "input": {
+    "type": "compound",
+    "ingredients": [
+      {
+        "type": "tag",
+        "tag": "c:ores/osmium"
+      },
+      {
+        "type": "tag",
+        "tag": "forge:ores/osmium"
+      }
+    ]
+  },
+  "outputMana": 450
+}

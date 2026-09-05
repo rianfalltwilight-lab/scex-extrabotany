@@ -1,0 +1,19 @@
+{
+  "category": "botania:generating_flowers",
+  "extra_recipe_mappings": {
+    "extrabotany:floating_moonlight_lily": 1
+  },
+  "icon": "extrabotany:moonlight_lily",
+  "name": "extrabotany.entry.moonlight_lily",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.moonlight_lily0"
+    },
+    {
+      "type": "botania:petal_apothecary",
+      "recipe": "extrabotany:petal_apothecary/moonlight_lily",
+      "text": "extrabotany.page.moonlight_lily1"
+    }
+  ]
+}

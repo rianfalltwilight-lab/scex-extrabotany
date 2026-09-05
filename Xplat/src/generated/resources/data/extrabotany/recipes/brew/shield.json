@@ -1,0 +1,18 @@
+{
+  "type": "botania:brew",
+  "brew": "extrabotany:shield",
+  "ingredients": [
+    {
+      "item": "minecraft:nether_wart"
+    },
+    {
+      "item": "minecraft:golden_apple"
+    },
+    {
+      "item": "minecraft:bucket"
+    },
+    {
+      "item": "minecraft:obsidian"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "category": "botania:functional_flowers",
+  "extra_recipe_mappings": {
+    "extrabotany:floating_necrofleur": 1,
+    "extrabotany:floating_necrofleur_chibi": 3
+  },
+  "icon": "extrabotany:necrofleur",
+  "name": "extrabotany.entry.necrofleur",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.necrofleur0"
+    },
+    {
+      "type": "botania:petal_apothecary",
+      "recipe": "extrabotany:petal_apothecary/necrofleur",
+      "text": "extrabotany.page.necrofleur1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.necrofleur2"
+    },
+    {
+      "type": "botania:mana_infusion",
+      "recipes": "extrabotany:mana_infusion/necrofleur_chibi",
+      "text": "extrabotany.page.necrofleur3"
+    }
+  ]
+}

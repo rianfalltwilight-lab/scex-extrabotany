@@ -1,0 +1,19 @@
+{
+  "type": "botania:terrestrial_agglomeration_plate",
+  "ingredients": [
+    {
+      "item": "extrabotany:the_chaos"
+    },
+    {
+      "item": "extrabotany:the_origin"
+    },
+    {
+      "item": "extrabotany:the_end"
+    }
+  ],
+  "mana": 1000000,
+  "result": {
+    "count": 1,
+    "id": "extrabotany:the_universe"
+  }
+}

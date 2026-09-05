@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "extrabotany:spider_ring"
+    },
+    {
+      "item": "extrabotany:jackie_chan_ring"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:parkour_ring"
+  }
+}

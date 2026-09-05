@@ -1,0 +1,20 @@
+{
+  "category": "botania:extrabotanies",
+  "extra_recipe_mappings": {
+    "extrabotany:orichalcos_block": 0,
+    "extrabotany:orichalcos_nugget": 0
+  },
+  "icon": "extrabotany:orichalcos_ingot",
+  "name": "extrabotany.entry.orichalcos",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.orichalcos0"
+    },
+    {
+      "type": "botania:runic_altar",
+      "recipe": "extrabotany:runic_altar/orichalcos_ingot",
+      "text": "extrabotany.page.orichalcos1"
+    }
+  ]
+}

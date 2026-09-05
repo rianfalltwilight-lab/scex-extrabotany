@@ -1,0 +1,33 @@
+{
+  "parent": "extrabotany:main/root",
+  "criteria": {
+    "craft_pedestal": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#extrabotany:pedestals"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:craft_pedestal.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:pedestal_livingrock"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:craft_pedestal"
+    }
+  },
+  "requirements": [
+    [
+      "craft_pedestal"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,169 @@
+plugins {
+    id 'java'
+    id 'net.neoforged.moddev.legacyforge' version '2.0.78'
+}
+
+base.archivesName = mod_id + "-" + "common"
+version = "${minecraft_version}-${mod_version}"
+if (System.getenv().RELEASE_MODE != "1") {
+    version += '-SNAPSHOT'
+}
+
+repositories {
+    maven {
+        name = "Jared" // Patchouli and JEI
+        url = "https://maven.blamejared.com/"
+    }
+    maven {
+        name = "TerraformersMC"
+        url = "https://maven.terraformersmc.com/" // for emi
+    }
+    maven {
+        name = "Unascribed"
+        url = "https://repo.unascribed.com" // for ears
+        content {
+            includeGroup "com.unascribed"
+        }
+    }
+    repositories {
+        maven {
+            name = "Forge"
+            url = "https://maven.minecraftforge.net"
+        }
+    }
+    maven {
+        url = "https://jitpack.io" // for step height eam
+    }
+    maven {
+        name = "lounode"
+        url = "https://maven.lounode.top/snapshots"
+    }
+    maven {
+        name = "lounode"
+        url = "https://maven.lounode.top/releases"
+    }
+    maven {
+        name = "kubejs"
+        url = "https://maven.latvian.dev/releases"
+        content {
+            includeGroup "dev.latvian.mods"
+            includeGroup "dev.latvian.apps"
+        }
+    }
+    maven {
+        url = "https://maven.saps.dev/minecraft"
+        content {
+            includeGroup "dev.latvian.mods"
+            includeGroup "dev.ftb.mods"
+        }
+    }
+    maven {
+        url = "https://maven.architectury.dev/"
+    }
+}
+
+legacyForge {
+    mcpVersion = minecraft_version
+    accessTransformers = [file('src/main/resources/META-INF/accesstransformer.cfg')]
+
+    parchment {
+        minecraftVersion = minecraft_version
+        mappingsVersion = mapping_version
+    }
+}
+
+dependencies {
+    compileOnly "org.spongepowered:mixin:0.8.5"
+    compileOnly "vazkii.patchouli:Patchouli-xplat:${patchouli_version}"
+    compileOnly "vazkii.botania:Botania:${botania_version}-FORGE"
+    compileOnly "io.github.lounode.eventwrapper:eventwrapper-common:${minecraft_version}-${eventwrapper_version}"
+    compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+    compileOnly "dev.emi:emi-xplat-mojmap:1.0.12+${minecraft_version}:api"
+
+    compileOnly "dev.latvian.mods:kubejs-forge:${kubejs_version}"
+    compileOnly "dev.latvian.mods:rhino-fabric:${rhino_version}"
+    compileOnly "dev.architectury:architectury-fabric:${architectury_version}"
+
+    api "com.demonwav.mcdev:annotations:2.1.0"
+    api 'org.jetbrains:annotations:24.0.1'
+    api "com.google.code.findbugs:jsr305:3.0.2"
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.6.1'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+}
+
+processResources {
+    // Exclude datagenerator .cache directory
+    exclude '.cache'
+}
+
+def generateModMetadataXplat = tasks.register('generateModMetadataXplat', ProcessResources) {
+    var replaceProperties = [
+            minecraft_version: minecraft_version, minecraft_version_range: minecraft_version_range,
+            forge_version: forge_version, forge_version_range: forge_version_range,
+            loader_version_range: loader_version_range,
+            mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
+            mod_authors: mod_authors, mod_description: mod_description,
+            botania_version: botania_version, botania_version_range: botania_version_range,
+            patchouli_version: patchouli_version, patchouli_version_range: patchouli_version_range,
+            curios_version: curios_version, curios_version_range: curios_version_range,
+            jei_version: jei_version, jei_version_range: jei_version_range,
+            mantle_version: mantle_version, mantle_version_range: mantle_version_range,
+            tinkers_version: tinkers_version, tinkers_version_range: tinkers_version_range,
+            top_version: top_version, top_version_range: top_version_range,
+            eventwrapper_version: eventwrapper_version, eventwrapper_version_range: eventwrapper_version_range,
+            kubejs_version: kubejs_version, kubejs_version_range: kubejs_version_range,
+    ]
+    inputs.properties replaceProperties
+    expand replaceProperties
+
+    from "src/main/template"
+    into "build/generated/sources/modMetadata"
+}
+
+sourceSets.main.resources.srcDir generateModMetadataXplat
+legacyForge.ideSyncTask generateModMetadataXplat
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = mod_group_id
+            artifactId = base.archivesName.get()
+            version = project.version
+            from components.java
+        }
+    }
+    repositories {
+        if (System.getenv("GITHUB_ACTIONS") != null) {
+            if (System.getenv().RELEASE_MODE != "1") {
+                maven {
+                    name = "lounode"
+                    url = "https://maven.lounode.top/snapshots"
+                    credentials {
+                        username = System.getenv("MAVEN_USERNAME")
+                        password = System.getenv("MAVEN_TOKEN")
+                    }
+                }
+            } else {
+                maven {
+                    name = "lounode"
+                    url = "https://maven.lounode.top/releases"
+                    credentials {
+                        username = System.getenv("MAVEN_USERNAME")
+                        password = System.getenv("MAVEN_TOKEN")
+                    }
+                }
+            }
+        } else {
+            mavenLocal()
+        }
+    }
+}

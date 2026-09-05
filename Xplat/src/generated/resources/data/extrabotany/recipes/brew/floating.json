@@ -1,0 +1,15 @@
+{
+  "type": "botania:brew",
+  "brew": "extrabotany:floating",
+  "ingredients": [
+    {
+      "item": "minecraft:nether_wart"
+    },
+    {
+      "item": "minecraft:chorus_fruit"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ]
+}

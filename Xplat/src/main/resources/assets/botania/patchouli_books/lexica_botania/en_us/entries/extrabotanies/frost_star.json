@@ -1,0 +1,16 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:frost_star",
+  "name": "extrabotany.entry.froststar",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.froststar0"
+    },
+    {
+      "type": "botania:runic_altar",
+      "text": "extrabotany.page.froststar1",
+      "recipe": "extrabotany:runic_altar/frost_star"
+    }
+  ]
+}

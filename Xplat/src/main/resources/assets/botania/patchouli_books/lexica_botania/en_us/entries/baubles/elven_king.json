@@ -1,0 +1,16 @@
+{
+  "category": "botania:baubles",
+  "icon": "extrabotany:elven_king",
+  "name": "extrabotany.entry.elven_king",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.elven_king0"
+    },
+    {
+      "type": "botania:runic_altar",
+      "recipe": "extrabotany:runic_altar/elven_king",
+      "text": "extrabotany.page.elven_king1"
+    }
+  ]
+}

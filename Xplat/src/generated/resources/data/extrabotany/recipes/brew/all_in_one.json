@@ -1,0 +1,18 @@
+{
+  "type": "botania:brew",
+  "brew": "extrabotany:all_in_one",
+  "ingredients": [
+    {
+      "item": "minecraft:nether_wart"
+    },
+    {
+      "item": "minecraft:golden_carrot"
+    },
+    {
+      "item": "minecraft:ghast_tear"
+    },
+    {
+      "item": "minecraft:glowstone_dust"
+    }
+  ]
+}

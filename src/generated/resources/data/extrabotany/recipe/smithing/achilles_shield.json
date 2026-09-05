@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "extrabotany:hero_medal"
+  },
+  "base": {
+    "item": "extrabotany:terrasteel_shield"
+  },
+  "result": {
+    "count": 1,
+    "id": "extrabotany:achilles_shield"
+  },
+  "template": {
+    "tag": "extrabotany:orichalcos_ingots"
+  }
+}

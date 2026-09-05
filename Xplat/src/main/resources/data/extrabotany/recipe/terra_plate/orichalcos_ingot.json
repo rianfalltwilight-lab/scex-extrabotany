@@ -1,0 +1,19 @@
+{
+  "type": "botania:terrestrial_agglomeration_plate",
+  "ingredients": [
+    {
+      "item": "botania:gaia_ingot"
+    },
+    {
+      "item": "extrabotany:gilded_potato_mashed"
+    },
+    {
+      "item": "extrabotany:hero_medal"
+    }
+  ],
+  "mana": 500000,
+  "result": {
+    "count": 1,
+    "id": "extrabotany:orichalcos_ingot"
+  }
+}

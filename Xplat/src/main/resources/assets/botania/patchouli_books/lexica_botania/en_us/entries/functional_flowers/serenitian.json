@@ -1,0 +1,19 @@
+{
+  "category": "botania:functional_flowers",
+  "extra_recipe_mappings": {
+    "extrabotany:floating_serenitian": 1
+  },
+  "icon": "extrabotany:serenitian",
+  "name": "extrabotany.entry.serenitian",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.serenitian0"
+    },
+    {
+      "type": "botania:petal_apothecary",
+      "recipe": "extrabotany:petal_apothecary/serenitian",
+      "text": "extrabotany.page.serenitian1"
+    }
+  ]
+}

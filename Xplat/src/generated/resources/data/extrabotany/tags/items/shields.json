@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "extrabotany:manasteel_shield",
+    "extrabotany:elementium_shield",
+    "extrabotany:terrasteel_shield",
+    "extrabotany:achilles_shield"
+  ]
+}

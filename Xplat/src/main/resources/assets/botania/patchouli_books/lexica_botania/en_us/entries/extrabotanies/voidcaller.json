@@ -1,0 +1,15 @@
+{
+  "name": "extrabotany.entry.voidcaller",
+  "icon": "extrabotany:voidcaller",
+  "category": "botania:extrabotanies",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.voidcaller0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:voidcaller"
+    }
+  ]
+}

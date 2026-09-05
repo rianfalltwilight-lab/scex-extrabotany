@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": {
+      "tag": "c:ingots/manasteel"
+    },
+    "S": {
+      "item": "minecraft:sticky_piston"
+    }
+  },
+  "pattern": [
+    "SM ",
+    "M M",
+    " M "
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:jackie_chan_ring"
+  }
+}

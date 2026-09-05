@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "botania:gaia_spirit"
+    },
+    {
+      "item": "botania:rune_of_air"
+    },
+    {
+      "item": "botania:rune_of_earth"
+    },
+    {
+      "item": "botania:rune_of_water"
+    },
+    {
+      "item": "botania:rune_of_fire"
+    },
+    {
+      "item": "botania:rune_of_spring"
+    },
+    {
+      "item": "botania:rune_of_summer"
+    },
+    {
+      "item": "botania:rune_of_autumn"
+    },
+    {
+      "item": "botania:rune_of_winter"
+    }
+  ],
+  "result": {
+    "count": 8,
+    "id": "extrabotany:element_rune"
+  }
+}

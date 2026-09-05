@@ -1,0 +1,15 @@
+{
+  "type": "botania:mana_infusion",
+  "catalyst": {
+    "type": "botania:block",
+    "block": "extrabotany:dimension_catalyst"
+  },
+  "input": {
+    "item": "minecraft:apple"
+  },
+  "mana": 500,
+  "output": {
+    "count": 1,
+    "id": "minecraft:chorus_fruit"
+  }
+}

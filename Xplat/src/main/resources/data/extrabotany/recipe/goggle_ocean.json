@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "P": {
+      "tag": "botania:petals/cyan"
+    },
+    "S": {
+      "item": "extrabotany:spirit_fragment"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "PSP",
+    "PPP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:goggle_ocean"
+  }
+}

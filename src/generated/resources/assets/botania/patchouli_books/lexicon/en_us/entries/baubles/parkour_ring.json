@@ -1,0 +1,16 @@
+{
+  "category": "botania:baubles",
+  "icon": "extrabotany:parkour_ring",
+  "name": "extrabotany.entry.parkour_ring",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.parkour_ring0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:parkour_ring",
+      "text": "extrabotany.page.parkour_ring1"
+    }
+  ]
+}

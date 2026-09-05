@@ -1,0 +1,17 @@
+{
+  "advancement": "extrabotany:main/the_source_of_honkai",
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:mana_ring_master",
+  "name": "extrabotany.entry.mana_ring_master",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.mana_ring_master0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:mana_ring_master",
+      "text": "extrabotany.page.mana_ring_master1"
+    }
+  ]
+}

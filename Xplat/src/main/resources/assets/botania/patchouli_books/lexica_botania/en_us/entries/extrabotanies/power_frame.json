@@ -1,0 +1,11 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:power_frame",
+  "name": "extrabotany.entry.powerframe",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.powerframe0"
+    }
+  ]
+}

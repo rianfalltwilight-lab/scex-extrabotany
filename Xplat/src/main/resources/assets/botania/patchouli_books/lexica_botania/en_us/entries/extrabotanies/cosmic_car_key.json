@@ -1,0 +1,20 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:cosmic_car_key",
+  "name": "extrabotany.entry.cosmiccarkey",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.cosmiccarkey0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.cosmiccarkey2"
+    },
+    {
+      "type": "patchouli:crafting",
+      "text": "extrabotany.page.cosmiccarkey1",
+      "recipe": "extrabotany:cosmic_car_key"
+    }
+  ]
+}

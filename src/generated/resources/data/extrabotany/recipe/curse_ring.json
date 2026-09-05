@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": {
+      "tag": "c:ingots/manasteel"
+    },
+    "S": {
+      "item": "minecraft:wither_skeleton_skull"
+    }
+  },
+  "pattern": [
+    "SM ",
+    "M M",
+    " M "
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:curse_ring"
+  }
+}

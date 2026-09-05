@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "extrabotany:manasteel_hammer",
+    "extrabotany:elementium_hammer",
+    "extrabotany:terrasteel_hammer",
+    "extrabotany:gaia_hammer",
+    "extrabotany:photonium_hammer",
+    "extrabotany:shadowium_hammer",
+    "extrabotany:aerialite_hammer",
+    "extrabotany:orichalcos_hammer",
+    "extrabotany:rhein_hammer"
+  ]
+}

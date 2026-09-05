@@ -1,0 +1,31 @@
+{
+  "parent": "extrabotany:main/root",
+  "criteria": {
+    "eat_nightmare_fuel": {
+      "conditions": {
+        "item": {
+          "items": "extrabotany:nightmare_fuel"
+        }
+      },
+      "trigger": "botania:use_item_success"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:deep_dark_fantasy.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:nightmare_fuel"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:deep_dark_fantasy"
+    }
+  },
+  "requirements": [
+    [
+      "eat_nightmare_fuel"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

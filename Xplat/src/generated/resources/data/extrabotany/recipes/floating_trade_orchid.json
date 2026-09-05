@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "botania:floating_flower",
+  "ingredients": [
+    {
+      "tag": "botania:floating_flowers"
+    },
+    {
+      "item": "extrabotany:trade_orchid"
+    }
+  ],
+  "result": {
+    "item": "extrabotany:floating_trade_orchid"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "botania:elven_trade",
+  "ingredients": [
+    {
+      "item": "botania:quartz_mana"
+    },
+    {
+      "item": "botania:quartz_mana"
+    }
+  ],
+  "output": [
+    {
+      "item": "extrabotany:elementium_quartz"
+    }
+  ]
+}

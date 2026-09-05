@@ -1,0 +1,30 @@
+SCEX ExtraBotany 1.21.1 port notice
+===================================
+
+This repository is a modified, unofficial Minecraft 1.21.1 / NeoForge port
+maintained by Space Creator EX (SCEX).
+
+Upstream source:
+  Lounode/ExtraBotany
+  tag release-1.20.1-1.9.2
+  commit a4d4f2a968d559752fa3bd6e609544473109d983
+  MIT License; copyright notice retained in LICENSE
+
+The SCEX port and restoration work was performed in 2026. The fixed comparison
+baseline for legacy registry and save compatibility was the archived
+extrabotany-neoforge-1.21.1-2.0-scex.1-gaia3-hotfix.jar with SHA-256:
+  8051956c2b045b9f28e78fe9c25b36235c83d118ab4823bcc31dc3c188857f42
+
+Decompiled bytecode was used as behavioral, registry, NBT, and numeric-model
+evidence. Decompiled Java source is not included as maintained source. Resource
+files restored from the archived baseline are recorded by relative path and
+SHA-256 in compatibility/*-resource-provenance.json; the baseline declared the
+MIT license and retained upstream attribution.
+
+The Minecraft 1.21.1 port, tests, audit tooling, documentation, and public-release
+preparation were primarily assisted by OpenAI Codex under maintainer supervision.
+See AI-GENERATED.md for the scope and limitations of that assistance.
+
+ExtraBotany, Botania, Minecraft, NeoForge, and all referenced names and assets
+remain the property of their respective owners. This notice records provenance;
+it does not expand or reinterpret the MIT license and is not legal advice.

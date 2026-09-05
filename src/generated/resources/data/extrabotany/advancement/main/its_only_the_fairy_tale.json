@@ -1,0 +1,26 @@
+{
+  "parent": "extrabotany:main/goodtek",
+  "criteria": {
+    "code_triggered": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:its_only_the_fairy_tale.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:edelweiss"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:its_only_the_fairy_tale"
+    }
+  },
+  "requirements": [
+    [
+      "code_triggered"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

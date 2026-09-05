@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "extrabotany:item/nine_and_three_quarters_reward_bag"
+  }
+}

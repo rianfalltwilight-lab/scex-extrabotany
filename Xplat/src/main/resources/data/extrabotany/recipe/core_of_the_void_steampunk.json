@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "extrabotany:core_of_the_void"
+    },
+    {
+      "item": "extrabotany:gilded_potato"
+    }
+  ],
+  "result": {
+    "id": "extrabotany:core_of_the_void",
+    "count": 1,
+    "components": {
+      "minecraft:custom_data": {
+        "variant": "steampunk"
+      }
+    }
+  }
+}

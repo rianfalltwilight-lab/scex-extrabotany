@@ -1,0 +1,34 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:manasteel_shield",
+  "name": "extrabotany.entry.shields",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.shields0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:manasteel_shield",
+      "text": "extrabotany.page.shields1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.shields2"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:elementium_shield",
+      "text": "extrabotany.page.shields3"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.shields4"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:terrasteel_shield",
+      "text": "extrabotany.page.shields5"
+    }
+  ]
+}

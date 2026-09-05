@@ -1,0 +1,15 @@
+{
+  "type": "extrabotany:copy_brew_from_mana_cocktail",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "extrabotany:mana_cocktail"
+    },
+    {
+      "item": "minecraft:popped_chorus_fruit"
+    }
+  ],
+  "result": {
+    "item": "extrabotany:holy_water_grenade"
+  }
+}

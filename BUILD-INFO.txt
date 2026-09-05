@@ -1,0 +1,17 @@
+Format-Version=2
+Project=SCEX ExtraBotany 1.21.1 port
+Mod-Version=2.0-scex.5-dev
+Minecraft-Version=1.21.1
+NeoForge-Version=21.1.248
+Java-Version=21
+Gradle-Version=9.2.1
+Upstream-Commit=a4d4f2a968d559752fa3bd6e609544473109d983
+Legacy-Baseline-SHA256=8051956c2b045b9f28e78fe9c25b36235c83d118ab4823bcc31dc3c188857f42
+Source-Tree-SHA256=189944093d3532c69c381e52e34d91bedfd115d7da26d9d3b54214292ae06544
+Source-File-Count=3525
+Source-Tree-Hash-Algorithm=SHA-256 over ordinal-relative-path-sorted UTF-8 lines: lowercase-file-sha256 two-spaces relative-path newline
+GameTests=19 required tests passed; bounded regression scope, not a gameplay completion rate
+Registry-Compatibility=zero missing inventoried legacy entries compared with the archived scex.1 baseline
+Old-World-Fixture=242 serialized item stacks and custom data reloaded unchanged
+Physical-Client=243 items, 34 entity renderers, and 3 restored armor sets checked
+AI-Disclosure=OpenAI Codex assisted porting, testing, documentation, and release preparation under maintainer supervision

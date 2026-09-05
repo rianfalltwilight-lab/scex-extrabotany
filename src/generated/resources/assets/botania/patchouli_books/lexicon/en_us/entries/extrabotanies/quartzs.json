@@ -1,0 +1,41 @@
+{
+  "category": "botania:extrabotanies",
+  "extra_recipe_mappings": {
+    "extrabotany:chiseled_elementium_quartz_block": 2,
+    "extrabotany:chiseled_gaia_quartz_block": 1,
+    "extrabotany:elementium_quartz_block": 2,
+    "extrabotany:elementium_quartz_bricks": 2,
+    "extrabotany:elementium_quartz_pillar": 2,
+    "extrabotany:elementium_quartz_slab": 2,
+    "extrabotany:elementium_quartz_stairs": 2,
+    "extrabotany:gaia_quartz_block": 1,
+    "extrabotany:gaia_quartz_bricks": 1,
+    "extrabotany:gaia_quartz_pillar": 1,
+    "extrabotany:gaia_quartz_slab": 1,
+    "extrabotany:gaia_quartz_stairs": 1,
+    "extrabotany:smooth_elementium_quartz": 2,
+    "extrabotany:smooth_elementium_quartz_slab": 2,
+    "extrabotany:smooth_elementium_quartz_stairs": 2,
+    "extrabotany:smooth_gaia_quartz": 1,
+    "extrabotany:smooth_gaia_quartz_slab": 1,
+    "extrabotany:smooth_gaia_quartz_stairs": 1
+  },
+  "icon": "extrabotany:gaia_quartz",
+  "name": "extrabotany.entry.quartzs",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.quartzs0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:gaia_quartz",
+      "text": "extrabotany.page.quartzs1"
+    },
+    {
+      "type": "botania:elven_trade",
+      "recipes": "extrabotany:elven_trade/elementium_quartz",
+      "text": "extrabotany.page.quartzs2"
+    }
+  ]
+}

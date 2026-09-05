@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "combat",
+  "ingredients": [
+    {
+      "item": "extrabotany:judah_oath"
+    },
+    {
+      "item": "extrabotany:sin_rune"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:judah_oath_sakura"
+  }
+}

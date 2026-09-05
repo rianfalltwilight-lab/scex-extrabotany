@@ -1,0 +1,140 @@
+{
+  "values": [
+    {
+      "id": "goblins_tyranny:goblin_huntsman",
+      "required": false
+    },
+    {
+      "id": "goblins_tyranny:goblin_hunter",
+      "required": false
+    },
+    {
+      "id": "goblins_tyranny:engineeress_goblin",
+      "required": false
+    },
+    {
+      "id": "goblins_tyranny:engineer_goblin",
+      "required": false
+    },
+    {
+      "id": "goblins_tyranny:shaman_goblin",
+      "required": false
+    },
+    {
+      "id": "goblins_tyranny:champion_goblin",
+      "required": false
+    },
+    {
+      "id": "goblins_tyranny:leader_goblin",
+      "required": false
+    },
+    {
+      "id": "goblins_tyranny:knight_goblin",
+      "required": false
+    },
+    {
+      "id": "goblins_tyranny:mini_goblin_3",
+      "required": false
+    },
+    {
+      "id": "goblins_tyranny:mini_goblin_2",
+      "required": false
+    },
+    {
+      "id": "goblins_tyranny:mini_goblin_1",
+      "required": false
+    },
+    {
+      "id": "goblins_tyranny:bard",
+      "required": false
+    },
+    {
+      "id": "goblins_tyranny:gold_cave_goblin",
+      "required": false
+    },
+    {
+      "id": "goblins_tyranny:iron_cave_goblin",
+      "required": false
+    },
+    {
+      "id": "goblins_tyranny:copper_cave_goblin",
+      "required": false
+    },
+    {
+      "id": "goblins_tyranny:coal_cave_goblin",
+      "required": false
+    },
+    {
+      "id": "goblins_tyranny:mini_drunk_gob_3",
+      "required": false
+    },
+    {
+      "id": "goblins_tyranny:mini_drunk_gob_2",
+      "required": false
+    },
+    {
+      "id": "goblins_tyranny:mini_drunk_gob_1",
+      "required": false
+    },
+    {
+      "id": "goblins_tyranny:wanderer_goblin",
+      "required": false
+    },
+    {
+      "id": "goblins_tyranny:merchant",
+      "required": false
+    },
+    {
+      "id": "goblins_tyranny:bartender_goblin",
+      "required": false
+    },
+    {
+      "id": "goblins_tyranny:blacksmith_goblin",
+      "required": false
+    },
+    {
+      "id": "goblins_tyranny:grobot",
+      "required": false
+    },
+    {
+      "id": "goblins_tyranny:droblin",
+      "required": false
+    },
+    {
+      "id": "aoa3:goblin",
+      "required": false
+    },
+    {
+      "id": "goblintraders:vein_goblin_trader",
+      "required": false
+    },
+    {
+      "id": "goblintraders:goblin_trader",
+      "required": false
+    },
+    {
+      "id": "apotheosis:twilight_treasure_goblin",
+      "required": false
+    },
+    {
+      "id": "twilightforest:block_and_chain_goblin",
+      "required": false
+    },
+    {
+      "id": "twilightforest:upper_goblin_knight",
+      "required": false
+    },
+    {
+      "id": "twilightforest:lower_goblin_knight",
+      "required": false
+    },
+    {
+      "id": "twilightforest:kobold",
+      "required": false
+    },
+    {
+      "id": "twilightforest:redcap",
+      "required": false
+    }
+  ]
+}

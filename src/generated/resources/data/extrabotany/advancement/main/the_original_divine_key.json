@@ -1,0 +1,35 @@
+{
+  "parent": "extrabotany:main/the_source_of_honkai",
+  "criteria": {
+    "has_relic": {
+      "conditions": {
+        "relic": {
+          "items": "extrabotany:void_archives"
+        }
+      },
+      "trigger": "botania:relic_bind"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:the_original_divine_key.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:void_archives"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:the_original_divine_key"
+    }
+  },
+  "requirements": [
+    [
+      "has_relic"
+    ]
+  ],
+  "rewards": {
+    "experience": 50
+  },
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,16 @@
+{
+  "category": "botania:baubles",
+  "icon": "extrabotany:dispersive_ring",
+  "name": "extrabotany.entry.dispersive_ring",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.dispersive_ring0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:dispersive_ring",
+      "text": "extrabotany.page.dispersive_ring1"
+    }
+  ]
+}

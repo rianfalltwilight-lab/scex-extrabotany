@@ -1,0 +1,27 @@
+{
+  "parent": "extrabotany:main/goodtek",
+  "criteria": {
+    "code_triggered": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:muromi_san.desc"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:annoyingflower"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:muromi_san"
+    }
+  },
+  "requirements": [
+    [
+      "code_triggered"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

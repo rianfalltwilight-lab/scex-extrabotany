@@ -1,0 +1,34 @@
+{
+  "category": "botania:extrabotanies",
+  "extra_recipe_mappings": {
+    "extrabotany:infinite_wine": 2
+  },
+  "icon": "extrabotany:infinite_wine{brewKey:\"extrabotany:mana_cocktail\"}",
+  "name": "extrabotany.entry.infinite_wine",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.infinite_wine0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.infinite_wine1"
+    },
+    {
+      "type": "extrabotany:craft_manual",
+      "input1": "extrabotany:mana_cocktail{brewKey:\"extrabotany:mana_cocktail\",swigsLeft:1}",
+      "input2": "extrabotany:hero_medal",
+      "output": "extrabotany:infinite_wine{brewKey:\"extrabotany:mana_cocktail\"}",
+      "shapeless": true,
+      "text": "extrabotany.page.infinite_wine2"
+    },
+    {
+      "type": "extrabotany:craft_manual",
+      "input1": "extrabotany:infinite_wine{brewKey:\"extrabotany:mana_cocktail\"}",
+      "input2": "extrabotany:mana_cocktail{brewKey:\"botania:strength\"}",
+      "output": "extrabotany:infinite_wine{brewKey:\"botania:strength\"}",
+      "shapeless": true,
+      "text": "extrabotany.page.infinite_wine3"
+    }
+  ]
+}

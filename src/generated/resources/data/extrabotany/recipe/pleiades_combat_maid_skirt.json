@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "G": {
+      "item": "extrabotany:das_rheingold"
+    },
+    "I": {
+      "item": "botania:gaia_ingot"
+    },
+    "T": {
+      "item": "botania:terrasteel_leggings"
+    }
+  },
+  "pattern": [
+    "III",
+    "GTG",
+    "G G"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:pleiades_combat_maid_skirt"
+  }
+}

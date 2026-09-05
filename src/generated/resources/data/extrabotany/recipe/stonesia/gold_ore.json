@@ -1,0 +1,17 @@
+{
+  "type": "extrabotany:stonesia",
+  "input": {
+    "type": "botania:any_of",
+    "ingredients": [
+      {
+        "type": "botania:tag",
+        "tag": "#minecraft:gold_ores"
+      },
+      {
+        "type": "botania:tag",
+        "tag": "#c:ores/gold"
+      }
+    ]
+  },
+  "outputMana": 580
+}

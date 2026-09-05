@@ -1,0 +1,19 @@
+{
+  "category": "botania:generating_flowers",
+  "extra_recipe_mappings": {
+    "extrabotany:floating_sunshine_lily": 1
+  },
+  "icon": "extrabotany:sunshine_lily",
+  "name": "extrabotany.entry.sunshine_lily",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.sunshine_lily0"
+    },
+    {
+      "type": "botania:petal_apothecary",
+      "recipe": "extrabotany:petal_apothecary/sunshine_lily",
+      "text": "extrabotany.page.sunshine_lily1"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "botania:alchemy_catalyst"
+    },
+    "P": {
+      "item": "minecraft:ender_pearl"
+    },
+    "Q": {
+      "item": "extrabotany:elementium_quartz"
+    },
+    "R": {
+      "item": "botania:livingrock"
+    },
+    "S": {
+      "item": "extrabotany:the_chaos"
+    }
+  },
+  "pattern": [
+    "RPR",
+    "QCQ",
+    "RSR"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:dimension_catalyst"
+  }
+}

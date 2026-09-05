@@ -1,0 +1,13 @@
+{
+  "values": [
+    "extrabotany:jingwei",
+    {
+      "id": "extrabotany:jingwei",
+      "required": false
+    },
+    {
+      "id": "extrabotany:flamescion_flame",
+      "required": false
+    }
+  ]
+}

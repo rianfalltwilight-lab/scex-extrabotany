@@ -1,0 +1,14 @@
+{
+  "type": "botania:mana_infusion",
+  "catalyst": {
+    "type": "block",
+    "block": "extrabotany:dimension_catalyst"
+  },
+  "input": {
+    "item": "minecraft:iron_ore"
+  },
+  "mana": 2000,
+  "output": {
+    "item": "minecraft:nether_quartz_ore"
+  }
+}

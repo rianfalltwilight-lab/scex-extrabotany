@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "extrabotany:item/infinite_wine",
+    "layer1": "extrabotany:item/infinite_wine_3"
+  }
+}

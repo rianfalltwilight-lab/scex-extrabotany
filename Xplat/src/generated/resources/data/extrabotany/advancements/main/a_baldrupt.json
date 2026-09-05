@@ -1,0 +1,29 @@
+{
+  "parent": "extrabotany:main/goodtek",
+  "criteria": {
+    "code_triggered": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.extrabotany:a_baldrupt.desc"
+    },
+    "frame": "task",
+    "hidden": true,
+    "icon": {
+      "item": "botania:daffomill"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.extrabotany:a_baldrupt"
+    }
+  },
+  "requirements": [
+    [
+      "code_triggered"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -1,0 +1,27 @@
+{
+  "type": "botania:crafting_shaped_mana_upgrade",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "extrabotany:miku_helm"
+    },
+    "G": {
+      "item": "botania:gaia_ingot"
+    },
+    "M": {
+      "item": "botania:mana_tablet"
+    },
+    "O": {
+      "tag": "extrabotany:orichalcos_ingots"
+    }
+  },
+  "pattern": [
+    "OGO",
+    "MAM",
+    "OGO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:silentsages_helm"
+  }
+}

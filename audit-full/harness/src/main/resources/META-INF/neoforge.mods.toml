@@ -1,0 +1,7 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="MIT"
+[[mods]]
+modId="scex_registry_audit"
+version="1.0"
+displayName="SCEX isolated registry audit"

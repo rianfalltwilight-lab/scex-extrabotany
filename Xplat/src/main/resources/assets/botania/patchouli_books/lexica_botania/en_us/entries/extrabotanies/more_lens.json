@@ -1,0 +1,52 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:lens_mana",
+  "name": "extrabotany.entry.more_lens",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.more_lens0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:lens_push",
+      "text": "extrabotany.page.more_lens1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.more_lens2"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:lens_smelt",
+      "text": "extrabotany.page.more_lens3"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.more_lens4"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:lens_mana",
+      "text": "extrabotany.page.more_lens5"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.more_lens6"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:lens_potion",
+      "text": "extrabotany.page.more_lens7"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.more_lens8"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:lens_trace",
+      "text": "extrabotany.page.more_lens9"
+    }
+  ]
+}

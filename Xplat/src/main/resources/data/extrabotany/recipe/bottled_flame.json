@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "tag": "botania:petals/red"
+    },
+    "B": {
+      "item": "minecraft:torch"
+    },
+    "C": {
+      "item": "botania:managlass"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "CBC",
+    "CCC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:bottled_flame"
+  }
+}

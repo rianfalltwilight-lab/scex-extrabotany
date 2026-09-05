@@ -1,0 +1,17 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:music_disc_gaia3",
+  "name": "extrabotany.entry.records",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.records0"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "extrabotany:music_disc_gaia3",
+      "link_recipe": true,
+      "text": "extrabotany.page.records1"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "botania:mana_infusion",
+  "catalyst": {
+    "type": "block",
+    "block": "extrabotany:dimension_catalyst"
+  },
+  "input": {
+    "item": "minecraft:diamond_horse_armor"
+  },
+  "mana": 20000,
+  "output": {
+    "item": "minecraft:shulker_shell"
+  }
+}

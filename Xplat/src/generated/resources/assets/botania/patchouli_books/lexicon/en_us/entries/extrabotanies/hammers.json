@@ -1,0 +1,92 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:manasteel_hammer",
+  "name": "extrabotany.entry.hammers",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.hammers0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:manasteel_hammer",
+      "text": "extrabotany.page.hammers1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.hammers2"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:elementium_hammer",
+      "text": "extrabotany.page.hammers3"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.hammers4"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:terrasteel_hammer",
+      "text": "extrabotany.page.hammers5"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.hammers6"
+    },
+    {
+      "type": "extrabotany:smithing",
+      "recipe": "extrabotany:smithing/gaia_hammer",
+      "text": "extrabotany.page.hammers7"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.hammers8"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:photonium_hammer",
+      "text": "extrabotany.page.hammers9"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.hammers10"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:shadowium_hammer",
+      "text": "extrabotany.page.hammers11"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.hammers12"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:aerialite_hammer",
+      "text": "extrabotany.page.hammers13"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.hammers14"
+    },
+    {
+      "type": "botania:runic_altar",
+      "recipe": "extrabotany:runic_altar/orichalcos_hammer",
+      "text": "extrabotany.page.hammers15"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.hammers16"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.hammers17"
+    },
+    {
+      "type": "botania:terrasteel",
+      "recipe": "extrabotany:terra_plate/rhein_hammer",
+      "text": "extrabotany.page.hammers18"
+    }
+  ]
+}

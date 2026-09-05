@@ -1,0 +1,30 @@
+{
+  "type": "botania:petal_apothecary",
+  "ingredients": [
+    {
+      "tag": "botania:petals/magenta"
+    },
+    {
+      "tag": "botania:petals/magenta"
+    },
+    {
+      "tag": "botania:petals/orange"
+    },
+    {
+      "tag": "botania:petals/orange"
+    },
+    {
+      "item": "botania:rune_of_lust"
+    },
+    {
+      "item": "botania:rune_of_gluttony"
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "extrabotany:resoncund"
+  },
+  "reagent": {
+    "tag": "botania:seed_apothecary_reagent"
+  }
+}

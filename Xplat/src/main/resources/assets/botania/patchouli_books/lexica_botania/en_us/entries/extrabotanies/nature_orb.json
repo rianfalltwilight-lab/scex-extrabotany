@@ -1,0 +1,85 @@
+{
+  "advancement": "botania:main/terrasteel_pickup",
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:nature_orb",
+  "name": "extrabotany.entry.nature_orb",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.nature_orb0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.nature_orb1"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:nature_orb",
+      "text": "extrabotany.page.nature_orb2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.nature_orb3"
+    },
+    {
+      "type": "patchouli:multiblock",
+      "multiblock": {
+        "mapping": {
+          "0": "extrabotany:pedestal_livingrock",
+          "P": "botania:natura_pylon"
+        },
+        "pattern": [
+          [
+            "P___P",
+            "_____",
+            "__0__",
+            "_____",
+            "P___P"
+          ]
+        ]
+      },
+      "name": "extrabotany.multiblock.nature_pedestal_tier1"
+    },
+    {
+      "type": "patchouli:multiblock",
+      "multiblock": {
+        "mapping": {
+          "0": "extrabotany:pedestal_livingrock",
+          "M": "botania:mana_pool",
+          "P": "botania:natura_pylon",
+          "S": "botania:shimmerrock"
+        },
+        "pattern": [
+          [
+            "P_____P",
+            "_______",
+            "_______",
+            "_______",
+            "_______",
+            "_______",
+            "P_____P"
+          ],
+          [
+            "M_____M",
+            "_P___P_",
+            "_______",
+            "___0___",
+            "_______",
+            "_P___P_",
+            "M_____M"
+          ],
+          [
+            "_______",
+            "_SSSSS_",
+            "_S___S_",
+            "_S___S_",
+            "_S___S_",
+            "_SSSSS_",
+            "_______"
+          ]
+        ]
+      },
+      "name": "extrabotany.multiblock.nature_pedestal_tier2"
+    }
+  ]
+}

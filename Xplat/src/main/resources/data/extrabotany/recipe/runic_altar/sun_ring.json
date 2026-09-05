@@ -1,0 +1,44 @@
+{
+  "type": "botania:runic_altar",
+  "catalysts": [],
+  "ingredients": [
+    {
+      "item": "extrabotany:the_end"
+    },
+    {
+      "item": "extrabotany:frost_star"
+    },
+    {
+      "item": "extrabotany:death_ring"
+    },
+    {
+      "item": "botania:greater_band_of_aura"
+    },
+    {
+      "item": "botania:ring_of_the_mantle"
+    },
+    {
+      "item": "botania:great_fairy_ring"
+    },
+    {
+      "item": "botania:ring_of_correction"
+    },
+    {
+      "item": "botania:ring_of_chordata"
+    },
+    {
+      "item": "extrabotany:dispersive_ring"
+    },
+    {
+      "item": "botania:ring_of_far_reach"
+    }
+  ],
+  "mana": 500000,
+  "output": {
+    "count": 1,
+    "id": "extrabotany:sun_ring"
+  },
+  "reagent": {
+    "item": "botania:livingrock"
+  }
+}

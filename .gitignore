@@ -1,0 +1,29 @@
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+.cache
+
+# other
+eclipse
+run
+run-data
+Xplat/src/generated/resources/.cache
+Forge/src/generated/resources/.cache
+Fabric/src/generated/resources/.cache
+
+

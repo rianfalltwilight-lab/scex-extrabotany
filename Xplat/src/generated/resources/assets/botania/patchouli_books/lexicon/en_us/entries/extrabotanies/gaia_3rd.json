@@ -1,0 +1,29 @@
+{
+  "advancement": "extrabotany:main/stygian_twins",
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:challenge_ticket",
+  "name": "extrabotany.entry.gaia_3rd",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.gaia_3rd0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:challenge_ticket",
+      "text": "extrabotany.page.gaia_3rd1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.gaia_3rd2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.gaia_3rd3"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.gaia_3rd4"
+    }
+  ]
+}

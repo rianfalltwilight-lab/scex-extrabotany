@@ -1,0 +1,21 @@
+{
+  "type": "botania:crafting_shaped_mana_upgrade",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "botania:manasteel_boots"
+    },
+    "W": {
+      "item": "botania:manaweave_cloth"
+    }
+  },
+  "pattern": [
+    "WWW",
+    "WAW",
+    "WWW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:miku_boots"
+  }
+}

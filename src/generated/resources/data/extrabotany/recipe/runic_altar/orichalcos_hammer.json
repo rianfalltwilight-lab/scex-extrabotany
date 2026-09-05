@@ -1,0 +1,29 @@
+{
+  "type": "botania:runic_altar",
+  "catalysts": [],
+  "ingredients": [
+    {
+      "item": "extrabotany:orichalcos_ingot"
+    },
+    {
+      "item": "extrabotany:gilded_potato_mashed"
+    },
+    {
+      "item": "extrabotany:the_chaos"
+    },
+    {
+      "item": "extrabotany:the_origin"
+    },
+    {
+      "item": "extrabotany:the_end"
+    }
+  ],
+  "mana": 1000000,
+  "output": {
+    "count": 1,
+    "id": "extrabotany:orichalcos_hammer"
+  },
+  "reagent": {
+    "item": "botania:livingrock"
+  }
+}

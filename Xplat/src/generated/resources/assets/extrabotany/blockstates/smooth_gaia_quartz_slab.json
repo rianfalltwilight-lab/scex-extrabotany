@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "extrabotany:block/smooth_gaia_quartz_slab"
+    },
+    "type=double": {
+      "model": "extrabotany:block/gaia_quartz_block"
+    },
+    "type=top": {
+      "model": "extrabotany:block/smooth_gaia_quartz_slab_top"
+    }
+  }
+}

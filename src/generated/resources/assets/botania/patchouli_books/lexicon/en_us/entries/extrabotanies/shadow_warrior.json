@@ -1,0 +1,32 @@
+{
+  "advancement": "extrabotany:main/stygian_twins",
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:shadow_warrior_helmet",
+  "name": "extrabotany.entry.shadow_warrior",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.shadow_warrior0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:shadow_warrior_helmet",
+      "text": "extrabotany.page.shadow_warrior1"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:shadow_warrior_chestplate",
+      "text": "extrabotany.page.shadow_warrior2"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:shadow_warrior_leggings",
+      "text": "extrabotany.page.shadow_warrior3"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:shadow_warrior_boots",
+      "text": "extrabotany.page.shadow_warrior4"
+    }
+  ]
+}

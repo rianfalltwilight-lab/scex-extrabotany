@@ -1,0 +1,16 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:walking_cane",
+  "name": "extrabotany.entry.walking_cane",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.walking_cane0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:walking_cane",
+      "text": "extrabotany.page.walking_cane1"
+    }
+  ]
+}

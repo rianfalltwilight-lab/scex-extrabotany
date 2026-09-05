@@ -1,0 +1,31 @@
+{
+  "category": "botania:extrabotanies",
+  "extra_recipe_mappings": {
+    "extrabotany:photonium_block": 2,
+    "extrabotany:photonium_nugget": 2,
+    "extrabotany:shadowium_block": 3,
+    "extrabotany:shadowium_nugget": 3
+  },
+  "icon": "extrabotany:shadowium_ingot",
+  "name": "extrabotany.entry.yin_and_yang",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.yin_and_yang0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.yin_and_yang1"
+    },
+    {
+      "type": "botania:runic_altar",
+      "recipe": "extrabotany:runic_altar/photonium_ingot",
+      "text": "extrabotany.page.yin_and_yang2"
+    },
+    {
+      "type": "botania:runic_altar",
+      "recipe": "extrabotany:runic_altar/shadowium_ingot",
+      "text": "extrabotany.page.yin_and_yang3"
+    }
+  ]
+}

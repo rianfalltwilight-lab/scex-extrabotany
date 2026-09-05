@@ -1,0 +1,7 @@
+{
+  "type": "extrabotany:omniviolet",
+  "burnTime": 65,
+  "input": {
+    "item": "minecraft:written_book"
+  }
+}

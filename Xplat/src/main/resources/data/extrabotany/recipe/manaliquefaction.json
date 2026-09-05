@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "botania:livingrock"
+    },
+    "B": {
+      "item": "minecraft:lapis_block"
+    },
+    "C": {
+      "item": "botania:mana_pool"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "BCB",
+    "ABA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:manaliquefaction"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "extrabotany:block/trophy",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "extrabotany:block/trophy",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "extrabotany:block/trophy"
+    },
+    "facing=west": {
+      "model": "extrabotany:block/trophy",
+      "y": 90
+    }
+  }
+}

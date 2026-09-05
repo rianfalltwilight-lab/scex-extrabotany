@@ -1,0 +1,29 @@
+{
+  "parent": "extrabotany:main/root",
+  "criteria": {
+    "code_triggered": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.extrabotany:potato_server.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "extrabotany:gilded_potato_mashed"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.extrabotany:potato_server"
+    }
+  },
+  "requirements": [
+    [
+      "code_triggered"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

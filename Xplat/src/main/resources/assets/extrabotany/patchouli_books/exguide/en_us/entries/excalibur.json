@@ -1,0 +1,16 @@
+{
+  "name": "extrabotany.entry.excalibur",
+  "category": "extrabotany:test_category",
+  "icon": "extrabotany:excalibur",
+  "pages": [
+    {
+      "type": "text",
+      "text": "extrabotany.page.excalibur0"
+    },
+    {
+      "type": "extrabotany:smithing",
+      "text": "extrabotany.page.excalibur1",
+      "recipe": "extrabotany:smithing/excalibur"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "type": "botania:runic_altar",
+  "catalysts": [],
+  "ingredients": [
+    {
+      "item": "extrabotany:elven_king"
+    },
+    {
+      "item": "extrabotany:hero_medal"
+    },
+    {
+      "item": "botania:rune_of_lust"
+    },
+    {
+      "item": "botania:rune_of_gluttony"
+    },
+    {
+      "item": "botania:rune_of_greed"
+    },
+    {
+      "item": "botania:rune_of_sloth"
+    },
+    {
+      "item": "botania:rune_of_wrath"
+    },
+    {
+      "item": "botania:rune_of_envy"
+    },
+    {
+      "item": "botania:rune_of_pride"
+    }
+  ],
+  "mana": 50000,
+  "output": {
+    "count": 1,
+    "id": "extrabotany:all_for_one"
+  },
+  "reagent": {
+    "item": "botania:livingrock"
+  }
+}

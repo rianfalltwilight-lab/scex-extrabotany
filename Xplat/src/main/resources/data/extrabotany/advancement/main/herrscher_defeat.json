@@ -1,0 +1,38 @@
+{
+  "parent": "extrabotany:main/gaia_trial",
+  "criteria": {
+    "kill_herrscher": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "extrabotany:void_herrscher"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:herrscher_defeat.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:voidcaller"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:herrscher_defeat"
+    }
+  },
+  "requirements": [
+    [
+      "kill_herrscher"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

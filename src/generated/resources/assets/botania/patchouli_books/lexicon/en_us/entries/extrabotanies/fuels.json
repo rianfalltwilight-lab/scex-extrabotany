@@ -1,0 +1,30 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:nightmare_fuel",
+  "name": "extrabotany.entry.fuels",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.fuels0"
+    },
+    {
+      "type": "botania:mana_infusion",
+      "recipes": "extrabotany:mana_infusion/nightmare_fuel",
+      "text": "extrabotany.page.fuels1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.fuels2"
+    },
+    {
+      "type": "extrabotany:eat",
+      "input": "extrabotany:nightmare_fuel",
+      "output": "extrabotany:spirit_fuel",
+      "text": "extrabotany.page.fuels3"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.fuels4"
+    }
+  ]
+}

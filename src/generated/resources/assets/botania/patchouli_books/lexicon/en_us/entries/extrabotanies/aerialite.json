@@ -1,0 +1,20 @@
+{
+  "category": "botania:extrabotanies",
+  "extra_recipe_mappings": {
+    "extrabotany:aerialite_block": 0,
+    "extrabotany:aerialite_nugget": 0
+  },
+  "icon": "extrabotany:aerialite_ingot",
+  "name": "extrabotany.entry.aerialite",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.aerialite0"
+    },
+    {
+      "type": "botania:terrasteel",
+      "recipe": "extrabotany:terra_plate/aerialite_ingot",
+      "text": "extrabotany.page.aerialite1"
+    }
+  ]
+}

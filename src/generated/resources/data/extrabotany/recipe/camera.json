@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "tag": "extrabotany:shadowium_ingots"
+    },
+    "G": {
+      "item": "botania:gaia_ingot"
+    },
+    "S": {
+      "item": "minecraft:spyglass"
+    }
+  },
+  "pattern": [
+    "BBB",
+    "BSB",
+    "GGG"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:camera"
+  }
+}

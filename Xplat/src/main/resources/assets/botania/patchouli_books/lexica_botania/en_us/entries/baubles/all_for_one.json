@@ -1,0 +1,16 @@
+{
+  "category": "botania:baubles",
+  "icon": "extrabotany:all_for_one",
+  "name": "extrabotany.entry.all_for_one",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.all_for_one0"
+    },
+    {
+      "type": "botania:runic_altar",
+      "recipe": "extrabotany:runic_altar/all_for_one",
+      "text": "extrabotany.page.all_for_one1"
+    }
+  ]
+}

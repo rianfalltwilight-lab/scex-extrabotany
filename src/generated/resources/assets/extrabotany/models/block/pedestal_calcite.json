@@ -1,0 +1,10 @@
+{
+  "parent": "extrabotany:block/shapes/pedestal",
+  "textures": {
+    "down": "extrabotany:block/pedestal_calcite_down",
+    "particle": "extrabotany:block/pedestal_calcite_down",
+    "side": "extrabotany:block/pedestal_calcite_side",
+    "top": "extrabotany:block/pedestal_calcite_top",
+    "up": "extrabotany:block/pedestal_calcite_up"
+  }
+}

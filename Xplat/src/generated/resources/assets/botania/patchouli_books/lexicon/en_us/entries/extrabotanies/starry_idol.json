@@ -1,0 +1,36 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:starry_idol_headgear",
+  "name": "extrabotany.entry.starry_idol",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.starry_idol0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:starry_idol_headgear",
+      "text": "extrabotany.page.starry_idol1"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:starry_idol_suit",
+      "text": "extrabotany.page.starry_idol2"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:starry_idol_skirt",
+      "text": "extrabotany.page.starry_idol3"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:starry_idol_boots",
+      "text": "extrabotany.page.starry_idol4"
+    },
+    {
+      "type": "patchouli:text",
+      "flag": "otaku_mode",
+      "text": "extrabotany.page.starry_idol5"
+    }
+  ]
+}

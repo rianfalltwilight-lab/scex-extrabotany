@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "extrabotany:item/holy_water_grenade",
+    "layer1": "extrabotany:item/holy_water_grenade_cover"
+  }
+}

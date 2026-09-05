@@ -1,0 +1,32 @@
+{
+  "criteria": {
+    "has_orichalcos": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#extrabotany:orichalcos_ingots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "extrabotany:spear_of_subspace"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_orichalcos",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extrabotany:spear_of_subspace"
+    ]
+  },
+  "sends_telemetry_event": false
+}

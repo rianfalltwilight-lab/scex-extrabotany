@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "botania:dice_of_fate"
+    }
+  ],
+  "result": {
+    "count": 3,
+    "id": "extrabotany:nine_and_three_quarters_reward_bag"
+  }
+}

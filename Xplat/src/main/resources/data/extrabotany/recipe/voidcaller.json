@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "botania:gaia_spirit"
+    },
+    "H": {
+      "item": "extrabotany:hero_medal"
+    },
+    "P": {
+      "tag": "extrabotany:photonium_ingots"
+    },
+    "S": {
+      "tag": "extrabotany:shadowium_ingots"
+    }
+  },
+  "pattern": [
+    "ASA",
+    "PHP",
+    "ASA"
+  ],
+  "result": {
+    "count": 3,
+    "id": "extrabotany:voidcaller"
+  }
+}

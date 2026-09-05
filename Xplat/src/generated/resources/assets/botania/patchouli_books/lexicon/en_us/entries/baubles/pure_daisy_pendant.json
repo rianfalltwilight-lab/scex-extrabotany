@@ -1,0 +1,16 @@
+{
+  "category": "botania:baubles",
+  "icon": "extrabotany:pure_daisy_pendant",
+  "name": "extrabotany.entry.pure_daisy_pendant",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.pure_daisy_pendant0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:pure_daisy_pendant",
+      "text": "extrabotany.page.pure_daisy_pendant1"
+    }
+  ]
+}

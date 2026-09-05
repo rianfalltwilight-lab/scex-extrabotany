@@ -1,0 +1,35 @@
+{
+  "parent": "extrabotany:main/panda_do_not_wear_rings",
+  "criteria": {
+    "mana_charge": {
+      "conditions": {
+        "item": {
+          "items": "extrabotany:mana_ring_master"
+        },
+        "mana": {
+          "min": 2147483647
+        }
+      },
+      "trigger": "extrabotany:mana_charge"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:overload.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:mana_ring_master"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:overload"
+    }
+  },
+  "requirements": [
+    [
+      "mana_charge"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

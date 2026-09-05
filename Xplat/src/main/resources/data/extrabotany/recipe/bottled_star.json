@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "tag": "botania:petals/yellow"
+    },
+    "B": {
+      "item": "extrabotany:spirit_fragment"
+    },
+    "C": {
+      "item": "botania:managlass"
+    }
+  },
+  "pattern": [
+    "AAA",
+    "CBC",
+    "CCC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:bottled_star"
+  }
+}

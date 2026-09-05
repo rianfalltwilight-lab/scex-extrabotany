@@ -1,0 +1,18 @@
+{
+  "advancement": "extrabotany:main/the_original_divine_key",
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:void_archives",
+  "name": "extrabotany.entry.void_archives",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "extrabotany:void_archives",
+      "link_recipe": true,
+      "text": "extrabotany.page.void_archives0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.void_archives1"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+    id 'net.neoforged.moddev' version '2.0.141'
+}
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+def candidate = providers.gradleProperty('candidate').getOrElse('current')
+def candidateJar = providers.gradleProperty('candidateJar')
+def targetJar = candidateJar.isPresent()
+    ? file(candidateJar.get())
+    : file('../../build/libs/extrabotany-neoforge-1.21.1-2.0-scex.5-dev.jar')
+// Only isolated runtime paths: never reads or writes a production world.
+neoForge {
+    version = '21.1.248'
+    runs {
+        server {
+            server()
+            gameDirectory = file('../runs/' + candidate)
+            programArguments.addAll '--nogui', '--port', '25579'
+            systemProperty 'com.mojang.eula.agree', 'true'
+            systemProperty 'scex.audit.fixture', providers.gradleProperty('fixture').getOrElse('none')
+        }
+        client {
+            client()
+            programArguments.addAll '--width', '1280', '--height', '900'
+            gameDirectory = file('../runs/client')
+            systemProperty 'scex.audit.client', 'true'
+        }
+    }
+    mods { scex_registry_audit { sourceSet(sourceSets.main) } }
+}
+repositories {
+    mavenCentral()
+    maven { url = 'https://maven.blamejared.com' }
+    exclusiveContent {
+        forRepository { maven { url = 'https://maven.theillusivec4.top/' } }
+        filter { includeGroup('top.theillusivec4.curios') }
+    }
+}
+dependencies {
+    runtimeOnly files(targetJar)
+    runtimeOnly 'vazkii.botania:botania-neoforge-1.21.1:456-20260822.093314-4'
+    runtimeOnly 'vazkii.patchouli:Patchouli:1.21.1-93-NEOFORGE'
+    runtimeOnly 'top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1'
+}
+tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }

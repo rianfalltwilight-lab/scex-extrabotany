@@ -1,0 +1,19 @@
+{
+  "type": "botania:terrestrial_agglomeration_plate",
+  "ingredients": [
+    {
+      "item": "botania:pure_ender_essence"
+    },
+    {
+      "item": "botania:dragonstone"
+    },
+    {
+      "item": "minecraft:phantom_membrane"
+    }
+  ],
+  "mana": 500000,
+  "result": {
+    "count": 1,
+    "id": "extrabotany:aerialite_ingot"
+  }
+}

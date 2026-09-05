@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "M": {
+      "tag": "botania:manasteel_ingots"
+    },
+    "S": {
+      "item": "minecraft:spider_eye"
+    }
+  },
+  "pattern": [
+    "SM ",
+    "M M",
+    " M "
+  ],
+  "result": {
+    "item": "extrabotany:spider_ring"
+  },
+  "show_notification": true
+}

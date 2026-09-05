@@ -1,0 +1,29 @@
+{
+  "type": "botania:runic_altar",
+  "catalysts": [],
+  "ingredients": [
+    {
+      "item": "botania:elementium_ingot"
+    },
+    {
+      "item": "extrabotany:gilded_potato_mashed"
+    },
+    {
+      "item": "extrabotany:spirit_fragment"
+    },
+    {
+      "item": "extrabotany:spirit_fragment"
+    },
+    {
+      "item": "extrabotany:spirit_fragment"
+    }
+  ],
+  "mana": 4200,
+  "output": {
+    "count": 1,
+    "id": "extrabotany:photonium_ingot"
+  },
+  "reagent": {
+    "item": "botania:livingrock"
+  }
+}

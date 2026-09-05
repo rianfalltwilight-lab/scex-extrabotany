@@ -1,0 +1,16 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:star_wrath",
+  "name": "extrabotany.entry.starwrath",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.starwrath0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "text": "extrabotany.page.starwrath1",
+      "recipe": "extrabotany:star_wrath"
+    }
+  ]
+}

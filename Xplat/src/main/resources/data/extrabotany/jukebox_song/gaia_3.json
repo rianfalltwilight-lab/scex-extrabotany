@@ -1,0 +1,8 @@
+{
+  "comparator_output": 1,
+  "description": {
+    "translate": "item.extrabotany.music_disc_gaia3.desc"
+  },
+  "length_in_seconds": 201.0,
+  "sound_event": "extrabotany:music.gaia3"
+}

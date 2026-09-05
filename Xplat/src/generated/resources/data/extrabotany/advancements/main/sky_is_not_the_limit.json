@@ -1,0 +1,36 @@
+{
+  "parent": "extrabotany:main/stygian_twins",
+  "criteria": {
+    "craft_aerialite": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "extrabotany:aerialite_ingots"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.extrabotany:sky_is_not_the_limit.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "extrabotany:aerialite_ingot"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.extrabotany:sky_is_not_the_limit"
+    }
+  },
+  "requirements": [
+    [
+      "craft_aerialite"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

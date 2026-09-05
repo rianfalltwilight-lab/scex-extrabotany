@@ -1,0 +1,17 @@
+{
+  "type": "extrabotany:stonesia",
+  "input": {
+    "type": "botania:any_of",
+    "ingredients": [
+      {
+        "type": "botania:tag",
+        "tag": "#minecraft:lapis_ores"
+      },
+      {
+        "type": "botania:tag",
+        "tag": "#c:ores/lapis"
+      }
+    ]
+  },
+  "outputMana": 290
+}

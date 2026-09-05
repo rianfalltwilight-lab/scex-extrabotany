@@ -1,0 +1,27 @@
+{
+  "parent": "extrabotany:main/soulsteel",
+  "criteria": {
+    "code_triggered": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:hundred_block_pierce.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:failnaught"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:hundred_block_pierce"
+    }
+  },
+  "requirements": [
+    [
+      "code_triggered"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

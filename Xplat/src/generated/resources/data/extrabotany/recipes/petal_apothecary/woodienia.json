@@ -1,0 +1,32 @@
+{
+  "type": "botania:petal_apothecary",
+  "ingredients": [
+    {
+      "tag": "botania:petals/brown"
+    },
+    {
+      "tag": "botania:petals/brown"
+    },
+    {
+      "tag": "botania:petals/brown"
+    },
+    {
+      "tag": "botania:petals/gray"
+    },
+    {
+      "item": "extrabotany:elementium_quartz"
+    },
+    {
+      "item": "botania:rune_gluttony"
+    },
+    {
+      "item": "botania:redstone_root"
+    }
+  ],
+  "output": {
+    "item": "extrabotany:woodienia"
+  },
+  "reagent": {
+    "tag": "botania:seed_apothecary_reagent"
+  }
+}

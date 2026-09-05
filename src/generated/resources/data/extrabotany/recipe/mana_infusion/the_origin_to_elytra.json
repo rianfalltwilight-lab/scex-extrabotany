@@ -1,0 +1,15 @@
+{
+  "type": "botania:mana_infusion",
+  "catalyst": {
+    "type": "botania:block",
+    "block": "extrabotany:dimension_catalyst"
+  },
+  "input": {
+    "item": "extrabotany:the_origin"
+  },
+  "mana": 50000,
+  "output": {
+    "count": 1,
+    "id": "minecraft:elytra"
+  }
+}

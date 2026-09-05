@@ -1,0 +1,32 @@
+{
+  "type": "botania:petal_apothecary",
+  "ingredients": [
+    {
+      "tag": "botania:petals/red"
+    },
+    {
+      "tag": "botania:petals/red"
+    },
+    {
+      "tag": "botania:petals/red"
+    },
+    {
+      "tag": "botania:petals/red"
+    },
+    {
+      "item": "botania:rune_fire"
+    },
+    {
+      "item": "botania:rune_summer"
+    },
+    {
+      "item": "botania:rune_wrath"
+    }
+  ],
+  "output": {
+    "item": "extrabotany:blood_enchantress"
+  },
+  "reagent": {
+    "tag": "botania:seed_apothecary_reagent"
+  }
+}

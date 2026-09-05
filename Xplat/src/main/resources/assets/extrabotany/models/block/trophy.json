@@ -1,0 +1,82 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "base": "extrabotany:block/trophy/trophy_base",
+    "head": "extrabotany:block/trophy/trophy_head",
+    "particle": "extrabotany:block/trophy/trophy_head"
+  },
+  "elements": [
+    {
+      "name": "body",
+      "from": [6, 2, 7],
+      "to": [10, 12, 9],
+      "faces": {
+        "north": {"texture": "#head", "uv": [0, 0, 4, 10]},
+        "east": {"texture": "#head", "uv": [4, 0, 6, 10]},
+        "south": {"texture": "#head", "uv": [0, 0, 4, 10]},
+        "west": {"texture": "#head", "uv": [4, 0, 6, 10]},
+        "up": {"texture": "#head", "uv": [0, 9, 4, 11]},
+        "down": {"texture": "#head", "uv": [0, 9, 4, 11]}
+      }
+    },
+    {
+      "name": "head",
+      "from": [6, 12, 6],
+      "to": [10, 16, 10],
+      "faces": {
+        "north": {"texture": "#head", "uv": [0, 0, 4, 4]},
+        "east": {"texture": "#head", "uv": [0, 4, 4, 8]},
+        "south": {"texture": "#head", "uv": [0, 0, 4, 4]},
+        "west": {"texture": "#head", "uv": [0, 4, 4, 8]},
+        "up": {"texture": "#head", "uv": [0, 8, 4, 12]},
+        "down": {"texture": "#head", "uv": [0, 8, 4, 12]}
+      }
+    },
+    {
+      "name": "arm1",
+      "from": [4, 7, 7],
+      "to": [6, 12, 9],
+      "faces": {
+        "north": {"texture": "#head", "uv": [0, 0, 2, 5]},
+        "east": {"texture": "#head", "uv": [2, 0, 4, 5]},
+        "south": {"texture": "#head", "uv": [0, 0, 2, 5]},
+        "west": {"texture": "#head", "uv": [2, 0, 4, 5]},
+        "up": {"texture": "#head", "uv": [4, 0, 6, 2]},
+        "down": {"texture": "#head", "uv": [4, 0, 6, 2]}
+      }
+    },
+    {
+      "name": "arm2",
+      "from": [10, 7, 7],
+      "to": [12, 12, 9],
+      "faces": {
+        "north": {"texture": "#head", "uv": [0, 0, 2, 5]},
+        "east": {"texture": "#head", "uv": [2, 0, 4, 5]},
+        "south": {"texture": "#head", "uv": [0, 0, 2, 5]},
+        "west": {"texture": "#head", "uv": [2, 0, 4, 5]},
+        "up": {"texture": "#head", "uv": [4, 0, 6, 2]},
+        "down": {"texture": "#head", "uv": [4, 0, 6, 2]}
+      }
+    },
+    {
+      "name": "base",
+      "from": [4, 0, 4],
+      "to": [12, 2, 12],
+      "faces": {
+        "north": {"texture": "#base", "uv": [0, 0, 8, 2]},
+        "east": {"texture": "#base", "uv": [0, 0, 8, 2]},
+        "south": {"texture": "#base", "uv": [0, 0, 8, 2]},
+        "west": {"texture": "#base", "uv": [0, 0, 8, 2]},
+        "up": {"texture": "#base", "uv": [0, 0, 8, 8]},
+        "down": {"texture": "#base", "uv": [0, 0, 8, 8]}
+      }
+    }
+  ],
+  "display": {
+    "gui": {
+      "rotation": [30, 225, 0],
+      "translation": [0, -0.55, 0],
+      "scale": [0.85, 0.85, 0.85]
+    }
+  }
+}

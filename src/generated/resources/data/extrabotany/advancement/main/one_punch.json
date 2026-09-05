@@ -1,0 +1,27 @@
+{
+  "parent": "extrabotany:main/the_source_of_honkai",
+  "criteria": {
+    "code_triggered": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:one_punch.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:feather_of_jingwei"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:one_punch"
+    }
+  },
+  "requirements": [
+    [
+      "code_triggered"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

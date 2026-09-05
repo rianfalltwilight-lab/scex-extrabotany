@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "extrabotany:item/terrasteel_hammer_active"
+  }
+}

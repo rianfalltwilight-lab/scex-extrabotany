@@ -1,0 +1,31 @@
+{
+  "parent": "extrabotany:main/gaia_trial",
+  "criteria": {
+    "open_pandoras_box": {
+      "conditions": {
+        "item": {
+          "items": "extrabotany:pandoras_box"
+        }
+      },
+      "trigger": "botania:use_item_success"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:the_source_of_honkai.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:pandoras_box"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:the_source_of_honkai"
+    }
+  },
+  "requirements": [
+    [
+      "open_pandoras_box"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

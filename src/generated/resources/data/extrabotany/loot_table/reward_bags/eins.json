@@ -1,0 +1,83 @@
+{
+  "type": "minecraft:empty",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "botania:white_mystical_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:orange_mystical_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:magenta_mystical_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:light_blue_mystical_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:yellow_mystical_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:lime_mystical_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:pink_mystical_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:gray_mystical_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:light_gray_mystical_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:cyan_mystical_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:purple_mystical_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:blue_mystical_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:brown_mystical_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:green_mystical_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:red_mystical_petal"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "botania:black_mystical_petal"
+        }
+      ],
+      "functions": [
+        {
+          "add": false,
+          "count": 6.0,
+          "function": "minecraft:set_count"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "extrabotany:reward_bags/eins"
+}

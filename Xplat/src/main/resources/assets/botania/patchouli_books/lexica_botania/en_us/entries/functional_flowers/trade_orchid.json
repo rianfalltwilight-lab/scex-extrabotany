@@ -1,0 +1,19 @@
+{
+  "category": "botania:functional_flowers",
+  "extra_recipe_mappings": {
+    "extrabotany:floating_trade_orchid": 1
+  },
+  "icon": "extrabotany:trade_orchid",
+  "name": "extrabotany.entry.trade_orchid",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.trade_orchid0"
+    },
+    {
+      "type": "botania:petal_apothecary",
+      "recipe": "extrabotany:petal_apothecary/trade_orchid",
+      "text": "extrabotany.page.trade_orchid1"
+    }
+  ]
+}

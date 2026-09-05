@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "R": {
+      "item": "botania:livingrock_slab"
+    },
+    "S": {
+      "item": "botania:livingwood_twig"
+    }
+  },
+  "pattern": [
+    "   ",
+    " R ",
+    "S S"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:mana_charger"
+  }
+}

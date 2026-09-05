@@ -1,0 +1,28 @@
+{
+  "parent": "extrabotany:main/herrscher_defeat",
+  "criteria": {
+    "code_triggered": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:endgame_goal.desc"
+    },
+    "frame": "challenge",
+    "hidden": true,
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:core_of_the_void"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:endgame_goal"
+    }
+  },
+  "requirements": [
+    [
+      "code_triggered"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

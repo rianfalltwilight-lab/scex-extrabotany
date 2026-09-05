@@ -1,0 +1,27 @@
+{
+  "parent": "extrabotany:main/stygian_twins",
+  "criteria": {
+    "code_triggered": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:i_see_everything.desc"
+    },
+    "frame": "goal",
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:camera"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:i_see_everything"
+    }
+  },
+  "requirements": [
+    [
+      "code_triggered"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

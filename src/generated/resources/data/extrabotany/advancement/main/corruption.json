@@ -1,0 +1,34 @@
+{
+  "parent": "extrabotany:main/cute_dress",
+  "criteria": {
+    "has_item": {
+      "conditions": {
+        "items": [
+          {
+            "items": "extrabotany:sanguine_pleiades_combat_maid_suit"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:corruption.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:sanguine_pleiades_combat_maid_suit"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:corruption"
+    }
+  },
+  "requirements": [
+    [
+      "has_item"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

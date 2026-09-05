@@ -1,0 +1,30 @@
+{
+  "parent": "extrabotany:main/craft_pedestal",
+  "criteria": {
+    "code_triggered": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "translate": "advancement.extrabotany:goodtek.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "extrabotany:manasteel_hammer",
+      "nbt": "{Damage:0}"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.extrabotany:goodtek"
+    }
+  },
+  "requirements": [
+    [
+      "code_triggered"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

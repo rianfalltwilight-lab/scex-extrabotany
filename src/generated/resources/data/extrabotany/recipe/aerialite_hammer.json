@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "H": {
+      "tag": "extrabotany:aerialite_ingots"
+    },
+    "S": {
+      "item": "botania:dreamwood_twig"
+    }
+  },
+  "pattern": [
+    "HHH",
+    "HHH",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:aerialite_hammer"
+  }
+}

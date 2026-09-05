@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "extrabotany:block/quantummanabuffer_down",
+    "particle": "extrabotany:block/quantummanabuffer_side",
+    "side": "extrabotany:block/quantummanabuffer_side",
+    "top": "extrabotany:block/quantummanabuffer_up"
+  }
+}

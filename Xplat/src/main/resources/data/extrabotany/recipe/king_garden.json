@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": {
+      "item": "minecraft:chest"
+    },
+    "M": {
+      "item": "extrabotany:the_origin"
+    },
+    "T": {
+      "tag": "c:ingots/terrasteel"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "MTM",
+    "MCM",
+    "MWM"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:king_garden"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "category": "botania:functional_flowers",
+  "extra_recipe_mappings": {
+    "extrabotany:floating_woodienia": 1
+  },
+  "icon": "extrabotany:woodienia",
+  "name": "extrabotany.entry.woodienia",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.woodienia0"
+    },
+    {
+      "type": "botania:petal_apothecary",
+      "recipe": "extrabotany:petal_apothecary/woodienia",
+      "text": "extrabotany.page.woodienia1"
+    }
+  ]
+}

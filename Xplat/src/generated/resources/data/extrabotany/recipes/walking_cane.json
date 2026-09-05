@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "G": {
+      "item": "minecraft:gold_block"
+    },
+    "P": {
+      "item": "minecraft:prismarine_crystals"
+    },
+    "T": {
+      "item": "botania:livingwood_twig"
+    }
+  },
+  "pattern": [
+    "TGP",
+    " TG",
+    "T T"
+  ],
+  "result": {
+    "item": "extrabotany:walking_cane"
+  },
+  "show_notification": true
+}

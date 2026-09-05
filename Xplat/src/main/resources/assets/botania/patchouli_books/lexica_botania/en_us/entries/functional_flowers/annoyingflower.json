@@ -1,0 +1,19 @@
+{
+  "category": "botania:functional_flowers",
+  "extra_recipe_mappings": {
+    "extrabotany:floating_annoyingflower": 1
+  },
+  "icon": "extrabotany:annoyingflower",
+  "name": "extrabotany.entry.annoyingflower",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.annoyingflower0"
+    },
+    {
+      "type": "botania:petal_apothecary",
+      "recipe": "extrabotany:petal_apothecary/annoyingflower",
+      "text": "extrabotany.page.annoyingflower1"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "type": "botania:runic_altar",
+  "catalysts": [],
+  "ingredients": [
+    {
+      "item": "botania:rune_of_envy"
+    },
+    {
+      "item": "botania:manasteel_ingot"
+    },
+    {
+      "item": "botania:manasteel_ingot"
+    },
+    {
+      "item": "botania:mana_diamond"
+    },
+    {
+      "item": "minecraft:wither_skeleton_skull"
+    }
+  ],
+  "mana": 2000,
+  "output": {
+    "count": 1,
+    "id": "extrabotany:death_ring"
+  },
+  "reagent": {
+    "item": "botania:livingrock"
+  }
+}

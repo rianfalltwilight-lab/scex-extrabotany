@@ -1,0 +1,14 @@
+{
+  "parent": "minecraft:item/handheld",
+  "overrides": [
+    {
+      "model": "extrabotany:item/rhein_hammer_active",
+      "predicate": {
+        "extrabotany:active": 1.0
+      }
+    }
+  ],
+  "textures": {
+    "layer0": "extrabotany:item/rhein_hammer"
+  }
+}

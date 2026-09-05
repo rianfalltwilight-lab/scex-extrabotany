@@ -1,0 +1,23 @@
+{
+  "name": "extrabotany.entry.herrscher",
+  "icon": "extrabotany:voidcaller",
+  "category": "botania:extrabotanies",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.herrscher0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.herrscher1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.herrscher2"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:voidcaller"
+    }
+  ]
+}

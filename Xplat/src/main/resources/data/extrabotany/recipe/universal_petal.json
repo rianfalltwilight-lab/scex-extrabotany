@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "item": "botania:gaia_spirit"
+    },
+    "P": {
+      "tag": "botania:petals"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "PLP",
+    "PPP"
+  ],
+  "result": {
+    "count": 8,
+    "id": "extrabotany:universal_petal"
+  }
+}

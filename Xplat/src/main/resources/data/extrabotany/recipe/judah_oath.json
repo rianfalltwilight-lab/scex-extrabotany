@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "combat",
+  "key": {
+    "A": {
+      "item": "botania:gaia_spirit"
+    },
+    "B": {
+      "tag": "extrabotany:orichalcos_ingots"
+    },
+    "C": {
+      "item": "extrabotany:spirit_fuel"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "ACA",
+    "AAA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:judah_oath"
+  }
+}

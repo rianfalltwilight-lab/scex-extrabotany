@@ -1,0 +1,8 @@
+{
+  "type": "extrabotany:stonesia",
+  "input": {
+    "type": "botania:tag",
+    "tag": "#minecraft:base_stone_overworld"
+  },
+  "outputMana": 20
+}

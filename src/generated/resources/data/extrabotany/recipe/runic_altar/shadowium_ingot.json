@@ -1,0 +1,29 @@
+{
+  "type": "botania:runic_altar",
+  "catalysts": [],
+  "ingredients": [
+    {
+      "item": "botania:elementium_ingot"
+    },
+    {
+      "item": "extrabotany:gilded_potato_mashed"
+    },
+    {
+      "item": "extrabotany:nightmare_fuel"
+    },
+    {
+      "item": "extrabotany:nightmare_fuel"
+    },
+    {
+      "item": "extrabotany:nightmare_fuel"
+    }
+  ],
+  "mana": 4200,
+  "output": {
+    "count": 1,
+    "id": "extrabotany:shadowium_ingot"
+  },
+  "reagent": {
+    "item": "botania:livingrock"
+  }
+}
