@@ -19,7 +19,7 @@
 
 从 [Releases](https://github.com/rianfalltwilight-lab/scex-extrabotany/releases) 下载运行 JAR，客户端与服务端使用同一文件。不要与其他使用 `extrabotany` 模组 ID 的 JAR 同时安装。JEI 与 KubeJS 为可选集成。
 
-SCEX 整包中的森林法杖绑定能力另由 `SCEX-Botania-ExtraBotany-Compat 1.3.0` 提供；它不包含在本仓库发行包内，使用时必须选择与 `2.0-scex.5-dev` 精确匹配的版本。
+SCEX 整包中的森林法杖绑定由独立的 [SCEX Botania / ExtraBotany 森林法杖兼容层](https://github.com/rianfalltwilight-lab/scex-botania-extrabotany-compat) `1.3.0` 提供。它不包含在 ExtraBotany 发行包内，而是一个需要客户端与服务端同时安装的版本锁定桥接；`1.3.0` 只能与 `2.0-scex.5-dev` 配对，用于花→发射器、花→魔力池和魔力池→Manalink 的选择、绑定与保存。
 
 ## 本次恢复范围
 

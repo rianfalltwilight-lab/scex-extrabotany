@@ -19,7 +19,7 @@ The current public preview is **2.0-scex.5-dev**. It is based on [Lounode/ExtraB
 
 Download the runtime JAR from [Releases](https://github.com/rianfalltwilight-lab/scex-extrabotany/releases) and use the same file on both client and server. Do not install another JAR with the `extrabotany` mod ID. JEI and KubeJS integrations are optional.
 
-SCEX's forest-wand binding behavior is supplied separately by `SCEX-Botania-ExtraBotany-Compat 1.3.0`; it is not bundled here and must be paired with exactly `2.0-scex.5-dev`.
+SCEX's forest-wand binding behavior is supplied by the separate [SCEX Botania / ExtraBotany forest-wand compatibility bridge](https://github.com/rianfalltwilight-lab/scex-botania-extrabotany-compat) `1.3.0`. It is not bundled with ExtraBotany and must be installed on both client and server. Version `1.3.0` only supports `2.0-scex.5-dev`; it handles selection, binding, and persistence for flower→spreader, flower→pool, and pool→Manalink interactions.
 
 ## Restored scope
 
