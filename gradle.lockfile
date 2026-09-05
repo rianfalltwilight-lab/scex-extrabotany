@@ -37,6 +37,7 @@ io.netty:netty-common:4.1.97.Final=compileClasspath,runtimeClasspath
 io.netty:netty-handler:4.1.97.Final=compileClasspath,runtimeClasspath
 io.netty:netty-resolver:4.1.97.Final=compileClasspath,runtimeClasspath
 io.netty:netty-transport-classes-epoll:4.1.97.Final=compileClasspath,runtimeClasspath
+io.netty:netty-transport-native-epoll:4.1.97.Final=runtimeClasspath
 io.netty:netty-transport-native-unix-common:4.1.97.Final=compileClasspath,runtimeClasspath
 io.netty:netty-transport:4.1.97.Final=compileClasspath,runtimeClasspath
 it.unimi.dsi:fastutil:8.5.12=compileClasspath,runtimeClasspath
