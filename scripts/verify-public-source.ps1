@@ -36,7 +36,7 @@ foreach ($file in $source) {
 }
 if ($findings.Count -gt 0) { throw "Public-source audit failed:`n$($findings -join [Environment]::NewLine)" }
 
-$large = @($source | Where-Object { (Get-Item -LiteralPath $_.FullName).Length -gt 50MB })
+$large = @($source | Where-Object { (Get-Item -LiteralPath $_.FullName -Force).Length -gt 50MB })
 if ($large.Count -gt 0) { throw "Source files exceed 50 MiB: $($large.Relative -join ', ')" }
 
 [pscustomobject]@{
