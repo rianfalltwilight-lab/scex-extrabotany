@@ -86,4 +86,4 @@ The code comments are in Chinese and English. [docs/COMMENT_STYLE.md](docs/COMME
 
 ## License
 
-MIT, see [LICENSE](LICENSE).
+This branch uses PolyForm Noncommercial 1.0.0 for the contributions covered by [LICENSE](LICENSE), permitting noncommercial use, modification, and distribution. It is source-available software. Upstream code retains its [MIT license](LICENSE-MIT) and notices; third-party assets retain their own terms. Previously MIT-published versions and code remain usable under those grants, including commercially. This change does not revoke existing permissions.

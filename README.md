@@ -86,4 +86,4 @@
 
 ## 许可
 
-MIT，见 [LICENSE](LICENSE)。
+本分支采用 PolyForm Noncommercial 1.0.0，允许非商业使用、修改和分发；适用范围见 [LICENSE](LICENSE)。这是源码公开的非商业许可。上游代码保留 [MIT 许可](LICENSE-MIT) 和版权声明，第三方资源保留各自许可。此前已按 MIT 发布的版本及其代码仍可按原许可使用，包括商用；此次变更不撤回既有授权。

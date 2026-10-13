@@ -188,7 +188,7 @@ In short: **the logic has tests, and the presentation still needs a person to lo
 - Botania: Vazkii and all contributors.
 - The models for the Key of Flamescion and the Gem of Conquest come from Honkai Impact 3rd.
 
-The code keeps the MIT license of Reburn. See [LICENSE](../LICENSE).
+This branch uses PolyForm Noncommercial 1.0.0 for the contributions covered by [LICENSE](../LICENSE), permitting noncommercial use, modification, and distribution. Upstream Reburn code retains its [MIT license](../LICENSE-MIT). Previously MIT-published versions and code remain usable under those grants, including commercially. This change does not revoke existing permissions or alter third-party asset rights.
 
 The GitHub repository of the original has no license file. In addition to the content that Reburn already brought, this version took the content below from the original repository. The rights to it belong to the original author or to the respective rights holders:
 

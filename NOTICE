@@ -10,7 +10,7 @@ Upstream source:
   Lounode/ExtraBotany
   tag release-1.20.1-1.9.2
   commit a4d4f2a968d559752fa3bd6e609544473109d983
-  MIT License; copyright notice retained in LICENSE
+  MIT License; complete license and copyright notice retained in LICENSE-MIT
 
 The SCEX port and restoration work was performed in 2026. The fixed comparison
 baseline for legacy registry and save compatibility was the archived
@@ -29,6 +29,6 @@ supervision. This paragraph records the initial port only.
 
 ExtraBotany, Botania, Minecraft, NeoForge, and all referenced names and assets
 remain the property of their respective owners. This notice records provenance;
-it does not expand or reinterpret the MIT license and is not legal advice.
+it does not expand or reinterpret the licenses. The current licensing policy is in LICENSE; upstream MIT and prior MIT grants remain in effect.
 
 SCEX.8 legacy resource comparison: ExtraMeteorP/Extra-Botany master 4ad2cc9b86620801409c17366511156a3ba1b45e and 1.16 f96f6d37c43d807e93a27d2dbe58c4c5efec8280. Resource ownership and upstream attribution are retained; see docs/scex/compatibility provenance manifests.

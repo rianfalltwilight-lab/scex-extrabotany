@@ -215,13 +215,13 @@ tasks.withType(ProcessResources).configureEach {
 }
 
 tasks.withType(Jar).configureEach {
+    from("LICENSE", "LICENSE-MIT", "NOTICE")
     includeEmptyDirs = false
     preserveFileTimestamps = false
     reproducibleFileOrder = true
 }
 
 tasks.named("jar", Jar).configure {
-    from("LICENSE")
     manifest {
         attributes([
                 "Specification-Title": artifact_name,
@@ -239,7 +239,6 @@ tasks.register("validationJar", Jar) {
     archiveClassifier = "validation"
     from sourceSets.main.output
     from sourceSets.gametest.output
-    from("LICENSE")
     manifest.from(tasks.named("jar", Jar).get().manifest)
 }
 
