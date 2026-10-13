@@ -183,8 +183,7 @@ In short: **the logic has tests, and the presentation still needs a person to lo
 
 - Original author: ExtraMeteorP (似水流年). This project is a tribute to him. Thank you for such a great mod.
 - Author of "ExtraBotany: Reburn": Lounode.
-- Initial 1.21.1 port: the SCEX maintainers.
-- Maintainer of the 1.21.1 branch: Magellan67.
+- Initial 1.21.1 port and branch maintenance: Magellan67.
 - Textures: Urranium. Armor model: Keletu.
 - Botania: Vazkii and all contributors.
 - The models for the Key of Flamescion and the Gem of Conquest come from Honkai Impact 3rd.

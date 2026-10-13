@@ -81,7 +81,6 @@
 
 - ExtraMeteorP：《额外植物学》原作者。
 - Lounode：《额外植物学：重燃》作者。
-- SCEX 维护者：最初的 1.21.1 移植。
 - Urranium（材质）、Keletu（盔甲模型）。
 - Vazkii 和植物魔法的全体贡献者。
 

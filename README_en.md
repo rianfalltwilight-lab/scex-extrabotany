@@ -81,7 +81,6 @@ The code comments are in Chinese and English. [docs/COMMENT_STYLE.md](docs/COMME
 
 - ExtraMeteorP: the author of the original "Extra Botany".
 - Lounode: the author of "ExtraBotany: Reburn".
-- The SCEX maintainers: the initial 1.21.1 port.
 - Urranium (textures), Keletu (armor model).
 - Vazkii and all contributors of Botania.
 
