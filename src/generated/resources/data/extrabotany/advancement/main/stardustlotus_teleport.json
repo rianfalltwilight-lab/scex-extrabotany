@@ -1,0 +1,26 @@
+{
+  "parent": "extrabotany:main/posbinder_craft",
+  "criteria": {
+    "code_triggered": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:stardustlotus_teleport.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:stardustlotus"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:stardustlotus_teleport"
+    }
+  },
+  "requirements": [
+    [
+      "code_triggered"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

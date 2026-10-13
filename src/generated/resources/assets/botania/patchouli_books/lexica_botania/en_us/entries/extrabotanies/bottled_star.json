@@ -1,0 +1,15 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:bottled_star",
+  "name": "item.extrabotany.bottled_star",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.bottled_star0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:bottled_star"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "values": {
+    "extrabotany:nightmare_fuel": {
+      "burn_time": 3200
+    },
+    "extrabotany:spirit_fuel": {
+      "burn_time": 12800
+    }
+  }
+}

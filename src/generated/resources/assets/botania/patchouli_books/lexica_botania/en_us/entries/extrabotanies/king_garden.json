@@ -1,0 +1,25 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:king_garden",
+  "name": "extrabotany.entry.king_garden",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.king_garden0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.king_garden1"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:king_garden",
+      "text": "extrabotany.page.king_garden2"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:king_garden_clear",
+      "text": "extrabotany.page.king_garden3"
+    }
+  ]
+}

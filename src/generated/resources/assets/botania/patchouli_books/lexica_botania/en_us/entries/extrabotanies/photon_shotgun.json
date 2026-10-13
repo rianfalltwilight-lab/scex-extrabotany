@@ -1,0 +1,16 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:photon_shotgun",
+  "name": "item.extrabotany.photon_shotgun",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.photon_shotgun0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:photon_shotgun",
+      "text": "extrabotany.page.photon_shotgun1"
+    }
+  ]
+}

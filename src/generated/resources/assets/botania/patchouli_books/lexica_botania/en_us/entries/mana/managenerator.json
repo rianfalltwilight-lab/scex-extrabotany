@@ -1,0 +1,16 @@
+{
+  "category": "botania:mana",
+  "icon": "extrabotany:managenerator",
+  "name": "block.extrabotany.managenerator",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.managenerator0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:managenerator",
+      "text": "extrabotany.page.managenerator1"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "parent": "extrabotany:main/root",
+  "criteria": {
+    "bottled_flame": {
+      "conditions": {
+        "items": [
+          {
+            "items": "extrabotany:bottled_flame"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "bottled_pixie": {
+      "conditions": {
+        "items": [
+          {
+            "items": "extrabotany:bottled_pixie"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "bottled_star": {
+      "conditions": {
+        "items": [
+          {
+            "items": "extrabotany:bottled_star"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "king_garden": {
+      "conditions": {
+        "items": [
+          {
+            "items": "extrabotany:king_garden"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:bottle_set.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:bottled_flame"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:bottle_set"
+    }
+  },
+  "requirements": [
+    [
+      "bottled_flame"
+    ],
+    [
+      "bottled_pixie"
+    ],
+    [
+      "bottled_star"
+    ],
+    [
+      "king_garden"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

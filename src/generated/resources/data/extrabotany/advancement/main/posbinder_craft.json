@@ -1,0 +1,33 @@
+{
+  "parent": "extrabotany:main/root",
+  "criteria": {
+    "has_item": {
+      "conditions": {
+        "items": [
+          {
+            "items": "extrabotany:binder"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:posbinder_craft.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:binder"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:posbinder_craft"
+    }
+  },
+  "requirements": [
+    [
+      "has_item"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

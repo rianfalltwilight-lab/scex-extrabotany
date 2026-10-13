@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_column",
-  "textures": {
-    "end": "extrabotany:block/chiseled_elementium_quartz_block_top",
-    "side": "extrabotany:block/chiseled_elementium_quartz_block"
-  }
-}

@@ -1,0 +1,22 @@
+{
+  "values": {
+    "minecraft:chorus_fruit": { "entity": "minecraft:shulker" },
+    "minecraft:coal_block": { "entity": "minecraft:wither_skeleton" },
+    "#minecraft:wool": { "entity": "minecraft:sheep" },
+    "minecraft:leather": { "entity": "minecraft:cow" },
+    "minecraft:bone": { "entity": "minecraft:skeleton" },
+    "minecraft:rotten_flesh": { "entity": "minecraft:zombie" },
+    "minecraft:wheat_seeds": { "entity": "minecraft:chicken" },
+    "minecraft:feather": { "entity": "minecraft:chicken" },
+    "minecraft:beetroot_seeds": { "entity": "minecraft:chicken" },
+    "minecraft:melon_seeds": { "entity": "minecraft:chicken" },
+    "minecraft:pumpkin_seeds": { "entity": "minecraft:chicken" },
+    "minecraft:wheat": { "entity": "minecraft:pig" },
+    "minecraft:ender_pearl": { "entity": "minecraft:enderman" },
+    "minecraft:gunpowder": { "entity": "minecraft:creeper" },
+    "minecraft:gold_ingot": { "entity": "minecraft:zombified_piglin" },
+    "minecraft:blaze_rod": { "entity": "minecraft:blaze" },
+    "minecraft:ghast_tear": { "entity": "minecraft:ghast" },
+    "minecraft:emerald_block": { "entity": "minecraft:villager" }
+  }
+}

@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v6
@@ -21,15 +21,10 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: gradle
-      - name: Make Gradle wrapper executable
-        run: chmod +x ./gradlew
-      - name: Audit public source
-        shell: pwsh
-        run: ./scripts/verify-public-source.ps1
-      - name: Build
-        run: ./gradlew --no-daemon --no-configuration-cache build
+      - name: Build and compile validation sources
+        run: ./gradlew.bat --no-daemon --no-configuration-cache build compileGametestJava compileDatagenJava
       - name: Run NeoForge GameTests
-        run: ./gradlew --no-daemon --no-configuration-cache runGameTestServer
+        run: ./gradlew.bat --no-daemon --no-configuration-cache runGameTestServer
       - name: Upload build artifacts
         uses: actions/upload-artifact@v6
         with:

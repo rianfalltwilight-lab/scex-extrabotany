@@ -1,0 +1,33 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "io.github.lounode.extrabotany.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "CustomClimbingItemMixin",
+    "DenyJumpMixin",
+    "ElementiumHammerFilter",
+    "TradeOrchidEditSpecialPrice",
+    "UniversalRuneMixin",
+    "accessor.DaffomillBlockEntityAccessor",
+    "accessor.HydroangeasBlockEntityAccessor",
+    "accessor.LightningBoltAccessor",
+    "accessor.SpecialFlowerBlockEntityAccessor",
+    "botania.DisplayWindLevel",
+    "botania.EnchantedSoilFlowerBoostMixin",
+    "botania.GaiaGuardianAdditionalSpawnCheck",
+    "botania.HydroangeasEnchantedSoilMixin",
+    "botania.MagicMissileTargetBypassGaiaIII",
+    "botania.WandOfTheForestExtension",
+    "botania.BoxEquipmentMixin"
+  ],
+  "client": [
+    "client.PowerGloveInputMixin",
+    "client.PatchouliTemplateXModMixin",
+    "client.HUDHandlerMixin",
+    "client.PatchouliTemplateXModMixinBuilder"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

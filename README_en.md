@@ -1,59 +1,90 @@
-# SCEX ExtraBotany 1.21.1
+![](docs/img/logo.png)
+# ExtraBotany: Reburn
 
-最新冻结交付与验证边界 / Current frozen delivery: [release notes](docs/releases/2.0-scex.9-dev.md).
-**[2.0-scex.9-dev：直接下载运行 JAR / Download JAR](https://github.com/rianfalltwilight-lab/scex-extrabotany/releases/download/v2.0-scex.9-dev/extrabotany-neoforge-1.21.1-2.0-scex.9-dev.jar)** · [更新说明 / Release notes](docs/releases/2.0-scex.9-dev.md)
+## [中文](README.md)
 
-> This is an unofficial Minecraft 1.21.1 / NeoForge port of ExtraBotany maintained by Space Creator EX (SCEX). The 1.21.1 port, fixes, tests, and public-release preparation were primarily assisted by OpenAI Codex under maintainer supervision. See [AI development disclosure](AI-GENERATED.md).
+## About this branch
 
-[中文](README.md)
+Magellan67 maintains this branch. The branch continues Lounode's "ExtraBotany: Reburn" and targets Minecraft 1.21.1 (NeoForge).
 
-The current public preview is **2.0-scex.9-dev**. It is based on [Lounode/ExtraBotany](https://github.com/Lounode/ExtraBotany) at `release-1.20.1-1.9.2` / `a4d4f2a968d559752fa3bd6e609544473109d983`. Upstream authorship, the MIT license, and resource credits are retained. This repository is not an official release from Lounode, Botania, or NeoForge.
+This project is a tribute to 似水流年. Thank you for such a great mod.
 
-## Runtime baseline
+The reference for the port is the original "Extra Botany" of ExtraMeteorP: content and values that the original has are restored from the original, and the content that Reburn added stays.
 
-| Component | Validated version |
-| --- | --- |
+- [docs/OVERVIEW_en.md](docs/OVERVIEW_en.md): what this version did, the differences from the original, and what is not verified yet.
+- [docs/PORT_AUDIT.md](docs/PORT_AUDIT.md): the record of each comparison and each correction.
+- [docs/ACCEPTANCE.md](docs/ACCEPTANCE.md): the items to check in the game and the items that need a decision.
+
+![](docs/img/overview.png)
+![](docs/img/overview2.png)
+
+## Requirements
+
+| Component | Version |
+|---|---|
 | Minecraft | 1.21.1 |
-| NeoForge | 21.1.248 |
-| Java | 21 |
-| Botania | 456-20260822.093314-4 (reports 456-SNAPSHOT at runtime) |
-| Patchouli | 1.21.1-93 |
-| Curios | 9.5.1+1.21.1 |
+| NeoForge | 21.1.248 or a later 21.1.x |
+| Botania | 456 |
+| Patchouli | 1.21.1-93 or later |
+| Curios | 9.5.1 or later |
+| JEI, EMI, KubeJS | optional |
 
-Download the runtime JAR from [Releases](https://github.com/rianfalltwilight-lab/scex-extrabotany/releases) and use the same file on both client and server. Do not install another JAR with the `extrabotany` mod ID. JEI and KubeJS integrations are optional.
+This branch supports NeoForge only. The Forge 1.20.1 and Fabric versions of Reburn are not in this repository.
 
-SCEX's forest-wand binding behavior is supplied by the separate [SCEX Botania / ExtraBotany forest-wand compatibility bridge](https://github.com/rianfalltwilight-lab/scex-botania-extrabotany-compat) `1.4.2`. It is not bundled with ExtraBotany and must be installed on both client and server. Version `1.4.2` was validated with `2.0-scex.9-dev` and declares ExtraBotany `[2.0-scex.7-dev,3)`; it handles selection, binding, and persistence for flower→spreader, flower→pool, and pool→Manalink interactions.
+Old worlds stay compatible: the registry names of items, blocks and entities, and the data keys in saved worlds, did not change.
 
-## Restored scope
+## Content
 
-- Ported the target to Minecraft 1.21.1, NeoForge 21.1.248, and Java 21.
-- Restored the inventoried legacy items, blocks, block entities, entities, fluids, armor, relics, flowers, recipes, tags, rendering, and save contracts. The runtime registry comparison against `scex.1` has zero missing legacy entries.
-- Fixed the Gaia III sound lookup, enchanted-soil lifetime boundary, Trade Orchid effect lookup, legacy registrations, old ItemStack preservation, and multiple resource-compatibility defects.
-- Retained locked dependencies, Gradle locks, reproducible JAR settings, GameTests, resource audits, and old-world fixtures.
+- Relics: Garden of King's Law, Key of Flamescion, Spear of Subspace, Judah Oath, Silent Eternity, ALL FOR ONE, Excalibur, Void Archives, Core of The Void and others.
+- Baubles: Gem of Conquest (the wearer becomes the Herrscher of Thunder), Master Band of Mana, the four stones and The Community, the two mounts (Motor and UFO) and others.
+- Armor: Goblin Slayer, Shadow Warrior, Starry Idol, Pleiades Combat Maid, Shooting Guardian, Silent Sages.
+- Flowers: Trade Orchid, Woodienia, Reikarlily, Stonesia, Edelweiss, Omniviolet, Stardust Lotus, Manalink and others.
+- Blocks: Mana Buffer, Quantum Mana Buffer, Flux Manafield, Mana Liquefaction Device, Livingrock Barrel, Cocoon of Desire, the pedestals, Mana Charger.
+- Bosses: Guardian of Gaia III, Herrscher of the Void, Ego.
+- The textures that Reburn made again, nearer to the style of the vanilla game.
 
-See [full restoration report](FULL_LEGACY_RESTORE.md), [porting record](PORTING.md), and [independent review](AUDIT_REVIEW.md) for implementation details and evidence boundaries.
+## For modpack makers
 
-## Previous restoration validation (scex.5)
+[docs/kubejs.md](docs/kubejs.md) shows the recipe types, the data maps and the use of KubeJS.
 
-- 19 / 19 NeoForge GameTests passed.
-- Zero missing inventoried registry entries compared with the archived `scex.1` runtime.
-- Full serialized stacks and custom data for 242 old-world items survived reload unchanged.
-- A physical client checked 243 items, 34 entity renderers, and three restored armor sets.
-- The resource/JAR audit reported zero errors; two builds produced byte-identical runtime and sources JARs.
+## Build from source
 
-These are bounded checks, not a gameplay-completion percentage. Full multiplayer boss fights, every mount control, every optional-mod combination, long-running load, and all GPU-specific rendering remain outside the proven scope. The archived `music.ego` has no audio, the butterfly projectile retains its unfinished upstream hit behavior.
+JDK 21 is necessary. Gradle downloads all other dependencies.
 
-## Build and release
-
-```powershell
-$env:JAVA_HOME = '<Java 21 JDK>'
-.\gradlew.bat --no-daemon build
-.\gradlew.bat --no-daemon runGameTestServer
-.\scripts\prepare-release.ps1
+```bash
+./gradlew build
 ```
 
-Use `./gradlew` on Linux/macOS. The release-packaging script requires PowerShell 7. See [RELEASING.md](docs/RELEASING.md) for the reproducible gate and GitHub Release workflow.
+The result is `build/libs/extrabotany-neoforge-1.21.1-<version>.jar`.
 
-## License and provenance
+| Command | Function |
+|---|---|
+| `./gradlew runClient` | Starts the development client. |
+| `./gradlew runServer` | Starts the development dedicated server. |
+| `./gradlew runGameTestServer` | Runs all game tests, then stops. |
+| `./gradlew runGameTestServer -Pgametest_namespaces=extrabotany_perf` | Runs the performance scenarios and not the tests. The results are in the log, in lines that start with `EB_PERF`. |
+| `./gradlew runData` | Runs the data generators. The output goes to `src/generated/resources`. |
 
-The source remains under the upstream [MIT License](LICENSE). SCEX changes do not replace upstream ownership of code, names, or assets. Fixed provenance, resource-restoration methods, and AI involvement are documented in [NOTICE](NOTICE) and [AI-GENERATED.md](AI-GENERATED.md). These records are provenance notes, not legal advice.
+### Layout
+
+| Directory | Content |
+|---|---|
+| `src/main` | The mod. The release JAR only has this content. |
+| `src/generated/resources` | The output of the data generators. Do not edit it by hand: `runData` makes the full directory again. |
+| `src/datagen` | The code of the data generators. It does not go into the release JAR. |
+| `src/gametest` | The game tests and their structure files. They do not go into the release JAR. |
+| `docs` | The project overview, the port audit record, the acceptance checklist, the comment style, the guide for modpack makers. |
+
+The code comments are in Chinese and English. [docs/COMMENT_STYLE.md](docs/COMMENT_STYLE.md) gives the rules.
+
+## Credits
+
+- ExtraMeteorP: the author of the original "Extra Botany".
+- Lounode: the author of "ExtraBotany: Reburn".
+- The SCEX maintainers: the initial 1.21.1 port.
+- Urranium (textures), Keletu (armor model).
+- Vazkii and all contributors of Botania.
+
+## License
+
+MIT, see [LICENSE](LICENSE).

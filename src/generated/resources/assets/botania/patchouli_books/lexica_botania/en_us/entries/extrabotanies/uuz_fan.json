@@ -1,0 +1,16 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:uuz_fan",
+  "name": "item.extrabotany.uuz_fan",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.uuz_fan0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:uuz_fan",
+      "text": "extrabotany.page.uuz_fan1"
+    }
+  ]
+}

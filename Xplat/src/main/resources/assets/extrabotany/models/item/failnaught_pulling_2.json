@@ -1,6 +1,0 @@
-{
-  "parent": "extrabotany:item/failnaught",
-  "textures": {
-    "layer0": "extrabotany:item/failnaught_pulling_2"
-  }
-}

@@ -1,0 +1,24 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:flamescion_weapon",
+  "name": "item.extrabotany.flamescion_weapon",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.flamescion_weapon0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.flamescion_weapon1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.flamescion_weapon2"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:flamescion_weapon",
+      "text": "extrabotany.page.flamescion_weapon3"
+    }
+  ]
+}

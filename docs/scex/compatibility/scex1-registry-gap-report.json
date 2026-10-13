@@ -1,0 +1,932 @@
+{
+  "comparison": "Exact matching scex.1 binary hash vs actual scex.4 running item registry; old list from static registration analysis",
+  "missing_block_or_fluid_candidates": [
+    "extrabotany:cocoondesire",
+    "extrabotany:elfjar",
+    "extrabotany:fluidedmana",
+    "extrabotany:fluidedmana_bucket",
+    "extrabotany:manabuffer",
+    "extrabotany:managenerator",
+    "extrabotany:manaliquefaction",
+    "extrabotany:quantummanabuffer",
+    "extrabotany:stardustlotus",
+    "extrabotany:trophy"
+  ],
+  "historical_string_hits_not_item_counts": {
+    "binder": 10,
+    "bottled_flame": 46,
+    "bottled_star": 4,
+    "bottled_pixie": 6,
+    "photon_shotgun": 1,
+    "miku_helm": 5,
+    "miku_chest": 4,
+    "miku_legs": 4,
+    "miku_boots": 5,
+    "universal_petal": 10,
+    "element_rune": 10,
+    "sin_rune": 12,
+    "peace_amulet": 12,
+    "fox_ear": 4,
+    "fox_mask": 4,
+    "pylon": 4,
+    "goggle_jungle": 4,
+    "goggle_ocean": 4,
+    "goggle_snowfield": 4,
+    "goggle_standard": 4,
+    "black_glasses": 4,
+    "red_scarf": 4,
+    "super_crown": 4,
+    "mask": 4,
+    "music_disc_herrscher_of_the_void": 7
+  },
+  "initial_missing_regular_items_before_confirmed_three": [
+    {
+      "id": "rod_of_discord",
+      "field": "rodOfDiscord",
+      "class": "RodOfDiscordItem"
+    },
+    {
+      "id": "shadow_katana",
+      "field": "shadowKatana",
+      "class": "ShadowKatanaItem"
+    },
+    {
+      "id": "uuz_fan",
+      "field": "uuzFan",
+      "class": "UuzFanItem"
+    },
+    {
+      "id": "binder",
+      "field": "binder",
+      "class": "BinderItem"
+    },
+    {
+      "id": "bottled_flame",
+      "field": "bottledFlame",
+      "class": "BottledFlameItem"
+    },
+    {
+      "id": "bottled_star",
+      "field": "bottledStar",
+      "class": "BottledStarItem"
+    },
+    {
+      "id": "bottled_pixie",
+      "field": "bottledPixie",
+      "class": "BottledPixieItem"
+    },
+    {
+      "id": "photon_shotgun",
+      "field": "photonShotgun",
+      "class": "PhotonShotgunItem"
+    },
+    {
+      "id": "silver_bullet",
+      "field": "silverBullet",
+      "class": "SilverBulletItem"
+    },
+    {
+      "id": "king_garden",
+      "field": "kingGarden",
+      "class": "KingGardenItem"
+    },
+    {
+      "id": "flamescion_weapon",
+      "field": "flamescionWeapon",
+      "class": "FlamescionWeaponItem"
+    },
+    {
+      "id": "cosmic_car_key",
+      "field": "cosmicCarKey",
+      "class": "CosmicCarKeyItem"
+    },
+    {
+      "id": "motor",
+      "field": "motor",
+      "class": "MotorItem"
+    },
+    {
+      "id": "motor_accessory",
+      "field": "motorAccessory",
+      "class": "MountAccessoryItem"
+    },
+    {
+      "id": "cosmic_car_key_accessory",
+      "field": "cosmicCarKeyAccessory",
+      "class": "MountAccessoryItem"
+    },
+    {
+      "id": "silent_eternity",
+      "field": "silentEternity",
+      "class": "SilentEternityItem"
+    },
+    {
+      "id": "frost_star",
+      "field": "frostStar",
+      "class": "FrostStarItem"
+    },
+    {
+      "id": "miku_helm",
+      "field": "mikuHelm",
+      "class": "OldExbotanyArmorItem"
+    },
+    {
+      "id": "miku_chest",
+      "field": "mikuChest",
+      "class": "OldExbotanyArmorItem"
+    },
+    {
+      "id": "miku_legs",
+      "field": "mikuLegs",
+      "class": "OldExbotanyArmorItem"
+    },
+    {
+      "id": "miku_boots",
+      "field": "mikuBoots",
+      "class": "OldExbotanyArmorItem"
+    },
+    {
+      "id": "shootingguardian_helm",
+      "field": "shootingGuardianHelm",
+      "class": "ShootingGuardianArmorItem"
+    },
+    {
+      "id": "shootingguardian_chest",
+      "field": "shootingGuardianChest",
+      "class": "ShootingGuardianArmorItem"
+    },
+    {
+      "id": "shootingguardian_legs",
+      "field": "shootingGuardianLegs",
+      "class": "ShootingGuardianArmorItem"
+    },
+    {
+      "id": "shootingguardian_boots",
+      "field": "shootingGuardianBoots",
+      "class": "ShootingGuardianArmorItem"
+    },
+    {
+      "id": "silentsages_helm",
+      "field": "silentSagesHelm",
+      "class": "OldExbotanyArmorItem"
+    },
+    {
+      "id": "silentsages_chest",
+      "field": "silentSagesChest",
+      "class": "OldExbotanyArmorItem"
+    },
+    {
+      "id": "silentsages_legs",
+      "field": "silentSagesLegs",
+      "class": "OldExbotanyArmorItem"
+    },
+    {
+      "id": "silentsages_boots",
+      "field": "silentSagesBoots",
+      "class": "OldExbotanyArmorItem"
+    },
+    {
+      "id": "true_terrablade",
+      "field": "trueTerrablade",
+      "class": "TrueTerrabladeItem"
+    },
+    {
+      "id": "true_shadow_katana",
+      "field": "trueShadowKatana",
+      "class": "TrueShadowKatanaItem"
+    },
+    {
+      "id": "influx_waver",
+      "field": "influxWaver",
+      "class": "InfluxWaverItem"
+    },
+    {
+      "id": "star_wrath",
+      "field": "starWrath",
+      "class": "StarWrathItem"
+    },
+    {
+      "id": "first_fractal",
+      "field": "firstFractal",
+      "class": "FirstFractalItem"
+    },
+    {
+      "id": "spear_of_subspace",
+      "field": "spearOfSubspace",
+      "class": "SpearOfSubspaceItem"
+    },
+    {
+      "id": "judah_oath",
+      "field": "judahOath",
+      "class": "JudahOathItem"
+    },
+    {
+      "id": "judah_oath_kira",
+      "field": "judahOathKira",
+      "class": "JudahOathItem"
+    },
+    {
+      "id": "judah_oath_sakura",
+      "field": "judahOathSakura",
+      "class": "JudahOathItem"
+    },
+    {
+      "id": "lens_superconductor",
+      "field": "lensSuperconductor",
+      "class": "LensItem"
+    },
+    {
+      "id": "gem_of_conquest",
+      "field": "gemOfConquest",
+      "class": "GemOfConquestItem"
+    },
+    {
+      "id": "universal_petal",
+      "field": "universalPetal",
+      "class": "Item"
+    },
+    {
+      "id": "element_rune",
+      "field": "elementRune",
+      "class": "Item"
+    },
+    {
+      "id": "sin_rune",
+      "field": "sinRune",
+      "class": "Item"
+    },
+    {
+      "id": "mana_drink",
+      "field": "manaDrink",
+      "class": "ManaDrinkItem"
+    },
+    {
+      "id": "voidcaller",
+      "field": "voidCaller",
+      "class": "VoidCallerItem"
+    },
+    {
+      "id": "empty_core_of_the_void",
+      "field": "emptyCoreOfTheVoid",
+      "class": "Item"
+    },
+    {
+      "id": "peace_amulet",
+      "field": "peaceAmulet",
+      "class": "PeaceAmuletItem"
+    },
+    {
+      "id": "aero_stone",
+      "field": "aeroStone",
+      "class": "ElementalStoneItem"
+    },
+    {
+      "id": "aqua_stone",
+      "field": "aquaStone",
+      "class": "AquaStoneItem"
+    },
+    {
+      "id": "earth_stone",
+      "field": "earthStone",
+      "class": "ElementalStoneItem"
+    },
+    {
+      "id": "ignis_stone",
+      "field": "ignisStone",
+      "class": "ElementalStoneItem"
+    },
+    {
+      "id": "the_community",
+      "field": "theCommunity",
+      "class": "CommunityStoneItem"
+    },
+    {
+      "id": "power_glove",
+      "field": "powerGlove",
+      "class": "AttributeBaubleItem"
+    },
+    {
+      "id": "death_ring",
+      "field": "deathRing",
+      "class": "DeathRingItem"
+    },
+    {
+      "id": "potato_chips",
+      "field": "potatoChips",
+      "class": "PotatoChipsItem"
+    },
+    {
+      "id": "sun_ring",
+      "field": "sunRing",
+      "class": "SunRingItem"
+    },
+    {
+      "id": "moon_pendant",
+      "field": "moonPendant",
+      "class": "MoonPendantItem"
+    },
+    {
+      "id": "elven_king",
+      "field": "elvenKing",
+      "class": "BaubleBoxSimulatorItem"
+    },
+    {
+      "id": "all_for_one",
+      "field": "allForOne",
+      "class": "BaubleBoxSimulatorItem"
+    },
+    {
+      "id": "fox_ear",
+      "field": "foxEar",
+      "class": "CosmeticBaubleItem"
+    },
+    {
+      "id": "fox_mask",
+      "field": "foxMask",
+      "class": "CosmeticBaubleItem"
+    },
+    {
+      "id": "pylon",
+      "field": "pylon",
+      "class": "CosmeticBaubleItem"
+    },
+    {
+      "id": "goggle_jungle",
+      "field": "goggleJungle",
+      "class": "CosmeticBaubleItem"
+    },
+    {
+      "id": "goggle_ocean",
+      "field": "goggleOcean",
+      "class": "CosmeticBaubleItem"
+    },
+    {
+      "id": "goggle_snowfield",
+      "field": "goggleSnowfield",
+      "class": "CosmeticBaubleItem"
+    },
+    {
+      "id": "goggle_standard",
+      "field": "goggleStandard",
+      "class": "CosmeticBaubleItem"
+    },
+    {
+      "id": "black_glasses",
+      "field": "blackGlasses",
+      "class": "CosmeticBaubleItem"
+    },
+    {
+      "id": "thug_life",
+      "field": "thugLife",
+      "class": "CosmeticBaubleItem"
+    },
+    {
+      "id": "red_scarf",
+      "field": "redScarf",
+      "class": "CosmeticBaubleItem"
+    },
+    {
+      "id": "super_crown",
+      "field": "superCrown",
+      "class": "CosmeticBaubleItem"
+    },
+    {
+      "id": "mask",
+      "field": "mask",
+      "class": "CosmeticBaubleItem"
+    },
+    {
+      "id": "limited_edition_supply_bag",
+      "field": "limitedEditionSupplyBag",
+      "class": "LimitedEditionSupplyBagItem"
+    },
+    {
+      "id": "music_disc_herrscher_of_the_void",
+      "field": "recordHerrscherOfTheVoid",
+      "class": "Item"
+    }
+  ],
+  "remaining_missing_regular_items": [
+    {
+      "id": "rod_of_discord",
+      "field": "rodOfDiscord",
+      "class": "RodOfDiscordItem"
+    },
+    {
+      "id": "shadow_katana",
+      "field": "shadowKatana",
+      "class": "ShadowKatanaItem"
+    },
+    {
+      "id": "uuz_fan",
+      "field": "uuzFan",
+      "class": "UuzFanItem"
+    },
+    {
+      "id": "binder",
+      "field": "binder",
+      "class": "BinderItem"
+    },
+    {
+      "id": "bottled_flame",
+      "field": "bottledFlame",
+      "class": "BottledFlameItem"
+    },
+    {
+      "id": "bottled_star",
+      "field": "bottledStar",
+      "class": "BottledStarItem"
+    },
+    {
+      "id": "bottled_pixie",
+      "field": "bottledPixie",
+      "class": "BottledPixieItem"
+    },
+    {
+      "id": "photon_shotgun",
+      "field": "photonShotgun",
+      "class": "PhotonShotgunItem"
+    },
+    {
+      "id": "silver_bullet",
+      "field": "silverBullet",
+      "class": "SilverBulletItem"
+    },
+    {
+      "id": "king_garden",
+      "field": "kingGarden",
+      "class": "KingGardenItem"
+    },
+    {
+      "id": "flamescion_weapon",
+      "field": "flamescionWeapon",
+      "class": "FlamescionWeaponItem"
+    },
+    {
+      "id": "cosmic_car_key",
+      "field": "cosmicCarKey",
+      "class": "CosmicCarKeyItem"
+    },
+    {
+      "id": "motor",
+      "field": "motor",
+      "class": "MotorItem"
+    },
+    {
+      "id": "motor_accessory",
+      "field": "motorAccessory",
+      "class": "MountAccessoryItem"
+    },
+    {
+      "id": "cosmic_car_key_accessory",
+      "field": "cosmicCarKeyAccessory",
+      "class": "MountAccessoryItem"
+    },
+    {
+      "id": "silent_eternity",
+      "field": "silentEternity",
+      "class": "SilentEternityItem"
+    },
+    {
+      "id": "frost_star",
+      "field": "frostStar",
+      "class": "FrostStarItem"
+    },
+    {
+      "id": "miku_helm",
+      "field": "mikuHelm",
+      "class": "OldExbotanyArmorItem"
+    },
+    {
+      "id": "miku_chest",
+      "field": "mikuChest",
+      "class": "OldExbotanyArmorItem"
+    },
+    {
+      "id": "miku_legs",
+      "field": "mikuLegs",
+      "class": "OldExbotanyArmorItem"
+    },
+    {
+      "id": "miku_boots",
+      "field": "mikuBoots",
+      "class": "OldExbotanyArmorItem"
+    },
+    {
+      "id": "shootingguardian_helm",
+      "field": "shootingGuardianHelm",
+      "class": "ShootingGuardianArmorItem"
+    },
+    {
+      "id": "shootingguardian_chest",
+      "field": "shootingGuardianChest",
+      "class": "ShootingGuardianArmorItem"
+    },
+    {
+      "id": "shootingguardian_legs",
+      "field": "shootingGuardianLegs",
+      "class": "ShootingGuardianArmorItem"
+    },
+    {
+      "id": "shootingguardian_boots",
+      "field": "shootingGuardianBoots",
+      "class": "ShootingGuardianArmorItem"
+    },
+    {
+      "id": "silentsages_helm",
+      "field": "silentSagesHelm",
+      "class": "OldExbotanyArmorItem"
+    },
+    {
+      "id": "silentsages_chest",
+      "field": "silentSagesChest",
+      "class": "OldExbotanyArmorItem"
+    },
+    {
+      "id": "silentsages_legs",
+      "field": "silentSagesLegs",
+      "class": "OldExbotanyArmorItem"
+    },
+    {
+      "id": "silentsages_boots",
+      "field": "silentSagesBoots",
+      "class": "OldExbotanyArmorItem"
+    },
+    {
+      "id": "true_terrablade",
+      "field": "trueTerrablade",
+      "class": "TrueTerrabladeItem"
+    },
+    {
+      "id": "true_shadow_katana",
+      "field": "trueShadowKatana",
+      "class": "TrueShadowKatanaItem"
+    },
+    {
+      "id": "influx_waver",
+      "field": "influxWaver",
+      "class": "InfluxWaverItem"
+    },
+    {
+      "id": "star_wrath",
+      "field": "starWrath",
+      "class": "StarWrathItem"
+    },
+    {
+      "id": "first_fractal",
+      "field": "firstFractal",
+      "class": "FirstFractalItem"
+    },
+    {
+      "id": "spear_of_subspace",
+      "field": "spearOfSubspace",
+      "class": "SpearOfSubspaceItem"
+    },
+    {
+      "id": "judah_oath",
+      "field": "judahOath",
+      "class": "JudahOathItem"
+    },
+    {
+      "id": "judah_oath_kira",
+      "field": "judahOathKira",
+      "class": "JudahOathItem"
+    },
+    {
+      "id": "judah_oath_sakura",
+      "field": "judahOathSakura",
+      "class": "JudahOathItem"
+    },
+    {
+      "id": "lens_superconductor",
+      "field": "lensSuperconductor",
+      "class": "LensItem"
+    },
+    {
+      "id": "gem_of_conquest",
+      "field": "gemOfConquest",
+      "class": "GemOfConquestItem"
+    },
+    {
+      "id": "universal_petal",
+      "field": "universalPetal",
+      "class": "Item"
+    },
+    {
+      "id": "mana_drink",
+      "field": "manaDrink",
+      "class": "ManaDrinkItem"
+    },
+    {
+      "id": "voidcaller",
+      "field": "voidCaller",
+      "class": "VoidCallerItem"
+    },
+    {
+      "id": "empty_core_of_the_void",
+      "field": "emptyCoreOfTheVoid",
+      "class": "Item"
+    },
+    {
+      "id": "peace_amulet",
+      "field": "peaceAmulet",
+      "class": "PeaceAmuletItem"
+    },
+    {
+      "id": "aero_stone",
+      "field": "aeroStone",
+      "class": "ElementalStoneItem"
+    },
+    {
+      "id": "aqua_stone",
+      "field": "aquaStone",
+      "class": "AquaStoneItem"
+    },
+    {
+      "id": "earth_stone",
+      "field": "earthStone",
+      "class": "ElementalStoneItem"
+    },
+    {
+      "id": "ignis_stone",
+      "field": "ignisStone",
+      "class": "ElementalStoneItem"
+    },
+    {
+      "id": "the_community",
+      "field": "theCommunity",
+      "class": "CommunityStoneItem"
+    },
+    {
+      "id": "power_glove",
+      "field": "powerGlove",
+      "class": "AttributeBaubleItem"
+    },
+    {
+      "id": "death_ring",
+      "field": "deathRing",
+      "class": "DeathRingItem"
+    },
+    {
+      "id": "potato_chips",
+      "field": "potatoChips",
+      "class": "PotatoChipsItem"
+    },
+    {
+      "id": "sun_ring",
+      "field": "sunRing",
+      "class": "SunRingItem"
+    },
+    {
+      "id": "moon_pendant",
+      "field": "moonPendant",
+      "class": "MoonPendantItem"
+    },
+    {
+      "id": "elven_king",
+      "field": "elvenKing",
+      "class": "BaubleBoxSimulatorItem"
+    },
+    {
+      "id": "all_for_one",
+      "field": "allForOne",
+      "class": "BaubleBoxSimulatorItem"
+    },
+    {
+      "id": "fox_ear",
+      "field": "foxEar",
+      "class": "CosmeticBaubleItem"
+    },
+    {
+      "id": "fox_mask",
+      "field": "foxMask",
+      "class": "CosmeticBaubleItem"
+    },
+    {
+      "id": "pylon",
+      "field": "pylon",
+      "class": "CosmeticBaubleItem"
+    },
+    {
+      "id": "goggle_jungle",
+      "field": "goggleJungle",
+      "class": "CosmeticBaubleItem"
+    },
+    {
+      "id": "goggle_ocean",
+      "field": "goggleOcean",
+      "class": "CosmeticBaubleItem"
+    },
+    {
+      "id": "goggle_snowfield",
+      "field": "goggleSnowfield",
+      "class": "CosmeticBaubleItem"
+    },
+    {
+      "id": "goggle_standard",
+      "field": "goggleStandard",
+      "class": "CosmeticBaubleItem"
+    },
+    {
+      "id": "black_glasses",
+      "field": "blackGlasses",
+      "class": "CosmeticBaubleItem"
+    },
+    {
+      "id": "thug_life",
+      "field": "thugLife",
+      "class": "CosmeticBaubleItem"
+    },
+    {
+      "id": "red_scarf",
+      "field": "redScarf",
+      "class": "CosmeticBaubleItem"
+    },
+    {
+      "id": "super_crown",
+      "field": "superCrown",
+      "class": "CosmeticBaubleItem"
+    },
+    {
+      "id": "mask",
+      "field": "mask",
+      "class": "CosmeticBaubleItem"
+    },
+    {
+      "id": "limited_edition_supply_bag",
+      "field": "limitedEditionSupplyBag",
+      "class": "LimitedEditionSupplyBagItem"
+    }
+  ],
+  "restored_confirmed_items": [
+    "element_rune",
+    "sin_rune",
+    "music_disc_herrscher_of_the_void"
+  ],
+  "runtime_item_registry": [
+    "extrabotany:achilles_shield",
+    "extrabotany:aerialite_block",
+    "extrabotany:aerialite_hammer",
+    "extrabotany:aerialite_ingot",
+    "extrabotany:aerialite_nugget",
+    "extrabotany:annoyingflower",
+    "extrabotany:bellflower",
+    "extrabotany:blood_enchantress",
+    "extrabotany:camera",
+    "extrabotany:candy_bag",
+    "extrabotany:candy_drei",
+    "extrabotany:candy_eins",
+    "extrabotany:candy_zwei",
+    "extrabotany:challenge_ticket",
+    "extrabotany:chiseled_elementium_quartz_block",
+    "extrabotany:chiseled_gaia_quartz_block",
+    "extrabotany:core_of_the_void",
+    "extrabotany:curse_ring",
+    "extrabotany:das_rheingold",
+    "extrabotany:dimension_catalyst",
+    "extrabotany:dispersive_ring",
+    "extrabotany:drei_reward_bag",
+    "extrabotany:edelweiss",
+    "extrabotany:eins_reward_bag",
+    "extrabotany:element_rune",
+    "extrabotany:elementium_hammer",
+    "extrabotany:elementium_quartz",
+    "extrabotany:elementium_quartz_block",
+    "extrabotany:elementium_quartz_bricks",
+    "extrabotany:elementium_quartz_pillar",
+    "extrabotany:elementium_quartz_slab",
+    "extrabotany:elementium_quartz_stairs",
+    "extrabotany:elementium_shield",
+    "extrabotany:enchanted_soil",
+    "extrabotany:enchanter",
+    "extrabotany:excalibur",
+    "extrabotany:failnaught",
+    "extrabotany:feather_of_jingwei",
+    "extrabotany:floating_annoyingflower",
+    "extrabotany:floating_bellflower",
+    "extrabotany:floating_blood_enchantress",
+    "extrabotany:floating_edelweiss",
+    "extrabotany:floating_enchanter",
+    "extrabotany:floating_manalink",
+    "extrabotany:floating_mirrowtunia",
+    "extrabotany:floating_moonlight_lily",
+    "extrabotany:floating_necrofleur",
+    "extrabotany:floating_necrofleur_chibi",
+    "extrabotany:floating_omniviolet",
+    "extrabotany:floating_reikarlily",
+    "extrabotany:floating_resoncund",
+    "extrabotany:floating_serenitian",
+    "extrabotany:floating_stonesia",
+    "extrabotany:floating_sunshine_lily",
+    "extrabotany:floating_tinkle",
+    "extrabotany:floating_trade_orchid",
+    "extrabotany:floating_twinstar",
+    "extrabotany:floating_woodienia",
+    "extrabotany:fried_chicken",
+    "extrabotany:frost_ring",
+    "extrabotany:gaia_hammer",
+    "extrabotany:gaia_quartz",
+    "extrabotany:gaia_quartz_block",
+    "extrabotany:gaia_quartz_bricks",
+    "extrabotany:gaia_quartz_pillar",
+    "extrabotany:gaia_quartz_slab",
+    "extrabotany:gaia_quartz_stairs",
+    "extrabotany:gilded_potato",
+    "extrabotany:gilded_potato_mashed",
+    "extrabotany:goblin_slayer_boots",
+    "extrabotany:goblin_slayer_chestplate",
+    "extrabotany:goblin_slayer_helmet",
+    "extrabotany:goblin_slayer_leggings",
+    "extrabotany:hero_medal",
+    "extrabotany:holy_water_grenade",
+    "extrabotany:infinite_wine",
+    "extrabotany:jackie_chan_ring",
+    "extrabotany:lens_mana",
+    "extrabotany:lens_potion",
+    "extrabotany:lens_push",
+    "extrabotany:lens_smelt",
+    "extrabotany:lens_trace",
+    "extrabotany:magic_finger",
+    "extrabotany:mana_charger",
+    "extrabotany:mana_cocktail",
+    "extrabotany:mana_glass_bottle",
+    "extrabotany:mana_reader",
+    "extrabotany:mana_ring_master",
+    "extrabotany:manalink",
+    "extrabotany:manasteel_hammer",
+    "extrabotany:manasteel_shield",
+    "extrabotany:mirrowtunia",
+    "extrabotany:moonlight_lily",
+    "extrabotany:music_disc_gaia3",
+    "extrabotany:music_disc_herrscher_of_the_void",
+    "extrabotany:nature_orb",
+    "extrabotany:necrofleur",
+    "extrabotany:necrofleur_chibi",
+    "extrabotany:nightmare_fuel",
+    "extrabotany:nine_and_three_quarters_reward_bag",
+    "extrabotany:omniviolet",
+    "extrabotany:orichalcos_block",
+    "extrabotany:orichalcos_hammer",
+    "extrabotany:orichalcos_ingot",
+    "extrabotany:orichalcos_nugget",
+    "extrabotany:pandoras_box",
+    "extrabotany:parkour_ring",
+    "extrabotany:pedestal_calcite",
+    "extrabotany:pedestal_livingrock",
+    "extrabotany:photonium_block",
+    "extrabotany:photonium_hammer",
+    "extrabotany:photonium_ingot",
+    "extrabotany:photonium_nugget",
+    "extrabotany:pleiades_combat_maid_boots",
+    "extrabotany:pleiades_combat_maid_headgear",
+    "extrabotany:pleiades_combat_maid_skirt",
+    "extrabotany:pleiades_combat_maid_suit",
+    "extrabotany:power_frame",
+    "extrabotany:pure_daisy_pendant",
+    "extrabotany:reikarlily",
+    "extrabotany:resoncund",
+    "extrabotany:rhein_hammer",
+    "extrabotany:sanguine_pleiades_combat_maid_suit",
+    "extrabotany:serenitian",
+    "extrabotany:shadow_warrior_boots",
+    "extrabotany:shadow_warrior_chestplate",
+    "extrabotany:shadow_warrior_helmet",
+    "extrabotany:shadow_warrior_leggings",
+    "extrabotany:shadowium_block",
+    "extrabotany:shadowium_hammer",
+    "extrabotany:shadowium_ingot",
+    "extrabotany:shadowium_nugget",
+    "extrabotany:sin_rune",
+    "extrabotany:smooth_elementium_quartz",
+    "extrabotany:smooth_elementium_quartz_slab",
+    "extrabotany:smooth_elementium_quartz_stairs",
+    "extrabotany:smooth_gaia_quartz",
+    "extrabotany:smooth_gaia_quartz_slab",
+    "extrabotany:smooth_gaia_quartz_stairs",
+    "extrabotany:spider_ring",
+    "extrabotany:spirit_fragment",
+    "extrabotany:spirit_fuel",
+    "extrabotany:starry_idol_boots",
+    "extrabotany:starry_idol_headgear",
+    "extrabotany:starry_idol_skirt",
+    "extrabotany:starry_idol_suit",
+    "extrabotany:stonesia",
+    "extrabotany:sunshine_lily",
+    "extrabotany:terrasteel_hammer",
+    "extrabotany:terrasteel_shield",
+    "extrabotany:the_chaos",
+    "extrabotany:the_end",
+    "extrabotany:the_origin",
+    "extrabotany:the_universe",
+    "extrabotany:tinkle",
+    "extrabotany:trade_orchid",
+    "extrabotany:twinstar",
+    "extrabotany:vier_reward_bag",
+    "extrabotany:void_archives",
+    "extrabotany:walking_cane",
+    "extrabotany:woodienia",
+    "extrabotany:zadkiel",
+    "extrabotany:zwei_reward_bag"
+  ],
+  "scope": "Ordinary item declarations only, plus explicitly unconfirmed block/fluid item candidates. Not a complete block/block-entity/entity/fluid registry migration audit."
+}

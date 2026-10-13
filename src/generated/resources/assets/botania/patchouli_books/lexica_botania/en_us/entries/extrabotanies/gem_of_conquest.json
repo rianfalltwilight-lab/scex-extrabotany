@@ -1,0 +1,20 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:gem_of_conquest",
+  "name": "item.extrabotany.gem_of_conquest",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.gem_of_conquest0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.gem_of_conquest1"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:gem_of_conquest",
+      "text": "extrabotany.page.gem_of_conquest2"
+    }
+  ]
+}

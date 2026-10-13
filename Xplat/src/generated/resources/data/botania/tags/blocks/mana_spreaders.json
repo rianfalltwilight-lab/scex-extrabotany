@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "botania:mana_spreader",
-    "botania:redstone_spreader",
-    "botania:elven_spreader",
-    "botania:gaia_spreader"
-  ]
-}

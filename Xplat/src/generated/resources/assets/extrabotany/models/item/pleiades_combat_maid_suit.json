@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "extrabotany:item/pleiades_combat_maid_suit"
-  }
-}

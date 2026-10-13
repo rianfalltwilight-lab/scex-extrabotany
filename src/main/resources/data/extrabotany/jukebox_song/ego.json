@@ -1,0 +1,8 @@
+{
+  "comparator_output": 1,
+  "description": {
+    "translate": "item.extrabotany.music_disc_ego.desc"
+  },
+  "length_in_seconds": 198.0,
+  "sound_event": "extrabotany:music.ego"
+}

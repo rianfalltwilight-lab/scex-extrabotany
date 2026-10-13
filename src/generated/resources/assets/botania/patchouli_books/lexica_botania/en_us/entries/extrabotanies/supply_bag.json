@@ -1,0 +1,23 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:limited_edition_supply_bag",
+  "name": "item.extrabotany.limited_edition_supply_bag",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.supply_bag0"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "extrabotany:silent_eternity",
+      "link_recipe": true,
+      "text": "extrabotany.page.supply_bag1"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "extrabotany:lens_superconductor",
+      "link_recipe": true,
+      "text": "extrabotany.page.supply_bag2"
+    }
+  ]
+}

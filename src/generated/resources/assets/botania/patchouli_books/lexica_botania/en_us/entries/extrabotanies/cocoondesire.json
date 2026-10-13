@@ -1,0 +1,20 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:cocoondesire",
+  "name": "block.extrabotany.cocoondesire",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.cocoondesire0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.cocoondesire1"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:cocoondesire",
+      "text": "extrabotany.page.cocoondesire2"
+    }
+  ]
+}

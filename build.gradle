@@ -38,48 +38,97 @@ repositories {
     maven { url = "https://maven.architectury.dev" }
 }
 
-neoForge {
-    version = neoforge_version
-    accessTransformers.from(file("Xplat/src/main/resources/META-INF/accesstransformer.cfg").absolutePath)
-
-    runs {
-        configureEach {
-            systemProperty "neoforge.enabledGameTestNamespaces", mod_id
-            systemProperty "neoforge.logging.console.level", "debug"
-            gameDirectory = file("run")
-        }
-        client { client() }
-        server {
-            server()
-            programArgument "--nogui"
-        }
-        gameTestServer { type = "gameTestServer" }
-        data {
-            data()
-            programArguments.addAll "--mod", mod_id, "--all",
-                    "--output", file("src/generated/resources").absolutePath,
-                    "--existing", file("Xplat/src/main/resources").absolutePath,
-                    "--input", file("Forge/src/main/resources").absolutePath
-        }
+// Layout:
+//   src/main       the mod (this is the only content of the release JAR)
+//   src/generated  the output of the data generators ("gradlew runData")
+//   src/datagen    the data generators (never in the release JAR)
+//   src/gametest   the game tests and their structures (never in the release JAR)
+sourceSets {
+    main {
+        resources.srcDir "src/generated/resources"
     }
-
-    mods {
-        "${mod_id}" { sourceSet(sourceSets.main) }
+    datagen {
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.output
+    }
+    gametest {
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.output
     }
 }
 
-sourceSets {
-    main {
-        java.srcDirs = ["Xplat/src/main/java", "Forge/src/main/java"]
-        resources.srcDirs = [
-                "Xplat/src/main/resources",
-                "Forge/src/main/resources",
-                "src/generated/resources"
-        ]
+configurations {
+    datagenImplementation.extendsFrom implementation
+    datagenCompileOnly.extendsFrom compileOnly
+    datagenRuntimeOnly.extendsFrom runtimeOnly
+    gametestImplementation.extendsFrom implementation
+    gametestCompileOnly.extendsFrom compileOnly
+    gametestRuntimeOnly.extendsFrom runtimeOnly
+}
+
+// The usual run has the tests of the mod. "-Pgametest_namespaces=extrabotany_perf" runs the performance scenarios in place of them.
+def gameTestNamespaces = providers.gradleProperty("gametest_namespaces").getOrElse(mod_id)
+
+neoForge {
+    version = neoforge_version
+    addModdingDependenciesTo(sourceSets.datagen)
+    addModdingDependenciesTo(sourceSets.gametest)
+
+    mods {
+        // The mod as players get it.
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
+        }
+        // The mod together with its data generators. Only the data run loads this group.
+        "${mod_id}_datagen" {
+            sourceSet(sourceSets.main)
+            sourceSet(sourceSets.datagen)
+        }
+        // The mod together with its game tests. Only the test runs load this group.
+        "${mod_id}_gametest" {
+            sourceSet(sourceSets.main)
+            sourceSet(sourceSets.gametest)
+        }
     }
-    test {
-        java.srcDirs = ["Xplat/src/test/java", "Forge/src/test/java"]
-        resources.srcDirs = ["Xplat/src/test/resources", "Forge/src/test/resources"]
+
+    runs {
+        configureEach {
+            systemProperty "neoforge.logging.console.level", "debug"
+            gameDirectory = file("run")
+        }
+        client {
+            client()
+            loadedMods = [mods."${mod_id}"]
+        }
+        server {
+            server()
+            programArgument "--nogui"
+            loadedMods = [mods."${mod_id}"]
+        }
+        gameTestServer {
+            type = "gameTestServer"
+            sourceSet = sourceSets.gametest
+            loadedMods = [mods."${mod_id}_gametest"]
+            systemProperty "neoforge.enabledGameTestNamespaces", gameTestNamespaces
+        }
+        // A client that also has the test classes. The client probes in src/gametest need it.
+        gameTestClient {
+            client()
+            sourceSet = sourceSets.gametest
+            loadedMods = [mods."${mod_id}_gametest"]
+            systemProperty "neoforge.enabledGameTestNamespaces", gameTestNamespaces
+        }
+        data {
+            data()
+            sourceSet = sourceSets.datagen
+            loadedMods = [mods."${mod_id}_datagen"]
+            // The generators do not write a file that has a hand-written version in this directory (see HandWrittenFilter).
+            systemProperty "extrabotany.datagen.handwritten", file("src/main/resources").absolutePath
+            programArguments.addAll "--mod", mod_id, "--all",
+                    "--output", file("src/generated/resources").absolutePath,
+                    "--existing", file("src/main/resources").absolutePath,
+                    "--existing-mod", "botania"
+        }
     }
 }
 
@@ -109,9 +158,6 @@ dependencies {
 
 // Pin resolved transitive inputs as well as the direct versions above.
 dependencyLocking {
-    // Linux adds the native epoll runtime; keep each platform strictly locked.
-    lockFile = file(System.getProperty("os.name").toLowerCase(java.util.Locale.ROOT).contains("linux")
-        ? "gradle-linux.lockfile" : "gradle.lockfile")
     // Maven reports this timestamped artifact as 456-SNAPSHOT in its metadata.
     // A generated SNAPSHOT lock conflicts with the exact timestamp coordinate.
     ignoredDependencies.add("vazkii.botania:botania-neoforge-${minecraft_version}")
@@ -145,8 +191,7 @@ def generateModMetadata = tasks.register("generateModMetadata", ProcessResources
     ]
     inputs.properties(replaceProperties)
     expand(replaceProperties)
-    from("Xplat/src/main/template")
-    from("Forge/src/main/template")
+    from("src/main/templates")
     into(layout.buildDirectory.dir("generated/sources/modMetadata"))
 }
 
@@ -176,25 +221,24 @@ tasks.withType(Jar).configureEach {
 }
 
 tasks.named("jar", Jar).configure {
-    exclude "io/github/lounode/extrabotany/forge/gametest/**"
     from("LICENSE")
     manifest {
         attributes([
                 "Specification-Title": artifact_name,
-                "Specification-Vendor": "Lounode / SCEX",
+                "Specification-Vendor": "ExtraMeteorP / Lounode",
                 "Specification-Version": "1",
                 "Implementation-Title": artifact_name,
                 "Implementation-Version": archiveVersion.get(),
-                "Implementation-Vendor": "SCEX",
-                "MixinConfigs": "extrabotany_xplat.mixins.json,extrabotany_neoforge.mixins.json"
+                "Implementation-Vendor": "Magellan67"
         ])
     }
 }
 
-// Opt-in validation artifact; never distribute the test entry points to players.
+// Opt-in validation artifact with the game tests; never distribute it to players.
 tasks.register("validationJar", Jar) {
     archiveClassifier = "validation"
     from sourceSets.main.output
+    from sourceSets.gametest.output
     from("LICENSE")
     manifest.from(tasks.named("jar", Jar).get().manifest)
 }

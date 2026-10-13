@@ -1,0 +1,276 @@
+{
+  "baseline": "scex.1",
+  "candidate": "2.0-scex.5-dev",
+  "evidence": {
+    "audit-full\\runs\\scex1\\registry-dump.json": {
+      "bytes": 45563,
+      "sha256": "4428c2535f5d9f3c0127a6bcac5ba00bd7666cf9624f56c0218574ae395ff7f7"
+    },
+    "audit-full\\runs\\scex4\\registry-dump.json": {
+      "bytes": 32239,
+      "sha256": "df1724561a9f497b348fa10a8471852cb2d13a6e209dd43cb2cadd0ed3acd078"
+    },
+    "audit-full\\runs\\scex5-fixture\\registry-dump.json": {
+      "bytes": 45192,
+      "sha256": "e8610f8a536a5a1ec4b1189ad030ef3171f202fa680eabb775317af29f8621ed"
+    }
+  },
+  "registries": {
+    "botania:brews": {
+      "old_count": 6,
+      "new_count": 6,
+      "missing": [],
+      "added": [],
+      "restored_since_scex4": []
+    },
+    "minecraft:armor_material": {
+      "old_count": 7,
+      "new_count": 7,
+      "missing": [],
+      "added": [],
+      "restored_since_scex4": [
+        "extrabotany:miku",
+        "extrabotany:shootingguardian",
+        "extrabotany:silentsages"
+      ]
+    },
+    "minecraft:block": {
+      "old_count": 98,
+      "new_count": 99,
+      "missing": [],
+      "added": [
+        "extrabotany:enchanted_soil"
+      ],
+      "restored_since_scex4": [
+        "extrabotany:cocoondesire",
+        "extrabotany:elfjar",
+        "extrabotany:floating_stardustlotus",
+        "extrabotany:fluidedmana",
+        "extrabotany:manabuffer",
+        "extrabotany:managenerator",
+        "extrabotany:manaliquefaction",
+        "extrabotany:potted_stardustlotus",
+        "extrabotany:quantummanabuffer",
+        "extrabotany:stardustlotus",
+        "extrabotany:trophy"
+      ]
+    },
+    "minecraft:block_entity_type": {
+      "old_count": 30,
+      "new_count": 30,
+      "missing": [],
+      "added": [],
+      "restored_since_scex4": [
+        "extrabotany:cocoondesire",
+        "extrabotany:elfjar",
+        "extrabotany:manabuffer",
+        "extrabotany:managenerator",
+        "extrabotany:manaliquefaction",
+        "extrabotany:quantummanabuffer",
+        "extrabotany:stardustlotus"
+      ]
+    },
+    "minecraft:creative_mode_tab": {
+      "old_count": 1,
+      "new_count": 1,
+      "missing": [],
+      "added": [],
+      "restored_since_scex4": []
+    },
+    "minecraft:entity_type": {
+      "old_count": 34,
+      "new_count": 34,
+      "missing": [],
+      "added": [],
+      "restored_since_scex4": [
+        "extrabotany:bottled_star",
+        "extrabotany:butterfly_projectile",
+        "extrabotany:ego_minion",
+        "extrabotany:flamescion_slash",
+        "extrabotany:flamescion_sword",
+        "extrabotany:flamescion_ult",
+        "extrabotany:flamescion_void",
+        "extrabotany:flower_weapon",
+        "extrabotany:influx_waver_projectile",
+        "extrabotany:judah_oath",
+        "extrabotany:judah_spear",
+        "extrabotany:judah_sword",
+        "extrabotany:motor",
+        "extrabotany:phantom_sword",
+        "extrabotany:photon_shotgun_projectile",
+        "extrabotany:strengthen_slash",
+        "extrabotany:subspace",
+        "extrabotany:subspace_lance",
+        "extrabotany:subspace_spear",
+        "extrabotany:sword_domain",
+        "extrabotany:true_shadow_katana_projectile",
+        "extrabotany:true_terrablade_projectile",
+        "extrabotany:ufo",
+        "extrabotany:void_field",
+        "extrabotany:void_herrscher"
+      ]
+    },
+    "minecraft:fluid": {
+      "old_count": 2,
+      "new_count": 2,
+      "missing": [],
+      "added": [],
+      "restored_since_scex4": [
+        "extrabotany:flowing_fluidedmana",
+        "extrabotany:fluidedmana"
+      ]
+    },
+    "minecraft:item": {
+      "old_count": 242,
+      "new_count": 243,
+      "missing": [],
+      "added": [
+        "extrabotany:enchanted_soil"
+      ],
+      "restored_since_scex4": [
+        "extrabotany:aero_stone",
+        "extrabotany:all_for_one",
+        "extrabotany:aqua_stone",
+        "extrabotany:binder",
+        "extrabotany:black_glasses",
+        "extrabotany:bottled_flame",
+        "extrabotany:bottled_pixie",
+        "extrabotany:bottled_star",
+        "extrabotany:cocoondesire",
+        "extrabotany:cosmic_car_key",
+        "extrabotany:cosmic_car_key_accessory",
+        "extrabotany:death_ring",
+        "extrabotany:earth_stone",
+        "extrabotany:elfjar",
+        "extrabotany:elven_king",
+        "extrabotany:empty_core_of_the_void",
+        "extrabotany:first_fractal",
+        "extrabotany:flamescion_weapon",
+        "extrabotany:floating_stardustlotus",
+        "extrabotany:fluidedmana_bucket",
+        "extrabotany:fox_ear",
+        "extrabotany:fox_mask",
+        "extrabotany:frost_star",
+        "extrabotany:gem_of_conquest",
+        "extrabotany:goggle_jungle",
+        "extrabotany:goggle_ocean",
+        "extrabotany:goggle_snowfield",
+        "extrabotany:goggle_standard",
+        "extrabotany:ignis_stone",
+        "extrabotany:influx_waver",
+        "extrabotany:judah_oath",
+        "extrabotany:judah_oath_kira",
+        "extrabotany:judah_oath_sakura",
+        "extrabotany:king_garden",
+        "extrabotany:lens_superconductor",
+        "extrabotany:limited_edition_supply_bag",
+        "extrabotany:mana_drink",
+        "extrabotany:manabuffer",
+        "extrabotany:managenerator",
+        "extrabotany:manaliquefaction",
+        "extrabotany:mask",
+        "extrabotany:miku_boots",
+        "extrabotany:miku_chest",
+        "extrabotany:miku_helm",
+        "extrabotany:miku_legs",
+        "extrabotany:moon_pendant",
+        "extrabotany:motor",
+        "extrabotany:motor_accessory",
+        "extrabotany:peace_amulet",
+        "extrabotany:photon_shotgun",
+        "extrabotany:potato_chips",
+        "extrabotany:power_glove",
+        "extrabotany:pylon",
+        "extrabotany:quantummanabuffer",
+        "extrabotany:red_scarf",
+        "extrabotany:rod_of_discord",
+        "extrabotany:shadow_katana",
+        "extrabotany:shootingguardian_boots",
+        "extrabotany:shootingguardian_chest",
+        "extrabotany:shootingguardian_helm",
+        "extrabotany:shootingguardian_legs",
+        "extrabotany:silent_eternity",
+        "extrabotany:silentsages_boots",
+        "extrabotany:silentsages_chest",
+        "extrabotany:silentsages_helm",
+        "extrabotany:silentsages_legs",
+        "extrabotany:silver_bullet",
+        "extrabotany:spear_of_subspace",
+        "extrabotany:star_wrath",
+        "extrabotany:stardustlotus",
+        "extrabotany:sun_ring",
+        "extrabotany:super_crown",
+        "extrabotany:the_community",
+        "extrabotany:thug_life",
+        "extrabotany:trophy",
+        "extrabotany:true_shadow_katana",
+        "extrabotany:true_terrablade",
+        "extrabotany:universal_petal",
+        "extrabotany:uuz_fan",
+        "extrabotany:voidcaller"
+      ]
+    },
+    "minecraft:memory_module_type": {
+      "old_count": 6,
+      "new_count": 6,
+      "missing": [],
+      "added": [],
+      "restored_since_scex4": []
+    },
+    "minecraft:mob_effect": {
+      "old_count": 11,
+      "new_count": 11,
+      "missing": [],
+      "added": [],
+      "restored_since_scex4": [
+        "extrabotany:eternity",
+        "extrabotany:flamescion",
+        "extrabotany:incandescence",
+        "extrabotany:timelock",
+        "extrabotany:witch_curse"
+      ]
+    },
+    "minecraft:recipe_serializer": {
+      "old_count": 9,
+      "new_count": 9,
+      "missing": [],
+      "added": [],
+      "restored_since_scex4": []
+    },
+    "minecraft:recipe_type": {
+      "old_count": 4,
+      "new_count": 4,
+      "missing": [],
+      "added": [],
+      "restored_since_scex4": []
+    },
+    "minecraft:sound_event": {
+      "old_count": 22,
+      "new_count": 22,
+      "missing": [],
+      "added": [],
+      "restored_since_scex4": [
+        "extrabotany:entity.motor.cyclone",
+        "extrabotany:item.flamescion_weapon.ult",
+        "extrabotany:item.spear_of_subspace.use",
+        "extrabotany:music.ego"
+      ]
+    },
+    "minecraft:trigger_type": {
+      "old_count": 3,
+      "new_count": 3,
+      "missing": [],
+      "added": [],
+      "restored_since_scex4": []
+    },
+    "neoforge:fluid_type": {
+      "old_count": 1,
+      "new_count": 1,
+      "missing": [],
+      "added": [],
+      "restored_since_scex4": [
+        "extrabotany:fluidedmana"
+      ]
+    }
+  }
+}

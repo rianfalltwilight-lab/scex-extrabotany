@@ -1,59 +1,90 @@
-# SCEX ExtraBotany 1.21.1
+![](docs/img/logo.png)
+# 额外植物学：重燃
 
-最新冻结交付与验证边界 / Current frozen delivery: [release notes](docs/releases/2.0-scex.9-dev.md).
-**[2.0-scex.9-dev：直接下载运行 JAR / Download JAR](https://github.com/rianfalltwilight-lab/scex-extrabotany/releases/download/v2.0-scex.9-dev/extrabotany-neoforge-1.21.1-2.0-scex.9-dev.jar)** · [更新说明 / Release notes](docs/releases/2.0-scex.9-dev.md)
+## [English](README_en.md)
 
-> 这是 Space Creator EX（SCEX）维护的 ExtraBotany 非官方 Minecraft 1.21.1 / NeoForge 移植版。1.21.1 移植、缺陷修复、测试与公开发布整理主要由 OpenAI Codex 在维护者监督下辅助完成；详见 [AI 参与开发声明](AI-GENERATED.md)。
+## 关于本分支
 
-[English](README_en.md)
+本分支由 Magellan67 接手维护，承接自 Lounode 的《额外植物学：重燃》，目标版本为 Minecraft 1.21.1（NeoForge）。
 
-当前公开预览版本为 **2.0-scex.9-dev**。项目基于 [Lounode/ExtraBotany](https://github.com/Lounode/ExtraBotany) 的 `release-1.20.1-1.9.2` / `a4d4f2a968d559752fa3bd6e609544473109d983`，保留上游作者、MIT 许可证与资源署名。本仓库不是 Lounode、Botania 或 NeoForge 的官方发行版。
+谨以此项目向似水流年致敬，感谢他做出了这么好的模组。
 
-## 环境与安装
+移植以 ExtraMeteorP 的原版《额外植物学》为准：原版有的内容和数值照原版恢复，重燃新增的内容保留。
 
-| 组件 | 已验证版本 |
-| --- | --- |
+- [docs/OVERVIEW.md](docs/OVERVIEW.md)：这一版做了什么、和原版的差异、哪些地方还没有验证。
+- [docs/PORT_AUDIT.md](docs/PORT_AUDIT.md)：逐项的对照和修复记录。
+- [docs/ACCEPTANCE.md](docs/ACCEPTANCE.md)：需要在游戏里确认的项目和需要决定的事项。
+
+![](docs/img/overview.png)
+![](docs/img/overview2.png)
+
+## 运行环境
+
+| 组件 | 版本 |
+|---|---|
 | Minecraft | 1.21.1 |
-| NeoForge | 21.1.248 |
-| Java | 21 |
-| Botania | 456-20260822.093314-4（运行时显示 456-SNAPSHOT） |
-| Patchouli | 1.21.1-93 |
-| Curios | 9.5.1+1.21.1 |
+| NeoForge | 21.1.248 或更高的 21.1.x |
+| 植物魔法（Botania） | 456 |
+| Patchouli | 1.21.1-93 或更高 |
+| Curios | 9.5.1 或更高 |
+| JEI、EMI、KubeJS | 可选 |
 
-从 [Releases](https://github.com/rianfalltwilight-lab/scex-extrabotany/releases) 下载运行 JAR，客户端与服务端使用同一文件。不要与其他使用 `extrabotany` 模组 ID 的 JAR 同时安装。JEI 与 KubeJS 为可选集成。
+本分支只支持 NeoForge。重燃的 Forge 1.20.1 和 Fabric 版本不在这个仓库里。
 
-SCEX 整包中的森林法杖绑定由独立的 [SCEX Botania / ExtraBotany 森林法杖兼容层](https://github.com/rianfalltwilight-lab/scex-botania-extrabotany-compat) `1.4.2` 提供。它不包含在 ExtraBotany 发行包内，而是一个需要客户端与服务端同时安装的交互桥接；`1.4.2` 已验证与 `2.0-scex.9-dev` 配对，声明接受 ExtraBotany `[2.0-scex.7-dev,3)`，用于花→发射器、花→魔力池和魔力池→Manalink 的选择、绑定与保存。
+旧存档保持兼容：物品、方块、实体的注册名和存档里的数据键保持不变。
 
-## 本次恢复范围
+## 内容
 
-- 将目标平台迁移至 Minecraft 1.21.1、NeoForge 21.1.248 与 Java 21。
-- 恢复旧版运行包的物品、方块、方块实体、实体、流体、护甲、遗物、花、配方、标签、渲染与存档契约；与旧 `scex.1` 的已盘点注册项相比缺失为零。
-- 修复 Gaia III 声音字段、附魔土寿命边界、交易兰效果读取、旧物品注册、旧 ItemStack 数据保留及多项资源兼容问题。
-- 保留精确依赖版本、Gradle 锁文件、可复现 JAR 设置、GameTest、资源审计和旧存档夹具。
+- 遗物：王之花园、焢煌之境：劫炎永燎、亚空之矛、犹大的誓约、静籁永恒、全能指环、王者圣剑、虚空万藏、空之律者核心等。
+- 饰品：征服宝石（佩戴者成为雷之律者）、大师魔力之戒、四种符石和四元归一石、机车和飞碟两种坐骑等。
+- 盔甲：哥布林猎人、暗影武士、星空歌姬、昴宿星团战斗女仆、银翼护卫、静默贤者。
+- 花：商友兰、伐木花、雷卡兰、石中姬、雪绒花、全知瑾、星尘莲、魔链星等。
+- 方块：魔力缓存器、量子魔力缓存器、FE转换器、液态魔力转化器、活石桶、不随想之茧、祭坛、魔力充能基座。
+- Boss：盖亚守护者III、空之律者、本我。
+- 重燃重绘的材质，更接近原版游戏的风格。
 
-详细实现与证据边界见 [完整恢复报告](FULL_LEGACY_RESTORE.md)、[移植记录](PORTING.md) 和 [独立复核](AUDIT_REVIEW.md)。
+## 整合包作者
 
-## 旧版恢复验证摘要（scex.5）
+配方、数据映射和 KubeJS 的用法见 [docs/kubejs.md](docs/kubejs.md)。
 
-- 19 / 19 NeoForge GameTest 通过。
-- 与旧 `scex.1` 运行包对照的注册项缺失为零。
-- 242 种旧世界物品完整编码、自定义数据与重载结果一致。
-- 物理客户端检查了 243 个物品、34 个实体渲染器和 3 套新增护甲。
-- 资源/JAR 审计错误为零；两次构建的运行 JAR与 sources JAR 均逐字节一致。
+## 从源码构建
 
-这些数字是限定验收范围，不是玩法完成率。尚未穷尽完整多人 Boss 战、所有坐骑按键、所有可选模组组合、长期负载或全部 GPU 的视觉表现。归档版 `music.ego` 没有音频，`蝶弹保留原版未完成命中行为。
+需要 JDK 21。其他依赖由 Gradle 下载。
 
-## 构建与发布
-
-```powershell
-$env:JAVA_HOME = '<Java 21 JDK>'
-.\gradlew.bat --no-daemon build
-.\gradlew.bat --no-daemon runGameTestServer
-.\scripts\prepare-release.ps1
+```bash
+./gradlew build
 ```
 
-Linux/macOS 使用 `./gradlew`；发布打包脚本需要 PowerShell 7。完整、可重复的发布门禁与 GitHub Release 流程见 [RELEASING.md](docs/RELEASING.md)。
+成品在 `build/libs/extrabotany-neoforge-1.21.1-<版本>.jar`。
 
-## 许可证与来源
+| 命令 | 作用 |
+|---|---|
+| `./gradlew runClient` | 启动开发用的客户端。 |
+| `./gradlew runServer` | 启动开发用的专用服务器。 |
+| `./gradlew runGameTestServer` | 运行全部游戏内测试，然后退出。 |
+| `./gradlew runGameTestServer -Pgametest_namespaces=extrabotany_perf` | 运行性能场景，不运行测试。结果在日志里，以 `EB_PERF` 开头。 |
+| `./gradlew runData` | 运行数据生成器，输出到 `src/generated/resources`。 |
 
-源代码沿用上游 [MIT License](LICENSE)。SCEX 修改不改变上游代码、名称和素材的权利归属；固定来源、资源恢复方式及 AI 参与范围见 [NOTICE](NOTICE) 与 [AI-GENERATED.md](AI-GENERATED.md)。这些记录是来源说明，不构成法律意见。
+### 目录
+
+| 目录 | 内容 |
+|---|---|
+| `src/main` | 模组本身。发布的 JAR 只包含这里的内容。 |
+| `src/generated/resources` | 数据生成器的输出。不要手工修改，`runData` 会重新生成整个目录。 |
+| `src/datagen` | 数据生成器的代码，不进入发布的 JAR。 |
+| `src/gametest` | 游戏内测试和它们的结构文件，不进入发布的 JAR。 |
+| `docs` | 项目说明、移植审计记录、验收清单、注释规范、整合包作者指南。 |
+
+代码注释是中英对照的，写法见 [docs/COMMENT_STYLE.md](docs/COMMENT_STYLE.md)。
+
+## 致谢
+
+- ExtraMeteorP：《额外植物学》原作者。
+- Lounode：《额外植物学：重燃》作者。
+- SCEX 维护者：最初的 1.21.1 移植。
+- Urranium（材质）、Keletu（盔甲模型）。
+- Vazkii 和植物魔法的全体贡献者。
+
+## 许可
+
+MIT，见 [LICENSE](LICENSE)。

@@ -1,0 +1,15 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:spear_of_subspace",
+  "name": "item.extrabotany.spear_of_subspace",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.spear_of_subspace0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:spear_of_subspace"
+    }
+  ]
+}

@@ -2,14 +2,31 @@
   "parent": "minecraft:recipes/root",
   "criteria": {
     "has_livingrock": {
-      "conditions": { "items": [{ "items": "botania:livingrock" }] },
+      "conditions": {
+        "items": [
+          {
+            "items": "botania:livingrock"
+          }
+        ]
+      },
       "trigger": "minecraft:inventory_changed"
     },
     "has_the_recipe": {
-      "conditions": { "recipe": "extrabotany:elfjar" },
+      "conditions": {
+        "recipe": "extrabotany:elfjar"
+      },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
-  "requirements": [["has_livingrock", "has_the_recipe"]],
-  "rewards": { "recipes": ["extrabotany:elfjar"] }
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_livingrock"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "extrabotany:elfjar"
+    ]
+  }
 }

@@ -2,8 +2,8 @@ project_identifier: extrabotany
 commit_message: "[ci skip]"
 base_path: .
 files:
-  - source: /Xplat/src/main/resources/assets/extrabotany/lang/zh_cn.json
-    translation: /Xplat/src/main/resources/assets/extrabotany/lang/%locale_with_underscore%.json
+  - source: /src/main/resources/assets/extrabotany/lang/zh_cn.json
+    translation: /src/main/resources/assets/extrabotany/lang/%locale_with_underscore%.json
     languages_mapping:
       locale_with_underscore:
         zh-TW: zh_tw

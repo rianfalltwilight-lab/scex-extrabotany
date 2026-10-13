@@ -1,0 +1,46 @@
+{
+  "models": [
+    {
+      "source": "upstream-1.16/src/main/java/com/meteor/extrabotany/client/model/armor/ModelMikuArmor.java",
+      "sha256": "efb251125d0780545087d22afdcd47e790bb1fa2b542fb0a87dfab72fb5e4788",
+      "parts": 29,
+      "cuboids": 29,
+      "texture_size": [
+        "128",
+        "128"
+      ],
+      "root_mapping": {
+        "helmAnchor": "\"head\"",
+        "bodyAnchor": "slot==EquipmentSlot.LEGS?\"unused_body\":\"body\"",
+        "pantsAnchor": "slot==EquipmentSlot.LEGS?\"body\":\"unused_pants\"",
+        "armLAnchor": "\"left_arm\"",
+        "armRAnchor": "\"right_arm\"",
+        "legL": "slot==EquipmentSlot.LEGS?\"left_leg\":\"unused_legL\"",
+        "legR": "slot==EquipmentSlot.LEGS?\"right_leg\":\"unused_legR\"",
+        "bootL": "slot==EquipmentSlot.LEGS?\"unused_bootL\":\"left_leg\"",
+        "bootR": "slot==EquipmentSlot.LEGS?\"unused_bootR\":\"right_leg\""
+      }
+    },
+    {
+      "source": "upstream-1.16/src/main/java/com/meteor/extrabotany/client/model/armor/ModelShootingGuardianArmor.java",
+      "sha256": "738ac591f4663f8394602114b55a71e542d33fc0e7bfa5a27e7b7574b98c9b54",
+      "parts": 150,
+      "cuboids": 116,
+      "texture_size": [
+        "64",
+        "64"
+      ],
+      "root_mapping": {
+        "helmet": "\"head\"",
+        "armor": "slot==EquipmentSlot.LEGS?\"unused_armor\":\"body\"",
+        "leftArm": "\"left_arm\"",
+        "rightArm": "\"right_arm\"",
+        "leftLeg": "slot==EquipmentSlot.LEGS?\"left_leg\":\"unused_leftLeg\"",
+        "rightLeg": "slot==EquipmentSlot.LEGS?\"right_leg\":\"unused_rightLeg\"",
+        "shoeLeft": "slot==EquipmentSlot.LEGS?\"unused_shoeLeft\":\"left_leg\"",
+        "shoeRight": "slot==EquipmentSlot.LEGS?\"unused_shoeRight\":\"right_leg\""
+      }
+    }
+  ],
+  "output_sha256": "3665306c8820ced2b014be1ba072d05fd16021d60dada66e6a1cb4bfd09b2683"
+}

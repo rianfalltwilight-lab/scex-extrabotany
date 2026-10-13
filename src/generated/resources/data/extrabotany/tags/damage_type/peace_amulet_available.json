@@ -2,13 +2,11 @@
   "values": [
     "extrabotany:excalibur",
     "extrabotany:jingwei",
-    {
-      "id": "extrabotany:excalibur",
-      "required": false
-    },
-    {
-      "id": "extrabotany:jingwei",
-      "required": false
-    }
+    "extrabotany:piercing",
+    "extrabotany:magic_piercing",
+    "extrabotany:herrscher_ice",
+    "extrabotany:herrscher_thunder",
+    "extrabotany:piercing_fire",
+    "extrabotany:flamescion_flame"
   ]
 }

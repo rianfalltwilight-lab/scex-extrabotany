@@ -1,0 +1,24 @@
+{
+  "advancement": "botania:main/gaia_guardian_kill",
+  "category": "botania:extrabotanies",
+  "icon": "minecraft:player_head",
+  "name": "entity.extrabotany.ego",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.ego0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.ego1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.ego2"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.ego3"
+    }
+  ]
+}

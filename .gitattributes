@@ -1,4 +1,7 @@
-# The accepted port contains a few historical mixed-EOL source files. Preserve
-# repository bytes exactly so BUILD-INFO and deterministic source archives have
-# the same tree hash on Windows and Linux checkouts.
-* -text
+# All text files use LF line endings in the repository and in the work tree.
+* text=auto eol=lf
+*.bat text eol=crlf
+*.png binary
+*.ogg binary
+*.jar binary
+*.nbt binary

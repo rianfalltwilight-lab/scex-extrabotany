@@ -1,0 +1,302 @@
+[
+  {
+    "upstream": "upstream-1.16/src/main/resources/assets/extrabotany/models/item/flamescionweapon.json",
+    "local": "Xplat/src/main/resources/assets/extrabotany/models/item/flamescion_weapon.json",
+    "source_sha256": "e7db0257fea5c22d785c054205b78e3b85e280b14a015a6ad448fce4f82fd0d6",
+    "output_sha256": "ea7d7e02fdeca36554d6fdd7553042c1183fbde29c1799a796954745d9ad1414"
+  },
+  {
+    "upstream": "upstream-1.16/src/main/resources/assets/extrabotany/textures/item/flamescionweapon.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/flamescion_weapon.png",
+    "source_sha256": "caa8edcb95776050f52d652c72e9d508f23049a98e3bebc01776c60174428170",
+    "output_sha256": "caa8edcb95776050f52d652c72e9d508f23049a98e3bebc01776c60174428170"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/extrabotany/textures/misc/subspace_0.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/misc/subspace_0.png",
+    "source_sha256": "27db10eaf1adef529b2dbf13b655e179b5dada87c94cb9b5c577918c9f66129c",
+    "output_sha256": "27db10eaf1adef529b2dbf13b655e179b5dada87c94cb9b5c577918c9f66129c"
+  },
+  {
+    "upstream": "upstream-1.16/src/main/resources/assets/extrabotany/textures/entity/flamescionslash_0.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/entity/flamescionslash_0.png",
+    "source_sha256": "d8f085f105d1597af7a7795c433e45f888018f94e981e88590594cb3cc097579",
+    "output_sha256": "d8f085f105d1597af7a7795c433e45f888018f94e981e88590594cb3cc097579"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/extrabotany/textures/misc/subspace_1.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/misc/subspace_1.png",
+    "source_sha256": "87658c04070142572424ce9980cdd9d8ddaa5e93020103d08ae4a2a15f00c6f8",
+    "output_sha256": "87658c04070142572424ce9980cdd9d8ddaa5e93020103d08ae4a2a15f00c6f8"
+  },
+  {
+    "upstream": "upstream-1.16/src/main/resources/assets/extrabotany/textures/entity/flamescionslash_1.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/entity/flamescionslash_1.png",
+    "source_sha256": "7c2d20595b0ee28510724a03bc29e91d4099cd5496a7f9ec74499def64651b3d",
+    "output_sha256": "7c2d20595b0ee28510724a03bc29e91d4099cd5496a7f9ec74499def64651b3d"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/extrabotany/textures/misc/subspace_2.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/misc/subspace_2.png",
+    "source_sha256": "6b96b9a3c218b20621fd29e773284bf2bc072245cfb76347749f55d5bf69ec40",
+    "output_sha256": "6b96b9a3c218b20621fd29e773284bf2bc072245cfb76347749f55d5bf69ec40"
+  },
+  {
+    "upstream": "upstream-1.16/src/main/resources/assets/extrabotany/textures/entity/flamescionslash_2.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/entity/flamescionslash_2.png",
+    "source_sha256": "38236669420b13580c0f9da87bc10d87da7fb5971c472945dba99e18148389cc",
+    "output_sha256": "38236669420b13580c0f9da87bc10d87da7fb5971c472945dba99e18148389cc"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/extrabotany/textures/misc/subspace_3.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/misc/subspace_3.png",
+    "source_sha256": "1f881eeafd892e6edb173ff893fd5089238015dc170834b28b81977ea37edfa0",
+    "output_sha256": "1f881eeafd892e6edb173ff893fd5089238015dc170834b28b81977ea37edfa0"
+  },
+  {
+    "upstream": "upstream-1.16/src/main/resources/assets/extrabotany/textures/entity/flamescionslash_3.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/entity/flamescionslash_3.png",
+    "source_sha256": "ad2f4c4d4f29f3254b924e9d3c705e2f6f82b4ee806618f2d93fc4409a883a52",
+    "output_sha256": "ad2f4c4d4f29f3254b924e9d3c705e2f6f82b4ee806618f2d93fc4409a883a52"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/extrabotany/textures/misc/subspace_4.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/misc/subspace_4.png",
+    "source_sha256": "c0f78525e8a79c545f78d590a23f14ea54c0be79b12090ca3964075a6278352f",
+    "output_sha256": "c0f78525e8a79c545f78d590a23f14ea54c0be79b12090ca3964075a6278352f"
+  },
+  {
+    "upstream": "upstream-1.16/src/main/resources/assets/extrabotany/textures/entity/flamescionslash_4.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/entity/flamescionslash_4.png",
+    "source_sha256": "d5f438855188525910a94ca09371626e1a5ca3bedbbe0b579385d099eaa18c3a",
+    "output_sha256": "d5f438855188525910a94ca09371626e1a5ca3bedbbe0b579385d099eaa18c3a"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/extrabotany/textures/misc/subspace_5.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/misc/subspace_5.png",
+    "source_sha256": "25698ec30563b9346eb8379e9d273e033adc46120f58d6d5d32289e880e21f72",
+    "output_sha256": "25698ec30563b9346eb8379e9d273e033adc46120f58d6d5d32289e880e21f72"
+  },
+  {
+    "upstream": "upstream-1.16/src/main/resources/assets/extrabotany/textures/entity/flamescionslash_5.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/entity/flamescionslash_5.png",
+    "source_sha256": "9992cc4b0e20daaeb1a3346365703755b782e1ec9aab4b596fcf76a256891681",
+    "output_sha256": "9992cc4b0e20daaeb1a3346365703755b782e1ec9aab4b596fcf76a256891681"
+  },
+  {
+    "upstream": "upstream-1.16/src/main/resources/assets/extrabotany/textures/item/strengthenslash.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/strengthenslash.png",
+    "source_sha256": "08a9e853ae5545c8da853278ca8191c2bf3f9069e03b1730ba87f2d07f8f302c",
+    "output_sha256": "08a9e853ae5545c8da853278ca8191c2bf3f9069e03b1730ba87f2d07f8f302c"
+  },
+  {
+    "upstream": "upstream-1.16/src/main/resources/assets/extrabotany/models/icon/strengthenslash.json",
+    "local": "Xplat/src/main/resources/assets/extrabotany/models/icon/strengthenslash.json",
+    "source_sha256": "098be31db44287abd10a16d92c75dc280fea411024515c9ccd9c94e10f293f99",
+    "output_sha256": "098be31db44287abd10a16d92c75dc280fea411024515c9ccd9c94e10f293f99"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/extrabotany/textures/model/void.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/model/void.png",
+    "source_sha256": "34763de78806f5632a9e586404cb4c89b11fe609742a2c06a6bd4c675623bbf2",
+    "output_sha256": "34763de78806f5632a9e586404cb4c89b11fe609742a2c06a6bd4c675623bbf2"
+  },
+  {
+    "upstream": "upstream-1.16/src/main/resources/assets/extrabotany/textures/gui/flamescionhud.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/gui/flamescionhud.png",
+    "source_sha256": "4f42469ec855697b9555228b3f435090bb0a4b24ccda841140a4af739ed1661b",
+    "output_sha256": "4f42469ec855697b9555228b3f435090bb0a4b24ccda841140a4af739ed1661b"
+  },
+  {
+    "upstream": "upstream-1.16/src/main/resources/assets/extrabotany/textures/item/flamescionring.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/flamescionring.png",
+    "source_sha256": "e122fda45faa137defff4f9b189a790647768a10d0877dee0283098f96506827",
+    "output_sha256": "e122fda45faa137defff4f9b189a790647768a10d0877dee0283098f96506827"
+  },
+  {
+    "upstream": "upstream-1.16/src/main/resources/assets/extrabotany/textures/item/flamescionring.png.mcmeta",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/flamescionring.png.mcmeta",
+    "source_sha256": "3516fbaae72e3823b20fb037b6e06e48843c06b609e0f0e0e5c46d977a821d6c",
+    "output_sha256": "3516fbaae72e3823b20fb037b6e06e48843c06b609e0f0e0e5c46d977a821d6c"
+  },
+  {
+    "upstream": "upstream-1.16/src/main/resources/assets/extrabotany/models/icon/flamescionring.json",
+    "local": "Xplat/src/main/resources/assets/extrabotany/models/icon/flamescionring.json",
+    "source_sha256": "abff169cf5ae607cb01649e93046179a9d7369fb7b526ea51b570fffe7926f8b",
+    "output_sha256": "abff169cf5ae607cb01649e93046179a9d7369fb7b526ea51b570fffe7926f8b"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/botania/textures/items/judahoath_0.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/judahoath_0.png",
+    "source_sha256": "20c9e140dcd11e7d091db61974d716763664dda3c28733b8b8e20d51cbae4f65",
+    "output_sha256": "20c9e140dcd11e7d091db61974d716763664dda3c28733b8b8e20d51cbae4f65"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/botania/textures/items/judahoath_1.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/judahoath_1.png",
+    "source_sha256": "063587700dba829a71849cddabfc9b1c436c127b22819b86716ba303506ef1ce",
+    "output_sha256": "063587700dba829a71849cddabfc9b1c436c127b22819b86716ba303506ef1ce"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/botania/textures/items/judahoath_2.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/judahoath_2.png",
+    "source_sha256": "fd3f34da484ce2b0fd16eedf53cb1a47d6347b4c29bab7ece7462263bde939fa",
+    "output_sha256": "fd3f34da484ce2b0fd16eedf53cb1a47d6347b4c29bab7ece7462263bde939fa"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/botania/textures/items/spear_0.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/spear_0.png",
+    "source_sha256": "a79aa0451aab49ec78527afdf710b544fa527a7dea0c5d6c5380f412f5e2e0c4",
+    "output_sha256": "a79aa0451aab49ec78527afdf710b544fa527a7dea0c5d6c5380f412f5e2e0c4"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/botania/textures/items/spear_1.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/spear_1.png",
+    "source_sha256": "dc8613f7d8a54243c60c42cb56eaa4e4ff01abd21a973364b91ff6204bd96c1a",
+    "output_sha256": "dc8613f7d8a54243c60c42cb56eaa4e4ff01abd21a973364b91ff6204bd96c1a"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/botania/textures/items/spear_2.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/spear_2.png",
+    "source_sha256": "9662c13b1b8710a11524431f05ac42800f09c58eb5043193f6fc697558b5ea50",
+    "output_sha256": "9662c13b1b8710a11524431f05ac42800f09c58eb5043193f6fc697558b5ea50"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/botania/textures/items/spear_3.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/spear_3.png",
+    "source_sha256": "25b84ee68d09549b829a9c2c1774f9bd93434298f06455b873aab9f379c20e01",
+    "output_sha256": "25b84ee68d09549b829a9c2c1774f9bd93434298f06455b873aab9f379c20e01"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/botania/textures/items/flower_weapon_0.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/flower_weapon_0.png",
+    "source_sha256": "319cc4e864f79d43c0e941cccbb607bdea4257238b9b1c753cf2e343d44cf746",
+    "output_sha256": "319cc4e864f79d43c0e941cccbb607bdea4257238b9b1c753cf2e343d44cf746"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/botania/textures/items/flower_weapon_1.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/flower_weapon_1.png",
+    "source_sha256": "700a2bce064056135730887b20bbddbbaf91bd4056855405de7f9f2c4cfaa35d",
+    "output_sha256": "700a2bce064056135730887b20bbddbbaf91bd4056855405de7f9f2c4cfaa35d"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/botania/textures/items/flower_weapon_2.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/flower_weapon_2.png",
+    "source_sha256": "90615d985074ac8d3c229f4005a0cf109696a04b0a9ed0e237d8a3c5368f2ef8",
+    "output_sha256": "90615d985074ac8d3c229f4005a0cf109696a04b0a9ed0e237d8a3c5368f2ef8"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/botania/textures/items/flower_weapon_3.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/flower_weapon_3.png",
+    "source_sha256": "e02a0b49d9b65a86dcd497bc330059638f5506d4bcc06d89d3126f1c5d52af19",
+    "output_sha256": "e02a0b49d9b65a86dcd497bc330059638f5506d4bcc06d89d3126f1c5d52af19"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/botania/textures/items/flower_weapon_4.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/flower_weapon_4.png",
+    "source_sha256": "9d6ce4ea4892cdd734b08fe56735441173f50adfc5bf36b28a9feff62acaaf26",
+    "output_sha256": "9d6ce4ea4892cdd734b08fe56735441173f50adfc5bf36b28a9feff62acaaf26"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/botania/textures/items/flower_weapon_5.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/flower_weapon_5.png",
+    "source_sha256": "158f399b0aa205c69d071674a3526cd6803469a42e142f7457ece08d05f0af0e",
+    "output_sha256": "158f399b0aa205c69d071674a3526cd6803469a42e142f7457ece08d05f0af0e"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/botania/textures/items/flower_weapon_6.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/flower_weapon_6.png",
+    "source_sha256": "9e8764e638841c4bd0b7510e5541dacc249422bedd3998b14d92abe52726855f",
+    "output_sha256": "9e8764e638841c4bd0b7510e5541dacc249422bedd3998b14d92abe52726855f"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/botania/textures/items/flower_weapon_7.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/flower_weapon_7.png",
+    "source_sha256": "d80f9668b238d47f861f3a16d4bc1f2d905bb33a5a71908026e4593af96a02d3",
+    "output_sha256": "d80f9668b238d47f861f3a16d4bc1f2d905bb33a5a71908026e4593af96a02d3"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/botania/textures/items/flower_weapon_8.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/flower_weapon_8.png",
+    "source_sha256": "cde3c986a81ade31df4c6e5aa067cf75e21ea971db0d8d673d7f4921406e13e5",
+    "output_sha256": "cde3c986a81ade31df4c6e5aa067cf75e21ea971db0d8d673d7f4921406e13e5"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/botania/textures/items/flower_weapon_9.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/flower_weapon_9.png",
+    "source_sha256": "5f8e3ef7277ced89134cd7cabf49ffc7179e10f29e4cc482c423b7acbc0517e2",
+    "output_sha256": "5f8e3ef7277ced89134cd7cabf49ffc7179e10f29e4cc482c423b7acbc0517e2"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/botania/textures/items/flower_weapon_10.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/flower_weapon_10.png",
+    "source_sha256": "fa93d2774b379440ed800b7c6b7c076a044a59c02d8e1998c5c41deb2e5bc8bd",
+    "output_sha256": "fa93d2774b379440ed800b7c6b7c076a044a59c02d8e1998c5c41deb2e5bc8bd"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/botania/textures/items/flower_weapon_11.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/flower_weapon_11.png",
+    "source_sha256": "8c4dd0cdcf84c4782764067a640da07b193b6180198d179054692e39f5adbbee",
+    "output_sha256": "8c4dd0cdcf84c4782764067a640da07b193b6180198d179054692e39f5adbbee"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/botania/textures/items/flower_weapon_12.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/flower_weapon_12.png",
+    "source_sha256": "8af67327f8d8c9bcabccd19dcbe35c4273acadc683dd6c8b7a5dbb0e313473c6",
+    "output_sha256": "8af67327f8d8c9bcabccd19dcbe35c4273acadc683dd6c8b7a5dbb0e313473c6"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/botania/textures/items/flower_weapon_13.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/flower_weapon_13.png",
+    "source_sha256": "a3f9da7b3a206cba53aacc0a2bcd6379d51ff8cc50e8419ecc5a5215a5fa70c7",
+    "output_sha256": "a3f9da7b3a206cba53aacc0a2bcd6379d51ff8cc50e8419ecc5a5215a5fa70c7"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/botania/textures/items/flower_weapon_14.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/flower_weapon_14.png",
+    "source_sha256": "b7117fa0dd7a57e1ead0e5dbeaab456ba663c5999a3c384bce773dde3cfabf39",
+    "output_sha256": "b7117fa0dd7a57e1ead0e5dbeaab456ba663c5999a3c384bce773dde3cfabf39"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/botania/textures/items/flower_weapon_15.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/flower_weapon_15.png",
+    "source_sha256": "21c22f15f82a478c370c769a52a86bf846e972090d9dcc2740a68ae69e22fa34",
+    "output_sha256": "21c22f15f82a478c370c769a52a86bf846e972090d9dcc2740a68ae69e22fa34"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/botania/textures/items/flower_weapon_16.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/flower_weapon_16.png",
+    "source_sha256": "96dc3f1b272d3ea3e85998fa26b25ad3ebabd4c9bd617b8dcd89da7e2a889e6a",
+    "output_sha256": "96dc3f1b272d3ea3e85998fa26b25ad3ebabd4c9bd617b8dcd89da7e2a889e6a"
+  },
+  {
+    "upstream": "upstream-master/src/main/resources/assets/extrabotany/textures/misc/flowerweapon.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/misc/flowerweapon.png",
+    "source_sha256": "e8f239b66ade1f40fa31cf387fb4a78bb97a0819da330b6bbc71357e1363e238",
+    "output_sha256": "e8f239b66ade1f40fa31cf387fb4a78bb97a0819da330b6bbc71357e1363e238"
+  },
+  {
+    "upstream": "upstream-1.16/src/main/resources/assets/extrabotany/textures/item/proj_butterfly.png",
+    "local": "Xplat/src/main/resources/assets/extrabotany/textures/item/proj_butterfly.png",
+    "source_sha256": "09d8b296cc9701e0a50c232ed72237e005846054e5bfbe9a7c077202607f7404",
+    "output_sha256": "09d8b296cc9701e0a50c232ed72237e005846054e5bfbe9a7c077202607f7404"
+  },
+  {
+    "upstream": "upstream-1.16/src/main/resources/assets/extrabotany/models/icon/butterflyprojectile.json",
+    "local": "Xplat/src/main/resources/assets/extrabotany/models/icon/butterflyprojectile.json",
+    "source_sha256": "a96c949cd9324abe725567322addd943ef8d100763b97821f3673eeba7adaf72",
+    "output_sha256": "a96c949cd9324abe725567322addd943ef8d100763b97821f3673eeba7adaf72"
+  },
+  {
+    "upstream": "upstream-1.16/src/main/resources/assets/extrabotany/lang/zh_cn.json",
+    "local": "Xplat/src/main/resources/assets/extrabotany/lang/zh_cn.json",
+    "source_sha256": "c6c82a7debf042c827f2ee3962b14f95092f478b91dd8502332c8eca48c8f5d3",
+    "output_sha256": "da16107ab93aca4195a31d13c52604b798d6d6f86367dd2bacb3652a543f1d8f"
+  },
+  {
+    "upstream": "upstream-1.16/src/main/resources/assets/extrabotany/lang/en_us.json",
+    "local": "Xplat/src/main/resources/assets/extrabotany/lang/en_us.json",
+    "source_sha256": "50c79454c7451ba47510e7baa05207023c5a2e8e4cdff89b4c64c7145bca5fc7",
+    "output_sha256": "264b9fedad1c1de57d122b37ee79acf61ddecc5b13f794551ddd26338bc9c6ab"
+  }
+]

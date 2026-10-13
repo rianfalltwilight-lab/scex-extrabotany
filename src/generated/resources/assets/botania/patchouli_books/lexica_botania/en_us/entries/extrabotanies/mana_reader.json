@@ -1,0 +1,36 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:mana_reader",
+  "name": "extrabotany.entry.mana_reader",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.mana_reader0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:mana_reader",
+      "text": "extrabotany.page.mana_reader1"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.mana_reader2"
+    },
+    {
+      "type": "extrabotany:craft_manual",
+      "heading": "extrabotany.page.mana_reader3",
+      "input1": "botania:wand_of_the_forest",
+      "input2": "extrabotany:mana_reader",
+      "output": "botania:wand_of_the_forest[minecraft:custom_data={extrabotany:{mana_reader:{enable:1b}}}]",
+      "shapeless": true
+    },
+    {
+      "type": "extrabotany:craft_manual",
+      "heading": "extrabotany.page.mana_reader3",
+      "input1": "botania:wand_of_the_elven_forest",
+      "input2": "extrabotany:mana_reader",
+      "output": "botania:wand_of_the_elven_forest[minecraft:custom_data={extrabotany:{mana_reader:{enable:1b}}}]",
+      "shapeless": true
+    }
+  ]
+}

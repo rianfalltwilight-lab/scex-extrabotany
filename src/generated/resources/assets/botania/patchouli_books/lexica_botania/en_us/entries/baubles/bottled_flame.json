@@ -1,0 +1,15 @@
+{
+  "category": "botania:baubles",
+  "icon": "extrabotany:bottled_flame",
+  "name": "item.extrabotany.bottled_flame",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.bottled_flame0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:bottled_flame"
+    }
+  ]
+}

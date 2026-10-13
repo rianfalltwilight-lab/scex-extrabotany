@@ -1,0 +1,8 @@
+{
+  "name": "Extrabotany Guide",
+  "landing_text": "This shouldn't be used. Just be use for template's namespace.",
+  "creative_tab": "minecraft:tools_and_utilities",
+  "use_resource_pack": true,
+  "#dont_generate_book": true,
+  "i18n": true
+}

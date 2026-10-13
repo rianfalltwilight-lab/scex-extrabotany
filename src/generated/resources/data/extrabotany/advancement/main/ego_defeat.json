@@ -1,0 +1,38 @@
+{
+  "parent": "extrabotany:main/craft_pedestal",
+  "criteria": {
+    "kill_ego": {
+      "conditions": {
+        "entity": [
+          {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "type": "extrabotany:ego"
+            }
+          }
+        ]
+      },
+      "trigger": "minecraft:player_killed_entity"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:ego_defeat.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:hero_medal"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:ego_defeat"
+    }
+  },
+  "requirements": [
+    [
+      "kill_ego"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

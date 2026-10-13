@@ -1,0 +1,33 @@
+{
+  "parent": "extrabotany:main/craft_pedestal",
+  "criteria": {
+    "has_item": {
+      "conditions": {
+        "items": [
+          {
+            "items": "extrabotany:king_garden"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:kinggarden_craft.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:king_garden"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:kinggarden_craft"
+    }
+  },
+  "requirements": [
+    [
+      "has_item"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

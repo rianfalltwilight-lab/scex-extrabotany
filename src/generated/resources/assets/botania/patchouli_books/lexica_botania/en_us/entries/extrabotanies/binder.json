@@ -1,0 +1,16 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:binder",
+  "name": "item.extrabotany.binder",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.binder0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:binder",
+      "text": "extrabotany.page.binder1"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "upstream": {
+    "master": {
+      "commit": "4ad2cc9b86620801409c17366511156a3ba1b45e",
+      "archive_sha256": "c7b969424e4516cda4ec5820cd69ae3d4d2bad4de03b4a61756d8c401e3fd37a"
+    },
+    "1.16": {
+      "commit": "f96f6d37c43d807e93a27d2dbe58c4c5efec8280",
+      "archive_sha256": "5c609c3d20217e4d02f766f19a5765e9bffd4986efb7199745ad0fa594f5a793"
+    }
+  },
+  "local_head": "a4d4f2a968d559752fa3bd6e609544473109d983",
+  "snapshot_sha256": "a97023cbd5f10b8d41e2c62160e821e8dcec8d338d7e4fb0263625b12b9ab974",
+  "files": 3542,
+  "jar_sha256": "bb9cf824e4194f1f3a270651dc118e0fcaeb03a3a284825a3d3c45bacd75f43d"
+}

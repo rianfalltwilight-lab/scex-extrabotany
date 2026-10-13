@@ -1,0 +1,21 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:element_rune",
+  "name": "extrabotany.entry.universal_runes",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.universal_runes0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:element_rune",
+      "text": "extrabotany.page.universal_runes1"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:sin_rune",
+      "text": "extrabotany.page.universal_runes2"
+    }
+  ]
+}

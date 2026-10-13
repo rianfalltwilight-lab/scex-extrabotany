@@ -1,0 +1,16 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:elfjar",
+  "name": "block.extrabotany.elfjar",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.elfjar0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:elfjar",
+      "text": "extrabotany.page.elfjar1"
+    }
+  ]
+}

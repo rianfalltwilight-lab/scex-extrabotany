@@ -1,0 +1,49 @@
+{
+  "category": "botania:baubles",
+  "icon": "extrabotany:fox_ear",
+  "name": "extrabotany.entry.cosmetics",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.cosmetics0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:fox_ear",
+      "recipe2": "extrabotany:fox_mask"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:pylon",
+      "recipe2": "extrabotany:red_scarf"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:black_glasses",
+      "recipe2": "extrabotany:thug_life"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:mask",
+      "recipe2": "extrabotany:goggle_standard"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:goggle_jungle",
+      "recipe2": "extrabotany:goggle_ocean"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:goggle_snowfield"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.cosmetics1"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:super_crown",
+      "text": "extrabotany.page.cosmetics2"
+    }
+  ]
+}

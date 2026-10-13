@@ -1,0 +1,7 @@
+{
+  "parts": 36,
+  "source": "audit-upstream-20260916\\upstream-master\\src\\main\\java\\com\\meteor\\extrabotany\\client\\model\\ModelQuantumManaBuffer.java",
+  "source_sha256": "e2af6ac617d3be1b49384fc66cad6dbbef15a99316aa6b8e6a6e08d28c2e4828",
+  "texture_sha256": "03cafe943cf1f67af9d1807dcc524ba2c76eb90685e9aa8b87c744cb9a4d2052",
+  "output_sha256": "0c5bb48e5551e880331aca1587a6748fe10ca171400ce6bdfc33eda0f6342086"
+}

@@ -1,0 +1,16 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:universal_petal",
+  "name": "item.extrabotany.universal_petal",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.universal_petal0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:universal_petal",
+      "text": "extrabotany.page.universal_petal1"
+    }
+  ]
+}

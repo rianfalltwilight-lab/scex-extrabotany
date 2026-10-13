@@ -22,8 +22,6 @@ build
 eclipse
 run
 run-data
-Xplat/src/generated/resources/.cache
-Forge/src/generated/resources/.cache
-Fabric/src/generated/resources/.cache
+src/generated/resources/.cache
 
 

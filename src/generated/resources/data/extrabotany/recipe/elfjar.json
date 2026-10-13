@@ -1,9 +1,18 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "building",
+  "category": "misc",
   "key": {
-    "R": { "item": "botania:livingrock" }
+    "R": {
+      "item": "botania:livingrock"
+    }
   },
-  "pattern": ["R R", "R R", "RRR"],
-  "result": { "count": 1, "id": "extrabotany:elfjar" }
+  "pattern": [
+    "R R",
+    "R R",
+    "RRR"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:elfjar"
+  }
 }

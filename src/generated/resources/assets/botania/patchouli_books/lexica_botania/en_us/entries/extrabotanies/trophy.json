@@ -1,0 +1,13 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:trophy",
+  "name": "block.extrabotany.trophy",
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "extrabotany:trophy",
+      "link_recipe": true,
+      "text": "extrabotany.page.trophy0"
+    }
+  ]
+}

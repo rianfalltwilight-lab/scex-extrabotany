@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/outer_stairs",
-  "textures": {
-    "bottom": "extrabotany:block/elementium_quartz_block_bottom",
-    "side": "extrabotany:block/elementium_quartz_block_bottom",
-    "top": "extrabotany:block/elementium_quartz_block_bottom"
-  }
-}

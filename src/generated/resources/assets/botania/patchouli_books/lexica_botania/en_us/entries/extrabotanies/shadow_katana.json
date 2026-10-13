@@ -1,0 +1,16 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:shadow_katana",
+  "name": "item.extrabotany.shadow_katana",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.shadow_katana0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:shadow_katana",
+      "text": "extrabotany.page.shadow_katana1"
+    }
+  ]
+}

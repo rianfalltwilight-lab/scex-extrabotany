@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/block",
-  "flower": {
-    "parent": "extrabotany:block/woodienia"
-  },
-  "loader": "botania:floating_flower"
-}

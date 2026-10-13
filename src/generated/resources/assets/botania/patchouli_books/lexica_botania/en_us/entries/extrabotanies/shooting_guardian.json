@@ -1,0 +1,25 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:shootingguardian_helm",
+  "name": "extrabotany.entry.shooting_guardian",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.shooting_guardian0"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.shooting_guardian1"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:shootingguardian_helm",
+      "recipe2": "extrabotany:shootingguardian_chest"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:shootingguardian_legs",
+      "recipe2": "extrabotany:shootingguardian_boots"
+    }
+  ]
+}

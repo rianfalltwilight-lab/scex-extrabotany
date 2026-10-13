@@ -1,0 +1,25 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:candy_eins",
+  "name": "extrabotany.entry.candies",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.candies0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:candy_eins",
+      "recipe2": "extrabotany:candy_zwei"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:candy_drei"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:candy_bag",
+      "text": "extrabotany.page.candies1"
+    }
+  ]
+}

@@ -1,8 +1,10 @@
-SCEX ExtraBotany 1.21.1 port notice
+SCEX ExtraBotany 1.21.1 historical port notice
 ===================================
 
 This repository is a modified, unofficial Minecraft 1.21.1 / NeoForge port
-maintained by Space Creator EX (SCEX).
+initially maintained by Space Creator EX (SCEX). The current 1.21.1 branch is
+maintained by Magellan67; current credits and additional resource provenance
+are documented in docs/OVERVIEW.md and docs/OVERVIEW_en.md.
 
 Upstream source:
   Lounode/ExtraBotany
@@ -18,15 +20,15 @@ extrabotany-neoforge-1.21.1-2.0-scex.1-gaia3-hotfix.jar with SHA-256:
 Decompiled bytecode was used as behavioral, registry, NBT, and numeric-model
 evidence. Decompiled Java source is not included as maintained source. Resource
 files restored from the archived baseline are recorded by relative path and
-SHA-256 in compatibility/*-resource-provenance.json; the baseline declared the
+SHA-256 in docs/scex/compatibility/*-resource-provenance.json; the baseline declared the
 MIT license and retained upstream attribution.
 
-The Minecraft 1.21.1 port, tests, audit tooling, documentation, and public-release
-preparation were primarily assisted by OpenAI Codex under maintainer supervision.
-See AI-GENERATED.md for the scope and limitations of that assistance.
+The initial SCEX Minecraft 1.21.1 port, tests, audit tooling, documentation,
+and public-release preparation were assisted by OpenAI Codex under maintainer
+supervision. This paragraph records the initial port only.
 
 ExtraBotany, Botania, Minecraft, NeoForge, and all referenced names and assets
 remain the property of their respective owners. This notice records provenance;
 it does not expand or reinterpret the MIT license and is not legal advice.
 
-SCEX.8 legacy resource comparison: ExtraMeteorP/Extra-Botany master 4ad2cc9b86620801409c17366511156a3ba1b45e and 1.16 f96f6d37c43d807e93a27d2dbe58c4c5efec8280. Resource ownership and upstream attribution are retained; see compatibility provenance manifests.
+SCEX.8 legacy resource comparison: ExtraMeteorP/Extra-Botany master 4ad2cc9b86620801409c17366511156a3ba1b45e and 1.16 f96f6d37c43d807e93a27d2dbe58c4c5efec8280. Resource ownership and upstream attribution are retained; see docs/scex/compatibility provenance manifests.

@@ -1,0 +1,16 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:quantummanabuffer",
+  "name": "block.extrabotany.quantummanabuffer",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.quantummanabuffer0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:quantummanabuffer",
+      "text": "extrabotany.page.quantummanabuffer1"
+    }
+  ]
+}

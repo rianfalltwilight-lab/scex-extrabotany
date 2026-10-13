@@ -1,0 +1,25 @@
+{
+  "models": [
+    {
+      "upstream": "upstream-1.16/src/main/java/com/meteor/extrabotany/client/model/ModelMotor.java",
+      "sha256": "f4089bbbbfcf562265b4a8a07f2d6eb1be738ad2d7cb3991498412af1c7fbdb1",
+      "parts": 64,
+      "cuboids": 66,
+      "texture_size": [
+        "128",
+        "128"
+      ]
+    },
+    {
+      "upstream": "upstream-1.16/src/main/java/com/meteor/extrabotany/client/model/ModelUfo.java",
+      "sha256": "0d2408b81917ecf1d8cb8f77accc9656e5260561dba0836a79f7a38501813160",
+      "parts": 3,
+      "cuboids": 22,
+      "texture_size": [
+        "256",
+        "256"
+      ]
+    }
+  ],
+  "output_sha256": "f5c7f2742ae4e0e6fb5ffeaa4f80dea6a23b802efb99e0195be9952983357713"
+}

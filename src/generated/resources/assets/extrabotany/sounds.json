@@ -5,6 +5,24 @@
     ],
     "subtitle": "subtitles.extrabotany:block.bellflower.ring"
   },
+  "entity.key_of_truth.shoot": {
+    "sounds": [
+      "extrabotany:entity/key_of_truth/shoot"
+    ],
+    "subtitle": "subtitles.extrabotany:entity.key_of_truth.shoot"
+  },
+  "entity.motor.cyclone": {
+    "sounds": [
+      "extrabotany:entity/motor/cyclone"
+    ],
+    "subtitle": "subtitles.extrabotany:entity.motor.cyclone"
+  },
+  "entity.motor.ride_on": {
+    "sounds": [
+      "extrabotany:entity/motor/ride_on"
+    ],
+    "subtitle": "subtitles.extrabotany:entity.motor.ride_on"
+  },
   "entity.player.hurt_backfire": {
     "sounds": [
       {
@@ -13,6 +31,12 @@
       }
     ],
     "subtitle": "subtitles.extrabotany:entity.player.hurt_backfire"
+  },
+  "entity.thunder_slash.slash": {
+    "sounds": [
+      "extrabotany:entity/thunder_slash/slash"
+    ],
+    "subtitle": "subtitles.extrabotany:entity.thunder_slash.slash"
   },
   "item.armor.equip_goblin": {
     "sounds": [
@@ -98,6 +122,12 @@
     ],
     "subtitle": "subtitles.extrabotany:item.feather_of_jingwei.shoot"
   },
+  "item.flamescion_weapon.ult": {
+    "sounds": [
+      "extrabotany:item/flamescion_weapon/ult"
+    ],
+    "subtitle": "subtitles.extrabotany:item.flamescion_weapon.ult"
+  },
   "item.hammer.use": {
     "sounds": [
       {
@@ -125,6 +155,12 @@
     ],
     "subtitle": "subtitles.extrabotany:item.reward_bag.open"
   },
+  "item.spear_of_subspace.use": {
+    "sounds": [
+      "extrabotany:item/spear_of_subspace/use"
+    ],
+    "subtitle": "subtitles.extrabotany:item.spear_of_subspace.use"
+  },
   "item.walking_cane.use": {
     "sounds": [
       {
@@ -133,6 +169,15 @@
       }
     ],
     "subtitle": "subtitles.extrabotany:item.walking_cane.use"
+  },
+  "music.ego": {
+    "sounds": [
+      {
+        "name": "extrabotany:music/ego",
+        "stream": true,
+        "volume": 1.3
+      }
+    ]
   },
   "music.gaia3": {
     "sounds": [
@@ -146,32 +191,10 @@
   "music.herrscher": {
     "sounds": [
       {
-        "name": "extrabotany:music/salvation",
+        "name": "extrabotany:music/herrscher",
         "stream": true,
         "volume": 1.3
       }
     ]
-  },
-  "entity.motor.cyclone": {
-    "sounds": [
-      "extrabotany:cyclone"
-    ],
-    "subtitle": "subtitles.extrabotany:entity.motor.cyclone"
-  },
-  "item.flamescion_weapon.ult": {
-    "sounds": [
-      "extrabotany:item/flamescion_weapon/ult"
-    ],
-    "subtitle": "subtitles.extrabotany:item.flamescion_weapon.ult"
-  },
-  "item.spear_of_subspace.use": {
-    "sounds": [
-      "extrabotany:item/spear_of_subspace/use"
-    ],
-    "subtitle": "subtitles.extrabotany:item.spear_of_subspace.use"
-  },
-  "music.ego": {
-    "sounds": [],
-    "subtitle": "subtitles.extrabotany:music.ego"
   }
 }

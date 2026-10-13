@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "extrabotany:king_garden"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:king_garden"
+  }
+}

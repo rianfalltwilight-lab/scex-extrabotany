@@ -1,0 +1,62 @@
+{
+  "category": "botania:functional_flowers",
+  "extra_recipe_mappings": {
+    "extrabotany:floating_stardustlotus": 1
+  },
+  "icon": "extrabotany:stardustlotus",
+  "name": "block.extrabotany.stardustlotus",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.stardustlotus0"
+    },
+    {
+      "type": "botania:petal_apothecary",
+      "recipe": "extrabotany:petal_apothecary/stardustlotus",
+      "text": "extrabotany.page.stardustlotus1"
+    },
+    {
+      "type": "patchouli:multiblock",
+      "multiblock": {
+        "mapping": {
+          "0": "extrabotany:stardustlotus",
+          "L": "minecraft:lapis_block",
+          "Q": "minecraft:quartz_block",
+          "S": "minecraft:sea_lantern"
+        },
+        "pattern": [
+          [
+            "S___S",
+            "_____",
+            "_____",
+            "_____",
+            "S___S"
+          ],
+          [
+            "L___L",
+            "_____",
+            "_____",
+            "_____",
+            "L___L"
+          ],
+          [
+            "L___L",
+            "_____",
+            "__0__",
+            "_____",
+            "L___L"
+          ],
+          [
+            "QQQQQ",
+            "Q___Q",
+            "Q___Q",
+            "Q___Q",
+            "QQQQQ"
+          ]
+        ]
+      },
+      "name": "block.extrabotany.stardustlotus",
+      "text": "extrabotany.page.stardustlotus2"
+    }
+  ]
+}

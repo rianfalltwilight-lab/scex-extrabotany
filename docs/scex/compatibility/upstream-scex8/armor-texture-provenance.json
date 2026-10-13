@@ -1,0 +1,17 @@
+[
+  {
+    "source": "upstream-1.16\\src\\main\\resources\\assets\\extrabotany\\textures\\model\\armor_miku.png",
+    "local": "Xplat\\src\\main\\resources\\assets\\extrabotany\\textures\\models\\armor\\miku.png",
+    "sha256": "bcb52b0e2918309dc72b4e3864743e2a4a12fa4540aadf9560c55905b1d13490"
+  },
+  {
+    "source": "upstream-1.16\\src\\main\\resources\\assets\\extrabotany\\textures\\model\\armor_shootingguardian.png",
+    "local": "Xplat\\src\\main\\resources\\assets\\extrabotany\\textures\\models\\armor\\shootingguardian.png",
+    "sha256": "c816e84797c5104991b45fe8fe1f477d0a8b9c43b9257b3c2d497fbf1982dca0"
+  },
+  {
+    "source": "upstream-1.16\\src\\main\\resources\\assets\\extrabotany\\textures\\model\\armor_shootingguardian_helmet.png",
+    "local": "Xplat\\src\\main\\resources\\assets\\extrabotany\\textures\\models\\armor\\shootingguardian_helmet.png",
+    "sha256": "7aefacd18a6df86192627470573a9fc0305e9599b9bb5043e83321a33b80c17c"
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:silentsages_helm",
+  "name": "extrabotany.entry.silent_sages",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.silent_sages0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:silentsages_helm",
+      "recipe2": "extrabotany:silentsages_chest"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:silentsages_legs",
+      "recipe2": "extrabotany:silentsages_boots"
+    }
+  ]
+}
