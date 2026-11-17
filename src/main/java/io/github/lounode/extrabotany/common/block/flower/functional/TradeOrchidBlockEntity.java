@@ -16,14 +16,13 @@ import io.github.lounode.extrabotany.common.brew.ExtraBotanyMobEffects;
 import io.github.lounode.extrabotany.xplat.ExtraBotanyConfig;
 
 import java.util.List;
-import java.util.HashSet;
 
 /**
  * 商友兰。它消耗魔力，给范围里的村民打折效果。有这个效果的村民在交易时降价。
  * Trade Orchid. It uses mana to give the Discount effect to the villagers in the range. A villager with this effect decreases its prices in a trade.
  *
- * <p>离开范围的村民立刻失去这个效果。花被移除时，范围里的村民也失去这个效果。红石信号让花停止工作。
- * <p>A villager that goes out of the range loses the effect immediately. When the flower is removed, the villagers in the range also lose the effect. A redstone signal stops the flower.
+ * <p>效果在花不再补充后短时间内自然到期，避免移除相邻花提供的折扣。红石信号让花停止工作。
+ * <p>The short effect expires when no flower refreshes it, so neighbouring flowers do not remove each other's discounts. A redstone signal stops the flower.
  *
  * <p>来源：重制版（Lounode）。原版没有这朵花。
  * <p>Source: Reburn (Lounode). The original does not have this flower.
@@ -67,13 +66,6 @@ public class TradeOrchidBlockEntity extends ExtraFunctionalFlowerBlockEntity {
 				.filter(villager -> !villager.isRemoved())
 				.filter(LivingEntity::isAlive)
 				.toList();
-		var nearbyVillagers = new HashSet<>(villagers);
-		List<Villager> farVillagers = getLevel()
-				.getEntitiesOfClass(Villager.class, ((RadiusDescriptor.Rectangle) getRadius()).aabb().inflate(5)).stream()
-				.filter(villager -> !villager.isRemoved())
-				.filter(LivingEntity::isAlive)
-				.filter(villager -> !nearbyVillagers.contains(villager))
-				.toList();
 
 		for (var villager : villagers) {
 			if (getMana() < getManaPerUse()) {
@@ -86,20 +78,6 @@ public class TradeOrchidBlockEntity extends ExtraFunctionalFlowerBlockEntity {
 			addMana(-getManaPerUse());
 		}
 
-		for (var villager : farVillagers) {
-			villager.removeEffect(ExtraBotanyMobEffects.DISCOUNT);
-		}
-	}
-
-	@Override
-	public void setRemoved() {
-		if (getLevel() != null && !getLevel().isClientSide()) {
-			List<Villager> villagers = getLevel().getEntitiesOfClass(Villager.class, ((RadiusDescriptor.Rectangle) getRadius()).aabb());
-			for (var villager : villagers) {
-				villager.removeEffect(ExtraBotanyMobEffects.DISCOUNT);
-			}
-		}
-		super.setRemoved();
 	}
 
 	public int getCooldown() {

@@ -33,6 +33,7 @@ import vazkii.botania.common.handler.BotaniaSounds;
 import io.github.lounode.extrabotany.common.entity.ExtraBotanyEntityType;
 import io.github.lounode.extrabotany.common.handler.DamageHandler;
 import io.github.lounode.extrabotany.common.item.KingGardenItem;
+import io.github.lounode.extrabotany.common.util.LoadedAreaRaycast;
 
 /**
  * 花之武器。王之花园召唤的投射物，一共 17 种，每种对应一朵花。
@@ -202,8 +203,8 @@ public class FlowerWeaponEntity extends ThrowableProjectile {
 	private Vec3 aimAt(Player owner) {
 		Vec3 eye = owner.getEyePosition();
 		Vec3 end = eye.add(owner.getLookAngle().scale(AIM_RANGE));
-		BlockHitResult hit = level().clip(new ClipContext(eye, end, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, owner));
-		Vec3 target = hit.getType() == HitResult.Type.MISS ? end : hit.getBlockPos().getCenter();
+		BlockHitResult hit = LoadedAreaRaycast.clip(level(), new ClipContext(eye, end, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, owner));
+		Vec3 target = hit.getType() == HitResult.Type.MISS ? hit.getLocation() : hit.getBlockPos().getCenter();
 		return target.subtract(position()).normalize().scale(FLIGHT_SPEED);
 	}
 

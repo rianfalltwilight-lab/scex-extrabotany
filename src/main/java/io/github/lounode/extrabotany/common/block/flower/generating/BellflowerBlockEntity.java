@@ -156,7 +156,7 @@ public class BellflowerBlockEntity extends ExtraGeneratingFlowerBlockEntity impl
 		for (BlockPos pos_ : BlockPos.betweenClosed(
 				pos.offset(-getSpaceRequire(), 0, -getSpaceRequire()),
 				pos.offset(getSpaceRequire(), getSpaceRequire(), getSpaceRequire()))) {
-			if (pos_.equals(pos)) {
+			if (pos_.equals(pos) || !getLevel().isLoaded(pos_)) {
 				continue;
 			}
 			BlockState state = getLevel().getBlockState(pos_);
@@ -176,6 +176,9 @@ public class BellflowerBlockEntity extends ExtraGeneratingFlowerBlockEntity impl
 	}
 
 	public void checkBeBlew(BlockPos daffomillPos) {
+		if (!getLevel().isLoaded(daffomillPos)) {
+			return;
+		}
 		var tile = getLevel().getBlockEntity(daffomillPos);
 		if (!(tile instanceof DaffomillBlockEntity daffomill)) {
 			return;

@@ -71,7 +71,8 @@ public class LivingrockBarrelBlockEntity extends BlockEntity implements IFluidHa
 			if (fluid.getAmount() < BUCKET) {
 				return;
 			}
-			if (level.getBlockEntity(worldPosition.relative(side)) instanceof PetalApothecary apothecary
+			BlockPos neighbour = worldPosition.relative(side);
+			if (level.isLoaded(neighbour) && level.getBlockEntity(neighbour) instanceof PetalApothecary apothecary
 					&& apothecary.getFluid() == PetalApothecary.State.EMPTY) {
 				apothecary.setFluid(PetalApothecary.State.WATER);
 				drain(BUCKET, FluidAction.EXECUTE);

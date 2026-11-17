@@ -3,6 +3,11 @@ package io.github.lounode.extrabotany.common.block.flower.functional;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -10,6 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.Nullable;
 
 import io.github.lounode.extrabotany.common.block.flower.ExtraFunctionalFlowerBlockEntity;
+import io.github.lounode.extrabotany.common.block.flower.FlowerBlockActions;
 import vazkii.botania.api.block_entity.RadiusDescriptor;
 
 import io.github.lounode.extrabotany.common.block.flower.ExtrabotanyFlowerBlocks;
@@ -35,6 +41,7 @@ public class EnchanterBlockEntity extends ExtraFunctionalFlowerBlockEntity {
 	public static final int TRANSFORM_COST = 250000;
 
 	private int consumedMana;
+	@Nullable private UUID ownerUUID;
 
 	public EnchanterBlockEntity(BlockEntityType<? extends EnchanterBlockEntity> type, BlockPos pos, BlockState state) {
 		super(type, pos, state);
@@ -70,7 +77,8 @@ public class EnchanterBlockEntity extends ExtraFunctionalFlowerBlockEntity {
 			return;
 		}
 
-		if (!getLevel().setBlockAndUpdate(transformPos, ExtraBotanyBlocks.enchantedSoil.defaultBlockState())) {
+		if (!FlowerBlockActions.placeBlock((ServerLevel) getLevel(), transformPos,
+				ExtraBotanyBlocks.enchantedSoil.defaultBlockState(), ownerUUID)) {
 			return;
 		}
 
@@ -85,6 +93,9 @@ public class EnchanterBlockEntity extends ExtraFunctionalFlowerBlockEntity {
 		BlockPos pos = getEffectivePos();
 
 		for (BlockPos pos_ : BlockPos.betweenClosed(pos.offset(-RANGE, -RANGE, -RANGE), pos.offset(RANGE, RANGE, RANGE))) {
+			if (!getLevel().isLoaded(pos_) || !getLevel().isLoaded(pos_.above())) {
+				continue;
+			}
 			BlockState state = getLevel().getBlockState(pos_);
 			BlockState above = getLevel().getBlockState(pos_.above());
 			if (!state.is(Blocks.GRASS_BLOCK) || !above.isAir()) {
@@ -112,6 +123,12 @@ public class EnchanterBlockEntity extends ExtraFunctionalFlowerBlockEntity {
 
 	public int getTransformCost() {
 		return ExtraBotanyConfig.common().enchanterTransformCost();
+	}
+
+	@Override
+	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+		super.setPlacedBy(level, pos, state, placer, stack);
+		ownerUUID = placer instanceof Player player ? player.getUUID() : null;
 	}
 
 	public int getConsumeSpeed() {
@@ -145,11 +162,15 @@ public class EnchanterBlockEntity extends ExtraFunctionalFlowerBlockEntity {
 	public void writeToPacketNBT(CompoundTag cmp) {
 		super.writeToPacketNBT(cmp);
 		cmp.putInt(TAG_CONSUMED, getConsumedMana());
+		if (ownerUUID != null) {
+			cmp.putUUID("ownerUUID", ownerUUID);
+		}
 	}
 
 	@Override
 	public void readFromPacketNBT(CompoundTag cmp) {
 		super.readFromPacketNBT(cmp);
 		setConsumedMana(cmp.getInt(TAG_CONSUMED));
+		ownerUUID = cmp.hasUUID("ownerUUID") ? cmp.getUUID("ownerUUID") : null;
 	}
 }

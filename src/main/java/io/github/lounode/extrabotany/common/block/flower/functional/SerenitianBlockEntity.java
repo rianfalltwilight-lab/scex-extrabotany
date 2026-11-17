@@ -54,7 +54,7 @@ public class SerenitianBlockEntity extends ExtraFunctionalFlowerBlockEntity {
 		int range = getRange();
 		BlockPos base = getEffectivePos();
 		for (BlockPos pos : BlockPos.betweenClosed(base.offset(-range, 0, -range), base.offset(range, 0, range))) {
-			if (getLevel().getBlockEntity(pos) instanceof SpecialFlowerBlockEntity flower) {
+			if (getLevel().isLoaded(pos) && getLevel().getBlockEntity(pos) instanceof SpecialFlowerBlockEntity flower) {
 				resetDecay(flower);
 			}
 		}

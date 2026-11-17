@@ -86,7 +86,7 @@ public class FailnaughtItem extends LivingwoodBowItem implements LensEffectItem 
 		if (relic != null &&
 				relic.isRightPlayer(player) &&
 				ManaItemHandler.instance().requestManaExactForTool(itemstack, player,
-						getManaForUse(chargeProgress) * (multiShoutLevel > 1 ? 3 : 1), false)
+						getManaForUse(chargeProgress) * (multiShoutLevel > 0 ? 3 : 1), false)
 
 		) {
 			flag = true;
@@ -130,8 +130,8 @@ public class FailnaughtItem extends LivingwoodBowItem implements LensEffectItem 
 					(player.getAbilities().instabuild
 							||
 							ManaItemHandler.instance().requestManaExactForTool(stack, player,
-									getManaForUse(chargeProgress) * (multiShoutLevel > 1 ? 3 : 1), true))) {
-				int manaInBurst = getManaForUse(chargeProgress) * (multiShoutLevel > 1 ? 3 : 1);
+									getManaForUse(chargeProgress) * (multiShoutLevel > 0 ? 3 : 1), true))) {
+				int manaInBurst = getManaForUse(chargeProgress);
 
 				float spreadAngle = 10.0f;
 
@@ -174,7 +174,7 @@ public class FailnaughtItem extends LivingwoodBowItem implements LensEffectItem 
 				ManaItemHandler.instance().requestManaExactForTool(stack, player, 50 * powerLevel, true)) {
 			baseDamage = baseDamage + 0.5f + 0.5f * powerLevel;
 		}
-		float damage = baseDamage * (tier * tierProcess);
+		float damage = baseDamage * (tier - 1 + tierProcess);
 
 		burst.setDamage(damage);
 		return burst;

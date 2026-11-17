@@ -17,6 +17,7 @@ import vazkii.botania.common.helper.PlayerHelper;
 import io.github.lounode.extrabotany.common.lib.ExtraBotanyTags;
 import io.github.lounode.extrabotany.common.lib.LibAdvancementNames;
 import io.github.lounode.extrabotany.common.proxy.Proxy;
+import io.github.lounode.extrabotany.common.util.PlayerDropHelper;
 import io.github.lounode.extrabotany.xplat.ExtraBotanyConfig;
 
 import static io.github.lounode.extrabotany.common.lib.ResourceLocationHelper.prefix;
@@ -123,9 +124,8 @@ public final class EgoRequirementHandler {
 		boolean[] examined = { false };
 		for (EquipmentSlot slot : SLOTS) {
 			ItemStack stack = player.getItemBySlot(slot);
-			if (mustDrop(player, stack, allowed, examined)) {
+			if (mustDrop(player, stack, allowed, examined) && drop(player, stack)) {
 				player.setItemSlot(slot, ItemStack.EMPTY);
-				drop(player, stack);
 			}
 		}
 		if (allowed[0]) {
@@ -136,9 +136,8 @@ public final class EgoRequirementHandler {
 				var stacks = handler.getStacks();
 				for (int slot = 0; slot < stacks.getSlots(); slot++) {
 					ItemStack stack = stacks.getStackInSlot(slot);
-					if (mustDrop(player, stack, allowed, examined)) {
+					if (mustDrop(player, stack, allowed, examined) && drop(player, stack)) {
 						stacks.setStackInSlot(slot, ItemStack.EMPTY);
-						drop(player, stack);
 					}
 				}
 			}
@@ -156,8 +155,11 @@ public final class EgoRequirementHandler {
 		return !allowed[0];
 	}
 
-	private static void drop(Player player, ItemStack stack) {
-		player.drop(stack, false);
+	private static boolean drop(Player player, ItemStack stack) {
+		if (!PlayerDropHelper.tryToss(player, stack)) {
+			return false;
+		}
 		player.displayClientMessage(message(), true);
+		return true;
 	}
 }

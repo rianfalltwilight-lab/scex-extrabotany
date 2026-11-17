@@ -86,11 +86,14 @@ public class ReikarlilyBlockEntity extends ExtraGeneratingFlowerBlockEntity {
 			return;
 		}
 
-		if (getSpawnLightningCooldown() <= 0 && trySpawnLightningBolt()) {
+		boolean spawnedLightning = getSpawnLightningCooldown() <= 0 && trySpawnLightningBolt();
+		if (spawnedLightning) {
 			setSpawnLightningCooldown(getAfterSpawnLightningCooldown());
 		}
 
-		if (resolveActiveProduce()) {
+		// 自召雷入世界前已设为视觉效果，不能再靠扫描吸收它来产魔。
+		// Self-summoned bolts are already visual-only, so account for their mana without absorbing them again.
+		if (resolveActiveProduce() || (spawnedLightning && getMana() < getMaxMana())) {
 			setCooldown(getAfterWorkCooldown());
 			setResidualHeat(getResidualHeatAfterProduce());
 			addMana(getProduceMana());
@@ -110,8 +113,8 @@ public class ReikarlilyBlockEntity extends ExtraGeneratingFlowerBlockEntity {
 				getEffectivePos().getY() + 1,
 				getEffectivePos().getZ() + zOffset
 		);
-		getLevel().addFreshEntity(lightningBolt);
-		return true;
+		lightningBolt.setVisualOnly(true);
+		return getLevel().addFreshEntity(lightningBolt);
 	}
 
 	public boolean resolveActiveProduce() {

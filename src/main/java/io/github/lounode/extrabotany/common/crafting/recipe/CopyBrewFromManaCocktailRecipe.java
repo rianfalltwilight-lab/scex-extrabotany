@@ -77,6 +77,10 @@ public final class CopyBrewFromManaCocktailRecipe extends CopyBrewRecipe {
 			if (wine.getSwigsLeft(input) < wine.getSwigs(input)) {
 				return ItemStack.EMPTY;
 			}
+			if (result.is(input.getItem())) {
+				// A brew change keeps the existing relic and its owner/components.
+				result = input.copyWithCount(result.getCount());
+			}
 		}
 
 		BrewUtil.setBrew(result, BrewUtil.getBrew(brewSource));

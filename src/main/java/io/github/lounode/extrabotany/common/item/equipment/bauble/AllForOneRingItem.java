@@ -29,7 +29,6 @@ import vazkii.botania.common.item.relic.RelicBaubleItem;
 import vazkii.botania.common.item.relic.RelicImpl;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -105,8 +104,10 @@ public class AllForOneRingItem extends RelicBaubleItem {
 		int size;
 		int[] writtenHashes = new int[0];
 		Map<Item, ItemStack> simulated = Map.of();
-		Map<ResourceLocation, Holder<Attribute>> appliedModifiers = Map.of();
+		Set<AppliedModifier> appliedModifiers = Set.of();
 	}
+
+	private record AppliedModifier(Holder<Attribute> attribute, ResourceLocation id) {}
 
 	private static ItemStack findBoxStack(Player player) {
 		Inventory inventory = player.getInventory();
@@ -279,10 +280,10 @@ public class AllForOneRingItem extends RelicBaubleItem {
 	}
 
 	private static void removeModifiers(State state, Player player) {
-		state.appliedModifiers.forEach((id, attribute) -> {
-			AttributeInstance instance = player.getAttribute(attribute);
+		state.appliedModifiers.forEach(modifier -> {
+			AttributeInstance instance = player.getAttribute(modifier.attribute());
 			if (instance != null) {
-				instance.removeModifier(id);
+				instance.removeModifier(modifier.id());
 			}
 		});
 	}
@@ -291,16 +292,16 @@ public class AllForOneRingItem extends RelicBaubleItem {
 	 * 把被模拟的饰品的属性修饰符加到玩家身上。每个修饰符用一个新的、带有来源物品的编号，这样它不会和真正佩戴的饰品冲突。
 	 * Adds the attribute modifiers of the simulated accessories to the player. Each modifier gets a new ID that contains the source item, so that it does not conflict with an accessory that is really worn.
 	 */
-	private static Map<ResourceLocation, Holder<Attribute>> applyModifiers(Map<Item, ItemStack> simulated, Player player) {
-		Map<ResourceLocation, Holder<Attribute>> applied = new HashMap<>();
+	private static Set<AppliedModifier> applyModifiers(Map<Item, ItemStack> simulated, Player player) {
+		Set<AppliedModifier> applied = new HashSet<>();
 		simulated.forEach((item, stack) -> ((BaubleItem) item).getEquippedAttributeModifiers(stack, BOX_SLOT).forEach((attribute, modifier) -> {
 			ResourceLocation id = prefix(("box_sim/" + BuiltInRegistries.ITEM.getKey(item) + "/" + modifier.id()).replace(':', '.'));
 			AttributeInstance instance = player.getAttribute(attribute);
-			if (instance != null && !applied.containsKey(id)) {
+			AppliedModifier key = new AppliedModifier(attribute, id);
+			if (instance != null && applied.add(key)) {
 				if (!instance.hasModifier(id)) {
 					instance.addTransientModifier(new AttributeModifier(id, modifier.amount(), modifier.operation()));
 				}
-				applied.put(id, attribute);
 			}
 		}));
 		return applied;

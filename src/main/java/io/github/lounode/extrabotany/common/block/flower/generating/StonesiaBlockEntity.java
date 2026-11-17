@@ -2,20 +2,28 @@ package io.github.lounode.extrabotany.common.block.flower.generating;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 
 import org.jetbrains.annotations.Nullable;
 
 import io.github.lounode.extrabotany.common.block.flower.ExtraGeneratingFlowerBlockEntity;
+import io.github.lounode.extrabotany.common.block.flower.FlowerBlockActions;
 import vazkii.botania.api.block_entity.RadiusDescriptor;
 
 import io.github.lounode.extrabotany.api.recipe.StonesiaRecipe;
 import io.github.lounode.extrabotany.common.block.flower.ExtrabotanyFlowerBlocks;
 import io.github.lounode.extrabotany.common.crafting.ExtraBotanyRecipeTypes;
 import io.github.lounode.extrabotany.xplat.ExtraBotanyConfig;
+
+import java.util.UUID;
 
 /**
  * 石中姬。它吃掉周围的石头和矿石来产生魔力。哪些方块能吃、能产生多少魔力，由石中姬配方决定。
@@ -34,6 +42,7 @@ public class StonesiaBlockEntity extends ExtraGeneratingFlowerBlockEntity {
 	public static final int COOLDOWN = 40;
 
 	private int cooldown;
+	@Nullable private UUID ownerUUID;
 
 	public StonesiaBlockEntity(BlockPos pos, BlockState state) {
 		super(ExtrabotanyFlowerBlocks.STONESIA, pos, state);
@@ -54,11 +63,13 @@ public class StonesiaBlockEntity extends ExtraGeneratingFlowerBlockEntity {
 		}
 
 		BlockPos eatPos = getRadomBlockPos();
+		if (!getLevel().isLoaded(eatPos)) {
+			return;
+		}
 
 		int mana = getManaFormBlock(getLevel().getBlockState(eatPos));
-		if (mana > 0) {
+		if (mana > 0 && FlowerBlockActions.breakBlock((ServerLevel) getLevel(), eatPos, ownerUUID, false)) {
 			setCooldown(getAfterWorkCooldown());
-			getLevel().destroyBlock(eatPos, false);
 			addMana(mana);
 			syncThrottled();
 			getLevel().playSound(null, getEffectivePos(), SoundEvents.GENERIC_DRINK, SoundSource.BLOCKS, 0.01F, 0.5F + (float) Math.random() * 0.5F);
@@ -104,6 +115,12 @@ public class StonesiaBlockEntity extends ExtraGeneratingFlowerBlockEntity {
 	}
 
 	@Override
+	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+		super.setPlacedBy(level, pos, state, placer, stack);
+		ownerUUID = placer instanceof Player player ? player.getUUID() : null;
+	}
+
+	@Override
 	public int getMaxMana() {
 		return ExtraBotanyConfig.common().stonesiaMaxMana();
 	}
@@ -131,6 +148,7 @@ public class StonesiaBlockEntity extends ExtraGeneratingFlowerBlockEntity {
 		super.readFromPacketNBT(cmp);
 
 		setCooldown(cmp.getInt(TAG_COOLDOWN));
+		ownerUUID = cmp.hasUUID("ownerUUID") ? cmp.getUUID("ownerUUID") : null;
 	}
 
 	@Override
@@ -138,5 +156,8 @@ public class StonesiaBlockEntity extends ExtraGeneratingFlowerBlockEntity {
 		super.writeToPacketNBT(cmp);
 
 		cmp.putInt(TAG_COOLDOWN, getCooldown());
+		if (ownerUUID != null) {
+			cmp.putUUID("ownerUUID", ownerUUID);
+		}
 	}
 }

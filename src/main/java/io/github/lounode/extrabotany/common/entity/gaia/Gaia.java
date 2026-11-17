@@ -140,8 +140,6 @@ public class Gaia extends Monster {
 
 		//all checks ok, spawn the boss
 		if (!world.isClientSide()) {
-			stack.shrink(1);
-
 			Gaia gaia = new Gaia(world, pos);
 			gaia.setArena(arena);
 			gaia.setPos(pos.getX() + 0.5, pos.getY() + 3, pos.getZ() + 0.5);
@@ -164,10 +162,13 @@ public class Gaia extends Monster {
 			gaia.getAttribute(Attributes.MAX_HEALTH).setBaseValue(MAX_HP * healthMultiplier);
 			gaia.getAttribute(Attributes.ARMOR).setBaseValue(15);
 
-			gaia.playSound(BotaniaSounds.GAIA_SUMMON, .1F, 1F);
 			EventHooks.finalizeMobSpawn(gaia, (ServerLevelAccessor) world,
 					world.getCurrentDifficultyAt(gaia.blockPosition()), MobSpawnType.EVENT, null);
-			world.addFreshEntity(gaia);
+			if (!world.addFreshEntity(gaia)) {
+				return false;
+			}
+			stack.shrink(1);
+			gaia.playSound(BotaniaSounds.GAIA_SUMMON, .1F, 1F);
 
 			for (Player nearbyPlayer : playersAround) {
 				if (nearbyPlayer instanceof ServerPlayer serverPlayer) {
@@ -298,9 +299,7 @@ public class Gaia extends Monster {
 		super.die(source);
 		LivingEntity lastAttacker = getKillCredit();
 
-		getArena().ifPresent(arena -> {
-			arena.cleanup(this.level());
-		});
+		cleanupFight();
 
 		if (!level().isClientSide) {
 			for (UUID u : getPlayersWhoAttacked()) {
@@ -367,9 +366,19 @@ public class Gaia extends Monster {
 		//this.gameEvent(GameEvent.ENTITY_DIE);
 		this.setHealth(0.0F);
 		this.bossEvent.setProgress(0.0F);
-		getArena().ifPresent(arena -> {
-			arena.cleanup(this.level());
-		});
+		cleanupFight();
+	}
+
+	protected void cleanupFight() {
+		getArena().orElseGet(() -> GaiaArena.of(getHome(), getArenaRange(), GaiaArena.ARENA_HEIGHT)).cleanup(level(), this);
+	}
+
+	@Override
+	public void remove(RemovalReason reason) {
+		if (reason.shouldDestroy()) {
+			cleanupFight();
+		}
+		super.remove(reason);
 	}
 
 

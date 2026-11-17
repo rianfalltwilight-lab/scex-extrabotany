@@ -110,6 +110,9 @@ public class ManaBufferBlockEntity extends ManaMachineBlockEntity {
 	 */
 	@Nullable
 	private ManaReceiver findPartner(ServerLevel level, BlockPos pos) {
+		if (!level.isLoaded(pos)) {
+			return null;
+		}
 		BlockEntity blockEntity = level.getBlockEntity(pos);
 		if (blockEntity instanceof ManaPool pool) {
 			return pool;

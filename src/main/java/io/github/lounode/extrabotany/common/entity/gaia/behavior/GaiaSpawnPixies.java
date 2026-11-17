@@ -15,6 +15,7 @@ import net.neoforged.neoforge.event.EventHooks;
 import vazkii.botania.common.entity.PixieEntity;
 
 import io.github.lounode.extrabotany.common.entity.ExtraBotanyMemoryType;
+import io.github.lounode.extrabotany.api.gaia.GaiaArena;
 import io.github.lounode.extrabotany.common.entity.gaia.Gaia;
 
 import java.util.ArrayList;
@@ -62,6 +63,7 @@ public class GaiaSpawnPixies<E extends Gaia> extends Behavior<E> {
 
 			for (int i = 1; i <= spawnCount; i++) {
 				PixieEntity pixie = new PixieEntity(gaia.level(), true);
+				pixie.getPersistentData().putUUID(GaiaArena.TAG_GAIA_SUMMONER, gaia.getUUID());
 				pixie.setProps(players.get(gaia.getRandom().nextInt(players.size())), gaia, 8);
 				pixie.setPos(gaia.getX() + gaia.getBbWidth() / 2, gaia.getY() + 2, gaia.getZ() + gaia.getBbWidth() / 2);
 				EventHooks.finalizeMobSpawn(pixie, (ServerLevelAccessor) gaia.level(),

@@ -31,6 +31,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import vazkii.botania.client.fx.SparkleParticleData;
 import vazkii.botania.client.fx.WispParticleData;
@@ -70,6 +71,7 @@ public class GaiaArena {
 
 	public static final float ARENA_RANGE = 12F;
 	public static final int ARENA_HEIGHT = 5;
+	public static final String TAG_GAIA_SUMMONER = "extrabotany:gaia_summoner";
 	private static final TagKey<Block> BLACKLIST = BotaniaTags.Blocks.GAIA_GUARDIAN_IMMUNE;
 	public static final List<BlockPos> PYLON_LOCATIONS = ImmutableList.of(
 			new BlockPos(4, 1, 4),
@@ -227,6 +229,10 @@ public class GaiaArena {
 	}
 
 	public void cleanup(Level level) {
+		cleanup(level, null);
+	}
+
+	public void cleanup(Level level, @Nullable Gaia owner) {
 		if (level.isClientSide()) {
 			return;
 		}
@@ -239,16 +245,21 @@ public class GaiaArena {
 		}
 
 		// Stop all the pixies leftover from the fight
-		for (PixieEntity pixie : level.getEntitiesOfClass(PixieEntity.class, getArenaBB(), p -> p.isAlive() && p.isGaia())) {
+		for (PixieEntity pixie : level.getEntitiesOfClass(PixieEntity.class, getArenaBB(), p -> p.isAlive() && p.isGaia()
+				&& (owner == null || p.getPersistentData().hasUUID(TAG_GAIA_SUMMONER)
+						&& owner.getUUID().equals(p.getPersistentData().getUUID(TAG_GAIA_SUMMONER))))) {
 			pixie.spawnAnim();
 			pixie.discard();
 		}
 
-		for (MagicLandmineEntity landmine : level.getEntitiesOfClass(MagicLandmineEntity.class, getArenaBB())) {
-			landmine.discard();
+		// These unowned Botania mines are not spawned by ExtraBotany's bosses.
+		if (owner == null) {
+			for (MagicLandmineEntity landmine : level.getEntitiesOfClass(MagicLandmineEntity.class, getArenaBB())) {
+				landmine.discard();
+			}
 		}
 
-		for (MagicLandMineEntity mine : level.getEntitiesOfClass(MagicLandMineEntity.class, getArenaBB())) {
+		for (MagicLandMineEntity mine : level.getEntitiesOfClass(MagicLandMineEntity.class, getArenaBB(), mine -> owner == null || mine.getOwner() == owner)) {
 			mine.discard();
 		}
 	}

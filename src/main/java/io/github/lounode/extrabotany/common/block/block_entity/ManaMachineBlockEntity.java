@@ -98,7 +98,7 @@ public abstract class ManaMachineBlockEntity extends BlockEntity implements Mana
 	 * @param lot 一份的魔力量 / the quantity of mana in one lot
 	 */
 	protected final void pushManaToSpreader(BlockPos pos, int lot) {
-		if (mana < lot || !(level.getBlockEntity(pos) instanceof ManaCollector spreader)) {
+		if (mana < lot || !level.isLoaded(pos) || !(level.getBlockEntity(pos) instanceof ManaCollector spreader)) {
 			return;
 		}
 		int amount = Math.min(lot, spreader.getMaxMana() - spreader.getCurrentMana());

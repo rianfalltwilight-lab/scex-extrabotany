@@ -68,6 +68,9 @@ public class JudahOathRenderer extends EntityRenderer<JudahOathEntity> {
 			}
 			pose.mulPose(Axis.ZP.rotationDegrees(180F));
 			pose.scale(SCALE, SCALE, SCALE);
+			// The texture's right edge is the seam. Generated models keep increasing U,
+			// unlike the reversed U coordinates of the original IconHelper call.
+			pose.translate(-1F, 0F, 0F);
 			IconModelRenderer.renderFlat(model, pose, buffers, 1F, FULL_BRIGHT);
 			pose.popPose();
 		}

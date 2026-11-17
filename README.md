@@ -13,6 +13,7 @@
 
 - [docs/OVERVIEW.md](docs/OVERVIEW.md)：这一版做了什么、和原版的差异、哪些地方还没有验证。
 - [docs/PORT_AUDIT.md](docs/PORT_AUDIT.md)：逐项的对照和修复记录。
+- [docs/extrabotany-full-audit-report.zh-CN.md](docs/extrabotany-full-audit-report.zh-CN.md)：2026-10-25 全模组审计，以及其中 P1、P2 问题的修复与回归记录。
 - [docs/ACCEPTANCE.md](docs/ACCEPTANCE.md)：需要在游戏里确认的项目和需要决定的事项。
 
 ![](docs/img/overview.png)

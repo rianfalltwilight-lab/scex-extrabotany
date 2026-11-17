@@ -1,6 +1,7 @@
 package io.github.lounode.extrabotany.common.item.equipment.bauble;
 
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -44,7 +45,8 @@ public class PotatoChipsItem extends BaubleItem {
 	 * Handles the death event of a player. The listener must have the lowest priority, so that other life-saving items apply first.
 	 */
 	public static void onPlayerDeath(LivingDeathEvent event) {
-		if (event.isCanceled() || !(event.getEntity() instanceof Player player) || player.level().isClientSide()) {
+		if (event.isCanceled() || !(event.getEntity() instanceof Player player) || player.level().isClientSide()
+				|| event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
 			return;
 		}
 		ItemStack chips = EquipmentHandler.findOrEmpty(ExtraBotanyItems.potatoChips, player);

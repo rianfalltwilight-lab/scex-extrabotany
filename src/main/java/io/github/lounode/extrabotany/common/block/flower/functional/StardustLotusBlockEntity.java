@@ -232,7 +232,7 @@ public class StardustLotusBlockEntity extends ExtraFunctionalFlowerBlockEntity {
 	}
 
 	private static boolean isBlock(Level level, BlockPos pos, Block block) {
-		return level.getBlockState(pos).is(block);
+		return level.isLoaded(pos) && level.getBlockState(pos).is(block);
 	}
 
 	/**

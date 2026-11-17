@@ -1,5 +1,7 @@
 package io.github.lounode.extrabotany.forge.event;
 
+import net.minecraft.tags.DamageTypeTags;
+
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.neoforged.bus.api.EventPriority;
@@ -115,7 +117,8 @@ public final class NeoForgeEventBridge {
     private static void onIncomingDamage(LivingIncomingDamageEvent event) {
 
         if (event.getEntity() instanceof net.minecraft.world.entity.player.Player
-                && event.getEntity().hasEffect(io.github.lounode.extrabotany.common.brew.ExtraBotanyMobEffects.ETERNITY)) {
+                && event.getEntity().hasEffect(io.github.lounode.extrabotany.common.brew.ExtraBotanyMobEffects.ETERNITY)
+                && !event.getSource().is(DamageTypeTags.BYPASSES_INVULNERABILITY)) {
             event.setAmount(0);
             event.setCanceled(true);
             return;

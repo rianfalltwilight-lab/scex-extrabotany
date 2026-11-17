@@ -198,6 +198,7 @@ public class VoidHerrscher extends Gaia {
 	private int supportCooldown = 300;
 	private final List<String> supporters = new ArrayList<>(OriginalContributors.NAMES);
 	private boolean killed;
+	private boolean readingSaveData;
 
 	public VoidHerrscher(EntityType<? extends VoidHerrscher> type, Level level) {
 		super(type, level);
@@ -244,7 +245,9 @@ public class VoidHerrscher extends Gaia {
 			boss.setHealth(boss.getMaxHealth());
 
 			EventHooks.finalizeMobSpawn(boss, serverLevel, serverLevel.getCurrentDifficultyAt(pos), MobSpawnType.EVENT, null);
-			serverLevel.addFreshEntity(boss);
+			if (!serverLevel.addFreshEntity(boss)) {
+				return false;
+			}
 			serverLevel.playSound(null, pos, SoundEvents.ENDER_DRAGON_GROWL, SoundSource.HOSTILE, 10F, 0.1F);
 			for (Player nearby : players) {
 				if (nearby instanceof ServerPlayer serverPlayer) {
@@ -827,7 +830,7 @@ public class VoidHerrscher extends Gaia {
 	 */
 	@Override
 	public void setHealth(float health) {
-		super.setHealth(killed ? health : Math.max(health, getHealth() - HIT_CAP));
+		super.setHealth(killed || readingSaveData ? health : Math.max(health, getHealth() - HIT_CAP));
 	}
 
 	@Override
@@ -915,7 +918,13 @@ public class VoidHerrscher extends Gaia {
 
 	@Override
 	public void readAdditionalSaveData(CompoundTag tag) {
-		super.readAdditionalSaveData(tag);
+		// Loading saved health is not a combat hit; keep the cap for later mutations.
+		readingSaveData = true;
+		try {
+			super.readAdditionalSaveData(tag);
+		} finally {
+			readingSaveData = false;
+		}
 		// 用命令召唤的 Boss 没有这些键。这时保留默认值。
 		// A boss from a command does not have these keys. Then the defaults stay.
 		if (!tag.contains(TAG_SKILL_COOLDOWN, Tag.TAG_ANY_NUMERIC)) {

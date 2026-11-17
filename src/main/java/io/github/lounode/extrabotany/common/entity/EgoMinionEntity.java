@@ -133,6 +133,10 @@ public class EgoMinionEntity extends Monster {
 		return entityData.get(MINION_TYPE);
 	}
 
+	public boolean isSummonedBy(Ego boss) {
+		return boss.getUUID().equals(summoner);
+	}
+
 	public void setMinionType(int type) {
 		entityData.set(MINION_TYPE, Math.floorMod(type, TYPES));
 	}

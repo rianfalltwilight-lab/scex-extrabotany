@@ -87,6 +87,11 @@ public class ManaLiquefactionBlockEntity extends ManaMachineBlockEntity {
 		if (!config.manaLiquefactionEnabled()) {
 			return;
 		}
+		// Redstone through a conductor can inspect a second neighbour. Wait rather than
+		// loading that area or treating an unknown signal as an instruction to drain.
+		if (!level.hasChunksAt(worldPosition.offset(-2, 0, -2), worldPosition.offset(2, 0, 2))) {
+			return;
+		}
 		boolean powered = level.hasNeighborSignal(worldPosition);
 		int transferSpeed = config.manaGeneratorTransferSpeed();
 		for (Direction side : ALL_SIDES) {

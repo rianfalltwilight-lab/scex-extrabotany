@@ -23,6 +23,7 @@ import vazkii.botania.client.fx.WispParticleData;
 import vazkii.botania.common.handler.BotaniaSounds;
 
 import io.github.lounode.extrabotany.common.handler.DamageHandler;
+import io.github.lounode.extrabotany.common.util.PlayerDropHelper;
 import io.github.lounode.extrabotany.xplat.ExtraBotanyConfig;
 
 /**
@@ -118,9 +119,8 @@ public class EgoLandmineEntity extends OwnedEntity {
 			player.addEffect(wither);
 			if (type == TYPE_GREEN && !ExtraBotanyConfig.common().disableGaiaDisArm()) {
 				ItemStack held = player.getMainHandItem();
-				if (!held.isEmpty()) {
+				if (PlayerDropHelper.tryDrop(player, held)) {
 					player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
-					player.drop(held, false, true);
 				}
 			} else if (type == TYPE_RED) {
 				DamageHandler.INSTANCE.dmg(player, owner, 10F, DamageHandler.DamageKind.LIFE_LOSING);

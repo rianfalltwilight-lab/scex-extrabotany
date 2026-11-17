@@ -1,5 +1,7 @@
 package io.github.lounode.extrabotany.common.item.equipment.bauble;
 
+import io.github.lounode.extrabotany.common.handler.DamageHandler;
+
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -39,7 +41,7 @@ public class CurseRingItem extends BaubleItem {
 				.toList();
 
 		for (var victim : entities) {
-			if (!isLookingAt(entity, victim)) {
+			if (!DamageHandler.INSTANCE.checkPassable(victim, serverPlayer) || !isLookingAt(entity, victim)) {
 				continue;
 			}
 			if (ManaItemHandler.INSTANCE.requestManaExactForTool(stack, serverPlayer, getCurseCost(), true)) {

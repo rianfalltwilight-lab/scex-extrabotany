@@ -11,24 +11,19 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.LevelEvent;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.world.level.chunk.LevelChunkSection;
-import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import org.jetbrains.annotations.Nullable;
 
 import io.github.lounode.extrabotany.common.block.flower.ExtraFunctionalFlowerBlockEntity;
+import io.github.lounode.extrabotany.common.block.flower.FlowerBlockActions;
 import vazkii.botania.api.block_entity.RadiusDescriptor;
-import vazkii.botania.common.item.equipment.tool.ToolCommons;
-import vazkii.botania.xplat.BotaniaConfig;
 
 import io.github.lounode.extrabotany.common.block.flower.ExtrabotanyFlowerBlocks;
-import io.github.lounode.extrabotany.common.util.PlayerUtil;
 import io.github.lounode.extrabotany.xplat.ExtraBotanyConfig;
 
 import java.util.Optional;
@@ -36,8 +31,8 @@ import java.util.UUID;
 import java.util.function.Predicate;
 
 /**
- * 伐木花。它消耗魔力，破坏范围里的一个原木。如果这朵花有放置者，它用放置者的假玩家来破坏方块，这样领地保护类的模组能识别是谁做的。红石信号让它停止工作。
- * Woodienia. It uses mana to break one log in the range. If the flower has an owner, it breaks the block with a fake player of the owner, thus protection mods can identify who did it. A redstone signal stops it.
+ * 伐木花。它消耗魔力，破坏范围里的一个原木。破坏事件携带放置者身份；没有放置者时使用固定的花朵身份。红石信号让它停止工作。
+ * Woodienia. It uses mana to break one log in the range. Break events carry the owner's identity, or a fixed flower identity when unowned. A redstone signal stops it.
  *
  * <p>来源：重制版（Lounode）。原版没有这朵花。
  * <p>Source: Reburn (Lounode). The original does not have this flower.
@@ -93,13 +88,9 @@ public class WoodieniaBlockEntity extends ExtraFunctionalFlowerBlockEntity {
 			return;
 		}
 
-		Player player = null;
-		//TODO 需要更多测试来确定是否可行
-		if (getOwnerUUID().isPresent()) {
-			player = PlayerUtil.createFakePlayer((ServerLevel) getLevel(), getOwnerUUID().get());
+		if (!FlowerBlockActions.breakBlock((ServerLevel) getLevel(), breakCoords, ownerUUID, true)) {
+			return;
 		}
-
-		breakBlock(getLevel(), breakCoords, player);
 		setCooldown(getAfterEatCooldown());
 		addMana(-getManaPerUse());
 		syncThrottled();
@@ -199,21 +190,6 @@ public class WoodieniaBlockEntity extends ExtraFunctionalFlowerBlockEntity {
 		return now + IDLE_SCAN_BACKOFF - Math.floorMod(now + phase, (long) IDLE_SCAN_BACKOFF);
 	}
 
-	protected static void breakBlock(Level level, BlockPos pos, @Nullable Player player) {
-		BlockState state = level.getBlockState(pos);
-
-		if (player != null) {
-			ToolCommons.removeBlockWithDrops(player, ItemStack.EMPTY, level, pos, (b) -> true);
-		} else {
-			level.destroyBlock(pos, true);
-		}
-
-		if (BotaniaConfig.common().blockBreakParticles()) {
-			level.levelEvent(LevelEvent.PARTICLES_DESTROY_BLOCK, pos, Block.getId(state));
-		}
-		level.gameEvent(null, GameEvent.BLOCK_DESTROY, pos);
-	}
-
 	@Override
 	public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
 		super.setPlacedBy(level, pos, state, placer, stack);
@@ -273,9 +249,7 @@ public class WoodieniaBlockEntity extends ExtraFunctionalFlowerBlockEntity {
 		super.readFromPacketNBT(cmp);
 
 		cooldown = cmp.getInt(TAG_COOLDOWN);
-		if (cmp.contains(TAG_OWNER_UUID)) {
-			setOwnerUUID(cmp.getUUID(TAG_OWNER_UUID));
-		}
+		ownerUUID = cmp.hasUUID(TAG_OWNER_UUID) ? cmp.getUUID(TAG_OWNER_UUID) : null;
 	}
 
 	public Optional<UUID> getOwnerUUID() {

@@ -205,7 +205,7 @@ public class AnnoyingFlowerBlockEntity extends ExtraFunctionalFlowerBlockEntity 
 		BlockPos pos = getEffectivePos();
 
 		if (cachedPedestalPos != null) {
-			BlockEntity tile = getLevel().getBlockEntity(cachedPedestalPos);
+			BlockEntity tile = getLevel().isLoaded(cachedPedestalPos) ? getLevel().getBlockEntity(cachedPedestalPos) : null;
 			if (tile instanceof Pedestal pedestal && pedestal.getItem().is(Items.WATER_BUCKET)) {
 				return true;
 			}
@@ -214,6 +214,9 @@ public class AnnoyingFlowerBlockEntity extends ExtraFunctionalFlowerBlockEntity 
 
 		for (BlockPos pos_ : BlockPos.betweenClosed(pos.offset(-RANGE, 0, -RANGE),
 				pos.offset(RANGE, RANGE, RANGE))) {
+			if (!getLevel().isLoaded(pos_)) {
+				continue;
+			}
 			BlockEntity tile = getLevel().getBlockEntity(pos_);
 			if (tile instanceof Pedestal pedestal && pedestal.getItem().is(Items.WATER_BUCKET)) {
 				cachedPedestalPos = pos_.immutable();

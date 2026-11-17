@@ -8,6 +8,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.PickaxeItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.level.Level;
+import io.github.lounode.extrabotany.common.util.EquipmentAnimation;
 import net.minecraft.world.level.block.state.BlockState;
 
 import vazkii.botania.api.item.SortableTool;
@@ -36,6 +37,11 @@ public class ManasteelHammerItem extends PickaxeItem implements CustomDamageItem
 
 	public int getManaPerDamage() {
 		return MANA_PER_DAMAGE;
+	}
+
+	@Override
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+		return EquipmentAnimation.shouldReequip(oldStack, newStack, slotChanged);
 	}
 
 	@Override

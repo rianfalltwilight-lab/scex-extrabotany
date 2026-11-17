@@ -1,10 +1,12 @@
 package io.github.lounode.extrabotany.common.item.equipment.bauble;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
@@ -12,6 +14,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.common.util.BlockSnapshot;
+import net.neoforged.neoforge.event.level.BlockEvent;
 
 import vazkii.botania.common.item.equipment.bauble.BaubleItem;
 
@@ -93,13 +98,17 @@ public class FrostRingItem extends BaubleItem {
 	}
 
 	private static void freeze(LivingEntity living, Level level, BlockPos pos, int strength, BlockState source, BlockState frozen) {
-		if (!living.onGround()) {
+		if (level.isClientSide() || !living.onGround()) {
 			return;
 		}
 		int range = Math.min(16, 2 + strength);
 		BlockPos.MutableBlockPos above = new BlockPos.MutableBlockPos();
 		for (BlockPos target : BlockPos.betweenClosed(pos.offset(-range, -1, -range), pos.offset(range, -1, range))) {
-			if (!target.closerToCenterThan(living.position(), range)) {
+			if (!target.closerToCenterThan(living.position(), range) || !level.hasChunkAt(target)) {
+				continue;
+			}
+			if (living instanceof Player player && (!level.mayInteract(player, target)
+					|| !player.mayUseItemAt(target, Direction.UP, ItemStack.EMPTY))) {
 				continue;
 			}
 			above.set(target.getX(), target.getY() + 1, target.getZ());
@@ -109,8 +118,23 @@ public class FrostRingItem extends BaubleItem {
 					&& level.getBlockState(target) == source
 					&& frozen.canSurvive(level, target)
 					&& level.isUnobstructed(frozen, target, CollisionContext.empty())) {
-				level.setBlockAndUpdate(target, frozen);
-				level.scheduleTick(target, frozen.getBlock(), Mth.nextInt(living.getRandom(), 60, 120));
+				// Check the intended placement before changing the world; the snapshot keeps the original fluid.
+				BlockEvent.EntityPlaceEvent event = new BlockEvent.EntityPlaceEvent(
+						BlockSnapshot.create(level.dimension(), level, target.immutable()),
+						level.getBlockState(target.below()), living) {
+					@Override
+					public BlockState getState() {
+						return frozen;
+					}
+
+					@Override
+					public BlockState getPlacedBlock() {
+						return frozen;
+					}
+				};
+				if (!NeoForge.EVENT_BUS.post(event).isCanceled() && level.setBlockAndUpdate(target, frozen)) {
+					level.scheduleTick(target, frozen.getBlock(), Mth.nextInt(living.getRandom(), 60, 120));
+				}
 			}
 		}
 	}

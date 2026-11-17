@@ -11,7 +11,8 @@ import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.BlockHitResult;
+import io.github.lounode.extrabotany.common.util.EquipmentAnimation;
+import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.phys.Vec3;
 
 import org.jetbrains.annotations.Nullable;
@@ -21,6 +22,7 @@ import vazkii.botania.api.mana.ManaItemHandler;
 import vazkii.botania.common.item.relic.RelicImpl;
 
 import io.github.lounode.extrabotany.api.item.LeftClickItem;
+import io.github.lounode.extrabotany.common.util.LoadedAreaRaycast;
 
 import java.util.List;
 
@@ -102,8 +104,16 @@ public abstract class RelicSwordItem extends SwordItem implements LeftClickItem 
 		if (target != null) {
 			return target.position().add(0, 1, 0);
 		}
-		BlockPos hit = ((BlockHitResult) user.pick(range, 1F, stopAtFluids)).getBlockPos();
+		Vec3 eye = user.getEyePosition(1F);
+		Vec3 end = eye.add(user.getViewVector(1F).scale(range));
+		BlockPos hit = LoadedAreaRaycast.clip(user.level(), new ClipContext(eye, end, ClipContext.Block.OUTLINE,
+				stopAtFluids ? ClipContext.Fluid.ANY : ClipContext.Fluid.NONE, user)).getBlockPos();
 		return Vec3.atBottomCenterOf(hit.above());
+	}
+
+	@Override
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+		return EquipmentAnimation.shouldReequip(oldStack, newStack, slotChanged);
 	}
 
 	@Override

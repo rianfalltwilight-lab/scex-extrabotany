@@ -6,6 +6,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import io.github.lounode.extrabotany.common.util.EquipmentAnimation;
 import net.minecraft.world.level.block.state.BlockState;
 
 import vazkii.botania.api.BotaniaAPI;
@@ -35,6 +36,11 @@ public class ManasteelShieldItem extends ShieldItem implements CustomDamageItem,
 
 	public ManasteelShieldItem(Properties properties) {
 		this(properties, BotaniaAPI.instance().getManasteelItemTier());
+	}
+
+	@Override
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+		return EquipmentAnimation.shouldReequip(oldStack, newStack, slotChanged);
 	}
 
 	@Override

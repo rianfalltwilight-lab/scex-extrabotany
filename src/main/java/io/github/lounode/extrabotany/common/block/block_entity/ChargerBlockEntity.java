@@ -218,9 +218,15 @@ public abstract class ChargerBlockEntity extends ExposedSimpleInventoryBlockEnti
 		List<BellowsBlockEntity> bellows = new ArrayList<>();
 
 		for (Direction dir : Direction.Plane.HORIZONTAL) {
-			BlockEntity tile = level.getBlockEntity(worldPosition.relative(dir));
+			BlockPos neighbour = worldPosition.relative(dir);
+			if (!level.isLoaded(neighbour)) {
+				continue;
+			}
+			BlockEntity tile = level.getBlockEntity(neighbour);
 			if (tile instanceof BellowsBlockEntity bellow) {
-				if (bellow.getLinkedTile() == self) {
+				BlockPos linkedPos = bellow.getBlockPos().relative(bellow.getBlockState()
+						.getValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.HORIZONTAL_FACING));
+				if (level.isLoaded(linkedPos) && bellow.getLinkedTile() == self) {
 					bellows.add(bellow);
 				}
 			}

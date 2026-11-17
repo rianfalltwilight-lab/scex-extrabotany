@@ -160,8 +160,8 @@ public final class FlowerHotPathGameTests {
             h.assertTrue(near.get(1).hasEffect(ExtraBotanyMobEffects.DISCOUNT) && near.get(2).hasEffect(ExtraBotanyMobEffects.DISCOUNT)
                     && !near.get(3).hasEffect(ExtraBotanyMobEffects.DISCOUNT), "Insufficient-mana selection changed entity order");
             h.assertTrue(unchanged.getEffect(ExtraBotanyMobEffects.DISCOUNT).getAmplifier() == 99, "Unchanged stronger effect was replaced");
-            h.assertTrue(!far.hasEffect(ExtraBotanyMobEffects.DISCOUNT) && beyond.hasEffect(ExtraBotanyMobEffects.DISCOUNT),
-                    "Outer-range cleanup crossed the original boundary");
+            h.assertTrue(far.hasEffect(ExtraBotanyMobEffects.DISCOUNT) && beyond.hasEffect(ExtraBotanyMobEffects.DISCOUNT),
+                    "Trade Orchid removed discounts that may belong to a neighbouring flower");
             // Botania saves and synchronizes the mana. The flower has no data of its own, thus it must not send a full update packet.
             h.assertTrue(flower.syncCalls == 0, "The Trade Orchid sent a full update packet for a mana change");
             flower.prepare(40);

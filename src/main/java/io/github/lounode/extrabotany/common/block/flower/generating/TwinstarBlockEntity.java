@@ -73,6 +73,9 @@ public class TwinstarBlockEntity extends ExtraGeneratingFlowerBlockEntity implem
 		int tempMin = TEMPERATURE_MAX;
 
 		for (var pos : BlockPos.betweenClosed(_pos.offset(-RANGE, 0, -RANGE), _pos.offset(RANGE, 0, RANGE))) {
+			if (!getLevel().isLoaded(pos)) {
+				continue;
+			}
 			Fluid fluid = getLevel().getFluidState(pos).getType();
 			if (fluid.isSame(Fluids.EMPTY)) {
 				continue;
@@ -87,7 +90,7 @@ public class TwinstarBlockEntity extends ExtraGeneratingFlowerBlockEntity implem
 			return 0;
 		}
 
-		return Math.min(getTemperatureMax(), tempMax) - Math.min(getTemperatureMin(), tempMin);
+		return Math.max(0, Math.min(getTemperatureMax(), tempMax) - Math.max(getTemperatureMin(), tempMin));
 	}
 
 	public int getTemperatureMax() {

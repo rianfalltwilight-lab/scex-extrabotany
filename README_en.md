@@ -13,6 +13,7 @@ The reference for the port is the original "Extra Botany" of ExtraMeteorP: conte
 
 - [docs/OVERVIEW_en.md](docs/OVERVIEW_en.md): what this version did, the differences from the original, and what is not verified yet.
 - [docs/PORT_AUDIT.md](docs/PORT_AUDIT.md): the record of each comparison and each correction.
+- [docs/extrabotany-full-audit-report.zh-CN.md](docs/extrabotany-full-audit-report.zh-CN.md) (Chinese): the 2026-10-25 full audit, with the fixes and regression runs for its P1 and P2 findings.
 - [docs/ACCEPTANCE.md](docs/ACCEPTANCE.md): the items to check in the game and the items that need a decision.
 
 ![](docs/img/overview.png)

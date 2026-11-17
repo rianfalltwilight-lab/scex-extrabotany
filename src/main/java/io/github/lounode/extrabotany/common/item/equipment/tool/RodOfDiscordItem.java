@@ -11,6 +11,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import io.github.lounode.extrabotany.common.util.EquipmentAnimation;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -64,6 +65,11 @@ public class RodOfDiscordItem extends Item {
 		}
 		stack.setDamageValue(stack.getMaxDamage() - 1);
 		return InteractionResultHolder.success(stack);
+	}
+
+	@Override
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+		return EquipmentAnimation.shouldReequip(oldStack, newStack, slotChanged);
 	}
 
 	@Override

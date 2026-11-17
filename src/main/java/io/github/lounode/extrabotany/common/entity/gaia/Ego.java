@@ -196,7 +196,9 @@ public class Ego extends Gaia {
 			ego.setHealth(ego.getMaxHealth());
 
 			EventHooks.finalizeMobSpawn(ego, serverLevel, serverLevel.getCurrentDifficultyAt(pos), MobSpawnType.EVENT, null);
-			serverLevel.addFreshEntity(ego);
+			if (!serverLevel.addFreshEntity(ego)) {
+				return false;
+			}
 			serverLevel.playSound(null, pos, SoundEvents.ENDER_DRAGON_GROWL, SoundSource.HOSTILE, 10F, 0.1F);
 			for (Player nearby : players) {
 				if (nearby instanceof ServerPlayer serverPlayer) {
@@ -531,20 +533,20 @@ public class Ego extends Gaia {
 		if (level() instanceof ServerLevel serverLevel) {
 			playSound(SoundEvents.GENERIC_EXPLODE.value(), 20F, (1F + (random.nextFloat() - random.nextFloat()) * 0.2F) * 0.7F);
 			serverLevel.sendParticles(ParticleTypes.EXPLOSION_EMITTER, getX(), getY(), getZ(), 1, 0, 0, 0, 0);
-			serverLevel.getEntitiesOfClass(EgoLandmineEntity.class, getHelperArea()).forEach(Entity::discard);
 		}
 	}
 
 	/**
-	 * 本我死亡或者离开时，它的仆从立刻消失。区块卸载时仆从留下，下次加载时它们还在。
-	 * When the Ego dies or goes away, its minions go away immediately. The minions stay when the chunk unloads, and they are there at the subsequent load.
+	 * 本我死亡或者离开时，只清除它自己的地雷和仆从。区块卸载不结束战斗。
+	 * Death or cancellation removes only this Ego's mines and minions. Chunk unloading does not end the fight.
 	 */
 	@Override
-	public void remove(RemovalReason reason) {
-		if (reason.shouldDestroy() && level() instanceof ServerLevel serverLevel) {
-			serverLevel.getEntitiesOfClass(EgoMinionEntity.class, getHelperArea()).forEach(Entity::discard);
+	protected void cleanupFight() {
+		super.cleanupFight();
+		if (level() instanceof ServerLevel serverLevel) {
+			serverLevel.getEntitiesOfClass(EgoLandmineEntity.class, getHelperArea(), mine -> mine.getOwner() == this).forEach(Entity::discard);
+			serverLevel.getEntitiesOfClass(EgoMinionEntity.class, getHelperArea(), minion -> minion.isSummonedBy(this)).forEach(Entity::discard);
 		}
-		super.remove(reason);
 	}
 
 	// ---------------------------------------------------------------------

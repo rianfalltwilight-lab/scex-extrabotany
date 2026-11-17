@@ -10,7 +10,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.core.registries.BuiltInRegistries;
 import top.theillusivec4.curios.api.CuriosApi;
 
 import io.github.lounode.extrabotany.common.entity.gaia.Gaia;
@@ -20,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static io.github.lounode.extrabotany.api.gaia.GaiaArena.checkFeasibility;
+import static io.github.lounode.extrabotany.api.gaia.GaiaArena.checkGuardianAllowed;
 
 /**
  * 缴械。玩家拿在手里、穿在身上或者戴在饰品栏里的不允许的物品会掉到地上。背包里的物品不受影响。
@@ -71,8 +71,7 @@ public class GaiaDisarm<E extends Gaia> extends Behavior<E> {
 	}
 
 	private static boolean dropForbidden(Player player, ItemStack stack) {
-		if (stack.isEmpty() || checkFeasibility(stack) || io.github.lounode.extrabotany.api.gaia.GaiaArena.GUARDIAN_ALLOWED_NAMESPACES
-				.contains(BuiltInRegistries.ITEM.getKey(stack.getItem()).getNamespace())) return false;
+		if (checkGuardianAllowed(stack) || checkFeasibility(stack)) return false;
 		var drop = new ItemEntity(player.level(), player.getX(), player.getEyeY() - 0.3, player.getZ(), stack.copy());
 		drop.setDeltaMovement(player.getLookAngle().scale(0.3).add(0, 0.15, 0));
 		drop.setPickUpDelay(90);

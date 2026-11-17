@@ -53,13 +53,12 @@ public class GaiaTeleport<E extends Gaia> extends Behavior<E> {
 
 	@Override
 	protected void tick(ServerLevel level, E gaia, long gameTime) {
-		int delay = getTeleportDelay(gaia);
-
 		//When hurt reset delay
 		if (isHurt(gaia)) {
 			resolveHurt(gaia);
 		}
 
+		int delay = getTeleportDelay(gaia);
 		if (delay > 0) {
 			setTeleportDelay(gaia, delay - 1);
 			return;

@@ -25,3 +25,12 @@ run-data
 src/generated/resources/.cache
 
 
+
+# SCEX machine-local output
+.gradle/
+**/build/
+**/run/
+**/runs/
+*.log
+.env
+secrets.json

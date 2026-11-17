@@ -22,6 +22,7 @@ import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.Level;
+import io.github.lounode.extrabotany.common.util.EquipmentAnimation;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.event.EventHooks;
 
@@ -107,6 +108,11 @@ public class ShadowKatanaItem extends SwordItem implements LeftClickItem {
 		} else {
 			attribute.removeModifier(modifier.id());
 		}
+	}
+
+	@Override
+	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+		return EquipmentAnimation.shouldReequip(oldStack, newStack, slotChanged);
 	}
 
 	@Override

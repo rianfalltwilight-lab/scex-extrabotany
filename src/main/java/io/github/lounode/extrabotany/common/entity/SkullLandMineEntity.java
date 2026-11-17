@@ -15,6 +15,7 @@ import vazkii.botania.client.fx.WispParticleData;
 import vazkii.botania.common.helper.PlayerHelper;
 
 import io.github.lounode.extrabotany.common.lib.LibAdvancementNames;
+import io.github.lounode.extrabotany.common.util.PlayerDropHelper;
 import io.github.lounode.extrabotany.xplat.ExtraBotanyConfig;
 
 import java.util.List;
@@ -147,9 +148,9 @@ public abstract class SkullLandMineEntity extends MagicLandMineEntity {
 					continue;
 				}
 
-				ItemStack itemStack = player.getItemInHand(InteractionHand.MAIN_HAND).copy();
-				player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
-				player.drop(itemStack, false, true);
+				if (PlayerDropHelper.tryDrop(player, player.getMainHandItem())) {
+					player.setItemInHand(InteractionHand.MAIN_HAND, ItemStack.EMPTY);
+				}
 			}
 		}
 

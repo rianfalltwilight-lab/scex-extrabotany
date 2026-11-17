@@ -18,6 +18,7 @@ import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @GameTestHolder("extrabotany")
@@ -33,30 +34,34 @@ public final class RobustnessGameTests {
 
     @GameTest(template = "empty", timeoutTicks = 20)
     public static void resoncundKeepsNormalDecayAndDoesNotOverflow(GameTestHelper h) {
-        var flower = flower(h);
-        var sound = SoundEvents.NOTE_BLOCK_HARP.value();
-        for (int expected : new int[] {500, 450, 400, 350, 300, 250, 200, 150, 100, 50, 0, 0}) {
+        var listenersBefore = Set.copyOf(ResoncundBlockEntity.listeners());
+        try (var flower = flower(h)) {
+            var sound = SoundEvents.NOTE_BLOCK_HARP.value();
+            for (int expected : new int[] {500, 450, 400, 350, 300, 250, 200, 150, 100, 50, 0, 0}) {
+                flower.addMana(-flower.getMana());
+                flower.onSoundHeard(sound);
+                h.assertTrue(flower.getMana() == expected, "Normal repeated-sound decay changed: expected " + expected);
+            }
+
+            flower.loss = Integer.MAX_VALUE; // This is a valid config value.
+            flower.getSoundHeard().put(sound, 2);
             flower.addMana(-flower.getMana());
             flower.onSoundHeard(sound);
-            h.assertTrue(flower.getMana() == expected, "Normal repeated-sound decay changed: expected " + expected);
-        }
+            h.assertTrue(flower.getMana() == 0, "Large configured decay wrapped into a positive mana reward");
 
-        flower.loss = Integer.MAX_VALUE; // This is a valid config value.
-        flower.getSoundHeard().put(sound, 2);
-        flower.addMana(-flower.getMana());
-        flower.onSoundHeard(sound);
-        h.assertTrue(flower.getMana() == 0, "Large configured decay wrapped into a positive mana reward");
-
-        flower.loss = 50;
-        flower.getSoundHeard().put(sound, Integer.MAX_VALUE);
-        var saved = flower.saveWithoutMetadata(h.getLevel().registryAccess());
-        var restored = flower(h);
-        restored.loadWithComponents(saved, h.getLevel().registryAccess());
-        for (int i = 0; i < 2; i++) {
-            restored.onSoundHeard(sound);
-            h.assertTrue(restored.getMana() == 0 && restored.getSoundHeard().get(sound) == Integer.MAX_VALUE,
-                    "Loaded counter limit wrapped or restarted the exhausted sound reward");
+            flower.loss = 50;
+            flower.getSoundHeard().put(sound, Integer.MAX_VALUE);
+            var saved = flower.saveWithoutMetadata(h.getLevel().registryAccess());
+            try (var restored = flower(h)) {
+                restored.loadWithComponents(saved, h.getLevel().registryAccess());
+                for (int i = 0; i < 2; i++) {
+                    restored.onSoundHeard(sound);
+                    h.assertTrue(restored.getMana() == 0 && restored.getSoundHeard().get(sound) == Integer.MAX_VALUE,
+                            "Loaded counter limit wrapped or restarted the exhausted sound reward");
+                }
+            }
         }
+        h.assertTrue(Set.copyOf(ResoncundBlockEntity.listeners()).equals(listenersBefore), "Decay fixtures leaked sound listeners");
         h.succeed();
     }
 
@@ -70,14 +75,32 @@ public final class RobustnessGameTests {
         sounds.putInt("extrabotany:nonexistent_robustness_sound", 5);
         var saved = new CompoundTag();
         saved.put(ResoncundBlockEntity.TAG_SOUND_HEARD, sounds);
-        var flower = flower(h);
-        flower.readFromPacketNBT(saved);
-        h.assertTrue(flower.getSoundHeard().size() == 1 && flower.getSoundHeard().get(valid) == 7,
-                "Malformed, unknown or negative-count sound corrupted the valid sound cache");
-        flower.onSoundHeard(valid);
-        h.assertTrue(flower.getMana() == 150, "Valid persisted repeat count did not retain its original decay");
+        var listenersBefore = Set.copyOf(ResoncundBlockEntity.listeners());
+        try (var flower = flower(h)) {
+            flower.readFromPacketNBT(saved);
+            h.assertTrue(flower.getSoundHeard().size() == 1 && flower.getSoundHeard().get(valid) == 7,
+                    "Malformed, unknown or negative-count sound corrupted the valid sound cache");
+            flower.onSoundHeard(valid);
+            h.assertTrue(flower.getMana() == 150, "Valid persisted repeat count did not retain its original decay");
+        }
+        h.assertTrue(Set.copyOf(ResoncundBlockEntity.listeners()).equals(listenersBefore), "Saved-sound fixture leaked a listener");
         h.succeed();
     }
+
+    @GameTest(template = "empty", timeoutTicks = 20)
+    public static void resoncundFixtureUnregistersEvenWhenItsCheckFails(GameTestHelper h) {
+        var listenersBefore = Set.copyOf(ResoncundBlockEntity.listeners());
+        try (var flower = flower(h)) {
+            h.assertTrue(ResoncundBlockEntity.listeners().contains(flower), "Fixture did not exercise listener registration");
+            throw new FixtureFailure();
+        } catch (FixtureFailure expected) {
+            h.assertTrue(Set.copyOf(ResoncundBlockEntity.listeners()).equals(listenersBefore),
+                    "Failed fixture retained a flower or ServerLevel in the global listener snapshot");
+        }
+        h.succeed();
+    }
+
+    private static final class FixtureFailure extends RuntimeException {}
 
     @GameTest(template = "empty", timeoutTicks = 20)
     public static void rheingoldChangesOnlyOneRelicAndRejectsForeignSlots(GameTestHelper h) {
@@ -119,10 +142,11 @@ public final class RobustnessGameTests {
         h.succeed();
     }
 
-    private static final class FixedResoncund extends ResoncundBlockEntity {
+    private static final class FixedResoncund extends ResoncundBlockEntity implements AutoCloseable {
         private int loss = 50;
         private FixedResoncund(BlockPos pos) { super(pos, ExtrabotanyFlowerBlocks.resoncund.defaultBlockState()); }
         @Override public int getLossPerHeard() { return loss; }
         @Override public int getMaxMana() { return 1200; }
+        @Override public void close() { setRemoved(); }
     }
 }

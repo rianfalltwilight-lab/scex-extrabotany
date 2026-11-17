@@ -102,9 +102,11 @@ public class GaiaIII extends Gaia {
 			gaia.getAttribute(Attributes.MAX_HEALTH).setBaseValue(MAX_HP * healthMultiplier);
 			gaia.getAttribute(Attributes.ARMOR).setBaseValue(30);
 
-			gaia.playSound(BotaniaSounds.GAIA_SUMMON, 0.05F, 1F);
 			EventHooks.finalizeMobSpawn(gaia, serverLevel, world.getCurrentDifficultyAt(gaia.blockPosition()), MobSpawnType.EVENT, null);
-			world.addFreshEntity(gaia);
+			if (!world.addFreshEntity(gaia)) {
+				return false;
+			}
+			gaia.playSound(BotaniaSounds.GAIA_SUMMON, 0.05F, 1F);
 
 			for (Player nearbyPlayer : playersAround) {
 				if (nearbyPlayer instanceof ServerPlayer serverPlayer) {

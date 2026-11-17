@@ -10,11 +10,12 @@ import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
-import vazkii.botania.api.block_entity.GeneratingFlowerBlockEntity;
+import vazkii.botania.api.block_entity.SpecialFlowerBlockEntity;
 
 import io.github.lounode.extrabotany.common.ExtraBotanyDamageTypes;
 import io.github.lounode.extrabotany.common.block.ExtraBotanyBlocks;
 import io.github.lounode.extrabotany.common.block.flower.ExtrabotanyFlowerBlocks;
+import io.github.lounode.extrabotany.common.block.flower.ExtraGeneratingFlowerBlockEntity;
 import io.github.lounode.extrabotany.common.lib.LibMisc;
 import io.github.lounode.extrabotany.common.sounds.ExtraBotanySounds;
 
@@ -111,20 +112,32 @@ public final class ExtraBotanyGameTests {
 
 	@GameTest(template = "empty", timeoutTicks = 20)
 	public static void enchantedSoilDoublesGroundFlowerTicks(GameTestHelper helper) {
-		helper.getLevel().setDayTime(1000);
+		long dayTime = helper.getLevel().getDayTime();
 		helper.setBlock(BOOSTED_SOIL_POS, ExtraBotanyBlocks.enchantedSoil);
 		helper.setBlock(NORMAL_SOIL_POS, Blocks.GRASS_BLOCK);
 		helper.setBlock(BOOSTED_FLOWER_POS, ExtrabotanyFlowerBlocks.sunshineLily);
 		helper.setBlock(NORMAL_FLOWER_POS, ExtrabotanyFlowerBlocks.sunshineLily);
 
-		helper.runAfterDelay(3, () -> {
-			GeneratingFlowerBlockEntity boosted = helper.getBlockEntity(BOOSTED_FLOWER_POS);
-			GeneratingFlowerBlockEntity normal = helper.getBlockEntity(NORMAL_FLOWER_POS);
-			helper.assertTrue(boosted.getMana() > 0,
-					"Ground flower over enchanted soil did not receive its accelerated tick");
-			helper.assertTrue(normal.getMana() == 0,
-					"Control flower advanced as quickly as the enchanted-soil flower");
-			helper.succeed();
-		});
+		// Exercise the real commonTick + soil mixin without changing shared world time or needing daylight.
+		SpecialFlowerBlockEntity boosted = helper.getBlockEntity(BOOSTED_FLOWER_POS);
+		SpecialFlowerBlockEntity normal = helper.getBlockEntity(NORMAL_FLOWER_POS);
+		long boostedBefore = flowerTicks(boosted);
+		long normalBefore = flowerTicks(normal);
+		SpecialFlowerBlockEntity.commonTick(helper.getLevel(), boosted.getBlockPos(), boosted.getBlockState(), boosted);
+		SpecialFlowerBlockEntity.commonTick(helper.getLevel(), normal.getBlockPos(), normal.getBlockState(), normal);
+		helper.assertTrue(flowerTicks(boosted) - boostedBefore == 2 && flowerTicks(normal) - normalBefore == 1,
+				"Enchanted soil must execute two real flower ticks while ordinary soil executes one");
+		helper.assertTrue(helper.getLevel().getDayTime() == dayTime, "Soil fixture changed shared world time");
+		helper.succeed();
+	}
+
+	private static long flowerTicks(SpecialFlowerBlockEntity flower) {
+		try {
+			var field = ExtraGeneratingFlowerBlockEntity.class.getDeclaredField("ticksExisted");
+			field.setAccessible(true);
+			return field.getLong(flower);
+		} catch (ReflectiveOperationException e) {
+			throw new AssertionError(e);
+		}
 	}
 }

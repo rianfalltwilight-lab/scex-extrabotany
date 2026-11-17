@@ -3,6 +3,7 @@ package io.github.lounode.extrabotany.client.renderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
+import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
@@ -34,7 +35,7 @@ public class ColorHandler {
 	}
 
 	public static void submitItems(ItemHandlerConsumer items) {
-		items.register((s, t) -> t == 0 ? Mth.hsvToRgb(ClientTickHandler.getUiAnimationTicks() * 2 % 360 / 360F, 0.25F, 1F) : -1,
+		items.register((s, t) -> t == 0 ? FastColor.ARGB32.opaque(Mth.hsvToRgb(ClientTickHandler.getUiAnimationTicks() * 2 % 360 / 360F, 0.25F, 1F)) : -1,
 				ExtraBotanyItems.gaiaHammer);
 
 		items.register((s, t) -> {
@@ -44,7 +45,7 @@ public class ColorHandler {
 
 			Brew brew = BrewUtil.getBrew(s);
 			if (brew == BotaniaBrews.FALLBACK) {
-				return s.getItem() instanceof TaintedBloodPendantItem ? 0xC6000E : 0x989898;
+				return FastColor.ARGB32.opaque(s.getItem() instanceof TaintedBloodPendantItem ? 0xC6000E : 0x989898);
 			}
 
 			int color = brew.getColor(s);
@@ -55,14 +56,14 @@ public class ColorHandler {
 			int g = Math.max(0, Math.min(255, (color >> 8 & 0xFF) + add));
 			int b = Math.max(0, Math.min(255, (color & 0xFF) + add));
 
-			return r << 16 | g << 8 | b;
+			return FastColor.ARGB32.color(255, r, g, b);
 		},
 				ExtraBotanyItems.manaCocktail,
 				ExtraBotanyItems.infiniteWine,
 				ExtraBotanyItems.holyWaterGrenade,
 				ExtraBotanyItems.voidArchives
 		);
-		ItemColor lensHandler = (s, t) -> t == 0 ? ((LensItem) s.getItem()).getLensColor(s, Minecraft.getInstance().level) : -1;
+		ItemColor lensHandler = (s, t) -> t == 0 ? FastColor.ARGB32.opaque(((LensItem) s.getItem()).getLensColor(s, Minecraft.getInstance().level)) : -1;
 		items.register(lensHandler,
 				ExtraBotanyItems.lensPush, ExtraBotanyItems.lensSmelt, ExtraBotanyItems.lensMana,
 				ExtraBotanyItems.lensPotion, ExtraBotanyItems.lensTrace);

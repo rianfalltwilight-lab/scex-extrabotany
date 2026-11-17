@@ -180,7 +180,7 @@ public class PedestalBlockEntity extends ExposedSimpleInventoryBlockEntity imple
 	private int tier;
 	private int solarTicks;
 	private boolean pendingSync;
-	private Map<ItemStack, ItemFrame> automaticHammers = new HashMap<>();
+	private List<ItemFrame> automaticHammers = List.of();
 
 	public PedestalBlockEntity(BlockPos pos, BlockState state) {
 		this(ExtraBotanyBlockEntities.PEDESTAL, pos, state);
@@ -509,12 +509,12 @@ public class PedestalBlockEntity extends ExposedSimpleInventoryBlockEntity imple
 		}
 
 		if (self.tickCount % 10 == 0 && !self.isEmpty()) {
-			for (ItemStack hammer : self.automaticHammers.keySet()) {
-				ItemFrame frame = self.automaticHammers.get(hammer);
-				if (frame == null || !frame.isAlive()) {
+			for (ItemFrame frame : self.automaticHammers) {
+				if (!frame.isAlive()) {
 					continue;
 				}
-				if (self.tryAutoSmash(hammer)) {
+				// Frames are cached between scans, but players can replace their items at any time.
+				if (self.tryAutoSmash(frame.getItem())) {
 					break;
 				}
 			}
@@ -532,7 +532,11 @@ public class PedestalBlockEntity extends ExposedSimpleInventoryBlockEntity imple
 		if (getTier() >= 2) {
 			amount += 5;
 			for (BlockPos pos : POOL_LOCATIONS) {
-				BlockEntity tile = getLevel().getBlockEntity(getBlockPos().offset(pos.getX(), pos.getY(), pos.getZ()));
+				BlockPos poolPos = getBlockPos().offset(pos);
+				if (!getLevel().isLoaded(poolPos)) {
+					continue;
+				}
+				BlockEntity tile = getLevel().getBlockEntity(poolPos);
 				if (tile instanceof ManaPoolBlockEntity pool && pool.getCurrentMana() >= 10) {
 					pool.receiveMana(-10);
 					amount += 2;
@@ -552,9 +556,11 @@ public class PedestalBlockEntity extends ExposedSimpleInventoryBlockEntity imple
 	 */
 	public void updateTier() {
 		BlockPos pos = getBlockPos();
-		if (TIER_2_STRUCTURE.matches(getLevel(), pos.offset(3, 1, 3), Direction.DOWN, Direction.SOUTH) != null) {
+		if (getLevel().hasChunksAt(pos.offset(-3, -2, -3), pos.offset(3, 1, 3))
+				&& TIER_2_STRUCTURE.matches(getLevel(), pos.offset(3, 1, 3), Direction.DOWN, Direction.SOUTH) != null) {
 			setTier(2);
-		} else if (TIER_1_STRUCTURE.matches(getLevel(), pos.offset(2, 0, 2), Direction.DOWN, Direction.SOUTH) != null) {
+		} else if (getLevel().hasChunksAt(pos.offset(-2, -2, -2), pos.offset(2, 0, 2))
+				&& TIER_1_STRUCTURE.matches(getLevel(), pos.offset(2, 0, 2), Direction.DOWN, Direction.SOUTH) != null) {
 			setTier(1);
 		} else {
 			setTier(0);
@@ -575,6 +581,10 @@ public class PedestalBlockEntity extends ExposedSimpleInventoryBlockEntity imple
 	}
 
 	public boolean tryAutoSmash(ItemStack hammer) {
+		ItemFrame frame = hammer.getFrame();
+		if (frame != null && (!frame.isAlive() || frame.getItem() != hammer)) {
+			return false;
+		}
 		for (var holder : ExtraBotanyRecipeTypes.getRecipeHolders(level, ExtraBotanyRecipeTypes.PEDESTAL_SMASH_TYPE)) {
 			PedestalRecipe recipe = holder.value();
 			if (!recipe.getSmashTools().test(hammer)) {
@@ -591,9 +601,8 @@ public class PedestalBlockEntity extends ExposedSimpleInventoryBlockEntity imple
 			int efficiency = getEnchantmentLevel(hammer, Enchantments.EFFICIENCY);
 
 			if (hammer.isDamageableItem() && level instanceof ServerLevel serverLevel) {
-				ItemFrame frame = automaticHammers.get(hammer);
 				hammer.hurtAndBreak(1, serverLevel, (LivingEntity) null, brokenItem -> {
-					if (frame != null) {
+					if (frame != null && frame.getItem() == hammer) {
 						frame.setItem(ItemStack.EMPTY);
 					}
 				});
@@ -641,10 +650,7 @@ public class PedestalBlockEntity extends ExposedSimpleInventoryBlockEntity imple
 	}
 
 	public void updateAutomaticHammers() {
-		this.automaticHammers = getPerhapsHammers();
-		if (this.automaticHammers == null) {
-			this.automaticHammers = new HashMap<>();
-		}
+		this.automaticHammers = List.copyOf(getPerhapsHammers().values());
 	}
 
 	@Override

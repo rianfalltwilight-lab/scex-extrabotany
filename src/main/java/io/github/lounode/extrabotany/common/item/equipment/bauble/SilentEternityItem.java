@@ -3,6 +3,7 @@ package io.github.lounode.extrabotany.common.item.equipment.bauble;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
@@ -26,7 +27,6 @@ import vazkii.botania.common.item.relic.RelicImpl;
 
 import io.github.lounode.extrabotany.common.brew.ExtraBotanyMobEffects;
 import io.github.lounode.extrabotany.common.item.ExtraBotanyItems;
-import io.github.lounode.extrabotany.common.util.FrostWalkerHelper;
 
 import java.util.Collections;
 import java.util.Map;
@@ -41,8 +41,8 @@ import static io.github.lounode.extrabotany.common.lib.ResourceLocationHelper.pr
  * <ul>
  * <li>佩戴者不能被任何方式治疗。
  * The wearer cannot be healed in any way.</li>
- * <li>佩戴者站着不动超过 15 tick 后，每 tick 直接恢复 0.4 点生命值，并且得到"永恒"效果，免疫全部伤害。
- * After the wearer stands still for more than 15 ticks, 0.4 health comes back directly on each tick, and the wearer gets the Eternity effect, which gives immunity to all damage.</li>
+ * <li>佩戴者站着不动超过 15 tick 后，每 tick 直接恢复 0.4 点生命值，并且得到"永恒"效果，免疫常规伤害；虚空和 /kill 仍生效。
+ * After the wearer stands still for more than 15 ticks, 0.4 health comes back directly on each tick, and Eternity protects against ordinary damage; void damage and /kill still apply.</li>
  * <li>它是一个永远有 666 魔力的魔力源，可以给其他物品供应魔力。
  * It is a mana source that always has 666 mana, and it can give mana to other items.</li>
  * <li>击退抗性 +1。脚下 4 格内的水和熔岩会结冰。
@@ -57,6 +57,7 @@ import static io.github.lounode.extrabotany.common.lib.ResourceLocationHelper.pr
  */
 public class SilentEternityItem extends RelicBaubleItem {
 	private static final int FREEZE_RADIUS = 4;
+	private static final int IDLE_FREEZE_INTERVAL = 20;
 	private static final int STILL_TICKS_BEFORE_REST = 15;
 	private static final float REST_HEAL = 0.4F;
 	private static final int REST_EFFECT_TICKS = 10;
@@ -113,19 +114,23 @@ public class SilentEternityItem extends RelicBaubleItem {
 			return;
 		}
 		new Reservoir(stack).addMana(Reservoir.MAX_MANA);
-		if (!(player instanceof ServerPlayer serverPlayer)) {
+		if (!(player instanceof ServerPlayer)) {
 			return;
 		}
 
-		FrostWalkerHelper.freeze(stack, serverPlayer, serverPlayer.serverLevel(), FREEZE_RADIUS);
 		// 结冰的逻辑只对站在地面上的生物生效。原版在调用前后临时把玩家标记为"在地面上"。
 		// The freeze logic only works for a mob that is on the ground. The original marks the player as "on the ground" for the time of the call.
-		boolean wasOnGround = player.onGround();
-		player.setOnGround(true);
-		try {
-			FrostRingItem.freezeLava(player, player.level(), player.blockPosition(), FREEZE_RADIUS);
-		} finally {
-			player.setOnGround(wasOnGround);
+		BlockPos pos = player.blockPosition();
+		boolean moved = !pos.equals(BlockPos.containing(player.xo, player.yo, player.zo));
+		if (moved || player.tickCount % IDLE_FREEZE_INTERVAL == 0) {
+			boolean wasOnGround = player.onGround();
+			player.setOnGround(true);
+			try {
+				FrostRingItem.freezeWater(player, player.level(), pos, FREEZE_RADIUS);
+				FrostRingItem.freezeLava(player, player.level(), pos, FREEZE_RADIUS);
+			} finally {
+				player.setOnGround(wasOnGround);
+			}
 		}
 
 		Stillness stillness = STILLNESS.computeIfAbsent(player, ignored -> new Stillness());

@@ -63,7 +63,9 @@ public final class MountItems {
 			return InteractionResultHolder.fail(stack);
 		}
 		if (!level.isClientSide()) {
-			level.addFreshEntity(mount);
+			if (!level.addFreshEntity(mount)) {
+				return InteractionResultHolder.fail(stack);
+			}
 			stack.consume(1, player);
 		}
 		return InteractionResultHolder.sidedSuccess(stack, level.isClientSide());
