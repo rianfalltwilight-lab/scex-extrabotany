@@ -1,6 +1,6 @@
 {
   "category": "botania:extrabotanies",
-  "icon": "extrabotany:starry_idol_headgear",
+  "icon": "extrabotany:miku_helm",
   "name": "extrabotany.entry.starry_idol",
   "pages": [
     {
@@ -9,22 +9,22 @@
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "extrabotany:starry_idol_headgear",
+      "recipe": "extrabotany:miku_helm",
       "text": "extrabotany.page.starry_idol1"
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "extrabotany:starry_idol_suit",
+      "recipe": "extrabotany:miku_chest",
       "text": "extrabotany.page.starry_idol2"
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "extrabotany:starry_idol_skirt",
+      "recipe": "extrabotany:miku_legs",
       "text": "extrabotany.page.starry_idol3"
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "extrabotany:starry_idol_boots",
+      "recipe": "extrabotany:miku_boots",
       "text": "extrabotany.page.starry_idol4"
     },
     {

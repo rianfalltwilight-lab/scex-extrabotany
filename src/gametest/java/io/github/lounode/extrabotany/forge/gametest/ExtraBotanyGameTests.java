@@ -115,8 +115,10 @@ public final class ExtraBotanyGameTests {
 		long dayTime = helper.getLevel().getDayTime();
 		helper.setBlock(BOOSTED_SOIL_POS, ExtraBotanyBlocks.enchantedSoil);
 		helper.setBlock(NORMAL_SOIL_POS, Blocks.GRASS_BLOCK);
-		helper.setBlock(BOOSTED_FLOWER_POS, ExtrabotanyFlowerBlocks.sunshineLily);
-		helper.setBlock(NORMAL_FLOWER_POS, ExtrabotanyFlowerBlocks.sunshineLily);
+		// 被动花在蕴魔土上不加速（见 E1ParityGameTests），所以这里用主动产能的石中姬。
+		// A passive flower is not made faster on Enchanted Soil (see E1ParityGameTests), thus this uses the active Stonesia.
+		helper.setBlock(BOOSTED_FLOWER_POS, ExtrabotanyFlowerBlocks.stonesia);
+		helper.setBlock(NORMAL_FLOWER_POS, ExtrabotanyFlowerBlocks.stonesia);
 
 		// Exercise the real commonTick + soil mixin without changing shared world time or needing daylight.
 		SpecialFlowerBlockEntity boosted = helper.getBlockEntity(BOOSTED_FLOWER_POS);

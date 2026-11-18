@@ -30,6 +30,18 @@
       "text": "extrabotany.page.pedestals5"
     },
     {
+      "type": "extrabotany:pedestal_smash",
+      "recipe": "extrabotany:pedestal_smash/gravel"
+    },
+    {
+      "type": "extrabotany:pedestal_smash",
+      "recipe": "extrabotany:pedestal_smash/flint"
+    },
+    {
+      "type": "extrabotany:pedestal_smash",
+      "recipe": "extrabotany:pedestal_smash/gunpowder"
+    },
+    {
       "type": "patchouli:text",
       "text": "extrabotany.page.pedestals4"
     }

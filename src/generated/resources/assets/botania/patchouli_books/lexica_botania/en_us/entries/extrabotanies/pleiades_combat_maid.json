@@ -38,10 +38,9 @@
       "text": "extrabotany.page.pleiades_combat_maid6"
     },
     {
-      "type": "patchouli:spotlight",
+      "type": "botania:runic_altar",
       "advancement": "extrabotany:main/corruption",
-      "item": "extrabotany:sanguine_pleiades_combat_maid_suit",
-      "link_recipe": true,
+      "recipe": "extrabotany:runic_altar/sanguine_pleiades_combat_maid_suit",
       "text": "extrabotany.page.pleiades_combat_maid7"
     },
     {

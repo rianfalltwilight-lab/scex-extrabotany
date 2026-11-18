@@ -6,12 +6,21 @@
       "item": "minecraft:potato"
     },
     {
-      "item": "minecraft:gold_nugget"
+      "item": "minecraft:potato"
+    },
+    {
+      "item": "minecraft:potato"
+    },
+    {
+      "item": "minecraft:potato"
+    },
+    {
+      "tag": "c:ingots/gold"
     }
   ],
-  "mana": 800,
+  "mana": 2000,
   "output": {
-    "count": 1,
+    "count": 4,
     "id": "extrabotany:gilded_potato"
   },
   "reagent": {

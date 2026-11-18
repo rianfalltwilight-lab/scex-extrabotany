@@ -134,8 +134,18 @@ Only you can do these, or they need your agreement first.
   The garden accepts the Stardust Lotus; a Flower Weapon goes away when it hits a block, and the weapon of the Entropinnyum makes an explosion.
 - [ ] 全能指环和精灵王指环里的饰品效果生效（属性加成、植物魔法饰品的效果）。
   The effects of the accessories in the ALL FOR ONE ring and in the Ring of Elven King work (attribute bonuses, the effects of the Botania accessories).
-- [ ] 限量补给袋：第一个袋子给空的律者核心；奖池抽完之后每次只给 2 个绿宝石。
-  Supply Bag Limited Edition: the first bag gives an Empty Herrscher Core; after the pool is empty, each draw only gives 2 emeralds.
+- [ ] 限量补给袋：100 份奖池（1.12），奖池抽完之后每次只给 2 个绿宝石。
+  Supply Bag Limited Edition: a pool of 100 lots (1.12); after the pool is empty, each draw only gives 2 emeralds.
+- [ ] 对照原版审计 E5：JEI 里王者圣剑、阿喀琉斯之盾在工作台，成龙 / 蜘蛛指环和血染女仆服在符文祭坛，律者核心用天翼族之冠；Eins 袋给万能花瓣，Zwei 袋给元素 / 七罪符文。
+  Parity audit E5: in JEI the Excalibur and the Achilles Shield are on the crafting table, the Jackie Chan / spider rings and the sanguine maid suit are on the runic altar, and the Core of the Void uses the Flugel Tiara; the Eins bag gives universal petals and the Zwei bag gives element / sin runes.
+- [ ] 新生成的地牢、废弃矿井等箱子里有时有瓶装火焰 / 星光 / 妖精；偶尔有僵尸或骷髅副手拿着糖果袋，杀死后掉落。
+  New dungeon, mineshaft and other chests sometimes have a Bottled Flame / Star / Pixie; now and then a zombie or skeleton holds a candy bag in its off hand and drops it when killed.
+- [ ] 完成 6 个本模组进度时得到"新生"并掉落弥散指环（12 个魔术手指、18 个精卫之羽）；击败空之律者掉落柠檬；完成"终局"时掉落 Thug Life 和两张唱片。
+  At 6 completed advancements of this mod the player gets "A Green Hand" and a Dispersive Ring drops (12: Magic Finger, 18: Feather of Jingwei); defeating the Herrscher drops the Lemon; "End Day" drops Thug Life and two music discs.
+- [ ] 对照原版审计 E7：花、锤子、盾牌、次元催化器、材料和券的贴图是原版的；盖亚守护者III的战斗音乐和唱片是 1.12 的原曲，音量不再偏大；王之花园召唤神烦花时有叫声；中文名是原版的（例如日耀百合、镀金服务器、诅咒指环 = death_ring、凋零指环 = curse_ring）；十月的黑暗精灵和圣诞期间的奖励袋外观正常；双子兰等条目的插图显示完整。
+  Parity audit E7: the textures of the flowers, hammers, shields, dimension catalyst, materials and ticket are the original ones; the fight music and the disc of Guardian of Gaia III are the original 1.12 track and no longer too loud; the King's Garden barks when it summons the annoying flower; the Chinese names are the original ones (for example 日耀百合, 镀金服务器, 诅咒指环 = death_ring, 凋零指环 = curse_ring); the October dark pixie and the Christmas reward bags look right; the illustrations of the twinstar and other entries show completely.
+- [ ] 对照原版审计 E6：三种飞船能划、按跳跃键上升、松开后慢慢下降，乘坐时消耗魔力，贴图正确；旅行手袋界面的格子和贴图对齐，能换盔甲；云朵透镜放出药水云；镀金究极锤在自然祭坛上能升级，范围模式能开关，贴图随开关变化；问号（头顶三个）和柠檬戴在头上位置合适。
+  Parity audit E6: the three airships row, rise with the jump key and sink slowly after it is released, use mana while ridden, and show the right textures; the slots of the Mini Handbag screen line up with its texture and the armor can be changed; the Cloud Lens makes potion clouds; the Ultimate Hammer upgrades on a pedestal, its area mode switches on and off, and its texture follows the mode; the question mark (three above the head) and the lemon sit well on the head.
 
 ### 4.10 机器、活石桶、不随想之茧和星尘莲 / Machines, the Livingrock Barrel, the Cocoon of Desire and the Stardust Lotus（第 9 批 / batch 9）
 
@@ -163,8 +173,12 @@ Only you can do these, or they need your agreement first.
 
 - [ ] 召唤：手持或佩戴有 200,000 点自然之息的自然蕴息宝珠，潜行右键盖亚仪式场地（和植物魔法的盖亚仪式相同，半径 12 格）中间的信标，出现的是本我，宝珠少了 200,000 点自然之息。创造模式物品栏里有一个充满的宝珠。
   The summon: hold or wear a Nature Orb that has 200,000 Nature Aura, and sneak-use the beacon in the center of a Gaia ritual arena (the same as for the Gaia ritual of Botania, a radius of 12 blocks); the Ego appears, and the orb has 200,000 Nature Aura less. The creative tab has a full orb.
-- [ ] 挑战券召唤的是盖亚守护者III（重制版的 Boss，场地半径 15 格），整场战斗里没有本我的阶段：没有彩色的地雷阵，没有拿遗物剑的仆从，音乐一直是盖亚守护者III的音乐。
-  The Challenge Ticket summons Guardian of Gaia III (the boss of Reburn, with an arena radius of 15 blocks), and the full fight has no Ego phase: no colored landmine formations, no minions with relic swords, and the music is always that of Guardian of Gaia III.
+- [ ] 挑战券召唤的是盖亚守护者III（按 1.12 重写，场地和普通盖亚仪式相同，半径 12 格），整场战斗里没有本我的阶段：没有本我的地雷阵型，没有拿遗物剑的仆从，音乐一直是盖亚守护者III的音乐。
+  The Challenge Ticket summons Guardian of Gaia III (rewritten after 1.12, with the arena of the usual Ritual of Gaia, radius 12), and the full fight has no Ego phase: no landmine formations of the Ego, no minions with relic swords, and the music is always that of Guardian of Gaia III.
+- [ ] 盖亚守护者III：开场 5 层护盾；生命 75% 和 40% 时召唤 4 个骷髅仆从（头颅）和 8 把审判之剑，并出现聊天提示；二阶段后有"点名"和导弹雨的预警消息。
+  Guardian of Gaia III: 5 shields at the start; at 75% and 40% health it summons 4 skull minions (heads) and 8 swords of judgment, with chat messages; after rank II, the random-player attack and the missile rain have warning messages.
+- [ ] 空之律者 2% 掉落的律者核心是彩虹翅膀；暗影之刃召唤的妖精是黑色的。
+  The 2% Core of the Void from the Herrscher of the Void has the rainbow wings; the pixies of the Shadow Katana are dark.
 - [ ] 本我用召唤者的名字（血条上）和召唤者的皮肤，手里拿着它现在用的遗物剑，武器每隔一会儿换一把。
   The Ego has the name of its summoner (on the boss bar) and the skin of its summoner, holds the relic sword that it uses at this time, and changes its weapon at intervals.
 - [ ] 本我没有出场动画，一出现就攻击。它被攻击时不会被击退，也不会跳向攻击者（和原版相同）。
@@ -189,8 +203,8 @@ Only you can do these, or they need your agreement first.
 
 - [ ] 用雪绒花或死之花做迷之炖菜，吃下后效果立刻生效。
   A suspicious stew from an Edelweiss or a Necrofleur has its effect immediately.
-- [ ] 手持森林法杖看风铃草：显示的风力和"主手法杖、副手风铃草、对着空气使用"在聊天栏显示的风力相同。
-  The Wand of the Forest on a Bellflower: the wind level that it shows is the same as the wind level in the chat for "wand in the main hand, Bellflower in the off hand, use on the air".
+- [ ] 风铃草种在 Y 90 以下或头顶有方块时不产魔力；种在 Y 180 的露天处，晴天每 10 tick 产 20。
+  A Bellflower below Y 90 or under a block makes no mana; in the open at Y 180 it makes 20 each 10 ticks in clear weather.
 - [ ] 永寂龙胆和叮当舞花收到红石信号时停止工作。
   The Serenitian and the Tinkle stop with a redstone signal.
 - [ ] 祭坛的一级和二级结构仍然能给自然蕴息宝珠充能。
@@ -200,8 +214,10 @@ Only you can do these, or they need your agreement first.
 
 ### 4.14 盖亚战斗、物品和事件 / Gaia fights, items and events（第 13 批 / batch 13）
 
-- [ ] 勇士盾：用它攻击能攒下伤害吸收（黄色的心），攒到 10 点后潜行并使用可以解放。
-  Achilles Shield: attacks with it collect absorption (yellow hearts), and at 10 points a sneak-use releases it.
+- [ ] 勇士盾：用它攻击能攒下伤害吸收（黄色的心），攒到 12 点后潜行并使用可以解放；举盾向前走会撞伤并击退面前的生物。
+  Achilles Shield: hits with it collect absorption (yellow hearts); with 12, a sneak-use releases it; walking with the shield raised hurts and knocks back the creatures in front.
+- [ ] 发射器朝着放有物品的自然祭坛、里面放锤子，每次激活敲 5 下，物品最终变成锻造结果。
+  A dispenser with a hammer that faces a Nature Pedestal with an item strikes 5 times for each activation, and the item finally becomes the result.
 - [ ] 精卫之羽：火焰命中后玩家得到伤害吸收。
   Feather of Jingwei: the player gets absorption after the fire hits.
 - [ ] 盖亚守护者传送时，出发的位置有紫色的传送粒子；血条的噪点在出场结束时正常消失。
@@ -212,8 +228,10 @@ Only you can do these, or they need your agreement first.
   After an exit and a new entry into the world during a fight (or a server restart), the boss bar still shows the number of players in the fight.
 - [ ] 莱茵锤开启后魔力的消耗速度明显变慢，四种增益仍然一直存在。
   After the Rhein Hammer is on, the mana cost is clearly slower, and the four buffs are still always there.
-- [ ] 梦魇燃料和精神燃料仍然能在熔炉里燃烧。
-  The Nightmare Fuel and the Spirit Fuel still burn in a furnace.
+- [ ] 梦魇燃料吃下后变成精神燃料；两者都不能在熔炉里燃烧（按 1.16）。
+  Eating the Nightmare Fuel gives the Spirit Fuel; neither burns in a furnace (as in 1.16).
+- [ ] 白天穿全套哥布林猎人、夜晚穿全套暗影武士时，生命上限立刻变化；天亮或天黑后一两秒内恢复。
+  The full Goblin Slayer set by day and the full Shadow Warrior set by night change the maximum health at once; it goes back within a second or two after dawn or dusk.
 
 ### 4.15 界面和客户端 / HUDs and the client（第 14 批和"结构整理" / batch 14 and "Structure"）
 

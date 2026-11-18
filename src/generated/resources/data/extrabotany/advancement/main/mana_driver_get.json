@@ -1,0 +1,27 @@
+{
+  "parent": "extrabotany:main/deep_dark_fantasy",
+  "criteria": {
+    "code_triggered": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:mana_driver_get.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:dispersive_ring"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:mana_driver_get"
+    }
+  },
+  "requirements": [
+    [
+      "code_triggered"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

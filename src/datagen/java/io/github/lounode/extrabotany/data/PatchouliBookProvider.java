@@ -79,6 +79,8 @@ public final class PatchouliBookProvider extends PatchouliProvider {
 						crafting(ExtraBotanyItems.elementiumHammer).withText("extrabotany.page.hammers3"),
 						text("extrabotany.page.hammers4"),
 						crafting(ExtraBotanyItems.terrasteelHammer).withText("extrabotany.page.hammers5"),
+						text("extrabotany.page.ultimate_hammer0"),
+						runicAlter(ExtraBotanyItems.ultimateHammer).withText("extrabotany.page.ultimate_hammer1"),
 						text("extrabotany.page.hammers6"),
 						new SmithingPage("extrabotany:smithing/gaia_hammer").withText("extrabotany.page.hammers7"),
 						text("extrabotany.page.hammers8"),
@@ -139,6 +141,9 @@ public final class PatchouliBookProvider extends PatchouliProvider {
 								.withText("extrabotany.page.pedestals3"),
 						pedestal(ExtraBotanyItems.spiritFragment)
 								.withText("extrabotany.page.pedestals5"),
+						new PedestalPage(prefix("pedestal_smash/gravel").toString()),
+						new PedestalPage(prefix("pedestal_smash/flint").toString()),
+						new PedestalPage(prefix("pedestal_smash/gunpowder").toString()),
 						text("extrabotany.page.pedestals4")
 				)
 				.extraRecipeMapping(ExtraBotanyBlocks.calcitePedestal, 1)
@@ -153,6 +158,8 @@ public final class PatchouliBookProvider extends PatchouliProvider {
 						text("extrabotany.page.fuels2"),
 						new EatPage(ExtraBotanyItems.nightmareFuel, ExtraBotanyItems.spiritFuel)
 								.withText("extrabotany.page.fuels3"),
+						elvenTrade(ExtraBotanyItems.spiritFuel),
+						elvenTrade(ExtraBotanyItems.spiritFragment),
 						text("extrabotany.page.fuels4")
 				)
 				.save(consumer, id("fuels"));
@@ -171,7 +178,7 @@ public final class PatchouliBookProvider extends PatchouliProvider {
 				.withAdvancement(mainAdvancement(LibAdvancementNames.THE_SOURCE_OF_HONKAI))
 				.pages(
 						text("extrabotany.page.excalibur0"),
-						smithing(ExtraBotanyItems.excalibur)
+						crafting(ExtraBotanyItems.excalibur)
 								.withText("extrabotany.page.excalibur1")
 				)
 				.save(consumer, id("excalibur"));
@@ -211,7 +218,8 @@ public final class PatchouliBookProvider extends PatchouliProvider {
 				.withAdvancement(mainAdvancement(LibAdvancementNames.THE_SOURCE_OF_HONKAI))
 				.pages(
 						text("extrabotany.page.core_of_the_void0"),
-						text("extrabotany.page.core_of_the_void1")
+						text("extrabotany.page.core_of_the_void1"),
+						crafting(ExtraBotanyItems.coreOfTheVoid).withText("extrabotany.page.core_of_the_void2")
 
 				)
 				.extraRecipeMapping(ExtraBotanyItems.coreOfTheVoid, 0)
@@ -313,7 +321,7 @@ public final class PatchouliBookProvider extends PatchouliProvider {
 						manaInfusion("blaze_rod_dupe").withText("extrabotany.page.dimension_catalyst2"),
 						manaInfusion("cobblestone_to_nether_rack").withText("extrabotany.page.dimension_catalyst3"),
 						manaInfusion("diamond_horse_armor_to_shulker_shell").withText("extrabotany.page.dimension_catalyst4"),
-						manaInfusion("snowball_to_ender_pearl").withText("extrabotany.page.dimension_catalyst5"),
+						manaInfusion("diamond_to_ender_pearl").withText("extrabotany.page.dimension_catalyst5"),
 						manaInfusion("iron_ore_to_quartz_ore").withText("extrabotany.page.dimension_catalyst6"),
 						manaInfusion("nether_star_to_totem_of_undying").withText("extrabotany.page.dimension_catalyst7"),
 						manaInfusion("sand_to_soul_sand").withText("extrabotany.page.dimension_catalyst8"),
@@ -414,7 +422,7 @@ public final class PatchouliBookProvider extends PatchouliProvider {
 				.withIcon(ExtraBotanyItems.orichalcos)
 				.pages(
 						text("extrabotany.page.orichalcos0"),
-						runicAlter(ExtraBotanyItems.orichalcos).withText("extrabotany.page.orichalcos1")
+						terraPlate(ExtraBotanyItems.orichalcos).withText("extrabotany.page.orichalcos1")
 				)
 				.extraRecipeMapping(ExtraBotanyBlocks.orichalcosBlock, 0)
 				.extraRecipeMapping(ExtraBotanyItems.orichalcosNugget, 0)
@@ -440,13 +448,13 @@ public final class PatchouliBookProvider extends PatchouliProvider {
 				.save(consumer, id("das_rheingold"));
 		PatchouliBuilder.entry(CATEGORY)
 				.withName("extrabotany.entry.starry_idol")
-				.withIcon(ExtraBotanyItems.starryIdolHeadgear)
+				.withIcon(ExtraBotanyItems.mikuHelm)
 				.pages(
 						text("extrabotany.page.starry_idol0"),
-						crafting(ExtraBotanyItems.starryIdolHeadgear).withText("extrabotany.page.starry_idol1"),
-						crafting(ExtraBotanyItems.starryIdolSuit).withText("extrabotany.page.starry_idol2"),
-						crafting(ExtraBotanyItems.starryIdolSkirt).withText("extrabotany.page.starry_idol3"),
-						crafting(ExtraBotanyItems.starryIdolBoots).withText("extrabotany.page.starry_idol4"),
+						crafting(ExtraBotanyItems.mikuHelm).withText("extrabotany.page.starry_idol1"),
+						crafting(ExtraBotanyItems.mikuChest).withText("extrabotany.page.starry_idol2"),
+						crafting(ExtraBotanyItems.mikuLegs).withText("extrabotany.page.starry_idol3"),
+						crafting(ExtraBotanyItems.mikuBoots).withText("extrabotany.page.starry_idol4"),
 						text("extrabotany.page.starry_idol5")
 								.withFlags("otaku_mode")
 				)
@@ -463,7 +471,7 @@ public final class PatchouliBookProvider extends PatchouliProvider {
 						text("extrabotany.page.pleiades_combat_maid5"),
 						text("extrabotany.page.pleiades_combat_maid6")
 								.withAdvancement(mainAdvancement(LibAdvancementNames.CORRUPTION)),
-						spotlight(ExtraBotanyItems.sanguinePleiadesCombatMaidSuit).withText("extrabotany.page.pleiades_combat_maid7")
+						runicAlter(ExtraBotanyItems.sanguinePleiadesCombatMaidSuit).withText("extrabotany.page.pleiades_combat_maid7")
 								.withAdvancement(mainAdvancement(LibAdvancementNames.CORRUPTION)),
 						text("extrabotany.page.pleiades_combat_maid8")
 								.withFlags("otaku_mode")
@@ -627,7 +635,7 @@ public final class PatchouliBookProvider extends PatchouliProvider {
 				.withIcon(ExtraBotanyItems.spiderRing)
 				.pages(
 						text("extrabotany.page.spider_ring0"),
-						crafting(ExtraBotanyItems.spiderRing).withText("extrabotany.page.spider_ring1")
+						runicAlter(ExtraBotanyItems.spiderRing).withText("extrabotany.page.spider_ring1")
 				)
 				.save(consumer, id("spider_ring"));
 		PatchouliBuilder.entry(BAUBLES)
@@ -635,7 +643,7 @@ public final class PatchouliBookProvider extends PatchouliProvider {
 				.withIcon(ExtraBotanyItems.jackieChanRing)
 				.pages(
 						text("extrabotany.page.jackie_chan_ring0"),
-						crafting(ExtraBotanyItems.jackieChanRing).withText("extrabotany.page.jackie_chan_ring1")
+						runicAlter(ExtraBotanyItems.jackieChanRing).withText("extrabotany.page.jackie_chan_ring1")
 				)
 				.save(consumer, id("jackie_chan_ring"));
 		PatchouliBuilder.entry(BAUBLES)
@@ -678,7 +686,9 @@ public final class PatchouliBookProvider extends PatchouliProvider {
 				.withIcon(ExtrabotanyFlowerBlocks.twinstar)
 				.pages(
 						text("extrabotany.page.twinstar0"),
-						petal(ExtrabotanyFlowerBlocks.twinstar).withText("extrabotany.page.twinstar1")
+						petal(ExtrabotanyFlowerBlocks.twinstar).withText("extrabotany.page.twinstar1"),
+						// 对照原版审计 E7：1.12 图鉴的插图。 / Parity audit E7: the illustration of the 1.12 lexicon.
+						new io.github.lounode.extrabotany.data.patchouli.page.patchouli.ImagePage().withEntry(prefix("textures/gui/lexicon/geminiorchid.png"))
 				)
 				.extraRecipeMapping(ExtrabotanyFlowerBlocks.twinstarFloating, 1)
 				.save(consumer, id("twinstar"));
@@ -743,7 +753,8 @@ public final class PatchouliBookProvider extends PatchouliProvider {
 								.withMapping("0", RegistryHelper.getRegistryName(ExtrabotanyFlowerBlocks.manalink).toString())
 								.withMapping("A", RegistryHelper.getRegistryName(Blocks.AIR).toString()),
 						text("extrabotany.page.manalink1"),
-						petal(ExtrabotanyFlowerBlocks.manalink).withText("extrabotany.page.manalink2")
+						petal(ExtrabotanyFlowerBlocks.manalink).withText("extrabotany.page.manalink2"),
+						new io.github.lounode.extrabotany.data.patchouli.page.patchouli.ImagePage().withEntry(prefix("textures/gui/lexicon/manalinkium.png"))
 				)
 				.extraRecipeMapping(ExtrabotanyFlowerBlocks.manalinkFloating, 1)
 				.priority()
@@ -775,7 +786,7 @@ public final class PatchouliBookProvider extends PatchouliProvider {
 				.pages(
 						text("extrabotany.page.achille_shield0"),
 						text("extrabotany.page.achille_shield1"),
-						smithing(ExtraBotanyItems.achillesShield).withText("extrabotany.page.achille_shield2")
+						crafting(ExtraBotanyItems.achillesShield).withText("extrabotany.page.achille_shield2")
 				)
 				.save(consumer, id("achille_shield"));
 		PatchouliBuilder.entry(CATEGORY)
@@ -800,7 +811,9 @@ public final class PatchouliBookProvider extends PatchouliProvider {
 						text("extrabotany.page.more_lens6"),
 						crafting(ExtraBotanyItems.lensPotion).withText("extrabotany.page.more_lens7"),
 						text("extrabotany.page.more_lens8"),
-						crafting(ExtraBotanyItems.lensTrace).withText("extrabotany.page.more_lens9")
+						crafting(ExtraBotanyItems.lensTrace).withText("extrabotany.page.more_lens9"),
+						text("extrabotany.page.more_lens10"),
+						crafting(ExtraBotanyItems.lensCloud).withText("extrabotany.page.more_lens11")
 				)
 				.save(consumer, id("more_lens"));
 
@@ -883,7 +896,8 @@ public final class PatchouliBookProvider extends PatchouliProvider {
 								.withMapping("L", RegistryHelper.getRegistryName(Blocks.LAPIS_BLOCK).toString())
 								.withMapping("S", RegistryHelper.getRegistryName(Blocks.SEA_LANTERN).toString())
 								.withMapping("0", RegistryHelper.getRegistryName(ExtrabotanyFlowerBlocks.stardustLotus).toString())
-								.withText("extrabotany.page.stardustlotus2")
+								.withText("extrabotany.page.stardustlotus2"),
+						new io.github.lounode.extrabotany.data.patchouli.page.patchouli.ImagePage().withEntry(prefix("textures/gui/lexicon/stardustlotus.png"))
 				)
 				.extraRecipeMapping(ExtrabotanyFlowerBlocks.stardustLotusFloating, 1)
 				.save(consumer, id("stardustlotus"));
@@ -927,7 +941,8 @@ public final class PatchouliBookProvider extends PatchouliProvider {
 				.withIcon(ExtraBotanyBlocks.manaLiquefaction)
 				.pages(
 						text("extrabotany.page.manaliquefaction0"),
-						crafting(ExtraBotanyBlocks.manaLiquefaction).withText("extrabotany.page.manaliquefaction1")
+						crafting(ExtraBotanyBlocks.manaLiquefaction).withText("extrabotany.page.manaliquefaction1"),
+						new io.github.lounode.extrabotany.data.patchouli.page.patchouli.ImagePage().withEntry(prefix("textures/gui/lexicon/manafluid.png"))
 				)
 				.save(consumer, id("manaliquefaction"));
 		PatchouliBuilder.entry(CATEGORY)
@@ -952,7 +967,8 @@ public final class PatchouliBookProvider extends PatchouliProvider {
 				.pages(
 						text("extrabotany.page.judah_oath0"),
 						crafting(ExtraBotanyItems.judahOath),
-						crafting(ExtraBotanyItems.judahOathKira).withRecipe2(ExtraBotanyItems.judahOathSakura)
+						crafting(ExtraBotanyItems.judahOathKira).withRecipe2(ExtraBotanyItems.judahOathSakura),
+						crafting(ExtraBotanyItems.triBloodstone).withText("extrabotany.page.tri_bloodstone0")
 				)
 				.save(consumer, id("judah_oath"));
 		PatchouliBuilder.entry(BAUBLES)
@@ -995,14 +1011,36 @@ public final class PatchouliBookProvider extends PatchouliProvider {
 						text("extrabotany.page.cosmetics0"),
 						crafting(ExtraBotanyItems.foxEar).withRecipe2(ExtraBotanyItems.foxMask),
 						crafting(ExtraBotanyItems.pylon).withRecipe2(ExtraBotanyItems.redScarf),
-						crafting(ExtraBotanyItems.blackGlasses).withRecipe2(ExtraBotanyItems.thugLife),
+						crafting(ExtraBotanyItems.blackGlasses).withRecipe2(ExtraBotanyItems.question),
 						crafting(ExtraBotanyItems.mask).withRecipe2(ExtraBotanyItems.goggleStandard),
 						crafting(ExtraBotanyItems.goggleJungle).withRecipe2(ExtraBotanyItems.goggleOcean),
 						crafting(ExtraBotanyItems.goggleSnowfield),
 						text("extrabotany.page.cosmetics1"),
-						crafting(ExtraBotanyItems.superCrown).withText("extrabotany.page.cosmetics2")
+						crafting(ExtraBotanyItems.superCrown).withText("extrabotany.page.cosmetics2"),
+						spotlight(ExtraBotanyItems.lemon).withText("extrabotany.page.cosmetics3"),
+						spotlight(ExtraBotanyItems.thugLife).withText("extrabotany.page.cosmetics4")
 				)
 				.save(consumer, id("cosmetics"));
+		// 对照原版审计 E6：1.12 的旅行手袋和飞艇。1.12 图鉴没有这两个条目，文字是新写的。
+		// Parity audit E6: the Mini Handbag and the flying boats of 1.12. The 1.12 lexicon has no entries for them; the text is new.
+		PatchouliBuilder.entry(CATEGORY)
+				.withName("item.extrabotany.mini_handbag")
+				.withIcon(ExtraBotanyItems.miniHandbag)
+				.pages(
+						text("extrabotany.page.mini_handbag0"),
+						crafting(ExtraBotanyItems.miniHandbag)
+				)
+				.save(consumer, id("mini_handbag"));
+		PatchouliBuilder.entry(CATEGORY)
+				.withName("extrabotany.entry.flying_boat")
+				.withIcon(ExtraBotanyItems.manasteelFlyingBoat)
+				.pages(
+						text("extrabotany.page.flying_boat0"),
+						crafting(ExtraBotanyItems.manasteelFlyingBoat),
+						text("extrabotany.page.flying_boat1"),
+						crafting(ExtraBotanyItems.elementiumFlyingBoat).withRecipe2(ExtraBotanyItems.terrasteelFlyingBoat)
+				)
+				.save(consumer, id("flying_boat"));
 	}
 
 	/**

@@ -43,15 +43,10 @@ public class EntityLootProvider extends EntityLootSubProviderFix {
 		// The Ego Minion drops nothing.
 		this.add(ExtraBotanyEntityType.EGO_MINION, LootTable.lootTable());
 
+		// 对照原版审计 E5：1.12 loot_tables/gaia_guardian_3.json 只有潘多拉魔盒。两张唱片在 1.12 是"终局"进度的奖励（见 AllAdvancementsHandler）。
+		// Parity audit E5: loot_tables/gaia_guardian_3.json of 1.12 only has the Pandora's Box. The two music discs are the reward of the "End Day" advancement in 1.12 (see AllAdvancementsHandler).
 		this.add(ExtraBotanyEntityType.GAIA_III, LootTable.lootTable()
 				.withPool(boundPandorasBoxPool())
-				.withPool(LootPool.lootPool()
-						.when(() -> RealPlayerCondition.INSTANCE)
-						.when(LootItemRandomChanceCondition.randomChance(0.2F))
-						.setRolls(ConstantValue.exactly(1))
-						.add(LootItem.lootTableItem(ExtraBotanyItems.recordGaia3))
-						.add(LootItem.lootTableItem(ExtraBotanyItems.recordHerrscherOfTheVoid))
-				)
 		);
 
 		// 本我：潘多拉魔盒，以及 20% 的几率掉落它的唱片。原版只掉落潘多拉魔盒，唱片在原版里没有来源。
@@ -64,14 +59,20 @@ public class EntityLootProvider extends EntityLootSubProviderFix {
 						.when(LootItemRandomChanceCondition.randomChance(0.2F)))
 		);
 
-		// 空之律者：潘多拉魔盒、三个限量补给袋、唱片，以及 2% 的几率掉落空之律者核心。
-		// Herrscher of the Void: a Pandora's Box, three bags of the type Supply Bag Limited Edition, the music disc, and a 2% chance for a Core of The Void.
+		// 空之律者：潘多拉魔盒、三个限量补给袋，以及 2% 的几率掉落空之律者核心（1.12 loot_tables/void_herrscher.json，没有唱片）。
+		// Herrscher of the Void: a Pandora's Box, three bags of the type Supply Bag Limited Edition, and a 2% chance for a Core of The Void (loot_tables/void_herrscher.json of 1.12, no music disc).
+		// 1.12 的骷髅仆从不掉落东西。 / The skull minion of 1.12 drops nothing.
+		this.add(ExtraBotanyEntityType.SKULL_MINION, LootTable.lootTable());
 		this.add(ExtraBotanyEntityType.VOID_HERRSCHER, LootTable.lootTable()
 				.withPool(playerKillPool(ExtraBotanyItems.pandorasBox, 1))
 				.withPool(playerKillPool(ExtraBotanyItems.limitedEditionSupplyBag, 3))
-				.withPool(playerKillPool(ExtraBotanyItems.recordHerrscherOfTheVoid, 1))
-				.withPool(playerKillPool(ExtraBotanyItems.coreOfTheVoid, 1)
-						.when(LootItemRandomChanceCondition.randomChance(0.02F)))
+				// 1.12 loot_tables/void_herrscher.json：2% 的彩虹外观律者核心。 / 1.12 loot_tables/void_herrscher.json: a 2% Core of the Void with the rainbow appearance.
+				.withPool(LootPool.lootPool()
+						.when(() -> RealPlayerCondition.INSTANCE)
+						.when(LootItemRandomChanceCondition.randomChance(0.02F))
+						.setRolls(ConstantValue.exactly(1))
+						.add(LootItem.lootTableItem(ExtraBotanyItems.coreOfTheVoid)
+								.apply(net.minecraft.world.level.storage.loot.functions.SetCustomDataFunction.setCustomData(rainbowVariant()))))
 		);
 	}
 
@@ -92,6 +93,12 @@ public class EntityLootProvider extends EntityLootSubProviderFix {
 	 * 一个只在真实玩家击杀时掉落的奖池：固定掉落 {@code count} 个物品。
 	 * A pool that only drops when a real player makes the kill: it always drops {@code count} of the item.
 	 */
+	private static net.minecraft.nbt.CompoundTag rainbowVariant() {
+		var tag = new net.minecraft.nbt.CompoundTag();
+		tag.putString("variant", io.github.lounode.extrabotany.common.item.relic.voidcore.CoreOfTheVoidItem.VARIANT_RAINBOW);
+		return tag;
+	}
+
 	private static LootPool.Builder playerKillPool(ItemLike item, int count) {
 		var entry = LootItem.lootTableItem(item);
 		if (count != 1) {

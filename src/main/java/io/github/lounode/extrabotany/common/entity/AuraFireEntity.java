@@ -40,7 +40,8 @@ public class AuraFireEntity extends ThrowableProjectile {
 	private static final EntityDataAccessor<Float> DAMAGE = SynchedEntityData.defineId(AuraFireEntity.class, EntityDataSerializers.FLOAT);
 	public static final float ADVANCEMENT_REQUIRE = 40;
 	private static final int LONG_LIVING = -1;
-	private static final float BASE_DAMAGE = 4.0F;
+	// 1.16 EntityAuraFire：5 + 攻击力，穿甲（伤害类型的标签见 DamageTypeTagProvider）。 / 1.16 EntityAuraFire: 5 + attack damage, armor piercing (see DamageTypeTagProvider for the tags of the damage type).
+	public static final float BASE_DAMAGE = 5.0F;
 	private static final float DAMAGE_ROUND = 1.0F;
 	public static final int ABSORPTION_MAX = 10;
 	private int _ticksExisted = 0;

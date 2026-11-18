@@ -26,7 +26,7 @@ public class EdelweissRecipeProvider extends ExtraBotanyRecipeProvider {
 	@Override
 	public void buildRecipes(RecipeOutput consumer) {
 		consumer.accept(id("snow_golem"),
-				new EdelweissRecipes(EntityTypePredicate.of(EntityType.SNOW_GOLEM), 3200), null);
+				new EdelweissRecipes(EntityTypePredicate.of(EntityType.SNOW_GOLEM), 1600), null);
 	}
 
 	private static ResourceLocation id(String id) {

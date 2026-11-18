@@ -12,8 +12,8 @@
       "text": "extrabotany.page.orichalcos0"
     },
     {
-      "type": "botania:runic_altar",
-      "recipe": "extrabotany:runic_altar/orichalcos_ingot",
+      "type": "botania:terrasteel",
+      "recipe": "extrabotany:terra_plate/orichalcos_ingot",
       "text": "extrabotany.page.orichalcos1"
     }
   ]

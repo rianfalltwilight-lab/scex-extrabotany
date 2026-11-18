@@ -64,8 +64,8 @@ public class ExtrabotanyFlowerBlocks {
 	public static final Block annoyingflowerFloating = new PoweredFloatingSpecialFlowerBlock(FLOATING_PROPS, () -> ExtrabotanyFlowerBlocks.ANNOYINGFLOWER);
 	public static final Block annoyingflowerPotted = ExtraBotanyBlocks.flowerPot(annoyingflower, 0);
 
-	public static final Block stonesia = new SpecialFlowerBlock(MobEffects.DIG_SPEED, 10 * 20, FLOWER_PROPS, () -> ExtrabotanyFlowerBlocks.STONESIA);
-	public static final Block stonesiaFloating = new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> ExtrabotanyFlowerBlocks.STONESIA);
+	public static final Block stonesia = new PoweredSpecialFlowerBlock(MobEffects.DIG_SPEED, 10 * 20, FLOWER_PROPS, () -> ExtrabotanyFlowerBlocks.STONESIA);
+	public static final Block stonesiaFloating = new PoweredFloatingSpecialFlowerBlock(FLOATING_PROPS, () -> ExtrabotanyFlowerBlocks.STONESIA);
 	public static final Block stonesiaPotted = ExtraBotanyBlocks.flowerPot(stonesia, 0);
 
 	public static final Block edelweiss = ownEffectFlower(ExtraBotanyMobEffects.WARM, 10 * 20, () -> ExtrabotanyFlowerBlocks.EDELWEISS);
@@ -96,8 +96,8 @@ public class ExtrabotanyFlowerBlocks {
 	public static final Block omnivioletFloating = new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> ExtrabotanyFlowerBlocks.OMNIVIOLET);
 	public static final Block omnivioletPotted = ExtraBotanyBlocks.flowerPot(omniviolet, 0);
 
-	public static final Block tinkle = new PoweredSpecialFlowerBlock(MobEffects.JUMP, 10 * 20, FLOWER_PROPS, () -> ExtrabotanyFlowerBlocks.TINKLE);
-	public static final Block tinkleFloating = new PoweredFloatingSpecialFlowerBlock(FLOATING_PROPS, () -> ExtrabotanyFlowerBlocks.TINKLE);
+	public static final Block tinkle = new SpecialFlowerBlock(MobEffects.JUMP, 10 * 20, FLOWER_PROPS, () -> ExtrabotanyFlowerBlocks.TINKLE);
+	public static final Block tinkleFloating = new FloatingSpecialFlowerBlock(FLOATING_PROPS, () -> ExtrabotanyFlowerBlocks.TINKLE);
 	public static final Block tinklePotted = ExtraBotanyBlocks.flowerPot(tinkle, 0);
 
 	public static final Block bloodEnchantress = new SpecialFlowerBlock(BotaniaMobEffects.BLOODTHIRST, 10 * 60, FLOWER_PROPS, () -> ExtrabotanyFlowerBlocks.BLOOD_ENCHANTRESS);

@@ -9,7 +9,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -29,7 +28,6 @@ import vazkii.botania.api.mana.ManaPool;
 
 import io.github.lounode.extrabotany.api.gaia.BlockPatternExtend;
 import io.github.lounode.extrabotany.api.gaia.BlockPatternExtendBuilder;
-import io.github.lounode.extrabotany.api.gaia.BlockTagPredicate;
 import io.github.lounode.extrabotany.common.block.flower.ExtrabotanyFlowerBlocks;
 import io.github.lounode.extrabotany.xplat.ExtraBotanyConfig;
 
@@ -42,8 +40,8 @@ import java.util.Optional;
  * <p>花的下面必须有 5×5 的多方块结构（见 {@link #PATTERN}）。玩家用森林法杖的绑定模式潜行右键一个魔力池来选择它，再潜行右键这朵花来完成绑定。这部分逻辑在 {@code WandOfTheForestExtension} 里。红石信号让花停止工作。
  * <p>Below the flower there must be a 5×5 multiblock structure (see {@link #PATTERN}). In the bind mode of the Wand of the Forest, the player sneak-uses a mana pool to select it, and then sneak-uses this flower to complete the binding. That logic is in {@code WandOfTheForestExtension}. A redstone signal stops the flower.
  *
- * <p>来源：重制版（Lounode）。它对应 ExtraMeteorP 1.12 的 {@code SubTileManalinkium}。
- * <p>Source: Reburn (Lounode). It corresponds to {@code SubTileManalinkium} of ExtraMeteorP 1.12.
+ * <p>来源：ExtraMeteorP 1.12 的 {@code SubTileManalinkium}：上限 10000，每 tick 送 400；1.12 的结构不检查中间那一格，所以花下面可以是任何方块，漂浮的花也能工作。
+ * <p>Source: {@code SubTileManalinkium} of ExtraMeteorP 1.12: a maximum of 10000, 400 on each tick; the structure of 1.12 does not examine the middle block, thus any block can be under the flower, and a floating flower also works.
  */
 public class ManalinkBlockEntity extends ExtraFunctionalFlowerBlockEntity implements Wandable {
 
@@ -78,7 +76,7 @@ public class ManalinkBlockEntity extends ExtraFunctionalFlowerBlockEntity implem
 
 	public static final BlockPatternExtend PATTERN_BUILTIN = new BlockPatternExtend(BlockPatternExtendBuilder.start()
 			.aisle(PATTERN[0])
-			.where('D', BlockInWorld.hasState(BlockTagPredicate.forTag(BlockTags.DIRT)))
+			.where('D', BlockInWorld.hasState(state -> true))
 			.where('Q', BlockInWorld.hasState(BlockStatePredicate.forBlock(Blocks.QUARTZ_BLOCK)))
 			.where('L', BlockInWorld.hasState(BlockStatePredicate.forBlock(Blocks.LAPIS_BLOCK)))
 			.where('O', BlockInWorld.hasState(BlockStatePredicate.forBlock(Blocks.OBSIDIAN)))
@@ -89,6 +87,7 @@ public class ManalinkBlockEntity extends ExtraFunctionalFlowerBlockEntity implem
 	private static final String TAG_LINK_POS = "linkPos";
 
 	public static final int TRANSFER_SPEED = 400;
+	public static final int MAX_MANA = 10000;
 
 	@Nullable
 	private GlobalPos linkPos = null;
@@ -185,7 +184,7 @@ public class ManalinkBlockEntity extends ExtraFunctionalFlowerBlockEntity implem
 
 	@Override
 	public int getMaxMana() {
-		return getTransferSpeed() * 2;
+		return MAX_MANA;
 	}
 
 	@Override

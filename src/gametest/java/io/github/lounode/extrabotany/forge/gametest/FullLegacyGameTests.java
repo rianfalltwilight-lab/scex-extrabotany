@@ -90,9 +90,8 @@ public final class FullLegacyGameTests {
         var data = new io.github.lounode.extrabotany.common.item.SupplyBagItem.PoolData();
         var uuid = java.util.UUID.fromString("9453a240-76cb-4db8-b44d-e4267a4d2079");
         var random = RandomSource.create(90210);
-        helper.assertTrue(data.draw(uuid, random).is(ExtraBotanyItems.emptyCoreOfTheVoid), "First bag is not guaranteed core");
         var counts = new java.util.TreeMap<String, Integer>();
-        for (int i = 0; i < 101; i++) {
+        for (int i = 0; i < 100; i++) {
             if (i == 43) data = io.github.lounode.extrabotany.common.item.SupplyBagItem.PoolData.load(data.save(new CompoundTag(), helper.getLevel().registryAccess()));
             var reward = data.draw(uuid, random);
             helper.assertTrue(!reward.isEmpty(), "Finite pool returned an empty reward");
@@ -101,7 +100,7 @@ public final class FullLegacyGameTests {
         helper.assertTrue(counts.equals(java.util.Map.of("extrabotany:silent_eternity", 1, "extrabotany:lens_superconductor", 4,
                 "extrabotany:hero_medal", 10, "extrabotany:vier_reward_bag", 40, "extrabotany:drei_reward_bag", 80,
                 "extrabotany:zwei_reward_bag", 180, "extrabotany:nine_and_three_quarters_reward_bag", 30,
-                "minecraft:diamond", 60, "extrabotany:empty_core_of_the_void", 1)), "Pool reset, duplicated reward, or lost progress: " + counts);
+                "minecraft:diamond", 60)), "Pool reset, duplicated reward, or lost progress: " + counts);
         var extra = data.draw(uuid, random); helper.assertTrue(extra.is(net.minecraft.world.item.Items.EMERALD) && extra.getCount() == 2, "An empty pool did not give 2 emeralds");
         helper.succeed();
     }
@@ -111,8 +110,10 @@ public final class FullLegacyGameTests {
         var player = helper.makeMockPlayer(GameType.SURVIVAL); player.setHealth(10);
         var drink = new ItemStack(ExtraBotanyItems.manaDrink);
         var bottle = drink.finishUsingItem(helper.getLevel(), player);
-        helper.assertTrue(bottle.is(ExtraBotanyItems.manaGlassBottle) && player.getHealth() == 15, "Drink lost healing or empty bottle");
-        for (var effect : List.of(MobEffects.DAMAGE_RESISTANCE, MobEffects.DAMAGE_BOOST, MobEffects.MOVEMENT_SPEED, MobEffects.JUMP))
+        // 1.16 ModItems.MANADRINK_PROP: no healing, Resistance, Speed and Jump Boost for 60 s.
+        helper.assertTrue(bottle.is(ExtraBotanyItems.manaGlassBottle) && player.getHealth() == 10, "Drink healed or lost the empty bottle");
+        helper.assertTrue(!player.hasEffect(MobEffects.DAMAGE_BOOST), "Drink still gives the Strength of 1.12");
+        for (var effect : List.of(MobEffects.DAMAGE_RESISTANCE, MobEffects.MOVEMENT_SPEED, MobEffects.JUMP))
             helper.assertTrue(player.getEffect(effect) != null && player.getEffect(effect).getDuration() == 1200, "Drink effect missing");
         var burst = new BurstProperties(100, 50, 2, .5F, 2, 0);
         new SuperconductorLens().apply(new ItemStack(ExtraBotanyItems.lensSuperconductor), burst);

@@ -1,0 +1,27 @@
+{
+  "parent": "extrabotany:main/mana_driver_get",
+  "criteria": {
+    "code_triggered": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:magic_finger_get.desc"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:magic_finger"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:magic_finger_get"
+    }
+  },
+  "requirements": [
+    [
+      "code_triggered"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

@@ -17,6 +17,7 @@ import org.jetbrains.annotations.Nullable;
 
 import vazkii.botania.api.mana.ManaDiscountArmor;
 import vazkii.botania.api.mana.ManaItemHandler;
+import io.github.lounode.extrabotany.common.helper.ItemNBTHelper;
 
 import io.github.lounode.extrabotany.common.item.ExtraBotanyItems;
 import io.github.lounode.extrabotany.common.item.equipment.armor.starry_idol.StarryIdolArmorItem;
@@ -43,7 +44,7 @@ public class MikuArmorItem extends StarryIdolArmorItem implements ManaDiscountAr
 	private static final int MANA_PER_DAMAGE = 70;
 	private static final float SET_DISCOUNT = 0.15F;
 
-	private static final Supplier<ItemStack[]> ARMOR_SET = Suppliers.memoize(() -> new ItemStack[] {
+	public static final Supplier<ItemStack[]> ARMOR_SET = Suppliers.memoize(() -> new ItemStack[] {
 			new ItemStack(ExtraBotanyItems.mikuHelm),
 			new ItemStack(ExtraBotanyItems.mikuChest),
 			new ItemStack(ExtraBotanyItems.mikuLegs),
@@ -79,6 +80,31 @@ public class MikuArmorItem extends StarryIdolArmorItem implements ManaDiscountAr
 		if (ManaItemHandler.instance().requestManaExact(stack, player, MANA_PER_DAMAGE * 2, true)) {
 			stack.setDamageValue(stack.getDamageValue() - 1);
 		}
+	}
+
+	/**
+	 * 1.16 的套装用盔甲上的一个标记决定昼夜加成。标记一变，物品就变了，游戏会重新计算这件盔甲的属性。只有变化时才写，返回是否变了。
+	 * The sets of 1.16 decide the day or night bonus with a flag on the armor. When the flag changes, the item changes, and the game calculates the attributes of the piece again. It only writes on a change, and returns if there was one.
+	 */
+	protected static boolean setFlag(ItemStack stack, String tag, boolean value) {
+		if (ItemNBTHelper.getBoolean(stack, tag, false) == value) {
+			return false;
+		}
+		if (value) {
+			ItemNBTHelper.setBoolean(stack, tag, true);
+		} else {
+			ItemNBTHelper.removeEntry(stack, tag);
+		}
+		return true;
+	}
+
+	protected static boolean getFlag(ItemStack stack, String tag) {
+		return ItemNBTHelper.getBoolean(stack, tag, false);
+	}
+
+	/** 这件盔甲是不是正穿在这个玩家身上的那一件。 / Tells if this piece is the one that the player wears. */
+	protected boolean isWorn(Player player, ItemStack stack) {
+		return player.getItemBySlot(getEquipmentSlot()) == stack;
 	}
 
 	@Override

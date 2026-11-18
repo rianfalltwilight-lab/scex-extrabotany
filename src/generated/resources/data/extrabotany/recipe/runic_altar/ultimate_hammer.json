@@ -1,0 +1,29 @@
+{
+  "type": "botania:runic_altar",
+  "catalysts": [],
+  "ingredients": [
+    {
+      "item": "extrabotany:terrasteel_hammer"
+    },
+    {
+      "item": "extrabotany:gilded_potato_mashed"
+    },
+    {
+      "item": "extrabotany:gilded_potato_mashed"
+    },
+    {
+      "item": "extrabotany:gilded_potato_mashed"
+    },
+    {
+      "item": "minecraft:gold_block"
+    }
+  ],
+  "mana": 100000,
+  "output": {
+    "count": 1,
+    "id": "extrabotany:ultimate_hammer"
+  },
+  "reagent": {
+    "item": "botania:livingrock"
+  }
+}

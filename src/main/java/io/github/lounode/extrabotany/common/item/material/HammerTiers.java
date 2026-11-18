@@ -27,7 +27,10 @@ public enum HammerTiers implements Tier {
 	SHADOWIUM(900, 6.2F, 2, BlockTags.INCORRECT_FOR_DIAMOND_TOOL, 20, () -> ExtraBotanyItems.shadowium),
 	AERIALITE(2300, 9, 4, BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 26, () -> ExtraBotanyItems.aerialite),
 	ORICHALCOS(4200, 10, 6, BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 30, () -> ExtraBotanyItems.orichalcos),
-	RHEIN(5000, 12, 10, BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 50, () -> ExtraBotanyItems.dasRheingold);
+	RHEIN(5000, 12, 10, BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 50, () -> ExtraBotanyItems.dasRheingold),
+	// 1.12 ExtraBotanyAPI.ultimateHammer：等级 4、耐久 3000、速度 10.5、伤害 3、附魔 40，没有修理材料。
+	// ultimateHammer of ExtraBotanyAPI of 1.12: level 4, durability 3000, speed 10.5, damage 3, enchantability 40, no repair material.
+	ULTIMATE(3000, 10.5F, 3, BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 40, () -> net.minecraft.world.item.Items.AIR);
 
 	private final int maxUses;
 	private final float efficiency;

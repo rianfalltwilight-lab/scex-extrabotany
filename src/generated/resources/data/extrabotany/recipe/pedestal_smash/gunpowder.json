@@ -1,0 +1,15 @@
+{
+  "type": "extrabotany:pedestal_smash",
+  "exp": 1,
+  "input": {
+    "item": "minecraft:flint"
+  },
+  "output": {
+    "count": 1,
+    "id": "minecraft:gunpowder"
+  },
+  "smash_tools": {
+    "tag": "extrabotany:hammers"
+  },
+  "strike": 5
+}

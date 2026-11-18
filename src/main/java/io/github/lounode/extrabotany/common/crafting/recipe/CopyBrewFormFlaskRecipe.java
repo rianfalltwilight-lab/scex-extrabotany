@@ -19,16 +19,18 @@ import vazkii.botania.common.item.BotaniaItems;
 import vazkii.botania.common.crafting.recipe.WrappingRecipeSerializer;
 
 import io.github.lounode.extrabotany.common.brew.BrewUtil;
-import io.github.lounode.extrabotany.common.brew.ExtraBotanyBrews;
-import io.github.lounode.extrabotany.common.item.brew.ManaCocktailItem;
+import io.github.lounode.extrabotany.common.item.ExtraBotanyItems;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 
 /**
- * 把酿造瓶里的酿造复制到一瓶默认的魔力鸡尾酒里。酿造瓶变成空的魔力玻璃小瓶。
- * Copies the brew of a brew flask into one default Mana Cocktail. The flask becomes an empty Managlass Vial.
+ * 用酿造瓶和魔力饮品合成魔力鸡尾酒，鸡尾酒得到酿造瓶里的酿造。酿造瓶变成空的魔力玻璃小瓶。
+ * Crafts a Mana Cocktail from a brew flask and a Mana Drink. The cocktail gets the brew of the flask. The flask becomes an empty Managlass Vial.
+ *
+ * <p>来源：ExtraMeteorP 1.16 {@code CocktailRecipe}。
+ * <p>Source: ExtraMeteorP 1.16 {@code CocktailRecipe}.
  */
 public final class CopyBrewFormFlaskRecipe extends CopyBrewRecipe {
 
@@ -74,11 +76,7 @@ public final class CopyBrewFormFlaskRecipe extends CopyBrewRecipe {
 			return ItemStack.EMPTY;
 		}
 
-		if (!(input.getItem() instanceof ManaCocktailItem cocktail)) {
-			return ItemStack.EMPTY;
-		}
-
-		if (cocktail.getBrew(input) != ExtraBotanyBrews.manaCocktail || cocktail.getSwigsLeft(input) != 1) {
+		if (!input.is(ExtraBotanyItems.manaDrink)) {
 			return ItemStack.EMPTY;
 		}
 

@@ -193,7 +193,7 @@ public final class P2ClientProbe {
 	private static void prepareTintSamples(Minecraft mc) {
 		ItemStack flask = new ItemStack(BotaniaItems.BREW_FLASK);
 		BrewUtil.setBrew(flask, ExtraBotanyBrews.revolution);
-		ItemStack cocktail = craft(mc, "mana_cocktail_change_brew", ManaCocktailItem.getDefaultCocktail(), flask);
+		ItemStack cocktail = craft(mc, "mana_cocktail_change_brew", new ItemStack(ExtraBotanyItems.manaDrink), flask);
 		ItemStack wine = craft(mc, "infinite_wine", cocktail, new ItemStack(ExtraBotanyItems.heroMedal));
 		ItemStack grenade = craft(mc, "holy_water_grenade", cocktail, new ItemStack(Items.POPPED_CHORUS_FRUIT));
 		ItemStack emptyWine = wine.copy();

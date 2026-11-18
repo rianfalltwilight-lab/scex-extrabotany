@@ -2,15 +2,6 @@
   "type": "botania:petal_apothecary",
   "ingredients": [
     {
-      "tag": "botania:petals/yellow"
-    },
-    {
-      "tag": "botania:petals/yellow"
-    },
-    {
-      "tag": "botania:petals/yellow"
-    },
-    {
       "tag": "botania:petals/orange"
     },
     {
@@ -20,10 +11,13 @@
       "tag": "botania:petals/orange"
     },
     {
-      "item": "botania:mana_powder"
+      "tag": "botania:petals/yellow"
     },
     {
-      "item": "botania:mana_powder"
+      "tag": "botania:petals/yellow"
+    },
+    {
+      "tag": "botania:petals/yellow"
     }
   ],
   "output": {

@@ -14,6 +14,11 @@
     {
       "type": "patchouli:text",
       "text": "extrabotany.page.core_of_the_void1"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:core_of_the_void",
+      "text": "extrabotany.page.core_of_the_void2"
     }
   ]
 }

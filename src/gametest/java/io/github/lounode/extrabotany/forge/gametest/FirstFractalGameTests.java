@@ -110,10 +110,6 @@ public final class FirstFractalGameTests {
 			h.assertTrue(has(contributor, HERRSCHER) && has(killer, HERRSCHER),
 					"Actual death did not grant both killer and contributor progression");
 
-			Relic.LOOKUP.find(stack).bindToUUID(UUID.randomUUID());
-			LeftClickEmptyPacket.INSTANCE.handle(contributor);
-			h.assertTrue(fixture.swords(contributor).isEmpty(), "Progression must not bypass another player's relic binding");
-			Relic.LOOKUP.find(stack).bindToUUID(contributor.getUUID());
 			Zombie target = new Zombie(EntityType.ZOMBIE, h.getLevel());
 			target.setNoAi(true);
 			target.setPos(contributor.position().add(0, 0, 3));

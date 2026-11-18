@@ -1,0 +1,15 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:mini_handbag",
+  "name": "item.extrabotany.mini_handbag",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.mini_handbag0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:mini_handbag"
+    }
+  ]
+}

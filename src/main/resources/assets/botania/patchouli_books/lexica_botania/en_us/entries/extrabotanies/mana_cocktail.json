@@ -18,7 +18,7 @@
     },
     {
       "type": "patchouli:spotlight",
-      "item": "extrabotany:mana_cocktail[custom_data={brewKey:\"extrabotany:mana_cocktail\",swigsLeft:1}]",
+      "item": "extrabotany:mana_drink",
       "link_recipe": true,
       "text": "extrabotany.page.mana_cocktail2"
     },

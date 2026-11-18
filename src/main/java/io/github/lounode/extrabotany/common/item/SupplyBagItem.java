@@ -45,11 +45,12 @@ import static io.github.lounode.extrabotany.common.lib.ResourceLocationHelper.pr
  * <p>和原版的差异：
  * <p>Differences from the original:
  * <ul>
- * <li>玩家第一次打开补给袋时，一定得到一个空的律者核心。这是这个移植版加的规则，因为制作空之律者核心需要它。奖池里另外还有一个。
- * The first bag that a player opens always gives an Empty Herrscher Core. This port adds that rule, because the Core of the Void needs it. The pool has one more.</li>
  * <li>奖池保存在主世界的存档数据里。原版把它保存在玩家的持久数据里。
  * The pool is kept in the saved data of the overworld. The original keeps it in the persistent data of the player.</li>
  * </ul>
+ *
+ * <p>对照原版审计 E5：重燃加的"第一次必出空的律者核心"和奖池里的第 101 份（空的律者核心）已经去掉，因为律者核心回到了 1.16 的工作台配方。
+ * <p>Parity audit E5: the Reburn rule "the first bag always gives an Empty Herrscher Core" and the 101st lot (an Empty Herrscher Core) are removed, because the Core of the Void went back to the crafting recipe of 1.16.
  */
 public class SupplyBagItem extends Item {
 	public SupplyBagItem(Properties props) {
@@ -90,8 +91,7 @@ public class SupplyBagItem extends Item {
 		DREI_BAG(() -> ExtraBotanyItems.dreiRewardBag, 4, 20),
 		ZWEI_BAG(() -> ExtraBotanyItems.zweiRewardBag, 6, 30),
 		NINE_AND_THREE_QUARTERS_BAG(() -> ExtraBotanyItems.nineAndThreeQuartersRewardBag, 3, 10),
-		DIAMOND(() -> Items.DIAMOND, 4, 15),
-		EMPTY_CORE(() -> ExtraBotanyItems.emptyCoreOfTheVoid, 1, 1);
+		DIAMOND(() -> Items.DIAMOND, 4, 15);
 
 		private final Supplier<Item> item;
 		private final int count;
@@ -114,8 +114,9 @@ public class SupplyBagItem extends Item {
 	 */
 	public static final class PoolData extends SavedData {
 		private static final String DATA_NAME = "extrabotany_limited_edition_supply_bag";
-		private static final int VERSION = 3;
-		private static final int POOL_SIZE = 101;
+		// 版本 4：奖池从 101 份变成 100 份，旧的奖池作废。 / Version 4: the pool went from 101 lots to 100; old pools are dropped.
+		private static final int VERSION = 4;
+		private static final int POOL_SIZE = 100;
 		private static final int DRAWN = -1;
 
 		private final Map<UUID, int[]> pools = new HashMap<>();
@@ -151,9 +152,9 @@ public class SupplyBagItem extends Item {
 		public ItemStack draw(UUID player, RandomSource random) {
 			int[] pool = pools.get(player);
 			if (pool == null) {
-				pools.put(player, createPool(random));
+				pool = createPool(random);
+				pools.put(player, pool);
 				setDirty();
-				return Reward.EMPTY_CORE.createStack();
 			}
 			int start = random.nextInt(pool.length);
 			for (int i = 0; i < pool.length; i++) {

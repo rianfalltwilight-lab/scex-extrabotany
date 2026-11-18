@@ -6,6 +6,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.ThrownPotion;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
@@ -31,8 +32,10 @@ import java.util.List;
  */
 public class HolyWaterGrenadeEntity extends ThrownPotion {
 
-	public static final double SPLASH_RANGE = 4.0D;
-	private static final double SPLASH_RANGE_SQ = 16.0D;
+	public static final double SPLASH_RANGE = 5.0D;
+	public static final float SPLASH_DAMAGE = 10F;
+	public static final float DIRECT_HIT_DAMAGE = 5F;
+	public static final float DURATION_FACTOR = 0.6F;
 
 	public HolyWaterGrenadeEntity(EntityType<? extends HolyWaterGrenadeEntity> entityType, Level level) {
 		super(entityType, level);
@@ -84,51 +87,39 @@ public class HolyWaterGrenadeEntity extends ThrownPotion {
 		}
 	}
 
+	/**
+	 * 1.16 {@code EntitySplashGrenade.onImpact}：中心 5 格的方框里，每个非玩家生物受 10 点魔法伤害；增益效果给玩家，负面效果给非玩家；效果时长 × 0.6，不按距离衰减。
+	 * 1.16 {@code EntitySplashGrenade.onImpact}: in the box of 5 blocks around the center, each creature that is not a player takes 10 magic damage; beneficial effects go to players, harmful effects to the others; the effect duration is × 0.6, with no loss by distance.
+	 */
 	public void applySplash(List<MobEffectInstance> effectInstances, @Nullable Entity target) {
-		AABB effectAura = this.getBoundingBox().inflate(SPLASH_RANGE, 2.0D, SPLASH_RANGE);
-
-		List<LivingEntity> nearby = this.level().getEntitiesOfClass(LivingEntity.class, effectAura);
-		if (nearby.isEmpty()) {
-			return;
-		}
-
+		AABB bounds = new AABB(getX() - SPLASH_RANGE, getY() - SPLASH_RANGE, getZ() - SPLASH_RANGE,
+				getX() + SPLASH_RANGE, getY() + SPLASH_RANGE, getZ() + SPLASH_RANGE);
 		Entity source = this.getEffectSource();
-
-		for (LivingEntity victim : nearby) {
-			if (!victim.isAffectedByPotions()) {
-				continue;
+		for (LivingEntity victim : this.level().getEntitiesOfClass(LivingEntity.class, bounds)) {
+			boolean isPlayer = victim instanceof Player;
+			if (!isPlayer) {
+				victim.hurt(damageSources().magic(), SPLASH_DAMAGE);
 			}
-			double distanceToSqr = this.distanceToSqr(victim);
-			if (distanceToSqr > SPLASH_RANGE_SQ) {
-				continue;
-			}
-
-			double d1 = victim == target ? 1.0D : 1.0D - Math.sqrt(distanceToSqr) / SPLASH_RANGE;
-			boolean isSource = victim == source;
-
 			for (MobEffectInstance tmpInstance : effectInstances) {
 				var mobeffect = tmpInstance.getEffect();
-				boolean isBeneficial = mobeffect.value().isBeneficial();
-
-				//Only give beneficial to owner. harmful to others
-				if ((isBeneficial && !isSource) || (!isBeneficial && isSource)) {
+				if (mobeffect.value().isBeneficial() != isPlayer) {
 					continue;
 				}
-
 				if (mobeffect.value().isInstantenous()) {
-					mobeffect.value().applyInstantenousEffect(this, this.getOwner(), victim, tmpInstance.getAmplifier(), d1);
+					mobeffect.value().applyInstantenousEffect(this, this.getOwner(), victim, tmpInstance.getAmplifier(), 1.0D);
 					continue;
 				}
-
-				int durationAdjustByDistance = tmpInstance.mapDuration(
-						(originalDuration) -> (int) (d1 * (double) originalDuration + 0.5D));
-
-				MobEffectInstance apply = new MobEffectInstance(mobeffect, durationAdjustByDistance, tmpInstance.getAmplifier(), tmpInstance.isAmbient(), tmpInstance.isVisible());
-				if (!apply.endsWithin(20)) {
-					victim.addEffect(apply, source);
-				}
+				victim.addEffect(new MobEffectInstance(mobeffect, (int) (tmpInstance.getDuration() * DURATION_FACTOR),
+						tmpInstance.getAmplifier(), true, true), source);
 			}
 		}
+	}
+
+	@Override
+	protected void onHitEntity(EntityHitResult result) {
+		super.onHitEntity(result);
+		// 1.16：直接命中再加 5 点投掷伤害。 / 1.16: a direct hit adds 5 thrown damage.
+		result.getEntity().hurt(damageSources().thrown(this, getOwner()), DIRECT_HIT_DAMAGE);
 	}
 
 	public Brew getBrew() {

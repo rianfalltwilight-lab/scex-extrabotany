@@ -24,7 +24,9 @@ public class ExtraBotanyBrews {
 			new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 20 * 60),
 			new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 20 * 60)
 	).setNotBloodPendantInfusable().setNotIncenseInfusable();
+	// Source: ExtraMeteorP 1.16 ModBrew.revolution (1.12 is the same): Bad Luck III and Haste III for 90 seconds.
 	public final static Brew revolution = new Brew(0x483D8B, 10000,
+			new MobEffectInstance(MobEffects.UNLUCK, 20 * 90, 2),
 			new MobEffectInstance(MobEffects.DIG_SPEED, 20 * 90, 2)
 	);
 	public final static Brew shield = new Brew(0x006400, 10000,

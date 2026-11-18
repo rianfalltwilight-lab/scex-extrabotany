@@ -46,8 +46,11 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 空之律者核心。遗物饰品。佩戴者可以飞行（飞行时每 tick 消耗魔力），不受弹射物伤害，负面效果会被消耗魔力清除或者挡下。魔力不足时它会反噬：每半秒对佩戴者造成伤害。它有四种外观，只影响翅膀的样子。
- * Core of the Void. A relic accessory. The wearer can fly (flight uses mana on each tick), gets no damage from projectiles, and harmful effects are removed or prevented for mana. When there is not sufficient mana, it backfires: it gives damage to the wearer one time for each half second. It has four appearances, which only change the look of the wings.
+ * 空之律者核心。遗物饰品。佩戴者可以飞行，飞行时每 tick 消耗 {@value #FLY_COST} 魔力。它有四种外观，只影响翅膀的样子。
+ * Core of the Void. A relic accessory. The wearer can fly, and flight uses {@value #FLY_COST} mana on each tick. It has four appearances, which only change the look of the wings.
+ *
+ * <p>来源：ExtraMeteorP 1.16 的 {@code ItemCoreGod}。重燃加的移动和飞行速度、弹射物免疫、负面效果清除和魔力不足时的反噬已经去掉。
+ * <p>Source: {@code ItemCoreGod} of ExtraMeteorP 1.16. The movement and flight speed, the projectile immunity, the removal of harmful effects and the backfire without mana that Reburn added are removed.
  */
 public class CoreOfTheVoidItem extends BaubleItem implements CustomCreativeTabContents {
 
@@ -57,11 +60,10 @@ public class CoreOfTheVoidItem extends BaubleItem implements CustomCreativeTabCo
 	public static final String VARIANT_FLANDRE = "flandre";
 	public static final String VARIANT_JIM = "jim";
 	public static final String VARIANT_STEAMPUNK = "steampunk";
+	// 1.12 ItemCoreGod 的 2 号外观：空之律者 2% 掉落。 / Appearance 2 of 1.12 ItemCoreGod: a 2% drop of the Herrscher of the Void.
+	public static final String VARIANT_RAINBOW = "rainbow";
 
-	private static final int FLY_COST = 100;
-	private static final int CURE_COST = 200;
-	private static final int BACKFIRE_THRESHOLD = 100;
-	private static final float BACKFIRE_DAMAGE = 2.0F;
+	public static final int FLY_COST = 35;
 
 	private static final List<String> playersWithFlight = Collections.synchronizedList(new ArrayList<>());
 
@@ -69,7 +71,7 @@ public class CoreOfTheVoidItem extends BaubleItem implements CustomCreativeTabCo
 		super(properties);
 		// 这里只登记外观的名字。翅膀的画法是客户端的代码，在 CoreOfTheVoidRenderer 里。
 		// Only the names of the appearances are recorded here. The method to draw the wings is client code, in CoreOfTheVoidRenderer.
-		for (String id : List.of(VARIANT_HERRSCHER, VARIANT_FLANDRE, VARIANT_JIM, VARIANT_STEAMPUNK)) {
+		for (String id : List.of(VARIANT_HERRSCHER, VARIANT_FLANDRE, VARIANT_RAINBOW, VARIANT_STEAMPUNK, VARIANT_JIM)) {
 			ExtraBotanyAPI.instance().registerCOVVariant(() -> id);
 		}
 	}
@@ -119,24 +121,6 @@ public class CoreOfTheVoidItem extends BaubleItem implements CustomCreativeTabCo
 		}
 	}
 
-	@Override
-	public void onWornTick(ItemStack stack, LivingEntity entity) {
-		if (entity.level().isClientSide()) {
-			return;
-		}
-
-		if (shouldBackFire(stack, entity) && entity.tickCount % 10 == 0) {
-
-			if (entity.hurt(damageSource(entity.level().registryAccess()), getBackfireDamage()) &&
-					entity instanceof Player player) {
-				player.playNotifySound(ExtraBotanySounds.PLAYER_BACKFIRE, SoundSource.PLAYERS, 1, SoundEventUtil.randomPitch(player.level()));
-			}
-			return;
-		}
-
-		tryRemoveHarmfulPotion(stack, entity);
-	}
-
 	public static void playerLoggedOut(PlayerEvent.PlayerLoggedOutEvent event) {
 		String username = event.getEntity().getGameProfile().getName();
 		playersWithFlight.remove(username + ":false");
@@ -163,37 +147,12 @@ public class CoreOfTheVoidItem extends BaubleItem implements CustomCreativeTabCo
 		return player.getGameProfile().getName() + ":" + player.level().isClientSide;
 	}
 
-	public static boolean shouldBackFire(ItemStack stack, LivingEntity entity) {
-		if (entity instanceof Player player &&
-				!(player.isCreative() || player.isSpectator()) &&
-				!ManaItemHandler.instance().requestManaExactForTool(stack, player, getBackfireThreshold(), false)) {
-			return true;
-		}
-		return false;
-	}
-
 	public static int getFlyCost() {
 		return FLY_COST;
 	}
 
-	public static int getCureCost() {
-		return CURE_COST;
-	}
-
-	public static int getBackfireThreshold() {
-		return BACKFIRE_THRESHOLD;
-	}
-
-	public float getBackfireDamage() {
-		return BACKFIRE_DAMAGE;
-	}
-
 	public static String getVariant(ItemStack stack) {
 		return ItemNBTHelper.getString(stack, TAG_VARIANT, VARIANT_HERRSCHER);
-	}
-
-	public DamageSource damageSource(RegistryAccess access) {
-		return ExtraBotanyDamageTypes.Sources.backfireDamage(access);
 	}
 
 	@Override
@@ -214,77 +173,5 @@ public class CoreOfTheVoidItem extends BaubleItem implements CustomCreativeTabCo
 			}
 		}
 		super.inventoryTick(stack, world, entity, slot, selected);
-	}
-
-	@Override
-	public Multimap<Holder<Attribute>, AttributeModifier> getEquippedAttributeModifiers(ItemStack stack, ResourceLocation slotId) {
-		Multimap<Holder<Attribute>, AttributeModifier> attributes = HashMultimap.create();
-		//TODO 反噬以及无魔力时去除Attribute
-		attributes.put(Attributes.MOVEMENT_SPEED,
-				new AttributeModifier(slotId, 0.1F, AttributeModifier.Operation.ADD_VALUE));
-		attributes.put(Attributes.FLYING_SPEED,
-				new AttributeModifier(slotId, 0.6F, AttributeModifier.Operation.ADD_VALUE));
-
-		return attributes;
-	}
-
-	/**
-	 * 佩戴者不受弹射物伤害。
-	 * The wearer gets no damage from projectiles.
-	 */
-	public static void onLivingAttack(LivingIncomingDamageEvent event) {
-		// 先做最便宜的判断：绝大多数受伤的生物不是玩家，受到的也不是弹射物伤害。
-		// The cheapest checks come first: most creatures that get damage are not players, and most damage is not from projectiles.
-		if (!event.getSource().is(DamageTypeTags.IS_PROJECTILE) || !(event.getEntity() instanceof Player player)) {
-			return;
-		}
-		ItemStack armor = EquipmentHandler.findOrEmpty(ExtraBotanyItems.coreOfTheVoid, player);
-		if (armor.isEmpty()) {
-			return;
-		}
-
-		var relic = io.github.lounode.extrabotany.xplat.EXplatAbstractions.INSTANCE.findRelic(armor);
-		if (relic == null || !relic.isRightPlayer(player) || shouldBackFire(armor, player)) {
-			return;
-		}
-		event.setCanceled(true);
-	}
-	//Harmful potion remove
-	protected void tryRemoveHarmfulPotion(ItemStack stack, LivingEntity entity) {
-		if (!(entity instanceof Player player)) {
-			return;
-		}
-		var relic = io.github.lounode.extrabotany.xplat.EXplatAbstractions.INSTANCE.findRelic(stack);
-		if (relic == null || !relic.isRightPlayer(player)) {
-			return;
-		}
-
-		List<MobEffectInstance> effects = entity.getActiveEffects().stream()
-				.filter(effect -> effect.getEffect().value().getCategory() == MobEffectCategory.HARMFUL)
-				.toList();
-
-		if (!effects.isEmpty() &&
-				ManaItemHandler.instance().requestManaExactForTool(stack, player, getCureCost(), true)) {
-			effects.forEach(e -> entity.removeEffect(e.getEffect()));
-		}
-	}
-
-	//TODO 立即生效药水效果截断
-	public static void onEffectAdd(MobEffectEvent.Applicable event) {
-		if (!(event.getEntity() instanceof Player player)
-				|| event.getEffectInstance().getEffect().value().getCategory() != MobEffectCategory.HARMFUL) {
-			return;
-		}
-		ItemStack armor = EquipmentHandler.findOrEmpty(ExtraBotanyItems.coreOfTheVoid, player);
-
-		if (!armor.isEmpty()) {
-			var relic = io.github.lounode.extrabotany.xplat.EXplatAbstractions.INSTANCE.findRelic(armor);
-			if (relic != null &&
-					relic.isRightPlayer(player) &&
-					ManaItemHandler.instance().requestManaExact(armor, player, getCureCost(), true)) {
-
-				event.setResult(MobEffectEvent.Applicable.Result.DO_NOT_APPLY);
-			}
-		}
 	}
 }

@@ -12,7 +12,7 @@
   "pattern": [
     "I I",
     "ISI",
-    " I "
+    "I I"
   ],
   "result": {
     "count": 1,

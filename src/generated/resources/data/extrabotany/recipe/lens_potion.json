@@ -10,6 +10,12 @@
     },
     {
       "tag": "c:dusts/mana"
+    },
+    {
+      "tag": "c:gems/dragonstone"
+    },
+    {
+      "item": "botania:pure_ender_essence"
     }
   ],
   "result": {

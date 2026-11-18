@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "G": {
-      "item": "botania:gaia_ingot"
+      "tag": "c:ingots/terrasteel"
     },
     "O": {
       "tag": "extrabotany:orichalcos_ingots"

@@ -4,7 +4,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolSingletonContainer;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 
@@ -62,35 +64,31 @@ public class RewardBagLootProvider extends RewardBagLootSubProvider {
 								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))));
 	}
 
+	/**
+	 * 九又四分之三奖励袋只有 1.12 有：ConfigHandler.REWARDBAG5 的默认值。
+	 * Only 1.12 has the Nine and Three-Quarters bag: the default value of ConfigHandler.REWARDBAG5.
+	 */
 	public static LootTable.Builder harryPotterTable() {
 		return LootTable.lootTable()
 				.withPool(LootPool.lootPool()
 						.setRolls(ConstantValue.exactly(1))
-						.add(LootItem.lootTableItem(ExtraBotanyItems.heroMedal)
-								.setWeight(1)
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
-						.add(LootItem.lootTableItem(ExtraBotanyItems.einsRewardBag)
-								.setWeight(30)
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(16))))
-						.add(LootItem.lootTableItem(ExtraBotanyItems.zweiRewardBag)
-								.setWeight(20)
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(10))))
-						.add(LootItem.lootTableItem(ExtraBotanyItems.dreiRewardBag)
-								.setWeight(10)
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(6))))
-						.add(LootItem.lootTableItem(ExtraBotanyItems.vierRewardBag)
-								.setWeight(10)
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(6))))
-						.add(LootItem.lootTableItem(BotaniaItems.GAIA_INGOT)
-								.setWeight(14)
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
-						.add(LootItem.lootTableItem(BotaniaItems.GAIA_SPIRIT)
-								.setWeight(20)
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(4))))
-						.add(LootItem.lootTableItem(ExtraBotanyItems.challengeTicket)
-								.setWeight(45)
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
+						.add(weighted(ExtraBotanyItems.einsRewardBag, 16, 33))
+						.add(weighted(ExtraBotanyItems.zweiRewardBag, 10, 23))
+						.add(weighted(ExtraBotanyItems.dreiRewardBag, 6, 13))
+						.add(weighted(ExtraBotanyItems.vierRewardBag, 6, 13))
+						.add(weighted(BotaniaItems.GAIA_INGOT, 1, 23))
+						.add(weighted(BotaniaItems.TERRASTEEL_INGOT, 5, 20))
+						.add(weighted(ExtraBotanyItems.challengeTicket, 1, 45))
+						.add(weighted(ExtraBotanyItems.heroMedal, 1, 1))
 				);
+	}
+
+	private static LootPoolSingletonContainer.Builder<?> weighted(ItemLike item, int count, int weight) {
+		var entry = LootItem.lootTableItem(item).setWeight(weight);
+		if (count != 1) {
+			entry.apply(SetItemCountFunction.setCount(ConstantValue.exactly(count)));
+		}
+		return entry;
 	}
 
 	public static LootTable.Builder usefulTable() {
@@ -133,6 +131,10 @@ public class RewardBagLootProvider extends RewardBagLootSubProvider {
 				);
 	}
 
+	/**
+	 * Vier 奖励袋：1.16 ModItems.categoryListD。现在的植物魔法没有过度生长种子，用附魔土代替；"佛舍利"就是虚空档案。
+	 * The Vier bag: categoryListD of 1.16 ModItems. The current Botania has no overgrowth seed, thus the enchanted soil takes its place; the "Buddhist relics" are the Void Archives.
+	 */
 	public static LootTable.Builder miscTable() {
 		LootPool.Builder pool = LootPool.lootPool()
 				.add(LootItem.lootTableItem(Items.COAL).apply(SetItemCountFunction.setCount(ConstantValue.exactly(6))).setWeight(40))
@@ -149,93 +151,30 @@ public class RewardBagLootProvider extends RewardBagLootSubProvider {
 		return LootTable.lootTable().withPool(pool);
 	}
 
+	/**
+	 * Zwei 奖励袋：1.16 ModItems.categoryListB。两个版本都有奖励袋，所以用 1.16。
+	 * The Zwei bag: categoryListB of 1.16 ModItems. Both versions have the reward bags, thus 1.16 is used.
+	 */
 	public static LootTable.Builder runeTable() {
 		return LootTable.lootTable()
 				.withPool(LootPool.lootPool()
 						.setRolls(ConstantValue.exactly(1))
-						.add(LootItem.lootTableItem(BotaniaItems.RUNE_OF_WATER)
-								.setWeight(50)
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))))
-						.add(LootItem.lootTableItem(BotaniaItems.RUNE_OF_FIRE)
-								.setWeight(50)
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))))
-						.add(LootItem.lootTableItem(BotaniaItems.RUNE_OF_EARTH)
-								.setWeight(50)
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))))
-						.add(LootItem.lootTableItem(BotaniaItems.RUNE_OF_AIR)
-								.setWeight(50)
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(2))))
-						.add(LootItem.lootTableItem(BotaniaItems.RUNE_OF_SPRING)
-								.setWeight(30)
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
-						.add(LootItem.lootTableItem(BotaniaItems.RUNE_OF_SUMMER)
-								.setWeight(30)
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
-						.add(LootItem.lootTableItem(BotaniaItems.RUNE_OF_AUTUMN)
-								.setWeight(30)
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
-						.add(LootItem.lootTableItem(BotaniaItems.RUNE_OF_WINTER)
-								.setWeight(30)
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
-						.add(LootItem.lootTableItem(BotaniaItems.RUNE_OF_MANA)
-								.setWeight(10)
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
-						.add(LootItem.lootTableItem(BotaniaItems.RUNE_OF_LUST)
-								.setWeight(10)
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
-						.add(LootItem.lootTableItem(BotaniaItems.RUNE_OF_GLUTTONY)
-								.setWeight(10)
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
-						.add(LootItem.lootTableItem(BotaniaItems.RUNE_OF_GREED)
-								.setWeight(10)
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
-						.add(LootItem.lootTableItem(BotaniaItems.RUNE_OF_SLOTH)
-								.setWeight(10)
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
-						.add(LootItem.lootTableItem(BotaniaItems.RUNE_OF_WRATH)
-								.setWeight(10)
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
-						.add(LootItem.lootTableItem(BotaniaItems.RUNE_OF_ENVY)
-								.setWeight(10)
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
-						.add(LootItem.lootTableItem(BotaniaItems.RUNE_OF_PRIDE)
-								.setWeight(10)
-								.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1))))
+						.add(weighted(ExtraBotanyItems.elementRune, 2, 80))
+						.add(weighted(ExtraBotanyItems.sinRune, 1, 20))
 				);
 	}
 
+	/**
+	 * Eins 奖励袋：1.16 ModItems.categoryListA，万能花瓣 4、8 或 6 个（权重 10、10、30）。
+	 * The Eins bag: categoryListA of 1.16 ModItems, 4, 8 or 6 universal petals (weights 10, 10, 30).
+	 */
 	public static LootTable.Builder petalPoll() {
-		Item[] petals = new Item[] {
-				BotaniaItems.WHITE_MYSTICAL_PETAL,
-				BotaniaItems.ORANGE_MYSTICAL_PETAL,
-				BotaniaItems.MAGENTA_MYSTICAL_PETAL,
-				BotaniaItems.LIGHT_BLUE_MYSTICAL_PETAL,
-				BotaniaItems.YELLOW_MYSTICAL_PETAL,
-				BotaniaItems.LIME_MYSTICAL_PETAL,
-				BotaniaItems.PINK_MYSTICAL_PETAL,
-				BotaniaItems.GRAY_MYSTICAL_PETAL,
-				BotaniaItems.LIGHT_GRAY_MYSTICAL_PETAL,
-				BotaniaItems.CYAN_MYSTICAL_PETAL,
-				BotaniaItems.PURPLE_MYSTICAL_PETAL,
-				BotaniaItems.BLUE_MYSTICAL_PETAL,
-				BotaniaItems.BROWN_MYSTICAL_PETAL,
-				BotaniaItems.GREEN_MYSTICAL_PETAL,
-				BotaniaItems.RED_MYSTICAL_PETAL,
-				BotaniaItems.BLACK_MYSTICAL_PETAL
-		};
-		LootTable.Builder builder = LootTable.lootTable();
-
-		LootPool.Builder pool = LootPool.lootPool();
-
-		for (var petal : petals) {
-			pool.add(LootItem.lootTableItem(petal));
-		}
-
-		pool.apply(SetItemCountFunction.setCount(ConstantValue.exactly(6)));
-		pool.setRolls(ConstantValue.exactly(1));
-
-		builder.withPool(pool);
-
-		return builder;
+		return LootTable.lootTable()
+				.withPool(LootPool.lootPool()
+						.setRolls(ConstantValue.exactly(1))
+						.add(weighted(ExtraBotanyItems.universalPetal, 4, 10))
+						.add(weighted(ExtraBotanyItems.universalPetal, 8, 10))
+						.add(weighted(ExtraBotanyItems.universalPetal, 6, 30))
+				);
 	}
 }

@@ -15,7 +15,8 @@ import static io.github.lounode.extrabotany.common.lib.ResourceLocationHelper.pr
  * Dimension Catalyst. When it is below a mana pool, the pool can do the dimension recipes of the mana infusion.
  */
 public class DimensionCatalystBlock extends ExtraBotanyBlock implements PoolOverlayProvider {
-	private static final ResourceLocation OVERLAY_ICON = prefix("block/dimension_catalyst_overlay");
+	// 1.16 MiscellaneousIcons：魔力池上的叠加图就是方块贴图（对照原版审计 E7）。 / MiscellaneousIcons of 1.16: the overlay on the mana pool is the block texture (parity audit E7).
+	private static final ResourceLocation OVERLAY_ICON = prefix("block/dimension_catalyst");
 
 	public DimensionCatalystBlock(Properties builder) {
 		super(builder);

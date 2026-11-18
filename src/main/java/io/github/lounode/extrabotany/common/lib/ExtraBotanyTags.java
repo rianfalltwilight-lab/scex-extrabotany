@@ -55,7 +55,6 @@ public class ExtraBotanyTags {
 		public static final TagKey<Block> PEDESTALS = tag("pedestals");
 		public static final TagKey<Block> MANA_POOLS = tag("botania", "mana_pools");
 		public static final TagKey<Block> CHARGERS = tag("chargers");
-		public static final TagKey<Block> BELLFLOWER_IGNORE = tag("bellflower_ignore");
 		public static final TagKey<Block> MANA_SPREADERS = tag("botania", "mana_spreaders");
 
 		private static TagKey<Block> tag(String name) {
@@ -70,7 +69,6 @@ public class ExtraBotanyTags {
 	public static class DamageTypes {
 		public static final TagKey<DamageType> PEACE_AMULET_AVAILABLE = tag("peace_amulet_available");
 		public static final TagKey<DamageType> MAID_PROTECTION = tag("maid_protection");
-		public static final TagKey<DamageType> SHADOW_WARRIOR_PROTECTION = tag("shadow_warrior_protection");
 
 		private static TagKey<DamageType> tag(String name) {
 			return TagKey.create(Registries.DAMAGE_TYPE, prefix(name));
@@ -79,6 +77,11 @@ public class ExtraBotanyTags {
 
 	public static class Entities {
 		public static final TagKey<EntityType<?>> GOBLINS = tag("goblins");
+		/**
+		 * 生成时可能拿着万圣节糖果袋的怪物。清空这个标签就关掉这个功能。
+		 * The monsters that can hold a Halloween candy bag when they spawn. Empty this tag to turn the feature off.
+		 */
+		public static final TagKey<EntityType<?>> CANDY_BAG_HOLDERS = tag("candy_bag_holders");
 
 		private static TagKey<EntityType<?>> tag(String name) {
 			return TagKey.create(Registries.ENTITY_TYPE, prefix(name));

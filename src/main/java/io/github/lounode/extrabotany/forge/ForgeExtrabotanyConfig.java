@@ -91,11 +91,9 @@ public class ForgeExtrabotanyConfig {
 		public final ModConfigSpec.IntValue tradeOrchidCooldown;
 		public final ModConfigSpec.DoubleValue tradeOrchidDiscountPercentage;
 		public final ModConfigSpec.IntValue bellflowerMaxMana;
-		public final ModConfigSpec.DoubleValue bellflowerGenerateModify;
 		public final ModConfigSpec.IntValue annoyingflowerMaxMana;
 		public final ModConfigSpec.IntValue annoyingflowerFishingCost;
 		public final ModConfigSpec.IntValue annoyingflowerCooldown;
-		public final ModConfigSpec.IntValue annoyingflowerFoodBoostMax;
 		public final ModConfigSpec.IntValue annoyingflowerFoodBoostTimes;
 		public final ModConfigSpec.DoubleValue annoyingflowerFoodBoostCooldownMultiplier;
 		public final ModConfigSpec.IntValue stonesiaMaxMana;
@@ -115,7 +113,6 @@ public class ForgeExtrabotanyConfig {
 		public final ModConfigSpec.IntValue tinkleMaxMana;
 		public final ModConfigSpec.IntValue tinkleProduceMana;
 		public final ModConfigSpec.IntValue bloodEnchantressMaxMana;
-		public final ModConfigSpec.IntValue bloodEnchantressProduceMana;
 		public final ModConfigSpec.IntValue serenitianRange;
 		public final ModConfigSpec.IntValue mirrowtuniaMaxMana;
 		public final ModConfigSpec.IntValue mirrowtuniaEffectCost;
@@ -124,6 +121,7 @@ public class ForgeExtrabotanyConfig {
 		public final ModConfigSpec.IntValue enchanterTransformCost;
 		public final ModConfigSpec.IntValue enchanterConsumeSpeed;
 		public final ModConfigSpec.ConfigValue<List<? extends String>> gaiaSpawnUnCheckList;
+		public final ModConfigSpec.IntValue parityRevision;
 
 		public Common(ModConfigSpec.Builder builder) {
 
@@ -363,11 +361,6 @@ public class ForgeExtrabotanyConfig {
 							最大魔力值
 							Maximum mana""")
 					.defineInRange("maxMana", BellflowerBlockEntity.MAX_MANA, 0, Integer.MAX_VALUE);
-			bellflowerGenerateModify = builder
-					.comment("""
-							魔力生成修正值
-							Mana generation modifier""")
-					.defineInRange("generateModify", BellflowerBlockEntity.GENERATE_MODIFY, 0, Integer.MAX_VALUE);
 			builder.pop(); // End bellflower
 			builder.comment("""
 					神烦花
@@ -388,11 +381,6 @@ public class ForgeExtrabotanyConfig {
 							工作冷却时间(ticks)
 							Cooldown time in ticks""")
 					.defineInRange("cooldown", AnnoyingFlowerBlockEntity.COOLDOWN_AFTER_WORK, 0, Integer.MAX_VALUE);
-			annoyingflowerFoodBoostMax = builder
-					.comment("""
-							最大食物加成次数
-							Maximum food boost""")
-					.defineInRange("foodBoostMax", AnnoyingFlowerBlockEntity.FOOD_BOOST_MAX, 0, Integer.MAX_VALUE);
 			annoyingflowerFoodBoostTimes = builder
 					.comment("""
 							每次进食增加的次数
@@ -534,11 +522,6 @@ public class ForgeExtrabotanyConfig {
 							最大魔力值
 							Maximum mana""")
 					.defineInRange("maxMana", BloodEnchantressBlockEntity.MAX_MANA, 0, Integer.MAX_VALUE);
-			bloodEnchantressProduceMana = builder
-					.comment("""
-							每次生成的魔力量
-							Mana generated per produce""")
-					.defineInRange("produceMana", BloodEnchantressBlockEntity.PRODUCE_MANA, 0, Integer.MAX_VALUE);
 			builder.pop();//End bloodEnchantress
 			builder.comment("""
 					永寂龙胆
@@ -605,6 +588,12 @@ public class ForgeExtrabotanyConfig {
 			builder.pop(); // End enchanter
 
 			builder.pop();//End flower
+
+			parityRevision = builder
+					.comment("""
+							内部使用，不要修改。记录这个配置文件已经按哪一批“对照原版”的默认值更新过。
+							Internal, do not change. It records up to which "parity with the original" batch this file has had its defaults updated.""")
+					.defineInRange("parityRevision", 0, 0, Integer.MAX_VALUE);
 			builder.pop();//End server
 		}
 
@@ -794,10 +783,6 @@ public class ForgeExtrabotanyConfig {
 			return bellflowerMaxMana.get();
 		}
 
-		@Override
-		public double bellflowerGenerateModify() {
-			return bellflowerGenerateModify.get();
-		}
 
 		@Override
 		public int annoyingflowerMaxMana() {
@@ -814,10 +799,6 @@ public class ForgeExtrabotanyConfig {
 			return annoyingflowerCooldown.get();
 		}
 
-		@Override
-		public int annoyingflowerFoodBoostMax() {
-			return annoyingflowerFoodBoostMax.get();
-		}
 
 		@Override
 		public int annoyingflowerFoodBoostTimes() {
@@ -914,10 +895,6 @@ public class ForgeExtrabotanyConfig {
 			return bloodEnchantressMaxMana.get();
 		}
 
-		@Override
-		public int bloodEnchantressProduceMana() {
-			return bloodEnchantressProduceMana.get();
-		}
 
 		@Override
 		public int serenitianRange() {
@@ -982,7 +959,36 @@ public class ForgeExtrabotanyConfig {
 	public static void onConfigLoad(ModConfigEvent.Loading evt) {
 		var config = evt.getConfig();
 		if (config.getType() == ModConfig.Type.COMMON && config.getModId().equals(LibMisc.MOD_ID)) {
+			migrateParityDefaults();
 			ExtraBotanyConfig.resetPatchouliFlags();
+		}
+	}
+
+	/** 对照原版的默认值修订号。每一批改了默认值就加一。 / The revision of the parity defaults. Each batch that changes defaults adds one. */
+	static final int PARITY_REVISION = 1;
+
+	/**
+	 * 对照原版审计改了一些花的默认值。已有的配置文件里存着旧默认值，会盖住新默认值。这里把仍然等于旧默认值的项改成新默认值；玩家自己改过的值不动。每个文件只做一次。
+	 * The parity audit changed some defaults of the flowers. An existing config file holds the old defaults, which would override the new ones. This changes each entry that still equals the old default to the new default; a value that the player changed is kept. Each file gets this only one time.
+	 */
+	static void migrateParityDefaults() {
+		if (COMMON.parityRevision.get() >= PARITY_REVISION) {
+			return;
+		}
+		// E1 (2026-11-18): old Reburn default -> original default.
+		replaceOldDefault(COMMON.tinkleProduceMana, 100, TinkleBlockEntity.PRODUCE_MANA);
+		replaceOldDefault(COMMON.stonesiaMaxMana, 3200, StonesiaBlockEntity.MAX_MANA);
+		replaceOldDefault(COMMON.edelweissMaxMana, 12800, EdelweissBlockEntity.MAX_MANA);
+		replaceOldDefault(COMMON.edelweissCooldown, 40, EdelweissBlockEntity.COOLDOWN);
+		replaceOldDefault(COMMON.mirrowtuniaEffectCost, 100, MirrowtuniaBlockEntity.EFFECT_COST);
+		replaceOldDefault(COMMON.enchanterTransformCost, 250000, EnchanterBlockEntity.TRANSFORM_COST);
+		COMMON.parityRevision.set(PARITY_REVISION);
+		COMMON_SPEC.save();
+	}
+
+	private static void replaceOldDefault(ModConfigSpec.IntValue value, int oldDefault, int newDefault) {
+		if (value.get() == oldDefault) {
+			value.set(newDefault);
 		}
 	}
 

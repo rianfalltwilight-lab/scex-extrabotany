@@ -32,6 +32,15 @@ public class ElvenTradeProvider extends ExtraBotanyRecipeProvider {
 				new ElvenTradeRecipe(new ItemStack[] { new ItemStack(ExtraBotanyItems.elementiumQuartz) },
 						Ingredient.of(BotaniaItems.MANA_QUARTZ), Ingredient.of(BotaniaItems.MANA_QUARTZ)),
 				null);
+		// 对照原版审计 E5：1.16 elven_trade/spiritfuel.json 和 spirit.json。 / Parity audit E5: 1.16 elven_trade/spiritfuel.json and spirit.json.
+		consumer.accept(id("spirit_fuel"),
+				new ElvenTradeRecipe(new ItemStack[] { new ItemStack(ExtraBotanyItems.spiritFuel) },
+						Ingredient.of(ExtraBotanyItems.nightmareFuel)),
+				null);
+		consumer.accept(id("spirit_fragment"),
+				new ElvenTradeRecipe(new ItemStack[] { new ItemStack(ExtraBotanyItems.spiritFragment) },
+						Ingredient.of(ExtraBotanyItems.spiritFuel)),
+				null);
 	}
 
 	private static ResourceLocation id(String path) {

@@ -20,7 +20,7 @@
     {
       "type": "patchouli:crafting",
       "recipe": "extrabotany:black_glasses",
-      "recipe2": "extrabotany:thug_life"
+      "recipe2": "extrabotany:question"
     },
     {
       "type": "patchouli:crafting",
@@ -44,6 +44,18 @@
       "type": "patchouli:crafting",
       "recipe": "extrabotany:super_crown",
       "text": "extrabotany.page.cosmetics2"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "extrabotany:lemon",
+      "link_recipe": true,
+      "text": "extrabotany.page.cosmetics3"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "extrabotany:thug_life",
+      "link_recipe": true,
+      "text": "extrabotany.page.cosmetics4"
     }
   ]
 }

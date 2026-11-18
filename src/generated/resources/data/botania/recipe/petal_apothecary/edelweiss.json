@@ -11,19 +11,16 @@
       "tag": "botania:petals/white"
     },
     {
-      "tag": "botania:petals/light_blue"
+      "tag": "botania:petals/blue"
     },
     {
-      "tag": "botania:petals/light_blue"
-    },
-    {
-      "item": "botania:mana_powder"
-    },
-    {
-      "item": "botania:rune_of_mana"
+      "tag": "botania:petals/blue"
     },
     {
       "item": "botania:rune_of_winter"
+    },
+    {
+      "item": "botania:rune_of_mana"
     }
   ],
   "output": {

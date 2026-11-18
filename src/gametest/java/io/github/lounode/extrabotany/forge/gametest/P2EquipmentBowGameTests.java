@@ -52,7 +52,8 @@ public final class P2EquipmentBowGameTests {
 
 	@GameTest(template = "projectile_arena", timeoutTicks = 20)
 	public static void multishotOneAndTwoChargeThreeSingleArrowBudgets(GameTestHelper helper) {
-		for (boolean archives : new boolean[] {false, true}) {
+		// The Failnaught itself follows 1.16 now (see E3ParityGameTests); the Void Archives form keeps these rules.
+		for (boolean archives : new boolean[] {true}) {
 			for (int multishot : new int[] {0, 1, 2}) {
 				Shot shot = shoot(helper, archives, multishot, 80, 5000);
 				try {
@@ -73,7 +74,8 @@ public final class P2EquipmentBowGameTests {
 
 	@GameTest(template = "projectile_arena", timeoutTicks = 20)
 	public static void multishotRefusesPartialManaPayment(GameTestHelper helper) {
-		for (boolean archives : new boolean[] {false, true}) {
+		// The Failnaught itself follows 1.16 now (see E3ParityGameTests); the Void Archives form keeps these rules.
+		for (boolean archives : new boolean[] {true}) {
 			Shot shot = shoot(helper, archives, 1, 80, 2399);
 			try {
 				helper.assertTrue(shot.arrows.isEmpty(), "Insufficient total mana must not emit arrows");
@@ -87,7 +89,8 @@ public final class P2EquipmentBowGameTests {
 
 	@GameTest(template = "projectile_arena", timeoutTicks = 20)
 	public static void damageNeverDropsAtChargeTierBoundaries(GameTestHelper helper) {
-		for (boolean archives : new boolean[] {false, true}) {
+		// The Failnaught itself follows 1.16 now (see E3ParityGameTests); the Void Archives form keeps these rules.
+		for (boolean archives : new boolean[] {true}) {
 			float previous = -1;
 			for (int drawTicks : new int[] {27, 28, 29, 55, 56, 57, 71, 72, 73, 80}) {
 				Shot shot = shoot(helper, archives, 0, drawTicks, 5000);

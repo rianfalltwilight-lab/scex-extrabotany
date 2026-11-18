@@ -8,9 +8,9 @@
       "text": "extrabotany.page.excalibur0"
     },
     {
-      "type": "extrabotany:smithing",
+      "type": "patchouli:crafting",
       "text": "extrabotany.page.excalibur1",
-      "recipe": "extrabotany:smithing/excalibur"
+      "recipe": "extrabotany:excalibur"
     }
   ]
 }

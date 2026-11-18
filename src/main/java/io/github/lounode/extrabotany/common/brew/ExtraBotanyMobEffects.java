@@ -43,6 +43,8 @@ public class ExtraBotanyMobEffects {
 	public static Holder<MobEffect> DISCOUNT = create(LibPotionNames.DISCOUNT, new DiscountMobEffect(MobEffectCategory.NEUTRAL, 0x54eb89));
 	public static Holder<MobEffect> WARM = create(LibPotionNames.WARM, new WarmMobEffect(MobEffectCategory.BENEFICIAL, 16750848));
 	public static Holder<MobEffect> THIRROR = create(LibPotionNames.THIRROR, new ThirrorMobEffect(MobEffectCategory.BENEFICIAL, 0X4169E1));
+	// Source: ExtraMeteorP 1.16 PotionBloodTempation (neutral, 0xFF0000, no effect of its own). The Blood Enchantress uses its amplifier.
+	public static Holder<MobEffect> BLOOD_TEMPTATION = create(LibPotionNames.BLOOD_TEMPTATION, new MobEffect(MobEffectCategory.NEUTRAL, 0xFF0000) {});
 
 	private static Holder<MobEffect> create(String name, MobEffect effect) {
 		var proxy = RegistryHelper.holderProxy(Registries.MOB_EFFECT, prefix(name), effect);
@@ -66,6 +68,7 @@ public class ExtraBotanyMobEffects {
         DISCOUNT = registry.getHolderOrThrow(DISCOUNT.unwrapKey().orElseThrow());
         WARM = registry.getHolderOrThrow(WARM.unwrapKey().orElseThrow());
         THIRROR = registry.getHolderOrThrow(THIRROR.unwrapKey().orElseThrow());
+        BLOOD_TEMPTATION = registry.getHolderOrThrow(BLOOD_TEMPTATION.unwrapKey().orElseThrow());
 
 	}
 }

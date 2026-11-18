@@ -3,7 +3,7 @@
   "category": "equipment",
   "key": {
     "A": {
-      "item": "botania:gaia_spirit"
+      "item": "botania:gaia_ingot"
     },
     "B": {
       "tag": "extrabotany:orichalcos_ingots"

@@ -57,6 +57,12 @@
       },
       "name": "block.extrabotany.stardustlotus",
       "text": "extrabotany.page.stardustlotus2"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "extrabotany:textures/gui/lexicon/stardustlotus.png"
+      ]
     }
   ]
 }

@@ -51,6 +51,9 @@ import static io.github.lounode.extrabotany.common.lib.ResourceLocationHelper.pr
  * <p>来源：ExtraMeteorP 1.12 {@code ItemShadowKatana} 和 {@code DarkPixieHandler}。
  * <p>Source: ExtraMeteorP 1.12 {@code ItemShadowKatana} and {@code DarkPixieHandler}.
  *
+ * <p>1.16 也有这件物品，但只是一把没有任何效果的铁剑（没做完的移植），所以这里例外地按 1.12。召唤的是黑色的暗影妖精。
+ * <p>1.16 also has this item, but there it is only an iron sword with no effect (an unfinished port), so as an exception this follows 1.12. It summons the dark pixie.
+ *
  * <p>和原版的差异：
  * <p>Differences from the original:
  * <ul>
@@ -58,8 +61,6 @@ import static io.github.lounode.extrabotany.common.lib.ResourceLocationHelper.pr
  * The original writes "is it night" into the item data on each tick. This port puts the night bonus directly on the player, and the item data does not change.</li>
  * <li>原版空挥时攻击 8 格内的第一个生物，包括动物。这里空挥时只攻击怪物。
  * A swing at nothing in the original attacks the first living entity within 8 blocks, animals included. In this port such a swing only attacks monsters.</li>
- * <li>原版的精灵是暗色的。这里使用植物魔法的普通精灵。
- * The pixie of the original is dark. This port uses the usual pixie of Botania.</li>
  * </ul>
  */
 public class ShadowKatanaItem extends SwordItem implements LeftClickItem {
@@ -201,7 +202,7 @@ public class ShadowKatanaItem extends SwordItem implements LeftClickItem {
 	 * Summons a pixie that attacks the target. The damage of the pixie is double at night. When the player has the full Shadow Warrior armor set, the pixie also gives a harmful effect.
 	 */
 	private static void spawnPixie(ServerLevel level, Player player, LivingEntity target) {
-		PixieEntity pixie = new PixieEntity(level, false);
+		PixieEntity pixie = new io.github.lounode.extrabotany.common.entity.DarkPixieEntity(level);
 		pixie.setPos(player.getX(), player.getY() + 3, player.getZ());
 		if (((ShadowWarriorArmorItem) ExtraBotanyItems.shadowWarriorHelmet).hasArmorSet(player)) {
 			Holder<MobEffect> effect = PIXIE_EFFECTS.get(player.getRandom().nextInt(PIXIE_EFFECTS.size()));

@@ -30,8 +30,8 @@ import java.util.List;
  * 遗物剑的基类。它处理灵魂绑定、魔力修复和左键技能的公共条件。
  * The base class for relic swords. It handles soulbind, repair with mana, and the common conditions of the left-click skill.
  *
- * <p>左键技能的条件：物品在主手、攻击冷却已满、玩家是遗物的主人。
- * <p>The conditions of the left-click skill: the item is in the main hand, the attack cooldown is full, and the player owns the relic.
+ * <p>左键技能的条件：物品在主手、攻击冷却已满。和 1.16 一样不要求是主人。
+ * <p>The conditions of the left-click skill: the item is in the main hand, and the attack cooldown is full. As in 1.16, the owner is not needed.
  *
  * <p>来源：ExtraMeteorP 1.16 {@code ItemSwordRelic}。
  * <p>Source: ExtraMeteorP 1.16 {@code ItemSwordRelic}.
@@ -66,9 +66,20 @@ public abstract class RelicSwordItem extends SwordItem implements LeftClickItem 
 		return relic != null && relic.isRightPlayer(player);
 	}
 
+	/**
+	 * 遗物剑的左键技能条件：和 {@link #canUseLeftClickSkill} 相同，但不要求是主人（1.16 {@code ItemSwordRelic} 的各把剑不检查主人；不是主人的人拿着会受到遗物的伤害）。
+	 * The condition of the left-click skill of a relic sword: the same as {@link #canUseLeftClickSkill}, but the owner is not needed (the swords of 1.16 {@code ItemSwordRelic} do not check the owner; a player who is not the owner gets the relic damage while holding it).
+	 */
+	public static boolean canSwingSword(Player player, Item item) {
+		if (player.level().isClientSide() || player.isSpectator()) {
+			return false;
+		}
+		return player.getMainHandItem().is(item) && player.getAttackStrengthScale(0F) >= 1F;
+	}
+
 	@Override
 	public final void onLeftClick(Player player, @Nullable Entity target) {
-		if (!canUseLeftClickSkill(player, this)) {
+		if (!canSwingSword(player, this)) {
 			return;
 		}
 		ItemStack stack = player.getMainHandItem();

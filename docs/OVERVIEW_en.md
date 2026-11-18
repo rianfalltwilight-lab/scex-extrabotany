@@ -36,7 +36,7 @@ This is an **unofficial** NeoForge 1.21.1 port of "Extra Botany". This document 
 The rule of this version: **the source code of the original is the reference**.
 
 - Content that the original has was written again, class by class, from the source of 1.12 and 1.16.
-- Content that Reburn added and the original does not have (for example the Resoncund, the Trade Orchid, the Woodienia, the Enchanter) keeps its design. Only defects were corrected.
+- Content that Reburn added and the original does not have (for example the Resoncund, the Trade Orchid, the Woodienia) keeps its design. Only defects were corrected. The Enchanter is not in this group: it is `SubTileEnchantedOrchid` of 1.12, and E1 restored it to the original.
 - The registry IDs and the keys of the saved data did not change, thus old worlds stay usable.
 
 ## What this version did
@@ -62,7 +62,7 @@ The content of the original 1.12 and of the original 1.16 is not the same. This 
 
 - Only in 1.12: Herrscher of the Void, Stardust Lotus, Garden of King's Law, Spear of Subspace, Judah Oath, Cocoon of Desire, Quantum Mana Buffer, Mana Liquefaction Device, Supply Bag Limited Edition, Trophy.
 - Only in 1.16: Ego, Motor and UFO, Key of Flamescion, Gem of Conquest, universal runes, Universal Petal.
-- Guardian of Gaia III (the Reburn port of the boss of 1.12) and the Ego (1.16) are two different bosses with separate summon methods.
+- Guardian of Gaia III (rewritten after `EntityGaiaIII` of 1.12, see E4 in PORT_AUDIT) and the Ego (1.16) are two different bosses with separate summon methods.
 
 ### Defects that were corrected
 
@@ -77,7 +77,7 @@ The audit record has approximately 190 numbered defects. Each one gives the symp
 - One NeoForge module with the standard Gradle layout.
 - Client code and common code are separate: classes outside the client packages do not refer to client classes. A script examined the release JAR for this.
 - The data generators run again (before, they stopped with an error at the third generator), and two runs give exactly the same output. Generated files and hand-written files are in different directories.
-- The mechanisms of 1.21.1 are used: data attachments (the energy and the state of the player), data maps (the hatch table of the cocoon, the burn times of the fuels), tags, data-driven damage types and jukebox songs. A modpack can adjust them with a data pack.
+- The mechanisms of 1.21.1 are used: data attachments (the energy and the state of the player), data maps (the hatch table of the cocoon), tags, data-driven damage types and jukebox songs. A modpack can adjust them with a data pack.
 - The KubeJS recipe support was verified at run time. See [kubejs.md](kubejs.md).
 - The code comments are in Chinese and English. See [COMMENT_STYLE.md](COMMENT_STYLE.md).
 

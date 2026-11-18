@@ -272,6 +272,30 @@ public class ExtraBotanyEntityType {
 			.updateInterval(10)
 			.build(LibEntityNames.GAIA_III.toString());
 
+	// 1.12 EntitySkullMinion：盖亚守护者III的骷髅仆从。 / 1.12 EntitySkullMinion: the skull minion of Guardian of Gaia III.
+	public static final EntityType<SkullMinionEntity> SKULL_MINION = EntityType.Builder.<SkullMinionEntity>of(
+			SkullMinionEntity::new, MobCategory.MONSTER)
+			.sized(1F, 1F)
+			.fireImmune()
+			.clientTrackingRange(10)
+			.updateInterval(3)
+			.build(LibMisc.MOD_ID + ":skull_minion");
+	// 1.12 EntityDarkPixie：暗影之刃召唤的暗影妖精。 / 1.12 EntityDarkPixie: the dark pixie that the Shadow Katana summons.
+	public static final EntityType<vazkii.botania.common.entity.PixieEntity> DARK_PIXIE = EntityType.Builder.<vazkii.botania.common.entity.PixieEntity>of(
+			DarkPixieEntity::new, MobCategory.MISC)
+			.sized(1F, 1F)
+			.clientTrackingRange(6)
+			.updateInterval(3)
+			.build(LibMisc.MOD_ID + ":dark_pixie");
+
+	// 1.12 EntityFlyingBoat：飞艇，大小和 1.12 相同。 / EntityFlyingBoat of 1.12: the flying boat, with the size of 1.12.
+	public static final EntityType<io.github.lounode.extrabotany.common.entity.vehicle.FlyingBoatEntity> FLYING_BOAT = EntityType.Builder.<io.github.lounode.extrabotany.common.entity.vehicle.FlyingBoatEntity>of(
+			io.github.lounode.extrabotany.common.entity.vehicle.FlyingBoatEntity::new, MobCategory.MISC)
+			.sized(1.375F, 0.5625F)
+			.eyeHeight(0.5625F)
+			.clientTrackingRange(10)
+			.build(LibMisc.MOD_ID + ":flying_boat");
+
 	public static final EntityType<SkullMissileEntity> SKULL_MISSILE = EntityType.Builder.<SkullMissileEntity>of(
 			SkullMissileEntity::new, MobCategory.MISC)
 			.sized(0.5F, 0.5F)
@@ -343,6 +367,9 @@ public class ExtraBotanyEntityType {
 		r.accept(GAIA_LEGACY, LibEntityNames.GAIA_LEGACY);
 		r.accept(GAIA_III, LibEntityNames.GAIA_III);
 		r.accept(SKULL_MISSILE, LibEntityNames.SKULL_MISSILE);
+		r.accept(SKULL_MINION, prefix("skull_minion"));
+		r.accept(DARK_PIXIE, prefix("dark_pixie"));
+		r.accept(FLYING_BOAT, prefix("flying_boat"));
 		r.accept(SKULL_LANDMINE_BLUE, LibEntityNames.SKULL_LANDMINE_BLUE);
 		r.accept(SKULL_LANDMINE_RED, LibEntityNames.SKULL_LANDMINE_RED);
 		r.accept(SKULL_LANDMINE_GREEN, LibEntityNames.SKULL_LANDMINE_GREEN);
@@ -356,6 +383,8 @@ public class ExtraBotanyEntityType {
 		consumer.accept(PET_PIXIE, PetPixieEntity.createAttributes());
 		consumer.accept(GAIA_LEGACY, Gaia.createGaiaAttributes());
 		consumer.accept(GAIA_III, GaiaIII.createGaiaAttributes());
+		consumer.accept(SKULL_MINION, SkullMinionEntity.createAttributes());
+		consumer.accept(DARK_PIXIE, DarkPixieEntity.createAttributes());
 
 	}
 }

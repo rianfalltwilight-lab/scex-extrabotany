@@ -61,7 +61,7 @@ public final class NatureOrbGameTests {
 				h.assertTrue(f.player.hasEffect(MobEffects.POISON) == (tick < 40)
 						&& f.player.hasEffect(MobEffects.WITHER) == (tick < 40), "Incorrect harmful-effect removal at worn tick " + tick);
 				h.assertTrue(f.player.hasEffect(MobEffects.DIG_SPEED), "The orb removed a beneficial effect");
-				h.assertTrue(f.energy.getEnergy() == NatureOrbItem.MAX_ENERGY - (tick < 40 ? 0 : 400),
+				h.assertTrue(f.energy.getEnergy() == NatureOrbItem.MAX_ENERGY - (tick < 40 ? 0 : 2 * NatureOrbItem.REMOVE_HARMFUL_POTION_COST),
 						"Energy changed without removing a harmful effect at worn tick " + tick);
 			}
 			var removed = f.player.packets.stream().filter(ClientboundRemoveMobEffectPacket.class::isInstance)

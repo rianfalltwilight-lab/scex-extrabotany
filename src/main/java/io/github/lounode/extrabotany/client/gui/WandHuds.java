@@ -13,7 +13,6 @@ import io.github.lounode.extrabotany.common.block.flower.functional.AnnoyingFlow
 import io.github.lounode.extrabotany.common.block.flower.functional.EnchanterBlockEntity;
 import io.github.lounode.extrabotany.common.block.flower.functional.ManalinkBlockEntity;
 import io.github.lounode.extrabotany.common.block.flower.functional.StardustLotusBlockEntity;
-import io.github.lounode.extrabotany.common.block.flower.generating.BellflowerBlockEntity;
 
 import java.util.function.Function;
 
@@ -47,10 +46,9 @@ public final class WandHuds {
 				TRADE_ORCHID, WOODIENIA, SERENITIAN, MIRROWTUNIA, NECROFLEUR, NECROFLEUR_CHIBI);
 		registrar.accept(be -> new BindableSpecialFlowerBlockEntity.BindableFlowerWandHud<>((GeneratingFlowerBlockEntity) be),
 				REIKARLILY, STONESIA, EDELWEISS, RESONCUND, SUNSHINE_LILY, MOONLIGHT_LILY,
-				TWINSTAR, OMNIVIOLET, TINKLE, BLOOD_ENCHANTRESS);
+				TWINSTAR, OMNIVIOLET, TINKLE, BLOOD_ENCHANTRESS, BELLFLOWER);
 
 		registrar.accept(be -> new StardustLotusWandHud((StardustLotusBlockEntity) be), STARDUST_LOTUS);
-		registrar.accept(be -> new BellflowerWandHud((BellflowerBlockEntity) be), BELLFLOWER);
 		registrar.accept(be -> new AnnoyingFlowerWandHud((AnnoyingFlowerBlockEntity) be), ANNOYINGFLOWER);
 		registrar.accept(be -> new ManalinkWandHud((ManalinkBlockEntity) be), MANALINK);
 		registrar.accept(be -> new EnchanterWandHud((EnchanterBlockEntity) be), ENCHANTER);

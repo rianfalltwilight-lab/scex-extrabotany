@@ -43,7 +43,11 @@ public class CosmeticBaubleItem extends BaubleItem {
 		THUG_LIFE(true, 0F, -0.2F, -0.3F, 0.7F, -0.7F, -0.7F),
 		SUPER_CROWN(true, 0F, -0.7F, -0.1F, 0.65F, -0.65F, -0.65F),
 		MASK(true, 0F, -0.3F, -0.3F, 0.65F, -0.65F, -0.65F),
-		RED_SCARF(false, 0F, 0.16F, -0.15F, 0.55F, -0.55F, -0.55F);
+		RED_SCARF(false, 0F, 0.16F, -0.15F, 0.55F, -0.55F, -0.55F),
+		// 对照原版审计 E6：1.12 ItemCosmetic 的 QUESTION（头顶三个问号，见 AccessoryRenderers）和 LEMON（脸侧）。数值按其他装饰品的换算从 1.12 推出。
+		// Parity audit E6: QUESTION (three question marks above the head, see AccessoryRenderers) and LEMON (at the side of the face) of ItemCosmetic of 1.12. The values are converted from 1.12 in the same way as the other cosmetics.
+		QUESTION(true, 0F, -0.75F, -0.13F, 0.47F, -0.47F, -0.47F),
+		LEMON(true, -0.11F, -0.22F, -0.33F, 0.25F, -0.25F, -0.25F);
 
 		/**
 		 * {@code true} 表示饰品跟随头部；{@code false} 表示跟随身体。

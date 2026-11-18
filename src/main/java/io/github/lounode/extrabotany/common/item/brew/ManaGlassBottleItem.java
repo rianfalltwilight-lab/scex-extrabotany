@@ -6,7 +6,6 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
@@ -17,15 +16,18 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 
 import vazkii.botania.api.mana.ManaReceiver;
-import vazkii.botania.common.item.CustomCreativeTabContents;
 
+import io.github.lounode.extrabotany.common.item.ExtraBotanyItems;
 import io.github.lounode.extrabotany.common.lib.ExtraBotanyTags;
 
 /**
- * 魔力玻璃瓶。对着魔力池使用时，它从魔力池里取走 25000 点魔力，变成一瓶默认的魔力鸡尾酒。
- * Managlass Bottle. When it is used on a mana pool, it takes 25000 mana from the pool and becomes one default Mana Cocktail.
+ * 魔力玻璃瓶。对着魔力池使用时，它从魔力池里取走 25000 点魔力，变成一瓶魔力饮品。
+ * Managlass Bottle. When it is used on a mana pool, it takes 25000 mana from the pool and becomes one Mana Drink.
+ *
+ * <p>来源：ExtraMeteorP 1.16 {@code ItemEmptyBottle}（1.12 也是对魔力池使用得到魔力饮品）。魔力鸡尾酒由酿造瓶和魔力饮品合成。
+ * <p>Source: ExtraMeteorP 1.16 {@code ItemEmptyBottle} (in 1.12 too, a use on a mana pool gives a Mana Drink). A Mana Cocktail is crafted from a brew flask and a Mana Drink.
  */
-public class ManaGlassBottleItem extends Item implements CustomCreativeTabContents {
+public class ManaGlassBottleItem extends Item {
 
 	public static int LADLE_OUT_MANA = 25_000;
 
@@ -33,12 +35,6 @@ public class ManaGlassBottleItem extends Item implements CustomCreativeTabConten
 		super(properties);
 	}
 
-	@Override
-	public void addToCreativeTab(Item item, CreativeModeTab.Output output) {
-		ItemStack empty = new ItemStack(this);
-		output.accept(empty);
-		output.accept(ManaCocktailItem.getDefaultCocktail());
-	}
 
 	@Override
 	public InteractionResult useOn(UseOnContext context) {
@@ -65,8 +61,7 @@ public class ManaGlassBottleItem extends Item implements CustomCreativeTabConten
 		level.playSound(player, player.getX(), player.getY(), player.getZ(), SoundEvents.BOTTLE_FILL, SoundSource.NEUTRAL, 1.0F, 1.0F);
 		level.gameEvent(player, GameEvent.FLUID_PICKUP, pos);
 
-		ItemStack defaultCocktail = ManaCocktailItem.getDefaultCocktail();
-		var emptyResult = turnBottleIntoItem(stack, player, defaultCocktail);
+		var emptyResult = turnBottleIntoItem(stack, player, new ItemStack(ExtraBotanyItems.manaDrink));
 
 		if (stack.isEmpty()) {
 			if (!player.getInventory().add(emptyResult)) {

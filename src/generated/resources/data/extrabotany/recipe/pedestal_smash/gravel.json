@@ -1,0 +1,15 @@
+{
+  "type": "extrabotany:pedestal_smash",
+  "exp": 1,
+  "input": {
+    "item": "minecraft:cobblestone"
+  },
+  "output": {
+    "count": 1,
+    "id": "minecraft:gravel"
+  },
+  "smash_tools": {
+    "tag": "extrabotany:hammers"
+  },
+  "strike": 5
+}

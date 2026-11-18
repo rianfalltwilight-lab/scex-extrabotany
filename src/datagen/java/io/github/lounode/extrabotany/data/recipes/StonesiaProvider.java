@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.Block;
 import vazkii.botania.api.recipe.StateIngredient;
 import vazkii.botania.common.crafting.StateIngredients;
 
+import io.github.lounode.extrabotany.common.block.flower.generating.StonesiaBlockEntity;
 import io.github.lounode.extrabotany.common.crafting.StonesiasRecipe;
 
 import java.util.concurrent.CompletableFuture;
@@ -23,6 +24,9 @@ import static io.github.lounode.extrabotany.common.lib.ResourceLocationHelper.pr
 /**
  * 生成石中姬的配方：哪种方块产生多少魔力。
  * Makes these recipes. The recipes of the Stonesia: which block gives how much mana.
+ *
+ * <p>下面的数是 1.12 {@code ModRecipe.initStonesiaRecipe} 的燃烧 tick 数；配方里写的是总魔力，也就是这个数乘以每 tick 的 {@link StonesiaBlockEntity#MANA_PER_TICK}。1.12 没有的矿石按同样的方式换算。
+ * <p>The numbers below are the burn ticks of {@code ModRecipe.initStonesiaRecipe} of 1.12; the recipe holds the total mana, that is, this number times {@link StonesiaBlockEntity#MANA_PER_TICK} for each tick. The ores that 1.12 does not have are converted in the same way.
  */
 public class StonesiaProvider extends ExtraBotanyRecipeProvider {
 	public StonesiaProvider(PackOutput packOutput,
@@ -33,10 +37,10 @@ public class StonesiaProvider extends ExtraBotanyRecipeProvider {
 	@Override
 	public void buildRecipes(RecipeOutput recipeOutput) {
 		Consumer<Result> consumer = result -> recipeOutput.accept(result.id(),
-				new StonesiasRecipe(result.input(), result.outputMana()), null);
+				new StonesiasRecipe(result.input(), result.outputMana() * StonesiaBlockEntity.MANA_PER_TICK), null);
 		//Stone
-		consumer.accept(new Result(id("stone"), forTag(BlockTags.BASE_STONE_OVERWORLD), 20));
-		consumer.accept(new Result(id("cobblestone"), forTag(location("c", "cobblestones")), 10));
+		consumer.accept(new Result(id("stone"), forTag(BlockTags.BASE_STONE_OVERWORLD), 10));
+		consumer.accept(new Result(id("cobblestone"), forTag(location("c", "cobblestones")), 5));
 		//Minecraft Ores
 		consumer.accept(new Result(id("coal_ore"), vanillaOre(BlockTags.COAL_ORES), 305));
 		consumer.accept(new Result(id("iron_ore"), vanillaOre(BlockTags.IRON_ORES), 370));

@@ -2,16 +2,16 @@
   "type": "botania:petal_apothecary",
   "ingredients": [
     {
-      "tag": "botania:petals/black"
-    },
-    {
-      "tag": "botania:petals/black"
+      "tag": "botania:petals/white"
     },
     {
       "tag": "botania:petals/purple"
     },
     {
-      "tag": "botania:petals/gray"
+      "tag": "botania:petals/purple"
+    },
+    {
+      "tag": "botania:petals/purple"
     }
   ],
   "output": {

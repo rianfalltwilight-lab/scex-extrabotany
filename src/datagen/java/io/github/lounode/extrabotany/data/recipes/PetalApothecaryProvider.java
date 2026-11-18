@@ -67,23 +67,24 @@ public class PetalApothecaryProvider extends ExtraBotanyRecipeProvider {
 
 		Ingredient redstoneRoot = Ingredient.of(BotaniaItems.REDSTONE_ROOT);
 		Ingredient gaiaSpirit = Ingredient.of(BotaniaItems.GAIA_SPIRIT);
-		Ingredient spiritFragment = Ingredient.of(ExtraBotanyItems.spiritFragment);
 		Ingredient manaDust = Ingredient.of(BotaniaItems.MANA_POWDER);
 
 		make(consumer, ExtrabotanyFlowerBlocks.tradeOrchid, lime, lime, green, brown, runeGreed, runeLust, redstoneRoot);
 		make(consumer, ExtrabotanyFlowerBlocks.woodienia, brown, brown, brown, gray, Ingredient.of(ExtraBotanyItems.elementiumQuartz), runeGluttony, redstoneRoot);
 		make(consumer, ExtrabotanyFlowerBlocks.reikarlily, lightBlue, lightBlue, cyan, cyan, blue, runePride, runeEnvy, runeSloth, gaiaSpirit);
-		make(consumer, ExtrabotanyFlowerBlocks.bellflower, yellow, yellow, lime, lime, spiritFragment);
-		make(consumer, ExtrabotanyFlowerBlocks.annoyingflower, white, white, pink, pink, green, runeMana, spiritFragment);
+		// 对照原版审计 E5：两个版本都有的花用 1.16 data/extrabotany/recipes/petal_apothecary/*.json。
+		// Parity audit E5: a flower that both versions have uses 1.16 data/extrabotany/recipes/petal_apothecary/*.json.
+		make(consumer, ExtrabotanyFlowerBlocks.bellflower, lime, lime, yellow, yellow, yellow, yellow);
+		make(consumer, ExtrabotanyFlowerBlocks.annoyingflower, white, white, pink, pink, green, runeMana);
 		make(consumer, ExtrabotanyFlowerBlocks.stonesia, gray, gray, black, gaiaSpirit, runeAutumn, runeGluttony);
-		make(consumer, ExtrabotanyFlowerBlocks.edelweiss, white, white, white, lightBlue, lightBlue, manaDust, runeMana, runeWinter);
+		make(consumer, ExtrabotanyFlowerBlocks.edelweiss, white, white, white, blue, blue, runeWinter, runeMana);
 		make(consumer, ExtrabotanyFlowerBlocks.resoncund, magenta, magenta, orange, orange, runeLust, runeGluttony);
-		make(consumer, ExtrabotanyFlowerBlocks.sunshineLily, yellow, yellow, yellow, orange);
-		make(consumer, ExtrabotanyFlowerBlocks.moonlightLily, black, black, purple, gray);
+		make(consumer, ExtrabotanyFlowerBlocks.sunshineLily, white, yellow, yellow, yellow);
+		make(consumer, ExtrabotanyFlowerBlocks.moonlightLily, white, purple, purple, purple);
 		make(consumer, ExtrabotanyFlowerBlocks.serenitian, purple, purple, blue, blue, runeMana, runeSloth, runeGreed, gaiaSpirit, Ingredient.of(Items.WITHER_ROSE));
-		make(consumer, ExtrabotanyFlowerBlocks.twinstar, yellow, yellow, yellow, orange, orange, orange, manaDust, manaDust);
+		make(consumer, ExtrabotanyFlowerBlocks.twinstar, orange, orange, orange, yellow, yellow, yellow);
 		make(consumer, ExtrabotanyFlowerBlocks.omniviolet, purple, purple, blue, blue, runeSpring, runeMana, runeLust);
-		make(consumer, ExtrabotanyFlowerBlocks.tinkle, yellow, yellow, green, lime, runeWater, runeEarth, manaDust, spiritFragment, spiritFragment);
+		make(consumer, ExtrabotanyFlowerBlocks.tinkle, yellow, red, green, blue, runeEarth, runeWater);
 		make(consumer, ExtrabotanyFlowerBlocks.bloodEnchantress, red, red, red, red, runeFire, runeSummer, runeWrath);
 		make(consumer, ExtrabotanyFlowerBlocks.mirrowtunia, cyan, cyan, lightBlue, blue, runeWrath, runePride, runeAir, manaDust);
 		make(consumer, ExtrabotanyFlowerBlocks.manalink, cyan, cyan, cyan, lightBlue, lightBlue, runeSloth, runeLust, gaiaSpirit);

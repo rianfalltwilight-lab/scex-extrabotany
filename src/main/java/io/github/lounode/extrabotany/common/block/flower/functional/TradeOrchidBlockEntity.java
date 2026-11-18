@@ -67,11 +67,16 @@ public class TradeOrchidBlockEntity extends ExtraFunctionalFlowerBlockEntity {
 				.filter(LivingEntity::isAlive)
 				.toList();
 
+		MobEffectInstance discount = getNewEffect();
+		if (discount == null) {
+			// The config asks for no discount (a price factor of 1.0): nothing to give, no mana to use.
+			return;
+		}
 		for (var villager : villagers) {
 			if (getMana() < getManaPerUse()) {
 				break;
 			}
-			if (!villager.addEffect(getNewEffect())) {
+			if (!villager.addEffect(new MobEffectInstance(discount))) {
 				continue;
 			}
 
@@ -98,11 +103,20 @@ public class TradeOrchidBlockEntity extends ExtraFunctionalFlowerBlockEntity {
 		return 0x54eb89;
 	}
 
+	/**
+	 * 给村民的折扣效果。配置要求不打折（价格系数 1.0）时返回 {@code null}。以前这时效果等级是 -1，被截成 0 级，结果还是打 1% 的折。
+	 * The discount effect for the villagers. {@code null} when the config asks for no discount (a price factor of 1.0). Before, the amplifier was -1 in that case, which was cut to 0, so it still gave 1% off.
+	 */
+	@Nullable
 	public MobEffectInstance getNewEffect() {
+		int level = calcRequireLevel(ExtraBotanyConfig.common().tradeOrchidDiscountPercentage());
+		if (level <= 0) {
+			return null;
+		}
 		return new MobEffectInstance(
 				ExtraBotanyMobEffects.DISCOUNT,
 				ExtraBotanyConfig.common().tradeOrchidCooldown() + 20,
-				calcRequireLevel(ExtraBotanyConfig.common().tradeOrchidDiscountPercentage()) - 1,
+				level - 1,
 				true,
 				false
 		);

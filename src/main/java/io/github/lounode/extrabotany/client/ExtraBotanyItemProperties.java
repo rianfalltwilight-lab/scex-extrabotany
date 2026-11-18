@@ -40,8 +40,11 @@ public class ExtraBotanyItemProperties {
 			}
 		};
 		consumer.accept(ExtraBotanyItems.failnaught, ResourceLocation.tryParse("pulling"), pulling);
+		// 对照原版审计 E7：1.12 的奖励袋在圣诞节期间也换图标。 / Parity audit E7: the reward bags of 1.12 also change their icon in the Christmas period.
 		for (var candy : java.util.List.of(ExtraBotanyItems.candyBag, ExtraBotanyItems.candyEins,
-				ExtraBotanyItems.candyZwei, ExtraBotanyItems.candyDrei)) {
+				ExtraBotanyItems.candyZwei, ExtraBotanyItems.candyDrei,
+				ExtraBotanyItems.einsRewardBag, ExtraBotanyItems.zweiRewardBag, ExtraBotanyItems.dreiRewardBag,
+				ExtraBotanyItems.vierRewardBag, ExtraBotanyItems.nineAndThreeQuartersRewardBag)) {
 			consumer.accept(candy, prefix("seasonal_christmas"), (stack, level, entity, seed) ->
 					io.github.lounode.extrabotany.common.item.SeasonalItemHelper.isChristmas() ? 1.0F : 0.0F);
 		}
@@ -96,6 +99,8 @@ public class ExtraBotanyItemProperties {
 				(stack, world, entity, seed) -> TerrasteelHammerItem.isEnabled(stack) ? 1 : 0);
 		consumer.accept(ExtraBotanyItems.orichalcosHammer, prefix("active"),
 				(stack, world, entity, seed) -> OrichalcosHammer.isEnabled(stack) ? 1 : 0);
+		consumer.accept(ExtraBotanyItems.ultimateHammer, prefix("active"),
+				(stack, world, entity, seed) -> io.github.lounode.extrabotany.common.item.equipment.tool.hammer.UltimateHammerItem.isEnabled(stack) ? 1 : 0);
 		consumer.accept(ExtraBotanyItems.rheinHammer, prefix("active"),
 				(stack, world, entity, seed) -> RheinHammerItem.isEnabled(stack) ? 1 : 0);
 		consumer.accept(ExtraBotanyItems.sanguinePleiadesCombatMaidSuit, prefix("senketsu"),

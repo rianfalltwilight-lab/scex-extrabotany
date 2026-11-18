@@ -136,6 +136,5 @@ public final class PedestalLegacyParityGameTests {
         private CountingPedestal(BlockPos pos) { super(pos, ExtraBotanyBlocks.livingrockPedestal.defaultBlockState()); }
         @Override public void setChanged() { dirtyCalls++; super.setChanged(); }
         @Override public void updateTier() { }
-        @Override public void updateAutomaticHammers() { }
     }
 }

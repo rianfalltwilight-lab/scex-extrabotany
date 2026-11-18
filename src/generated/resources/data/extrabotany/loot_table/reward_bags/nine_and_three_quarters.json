@@ -9,23 +9,12 @@
           "functions": [
             {
               "add": false,
-              "count": 1.0,
-              "function": "minecraft:set_count"
-            }
-          ],
-          "name": "extrabotany:hero_medal"
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
               "count": 16.0,
               "function": "minecraft:set_count"
             }
           ],
           "name": "extrabotany:eins_reward_bag",
-          "weight": 30
+          "weight": 33
         },
         {
           "type": "minecraft:item",
@@ -37,7 +26,7 @@
             }
           ],
           "name": "extrabotany:zwei_reward_bag",
-          "weight": 20
+          "weight": 23
         },
         {
           "type": "minecraft:item",
@@ -49,7 +38,7 @@
             }
           ],
           "name": "extrabotany:drei_reward_bag",
-          "weight": 10
+          "weight": 13
         },
         {
           "type": "minecraft:item",
@@ -61,43 +50,33 @@
             }
           ],
           "name": "extrabotany:vier_reward_bag",
-          "weight": 10
+          "weight": 13
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": 1.0,
-              "function": "minecraft:set_count"
-            }
-          ],
           "name": "botania:gaia_ingot",
-          "weight": 14
+          "weight": 23
         },
         {
           "type": "minecraft:item",
           "functions": [
             {
               "add": false,
-              "count": 4.0,
+              "count": 5.0,
               "function": "minecraft:set_count"
             }
           ],
-          "name": "botania:gaia_spirit",
+          "name": "botania:terrasteel_ingot",
           "weight": 20
         },
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": 1.0,
-              "function": "minecraft:set_count"
-            }
-          ],
           "name": "extrabotany:challenge_ticket",
           "weight": 45
+        },
+        {
+          "type": "minecraft:item",
+          "name": "extrabotany:hero_medal"
         }
       ],
       "rolls": 1.0

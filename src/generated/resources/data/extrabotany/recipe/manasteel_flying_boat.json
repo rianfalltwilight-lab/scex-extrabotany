@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:ingots/manasteel"
+    },
+    "B": {
+      "item": "botania:mana_tablet"
+    },
+    "C": {
+      "item": "minecraft:dragon_breath"
+    }
+  },
+  "pattern": [
+    "C C",
+    "ABA",
+    "AAA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:manasteel_flying_boat"
+  }
+}

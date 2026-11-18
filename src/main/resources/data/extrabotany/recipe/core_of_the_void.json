@@ -2,20 +2,20 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "O": {
-      "tag": "extrabotany:orichalcos_ingots"
+    "G": {
+      "item": "botania:sunny_quartz"
     },
-    "Q": {
-      "item": "botania:sunny_quartz_block"
+    "H": {
+      "item": "extrabotany:hero_medal"
     },
-    "T": {
-      "item": "extrabotany:empty_core_of_the_void"
+    "F": {
+      "item": "botania:flugel_tiara"
     }
   },
   "pattern": [
-    "QOQ",
-    "QTQ",
-    "QQQ"
+    "GHG",
+    "GFG",
+    "GGG"
   ],
   "result": {
     "count": 1,

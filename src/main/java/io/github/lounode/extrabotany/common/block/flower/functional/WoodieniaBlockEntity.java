@@ -89,6 +89,9 @@ public class WoodieniaBlockEntity extends ExtraFunctionalFlowerBlockEntity {
 		}
 
 		if (!FlowerBlockActions.breakBlock((ServerLevel) getLevel(), breakCoords, ownerUUID, true)) {
+			// 破坏被拒绝（例如领地保护）。和找不到原木一样，隔一会儿再扫描，不要每 tick 都扫描。
+			// The break was refused (for example by a claim). The same as with no log, scan again after some time, not on each tick.
+			nextIdleScan = nextIdleScanTime(getLevel().getGameTime());
 			return;
 		}
 		setCooldown(getAfterEatCooldown());

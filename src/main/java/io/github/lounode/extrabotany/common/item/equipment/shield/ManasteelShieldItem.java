@@ -30,7 +30,8 @@ public class ManasteelShieldItem extends ShieldItem implements CustomDamageItem,
 	private final Tier tier;
 
 	public ManasteelShieldItem(Properties properties, Tier tier) {
-		super(properties.durability((int) (tier.getUses() * 1.5F)));
+		// 1.12 ItemShieldCopy：耐久是材料的 2 倍。 / 1.12 ItemShieldCopy: the durability is 2 times that of the material.
+		super(properties.durability(tier.getUses() * 2));
 		this.tier = tier;
 	}
 
@@ -46,7 +47,7 @@ public class ManasteelShieldItem extends ShieldItem implements CustomDamageItem,
 	@Override
 	public void inventoryTick(ItemStack stack, Level world, Entity entity, int slot, boolean selected) {
 		if (!world.isClientSide && entity instanceof Player player && stack.getDamageValue() > 0 &&
-				ManaItemHandler.instance().requestManaExactForTool(stack, player, getManaPerDamage(), true)) {
+				ManaItemHandler.instance().requestManaExactForTool(stack, player, getManaPerDamage() * 2, true)) {
 			stack.setDamageValue(stack.getDamageValue() - 1);
 		}
 	}

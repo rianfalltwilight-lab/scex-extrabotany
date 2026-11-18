@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import vazkii.botania.common.helper.PlayerHelper;
 
 import io.github.lounode.extrabotany.common.block.ExtraBotanyBlocks;
+import io.github.lounode.extrabotany.common.item.ExtraBotanyItems;
 import io.github.lounode.extrabotany.common.lib.LibAdvancementNames;
 import io.github.lounode.extrabotany.common.lib.LibMisc;
 
@@ -30,6 +31,19 @@ import static io.github.lounode.extrabotany.common.lib.ResourceLocationHelper.pr
 public final class AllAdvancementsHandler {
 	private static final String MAIN_PREFIX = "main/";
 	private static final ResourceLocation ALL_STATS = prefix(MAIN_PREFIX + LibAdvancementNames.ALL_STATS);
+	private static final ResourceLocation ROOT = prefix(MAIN_PREFIX + LibAdvancementNames.ROOT);
+	private static final ResourceLocation ENDGAME_GOAL = prefix(MAIN_PREFIX + LibAdvancementNames.ENDGAME_GOAL);
+	private static final ResourceLocation HERRSCHER_DEFEAT = prefix(MAIN_PREFIX + LibAdvancementNames.HERRSCHER_DEFEAT);
+	/**
+	 * 对照原版审计 E5：1.12 StatHandler。完成 6、12、18 个进度时各得到一个进度，并掉落一件物品。
+	 * Parity audit E5: StatHandler of 1.12. At 6, 12 and 18 completed advancements the player gets one advancement each, and one item drops.
+	 */
+	private static final ResourceLocation[] COUNT_REWARDS = {
+			prefix(MAIN_PREFIX + LibAdvancementNames.MANA_DRIVER_GET),
+			prefix(MAIN_PREFIX + LibAdvancementNames.MAGIC_FINGER_GET),
+			prefix(MAIN_PREFIX + LibAdvancementNames.JINGWEI_FEATHER_GET)
+	};
+	public static final int[] COUNT_NEEDED = { 6, 12, 18 };
 
 	private AllAdvancementsHandler() {}
 
@@ -41,15 +55,75 @@ public final class AllAdvancementsHandler {
 		if (!(player instanceof ServerPlayer serverPlayer) || !PlayerHelper.isTruePlayer(player)) {
 			return;
 		}
-		if (earned.id().equals(ALL_STATS)) {
+		ResourceLocation id = earned.id();
+		if (id.equals(ALL_STATS)) {
 			// 和原版相同：不管这个进度是怎么得到的，得到它的时候就给奖杯。
 			// The same as in the original: the Trophy is given when the player gets this advancement, by any method.
-			ItemEntity trophy = serverPlayer.spawnAtLocation(new ItemStack(ExtraBotanyBlocks.trophy), 0F);
-			if (trophy != null) {
-				trophy.setNoPickUpDelay();
-			}
-		} else if (isMainAdvancement(earned)) {
+			drop(serverPlayer, new ItemStack(ExtraBotanyBlocks.trophy));
+			return;
+		}
+		// 1.12 StatHandler.getAchievement 的物品奖励：击败空之律者给柠檬（mask:8），"终局"给 Thug Life（mask:9）和两张唱片。
+		// The item rewards of StatHandler.getAchievement of 1.12: defeating the Herrscher gives the lemon (mask:8), "End Day" gives Thug Life (mask:9) and the two discs.
+		if (id.equals(COUNT_REWARDS[0])) {
+			drop(serverPlayer, new ItemStack(ExtraBotanyItems.dispersiveRing));
+		} else if (id.equals(COUNT_REWARDS[1])) {
+			drop(serverPlayer, new ItemStack(ExtraBotanyItems.magicFinger));
+		} else if (id.equals(COUNT_REWARDS[2])) {
+			drop(serverPlayer, new ItemStack(ExtraBotanyItems.featherOfJingwei));
+		} else if (id.equals(HERRSCHER_DEFEAT)) {
+			drop(serverPlayer, new ItemStack(ExtraBotanyItems.lemon));
+		} else if (id.equals(ENDGAME_GOAL)) {
+			drop(serverPlayer, new ItemStack(ExtraBotanyItems.thugLife));
+			drop(serverPlayer, new ItemStack(ExtraBotanyItems.recordGaia3));
+			drop(serverPlayer, new ItemStack(ExtraBotanyItems.recordHerrscherOfTheVoid));
+		}
+		if (isMainAdvancement(earned)) {
 			check(serverPlayer);
+		}
+	}
+
+	private static void drop(ServerPlayer player, ItemStack stack) {
+		ItemEntity entity = player.spawnAtLocation(stack, 0F);
+		if (entity != null) {
+			entity.setNoPickUpDelay();
+		}
+	}
+
+	/**
+	 * 数出完成的主进度，不算根进度、三个计数奖励进度和最后的进度。
+	 * Counts the completed main advancements, without the root, the three counting rewards and the last advancement.
+	 */
+	public static int countCompleted(ServerPlayer player) {
+		PlayerAdvancements progress = player.getAdvancements();
+		int count = 0;
+		for (AdvancementHolder holder : player.server.getAdvancements().getAllAdvancements()) {
+			if (isMainAdvancement(holder) && !isCountReward(holder.id()) && !holder.id().equals(ROOT)
+					&& progress.getOrStartProgress(holder).isDone()) {
+				count++;
+			}
+		}
+		return count;
+	}
+
+	private static boolean isCountReward(ResourceLocation id) {
+		for (ResourceLocation reward : COUNT_REWARDS) {
+			if (reward.equals(id)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private static void grantCountRewards(ServerPlayer player) {
+		int completed = countCompleted(player);
+		for (int i = 0; i < COUNT_REWARDS.length; i++) {
+			if (completed < COUNT_NEEDED[i]) {
+				break;
+			}
+			AdvancementHolder reward = player.server.getAdvancements().get(COUNT_REWARDS[i]);
+			if (reward != null && !player.getAdvancements().getOrStartProgress(reward).isDone()) {
+				PlayerHelper.grantCriterion(player, COUNT_REWARDS[i], "code_triggered");
+			}
 		}
 	}
 
@@ -61,6 +135,7 @@ public final class AllAdvancementsHandler {
 		if (!(player instanceof ServerPlayer serverPlayer) || !PlayerHelper.isTruePlayer(player)) {
 			return;
 		}
+		grantCountRewards(serverPlayer);
 		ServerAdvancementManager manager = serverPlayer.server.getAdvancements();
 		AdvancementHolder goal = manager.get(ALL_STATS);
 		if (goal == null) {

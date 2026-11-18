@@ -2,23 +2,23 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "B": {
-      "item": "minecraft:blaze_powder"
-    },
     "F": {
       "item": "minecraft:feather"
     },
-    "H": {
-      "item": "extrabotany:hero_medal"
+    "I": {
+      "item": "botania:rune_of_fire"
     },
-    "L": {
-      "item": "minecraft:lava_bucket"
+    "P": {
+      "item": "botania:pixie_dust"
+    },
+    "R": {
+      "item": "botania:red_quartz"
     }
   },
   "pattern": [
-    "BLB",
-    "BFB",
-    "BHB"
+    "RPR",
+    "IFI",
+    "RPR"
   ],
   "result": {
     "count": 1,

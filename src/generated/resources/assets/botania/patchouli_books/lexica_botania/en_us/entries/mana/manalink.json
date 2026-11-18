@@ -48,6 +48,12 @@
       "type": "botania:petal_apothecary",
       "recipe": "extrabotany:petal_apothecary/manalink",
       "text": "extrabotany.page.manalink2"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "extrabotany:textures/gui/lexicon/manalinkium.png"
+      ]
     }
   ],
   "priority": true

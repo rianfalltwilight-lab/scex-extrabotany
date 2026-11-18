@@ -125,7 +125,7 @@ public final class DataPackGameTests {
 		var songs = helper.getLevel().registryAccess().registryOrThrow(Registries.JUKEBOX_SONG);
 		record Expected(Item item, ResourceKey<JukeboxSong> song, net.minecraft.sounds.SoundEvent sound, float seconds) {}
 		for (Expected expected : List.of(
-				new Expected(ExtraBotanyItems.recordGaia3, ExtraBotanyJukeboxSongs.GAIA_3, ExtraBotanySounds.MUSIC_GAIA3, 201F),
+				new Expected(ExtraBotanyItems.recordGaia3, ExtraBotanyJukeboxSongs.GAIA_3, ExtraBotanySounds.MUSIC_GAIA3, 134.6F),
 				new Expected(ExtraBotanyItems.recordEgo, ExtraBotanyJukeboxSongs.EGO, ExtraBotanySounds.MUSIC_EGO, 198F),
 				new Expected(ExtraBotanyItems.recordHerrscherOfTheVoid, ExtraBotanyJukeboxSongs.HERRSCHER_OF_THE_VOID, ExtraBotanySounds.MUSIC_HERRSCHER, 48F))) {
 			var playable = new ItemStack(expected.item()).get(DataComponents.JUKEBOX_PLAYABLE);

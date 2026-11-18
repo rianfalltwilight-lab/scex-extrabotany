@@ -47,15 +47,8 @@ public class SmithingRecipeProvider extends ExtraBotanyRecipeProvider {
 	public void buildRecipes(RecipeOutput consumer) {
 		Ingredient heroMedal = Ingredient.of(ExtraBotanyItems.heroMedal);
 
-		SmithingTransformRecipeBuilder.smithing(
-				Ingredient.of(BotaniaItems.DREAMWOOD_TWIG),
-				Ingredient.of(BotaniaItems.TERRA_BLADE),
-				heroMedal,
-				RecipeCategory.COMBAT,
-				ExtraBotanyItems.excalibur
-		)
-				.unlocks("has_item", conditionsFromItem(ExtraBotanyItems.heroMedal))
-				.save(consumer, id(ExtraBotanyItems.excalibur));
+		// 王者圣剑和阿喀琉斯之盾回到原版的工作台配方（对照原版审计 E5），见 CraftingRecipeProvider。
+		// The Excalibur and the Achilles Shield went back to the crafting recipes of the original (parity audit E5), see CraftingRecipeProvider.
 		SmithingTransformRecipeBuilder.smithing(
 				Ingredient.of(BotaniaItems.GAIA_INGOT),
 				Ingredient.of(ExtraBotanyItems.terrasteelHammer),
@@ -65,15 +58,6 @@ public class SmithingRecipeProvider extends ExtraBotanyRecipeProvider {
 		)
 				.unlocks("has_item", conditionsFromItem(BotaniaItems.GAIA_INGOT))
 				.save(consumer, id(ExtraBotanyItems.gaiaHammer));
-		SmithingTransformRecipeBuilder.smithing(
-				Ingredient.of(ExtraBotanyTags.Items.INGOTS_ORICHALCOS),
-				Ingredient.of(ExtraBotanyItems.terrasteelShield),
-				heroMedal,
-				RecipeCategory.COMBAT,
-				ExtraBotanyItems.achillesShield
-		)
-				.unlocks("has_item", conditionsFromTag(ExtraBotanyTags.Items.INGOTS_ORICHALCOS))
-				.save(consumer, id(ExtraBotanyItems.achillesShield));
 	}
 
 	protected ResourceLocation id(ItemLike itemLike) {

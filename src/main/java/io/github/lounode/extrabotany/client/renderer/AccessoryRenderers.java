@@ -36,7 +36,9 @@ public final class AccessoryRenderers {
 	 */
 	public static void register() {
 		for (Item item : BuiltInRegistries.ITEM) {
-			if (item instanceof CosmeticBaubleItem cosmetic) {
+			if (item instanceof CosmeticBaubleItem cosmetic && cosmetic.getVariant() == CosmeticBaubleItem.Variant.QUESTION) {
+				AccessoryRenderRegistry.register(item, new QuestionRenderer());
+			} else if (item instanceof CosmeticBaubleItem cosmetic) {
 				CosmeticBaubleItem.Variant variant = cosmetic.getVariant();
 				AccessoryRenderRegistry.register(item, new ItemModelRenderer(variant.onHead,
 						variant.x, variant.y, variant.z, variant.scaleX, variant.scaleY, variant.scaleZ));
@@ -47,6 +49,31 @@ public final class AccessoryRenderers {
 		AccessoryRenderRegistry.register(ExtraBotanyItems.potatoChips,
 				new ItemModelRenderer(true, 0F, -0.3F, -0.3F, 0.6F, -0.6F, -0.6F));
 		AccessoryRenderRegistry.register(ExtraBotanyItems.coreOfTheVoid, new CoreOfTheVoidRenderer());
+	}
+
+	/**
+	 * 问号：1.12 在头顶画三份，中间一份，左右各一份向外倾斜 35°。
+	 * The question mark: 1.12 draws three of them above the head, one in the middle and one on each side tilted 35° outward.
+	 */
+	private record QuestionRenderer() implements AccessoryRenderer {
+		private static final float SIDE = 0.27F;
+
+		@Override
+		public void doRender(HumanoidModel<?> bipedModel, ItemStack stack, LivingEntity living, PoseStack ms,
+				MultiBufferSource buffers, int light, float limbSwing, float limbSwingAmount, float partialTicks,
+				float ageInTicks, float netHeadYaw, float headPitch) {
+			var v = CosmeticBaubleItem.Variant.QUESTION;
+			for (int i = -1; i <= 1; i++) {
+				ms.pushPose();
+				bipedModel.head.translateAndRotate(ms);
+				ms.translate(v.x + i * SIDE, v.y, v.z);
+				ms.mulPose(com.mojang.math.Axis.ZP.rotationDegrees(i * 35F));
+				ms.scale(v.scaleX, v.scaleY, v.scaleZ);
+				Minecraft.getInstance().getItemRenderer().renderStatic(stack, ItemDisplayContext.NONE,
+						light, OverlayTexture.NO_OVERLAY, ms, buffers, living.level(), 0);
+				ms.popPose();
+			}
+		}
 	}
 
 	/**

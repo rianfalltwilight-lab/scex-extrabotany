@@ -29,10 +29,10 @@ public interface Proxy extends vazkii.botania.common.proxy.Proxy {
 	default void displayClientMessage(Component chatComponent, boolean actionBar) {}
 
 	/**
-	 * 如果这个生物是本机玩家，并且玩家正贴着墙按跳跃键，就让玩家再跳一次。
-	 * If this entity is the local player, and the player presses the jump key against a wall, the player jumps again.
+	 * 如果这个生物是本机玩家，并且玩家贴着墙重新按下跳跃键，就让玩家再跳一次。落地之前最多跳 {@code maxJumps} 次。
+	 * If this entity is the local player, and the player presses the jump key again against a wall, the player jumps again. At most {@code maxJumps} times before the player lands.
 	 */
-	default void tryWallJump(LivingEntity entity) {}
+	default void tryWallJump(LivingEntity entity, int maxJumps) {}
 
 	/**
 	 * 本机玩家是不是已经完成了这个进度。服务端上总是 {@code false}。

@@ -61,6 +61,8 @@ public class ForgeClientInitializer {
 	@SubscribeEvent
 	public static void clientInit(FMLClientSetupEvent evt) {
 		evt.enqueueWork(io.github.lounode.extrabotany.client.renderer.AccessoryRenderers::register);
+		// 1.12 的飞艇用跳跃键上升。 / The flying boat of 1.12 rises with the jump key.
+		io.github.lounode.extrabotany.common.entity.vehicle.FlyingBoatEntity.ascendKey = () -> Minecraft.getInstance().options.keyJump.isDown();
 		// 物品属性的表不是线程安全的，所以要在主线程上登记，并且只登记一次。以前它在每次模型重载时、在工作线程上登记。
 		// The map of the item properties is not thread-safe, thus the registration must be on the main thread, and only one time. Before, it was done at each model reload, on a worker thread.
 		evt.enqueueWork(() -> ExtraBotanyItemProperties.init((item, id, prop) -> ItemProperties.register(item.asItem(), id, prop)));
@@ -132,6 +134,13 @@ public class ForgeClientInitializer {
 		e.registerAbove(VanillaGuiLayers.EXPERIENCE_BAR, prefix("hud"),
 				(gui, deltaTracker) -> hud.onDrawScreenPost(gui, deltaTracker.getGameTimeDeltaPartialTick(true)));
 		e.registerAbove(VanillaGuiLayers.EXPERIENCE_BAR, prefix("energy_bars"), EnergyBarsHud::render);
+	}
+
+	// 对照原版审计 E6：旅行手袋的界面。 / Parity audit E6: the screen of the Mini Handbag.
+	@SubscribeEvent
+	public static void registerMenuScreens(net.neoforged.neoforge.client.event.RegisterMenuScreensEvent evt) {
+		evt.register(io.github.lounode.extrabotany.common.item.ExtraBotanyItems.MINI_HANDBAG_MENU,
+				io.github.lounode.extrabotany.client.gui.MiniHandbagScreen::new);
 	}
 
 	@SubscribeEvent

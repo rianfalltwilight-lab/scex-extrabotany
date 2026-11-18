@@ -5,42 +5,51 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 
 import org.jetbrains.annotations.Nullable;
 
 import io.github.lounode.extrabotany.common.block.flower.ExtraFunctionalFlowerBlockEntity;
 import io.github.lounode.extrabotany.common.block.flower.FlowerBlockActions;
 import vazkii.botania.api.block_entity.RadiusDescriptor;
+import vazkii.botania.common.helper.EntityHelper;
+import vazkii.botania.common.internal_caps.ItemLifetime;
+import vazkii.botania.common.item.BotaniaItems;
 
 import io.github.lounode.extrabotany.common.block.flower.ExtrabotanyFlowerBlocks;
 import io.github.lounode.extrabotany.common.block.ExtraBotanyBlocks;
 import io.github.lounode.extrabotany.xplat.ExtraBotanyConfig;
 
-import java.util.*;
+import java.util.UUID;
 
 /**
- * 蕴魔瑾。它积累大量魔力，然后把范围里的一个草方块变成蕴魔土。红石信号让它停止工作。
- * Enchanter. It collects a large quantity of mana, and then changes one grass block in the range into Enchanted Soil. A redstone signal stops it.
+ * 蕴魔瑾。丢给它一朵黑莲花后，它积累大量魔力，然后把下面一层的一个草方块变成蕴魔土。红石信号让它停止工作。
+ * Enchanter. After a Black Lotus is thrown to it, it collects a large quantity of mana, and then changes one grass block on the layer below into Enchanted Soil. A redstone signal stops it.
  *
- * <p>来源：重制版（Lounode）。它对应 ExtraMeteorP 1.12 的 {@code SubTileEnchantedOrchid}。
- * <p>Source: Reburn (Lounode). It corresponds to {@code SubTileEnchantedOrchid} of ExtraMeteorP 1.12.
+ * <p>来源：ExtraMeteorP 1.12 的 {@code SubTileEnchantedOrchid}：每块蕴魔土要一朵黑莲花和 200000 魔力，每 tick 消耗 400；草方块在花下面一层、水平 4 格内；花的上限 10000。
+ * <p>Source: {@code SubTileEnchantedOrchid} of ExtraMeteorP 1.12: each Enchanted Soil needs one Black Lotus and 200000 mana, 400 is used on each tick; the grass block is on the layer below the flower, 4 blocks or less away horizontally; the flower holds at most 10000.
  */
 public class EnchanterBlockEntity extends ExtraFunctionalFlowerBlockEntity {
 
 	private static final String TAG_CONSUMED = "consumedMana";
+	private static final String TAG_HAS_LOTUS = "hasLotus";
 
-	public static final int RANGE = 3;
+	public static final int RANGE = 4;
+	private static final int LOTUS_RANGE = 1;
 
 	public static final int CONSUME_SPEED = 400;
-	public static final int TRANSFORM_COST = 250000;
+	public static final int TRANSFORM_COST = 200000;
+	public static final int MAX_MANA = 10000;
 
 	private int consumedMana;
+	private boolean hasLotus;
 	@Nullable private UUID ownerUUID;
 
 	public EnchanterBlockEntity(BlockEntityType<? extends EnchanterBlockEntity> type, BlockPos pos, BlockState state) {
@@ -58,6 +67,18 @@ public class EnchanterBlockEntity extends ExtraFunctionalFlowerBlockEntity {
 			return;
 		}
 
+		if (!hasLotus && !isIdleBackoff()) {
+			if (tryEatLotus()) {
+				hasLotus = true;
+				sync();
+			} else {
+				backoffIdle(IDLE_BACKOFF_TICKS);
+			}
+		}
+		if (!hasLotus) {
+			return;
+		}
+
 		if (consumedMana < getTransformCost()) {
 			int manaCanConsume = Math.min(getTransformCost() - consumedMana, Math.min(getConsumeSpeed(), getMana()));
 			if (manaCanConsume > 0) {
@@ -68,57 +89,56 @@ public class EnchanterBlockEntity extends ExtraFunctionalFlowerBlockEntity {
 			return;
 		}
 
+		// 领地插件可能拒绝放置；每秒试一次，不要每 tick 都发放置事件。
+		// A claim plugin can refuse the placement; try once per second, not a place event on each tick.
 		if (ticksExisted % 20 != 0) {
 			return;
 		}
-
-		BlockPos transformPos = getRandomPos();
+		BlockPos transformPos = findGrass();
 		if (transformPos == null) {
 			return;
 		}
-
 		if (!FlowerBlockActions.placeBlock((ServerLevel) getLevel(), transformPos,
 				ExtraBotanyBlocks.enchantedSoil.defaultBlockState(), ownerUUID)) {
 			return;
 		}
-
 		setConsumedMana(0);
+		hasLotus = false;
 		sync();
 	}
 
-	@Nullable
-	public BlockPos getRandomPos() {
-		Map<BlockPos, Float> coordsMap = new HashMap<>();
-		Random rng = new Random();
+	private boolean tryEatLotus() {
 		BlockPos pos = getEffectivePos();
-
-		for (BlockPos pos_ : BlockPos.betweenClosed(pos.offset(-RANGE, -RANGE, -RANGE), pos.offset(RANGE, RANGE, RANGE))) {
-			if (!getLevel().isLoaded(pos_) || !getLevel().isLoaded(pos_.above())) {
-				continue;
+		for (ItemEntity item : getLevel().getEntitiesOfClass(ItemEntity.class, new AABB(pos).inflate(LOTUS_RANGE))) {
+			if (ItemLifetime.canInteractWith(this, item) && item.getItem().is(BotaniaItems.BLACK_LOTUS)) {
+				EntityHelper.shrinkItem(item);
+				return true;
 			}
-			BlockState state = getLevel().getBlockState(pos_);
-			BlockState above = getLevel().getBlockState(pos_.above());
-			if (!state.is(Blocks.GRASS_BLOCK) || !above.isAir()) {
-				continue;
+		}
+		return false;
+	}
+
+	/**
+	 * 花下面一层、水平 {@value #RANGE} 格内的第一个草方块。
+	 * The first grass block on the layer below the flower, {@value #RANGE} blocks or less away horizontally.
+	 */
+	@Nullable
+	public BlockPos findGrass() {
+		BlockPos center = getEffectivePos().below();
+		for (BlockPos pos : BlockPos.betweenClosed(center.offset(-RANGE, 0, -RANGE), center.offset(RANGE, 0, RANGE))) {
+			if (getLevel().isLoaded(pos) && getLevel().getBlockState(pos).is(Blocks.GRASS_BLOCK)) {
+				return pos.immutable();
 			}
-			coordsMap.put(pos_.immutable(), 2.0f * rng.nextFloat());
 		}
+		return null;
+	}
 
-		if (coordsMap.isEmpty()) {
-			return null;
-		}
+	public boolean hasLotus() {
+		return hasLotus;
+	}
 
-		float maxDistance = 0F;
-		for (float distance : coordsMap.values()) {
-			maxDistance = Math.max(maxDistance, distance);
-		}
-
-		float finalMaxDistance = maxDistance;
-		coordsMap.values().removeIf(dist -> dist < finalMaxDistance - 1f);
-		List<BlockPos> coords = new ArrayList<>(coordsMap.keySet());
-
-		BlockPos breakCoords = coords.get(level.getRandom().nextInt(coords.size()));
-		return breakCoords;
+	public void setHasLotus(boolean hasLotus) {
+		this.hasLotus = hasLotus;
 	}
 
 	public int getTransformCost() {
@@ -137,7 +157,7 @@ public class EnchanterBlockEntity extends ExtraFunctionalFlowerBlockEntity {
 
 	@Override
 	public int getMaxMana() {
-		return getConsumeSpeed() * 4;
+		return MAX_MANA;
 	}
 
 	@Override
@@ -162,6 +182,7 @@ public class EnchanterBlockEntity extends ExtraFunctionalFlowerBlockEntity {
 	public void writeToPacketNBT(CompoundTag cmp) {
 		super.writeToPacketNBT(cmp);
 		cmp.putInt(TAG_CONSUMED, getConsumedMana());
+		cmp.putBoolean(TAG_HAS_LOTUS, hasLotus);
 		if (ownerUUID != null) {
 			cmp.putUUID("ownerUUID", ownerUUID);
 		}
@@ -171,6 +192,7 @@ public class EnchanterBlockEntity extends ExtraFunctionalFlowerBlockEntity {
 	public void readFromPacketNBT(CompoundTag cmp) {
 		super.readFromPacketNBT(cmp);
 		setConsumedMana(cmp.getInt(TAG_CONSUMED));
+		hasLotus = cmp.getBoolean(TAG_HAS_LOTUS);
 		ownerUUID = cmp.hasUUID("ownerUUID") ? cmp.getUUID("ownerUUID") : null;
 	}
 }

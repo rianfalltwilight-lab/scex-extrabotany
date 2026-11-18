@@ -231,6 +231,15 @@ public class ItemModelProvider implements DataProvider {
 
 		items.remove(voidArchives);
 
+		// 对照原版审计 E7：1.12 的圣诞奖励袋图标（bag_chris_1..5）。 / Parity audit E7: the Christmas reward bag icons of 1.12 (bag_chris_1..5).
+		for (Item bag : List.of(einsRewardBag, zweiRewardBag, dreiRewardBag, vierRewardBag, nineAndThreeQuartersRewardBag)) {
+			ResourceLocation christmas = ModelLocationUtils.getModelLocation(bag, "_christmas");
+			ModelTemplates.FLAT_ITEM.create(christmas, TextureMapping.layer0(christmas), consumer);
+			GENERATED_OVERRIDES.create(ModelLocationUtils.getModelLocation(bag), TextureMapping.layer0(bag),
+					new OverrideHolder().add(christmas, Pair.of(prefix("seasonal_christmas"), 1.0)), consumer);
+			items.remove(bag);
+		}
+
 		ResourceLocation terrHammerEnabledModel = ModelLocationUtils.getModelLocation(terrasteelHammer, "_active");
 		ModelTemplates.FLAT_HANDHELD_ITEM.create(terrHammerEnabledModel, TextureMapping.layer0(terrHammerEnabledModel), consumer);
 
@@ -239,6 +248,15 @@ public class ItemModelProvider implements DataProvider {
 				new OverrideHolder().add(terrHammerEnabledModel, Pair.of(prefix("active"), 1.0)),
 				consumer);
 		items.remove(terrasteelHammer);
+
+		// 对照原版审计 E6：1.12 镀金究极锤的开关模型。 / Parity audit E6: the on/off models of the Ultimate Hammer of 1.12.
+		ResourceLocation ultimateHammerEnabledModel = ModelLocationUtils.getModelLocation(ultimateHammer, "_active");
+		ModelTemplates.FLAT_HANDHELD_ITEM.create(ultimateHammerEnabledModel, TextureMapping.layer0(ultimateHammerEnabledModel), consumer);
+		HANDHELD_OVERRIDES.create(ModelLocationUtils.getModelLocation(ultimateHammer),
+				TextureMapping.layer0(ultimateHammer),
+				new OverrideHolder().add(ultimateHammerEnabledModel, Pair.of(prefix("active"), 1.0)),
+				consumer);
+		items.remove(ultimateHammer);
 
 		ResourceLocation orichalcosHammerEnabledModel = ModelLocationUtils.getModelLocation(orichalcosHammer, "_active");
 		ModelTemplates.FLAT_HANDHELD_ITEM.create(orichalcosHammerEnabledModel, TextureMapping.layer0(orichalcosHammerEnabledModel), consumer);

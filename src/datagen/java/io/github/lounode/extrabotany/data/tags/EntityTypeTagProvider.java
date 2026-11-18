@@ -31,6 +31,10 @@ public class EntityTypeTagProvider extends IntrinsicHolderTagsProvider<EntityTyp
 	@Override
 	protected void addTags(HolderLookup.Provider provider) {
 		tag(common("bosses")).add(ExtraBotanyEntityType.GAIA_LEGACY, ExtraBotanyEntityType.GAIA_III, ExtraBotanyEntityType.EGO, ExtraBotanyEntityType.VOID_HERRSCHER);
+		// 对照原版审计 E5：1.12 ItemHalloweenCandy.onSpawn 检查 EntityZombie 和 EntitySkeleton。1.12 的 EntityZombie 包括尸壳、僵尸村民和僵尸猪人；溺尸在 1.13 才加入，它也是僵尸的子类。
+		// Parity audit E5: ItemHalloweenCandy.onSpawn of 1.12 checks EntityZombie and EntitySkeleton. EntityZombie of 1.12 includes the husk, the zombie villager and the zombie pigman; the drowned came in 1.13 and is also a zombie subclass.
+		tag(ExtraBotanyTags.Entities.CANDY_BAG_HOLDERS).add(EntityType.ZOMBIE, EntityType.HUSK, EntityType.ZOMBIE_VILLAGER,
+				EntityType.ZOMBIFIED_PIGLIN, EntityType.DROWNED, EntityType.SKELETON);
 
 		tag(ExtraBotanyTags.Entities.GOBLINS)
 				.addOptional(location("goblins_tyranny", "goblin_huntsman"))

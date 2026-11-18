@@ -18,14 +18,12 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
 import vazkii.botania.common.block.BotaniaBlocks;
 import vazkii.botania.common.block.block_entity.flower.generating.HydroangeasBlockEntity;
 
-import io.github.lounode.extrabotany.api.level.Wind;
 import io.github.lounode.extrabotany.common.block.flower.ExtrabotanyFlowerBlocks;
 import io.github.lounode.extrabotany.common.block.flower.functional.SerenitianBlockEntity;
 import io.github.lounode.extrabotany.common.block.flower.functional.WoodieniaBlockEntity;
@@ -36,10 +34,8 @@ import io.github.lounode.extrabotany.common.block.flower.generating.SunshineLily
 import io.github.lounode.extrabotany.common.brew.ExtraBotanyMobEffects;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * 花的回归测试：迷之炖菜的效果、红石属性、永寂龙胆、风铃草的风力、回音花的监听、伐木花的扫描和石中姬的进食。
@@ -99,7 +95,7 @@ public final class FlowerGameTests {
 		List<Block> plain = List.of(
 				ExtrabotanyFlowerBlocks.reikarlily, ExtrabotanyFlowerBlocks.reikarlilyFloating,
 				ExtrabotanyFlowerBlocks.bellflower, ExtrabotanyFlowerBlocks.bellflowerFloating,
-				ExtrabotanyFlowerBlocks.stonesia, ExtrabotanyFlowerBlocks.stonesiaFloating,
+				ExtrabotanyFlowerBlocks.tinkle, ExtrabotanyFlowerBlocks.tinkleFloating,
 				ExtrabotanyFlowerBlocks.edelweiss, ExtrabotanyFlowerBlocks.edelweissFloating,
 				ExtrabotanyFlowerBlocks.omniviolet, ExtrabotanyFlowerBlocks.omnivioletFloating,
 				ExtrabotanyFlowerBlocks.bloodEnchantress, ExtrabotanyFlowerBlocks.bloodEnchantressFloating,
@@ -110,7 +106,7 @@ public final class FlowerGameTests {
 					block + " does not react to redstone, but it has the powered property");
 		}
 		List<Block> powered = List.of(
-				ExtrabotanyFlowerBlocks.tinkle, ExtrabotanyFlowerBlocks.tinkleFloating,
+				ExtrabotanyFlowerBlocks.stonesia, ExtrabotanyFlowerBlocks.stonesiaFloating,
 				ExtrabotanyFlowerBlocks.serenitian, ExtrabotanyFlowerBlocks.serenitianFloating,
 				ExtrabotanyFlowerBlocks.annoyingflower, ExtrabotanyFlowerBlocks.tradeOrchid,
 				ExtrabotanyFlowerBlocks.woodienia, ExtrabotanyFlowerBlocks.mirrowtunia,
@@ -153,28 +149,6 @@ public final class FlowerGameTests {
 		helper.assertTrue(lily.getPassiveDecayTicks() == 0, "The Serenitian did not set the decay counter of the Sunshine Lily to zero");
 		helper.assertTrue(hydroangeas.saveCustomOnly(registries).getInt(TAG_DECAY) == 0,
 				"The Serenitian did not set the decay counter of the Hydroangeas to zero");
-		helper.succeed();
-	}
-
-	/**
-	 * 风铃草保存服务端的风力，并把它同步到客户端。客户端的法杖界面显示这个数值。
-	 * The Bellflower keeps the wind level of the server and synchronizes it to the client. The wand HUD of the client shows this value.
-	 */
-	@GameTest(template = "empty", timeoutTicks = 20)
-	public static void bellflowerSynchronizesTheWindLevel(GameTestHelper helper) {
-		HolderLookup.Provider registries = helper.getLevel().registryAccess();
-		BellflowerBlockEntity flower = plant(helper, CENTER, ExtrabotanyFlowerBlocks.bellflower.defaultBlockState(), BellflowerBlockEntity.class);
-		BlockPos pos = flower.getEffectivePos();
-		double wind = Wind.instance().getWindLevel(helper.getLevel(), new Vec3(pos.getX(), pos.getY(), pos.getZ()));
-		helper.assertTrue(wind > 0, "The server has no wind");
-
-		flower.getGenerateMana();
-		helper.assertTrue(Math.abs(flower.getWindLevel() - wind) < 0.005, "The Bellflower did not keep the wind level of the server");
-
-		// 客户端用 loadCustomOnly 读取更新数据包。 / The client reads the update packet with loadCustomOnly.
-		BellflowerBlockEntity client = new BellflowerBlockEntity(flower.getBlockPos(), flower.getBlockState());
-		client.loadCustomOnly(flower.getUpdateTag(registries), registries);
-		helper.assertTrue(Math.abs(client.getWindLevel() - wind) < 0.005, "The update packet does not have the wind level");
 		helper.succeed();
 	}
 
@@ -283,37 +257,31 @@ public final class FlowerGameTests {
 	}
 
 	/**
-	 * 石中姬吃掉旁边符合配方的方块，得到配方里的魔力。不符合配方的方块不受影响。它只在自己周围的 17 个位置里选，不选自己的位置。
-	 * The Stonesia eats an adjacent block that agrees with a recipe, and gets the mana of the recipe. Blocks that agree with no recipe are not changed. It only selects from the 17 positions around it, and not its own position.
+	 * 石中姬吃掉同一层旁边符合配方的方块，然后每 tick 产生 5 魔力，直到这块方块的魔力产完。不符合配方的方块不受影响。配方值是 1.12 的燃烧 tick 数乘以 5。
+	 * The Stonesia eats an adjacent block on its layer that agrees with a recipe, and then makes 5 mana on each tick until the mana of that block is all made. Blocks that agree with no recipe are not changed. The recipe value is the burn ticks of 1.12 times 5.
 	 */
 	@GameTest(template = "empty", timeoutTicks = 20)
 	public static void stonesiaEatsOnlyRecipeBlocksAroundIt(GameTestHelper helper) {
 		StonesiaBlockEntity flower = plant(helper, CENTER, ExtrabotanyFlowerBlocks.stonesia.defaultBlockState(), StonesiaBlockEntity.class);
-		helper.assertTrue(flower.getManaFormBlock(Blocks.STONE.defaultBlockState()) == 20, "Stone must give 20 mana");
-		helper.assertTrue(flower.getManaFormBlock(Blocks.DIAMOND_ORE.defaultBlockState()) == 750, "Diamond ore must give 750 mana");
+		helper.assertTrue(flower.getManaFormBlock(Blocks.STONE.defaultBlockState()) == 50, "Stone must give 50 mana (10 ticks of 1.12)");
+		helper.assertTrue(flower.getManaFormBlock(Blocks.COBBLESTONE.defaultBlockState()) == 25, "Cobblestone must give 25 mana (5 ticks of 1.12)");
+		helper.assertTrue(flower.getManaFormBlock(Blocks.DIAMOND_ORE.defaultBlockState()) == 3750, "Diamond ore must give 3750 mana (750 ticks of 1.12)");
 		helper.assertTrue(flower.getManaFormBlock(Blocks.AIR.defaultBlockState()) == 0, "Air must give no mana");
 		helper.assertTrue(flower.getManaFormBlock(Blocks.OAK_PLANKS.defaultBlockState()) == 0, "Oak planks must give no mana");
 
-		BlockPos center = flower.getEffectivePos();
-		Set<BlockPos> seen = new HashSet<>();
-		for (int i = 0; i < 2000; i++) {
-			BlockPos pos = flower.getRadomBlockPos();
-			boolean inBox = Math.abs(pos.getX() - center.getX()) <= 1 && Math.abs(pos.getZ() - center.getZ()) <= 1
-					&& pos.getY() >= center.getY() && pos.getY() <= center.getY() + 1;
-			helper.assertTrue(inBox && !pos.equals(center), "The Stonesia selected the position " + pos + ", which is not one of the 17 positions around " + center);
-			seen.add(pos);
-		}
-		helper.assertTrue(seen.size() == 17, "The Stonesia must select from 17 positions, but it selected from " + seen.size());
-
 		helper.setBlock(CENTER.east(), Blocks.STONE);
 		helper.setBlock(CENTER.west(), Blocks.OAK_PLANKS);
-		for (int i = 0; i < 2000 && !helper.getBlockState(CENTER.east()).isAir(); i++) {
+		helper.setBlock(CENTER.above().north(), Blocks.STONE);
+		flower.tickFlower();
+		helper.assertTrue(helper.getBlockState(CENTER.east()).isAir(), "The Stonesia did not eat the stone next to it");
+		helper.assertTrue(flower.getMana() == 0 && flower.getBurnMana() == 50, "The Stonesia must not get the mana at once");
+		helper.assertTrue(flower.getCooldown() == flower.getAfterWorkCooldown(), "The Stonesia must start its cooldown after it eats a block");
+		for (int i = 0; i < 10; i++) {
 			flower.tickFlower();
 		}
-		helper.assertTrue(helper.getBlockState(CENTER.east()).isAir(), "The Stonesia did not eat the stone next to it");
-		helper.assertTrue(flower.getMana() == 20, "The Stonesia must get 20 mana from one stone, but it has " + flower.getMana());
-		helper.assertTrue(flower.getCooldown() == flower.getAfterWorkCooldown(), "The Stonesia must start its cooldown after it eats a block");
+		helper.assertTrue(flower.getMana() == 50 && flower.getBurnMana() == 0, "The Stonesia must make 5 mana on each tick, 50 in 10 ticks, but it has " + flower.getMana());
 		helper.assertTrue(helper.getBlockState(CENTER.west()).is(Blocks.OAK_PLANKS), "The Stonesia ate a block that has no recipe");
+		helper.assertTrue(helper.getBlockState(CENTER.above().north()).is(Blocks.STONE), "The Stonesia ate a block of the layer above");
 		helper.assertTrue(helper.getBlockState(CENTER).is(ExtrabotanyFlowerBlocks.stonesia), "The Stonesia ate itself");
 		helper.succeed();
 	}

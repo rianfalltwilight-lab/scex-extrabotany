@@ -7,7 +7,7 @@
   "input": {
     "item": "minecraft:blaze_rod"
   },
-  "mana": 2000,
+  "mana": 20000,
   "output": {
     "count": 2,
     "id": "minecraft:blaze_rod"

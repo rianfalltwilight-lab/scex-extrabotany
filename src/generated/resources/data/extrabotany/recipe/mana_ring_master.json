@@ -2,29 +2,23 @@
   "type": "botania:crafting_shaped_mana_upgrade",
   "category": "equipment",
   "key": {
-    "C": {
-      "item": "extrabotany:the_chaos"
-    },
-    "E": {
-      "item": "extrabotany:the_end"
-    },
     "H": {
       "item": "extrabotany:hero_medal"
     },
-    "O": {
-      "tag": "extrabotany:orichalcos_ingots"
+    "M": {
+      "item": "botania:mana_tablet"
     },
     "R": {
       "item": "botania:greater_band_of_mana"
     },
-    "Y": {
-      "item": "extrabotany:the_origin"
+    "T": {
+      "tag": "c:ingots/terrasteel"
     }
   },
   "pattern": [
-    "OHO",
-    "YRE",
-    "OCO"
+    "THT",
+    "MRM",
+    "TMT"
   ],
   "result": {
     "count": 1,

@@ -42,7 +42,10 @@ public final class BrewRecipeGameTests {
 		var recipe = helper.getLevel().getRecipeManager()
 				.getRecipeFor(RecipeType.CRAFTING, input, helper.getLevel()).orElseThrow().value();
 		ItemStack result = recipe.assemble(input, helper.getLevel().registryAccess());
-		helper.assertTrue(!result.isEmpty() && result.getCount() == 1, "Brew recipe produced no result or duplicated its output");
+		// 产出数量等于配方声明的数量：圣水手雷是 8 个（对照原版审计 E5，1.16 HolyGrenadeRecipe），其余是 1 个。
+		// The output count equals the declared count of the recipe: 8 for the Holy Water Grenade (parity audit E5, HolyGrenadeRecipe of 1.16), 1 for the rest.
+		int declared = recipe.getResultItem(helper.getLevel().registryAccess()).getCount();
+		helper.assertTrue(!result.isEmpty() && result.getCount() == declared, "Brew recipe produced no result or duplicated its output");
 		helper.assertTrue(ItemStack.matches(first, beforeFirst) && ItemStack.matches(second, beforeSecond),
 				"Brew recipe assembly modified its input stacks");
 		return result;
@@ -57,7 +60,7 @@ public final class BrewRecipeGameTests {
 	public static void flaskBrewSurvivesCraftSaveAndActualDrink(GameTestHelper helper) {
 		ItemStack flask = new ItemStack(BotaniaItems.BREW_FLASK);
 		BaseBrewItem.setBrew(flask, ExtraBotanyBrews.revolution);
-		ItemStack cocktail = craft(helper, ManaCocktailItem.getDefaultCocktail(), flask);
+		ItemStack cocktail = craft(helper, new ItemStack(ExtraBotanyItems.manaDrink), flask);
 		helper.assertTrue(cocktail.is(ExtraBotanyItems.manaCocktail), "Flask recipe produced the wrong item");
 		cocktail = saveAndLoad(helper, cocktail);
 		var item = (ManaCocktailItem) cocktail.getItem();
@@ -65,9 +68,13 @@ public final class BrewRecipeGameTests {
 				"Flask recipe lost the brew component or changed the full cocktail amount");
 		var player = helper.makeMockPlayer(GameType.SURVIVAL);
 		item.finishUsingItem(cocktail, helper.getLevel(), player);
+		// Original 1.16 ItemCocktail: 1.3 times the duration of the brew, the same level.
 		var haste = player.getEffect(MobEffects.DIG_SPEED);
-		helper.assertTrue(haste != null && haste.getAmplifier() == 2 && haste.getDuration() == 1800,
-				"Crafted cocktail did not apply the flask's actual effect");
+		helper.assertTrue(haste != null && haste.getAmplifier() == 2 && haste.getDuration() == 2340,
+				"Crafted cocktail did not apply the flask's effect for 1.3 times its duration");
+		var unluck = player.getEffect(MobEffects.UNLUCK);
+		helper.assertTrue(unluck != null && unluck.getAmplifier() == 2 && unluck.getDuration() == 2340,
+				"Revolution brew lost the Bad Luck III of the original");
 		helper.assertTrue(item.getSwigsLeft(cocktail) == 7, "Crafted cocktail did not consume exactly one swig");
 		helper.succeed();
 	}
@@ -133,7 +140,7 @@ public final class BrewRecipeGameTests {
 		var registry = BotaniaAPI.instance().getBrewRegistry();
 		ItemStack flask = new ItemStack(BotaniaItems.BREW_FLASK);
 		ItemNBTHelper.setString(flask, BrewUtil.TAG_BREW_KEY, registry.getKey(ExtraBotanyBrews.revolution).toString());
-		ItemStack result = craft(helper, ManaCocktailItem.getDefaultCocktail(), flask);
+		ItemStack result = craft(helper, new ItemStack(ExtraBotanyItems.manaDrink), flask);
 		helper.assertTrue(((ManaCocktailItem) result.getItem()).getBrew(result) == ExtraBotanyBrews.revolution,
 				"Legacy-only flask lost its brew when copied into a component-based cocktail");
 		helper.assertTrue(!flask.has(BotaniaDataComponents.BREW) && ItemNBTHelper.verifyExistance(flask, BrewUtil.TAG_BREW_KEY),
@@ -142,7 +149,7 @@ public final class BrewRecipeGameTests {
 		BaseBrewItem.setBrew(flask, BotaniaBrews.MENDING);
 		helper.assertTrue(BrewUtil.getBrew(flask) == BotaniaBrews.MENDING,
 				"Stale legacy key overrode the brew component used by Botania");
-		result = craft(helper, ManaCocktailItem.getDefaultCocktail(), flask);
+		result = craft(helper, new ItemStack(ExtraBotanyItems.manaDrink), flask);
 		helper.assertTrue(((ManaCocktailItem) result.getItem()).getBrew(result) == BotaniaBrews.MENDING,
 				"Copy recipe ignored the current component in favor of the old brew key");
 		helper.succeed();

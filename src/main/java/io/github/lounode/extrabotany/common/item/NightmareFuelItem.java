@@ -16,8 +16,8 @@ import vazkii.botania.common.advancements.UseItemSuccessTrigger;
 
 
 /**
- * 梦魇燃料。它可以吃，吃下后变成精神燃料。它也是熔炉燃料，燃烧时间在数据映射 {@code neoforge:furnace_fuels} 里。
- * Nightmare Fuel. It can be eaten, and it becomes Spirit Fuel after that. It is also a furnace fuel, and its burn time is in the data map {@code neoforge:furnace_fuels}.
+ * 梦魇燃料。它可以吃，吃下后变成精神燃料。来源：ExtraMeteorP 1.16 {@code ItemNightmareFuel}；1.16 不是熔炉燃料。
+ * Nightmare Fuel. It can be eaten, and it becomes Spirit Fuel after that. Source: {@code ItemNightmareFuel} of ExtraMeteorP 1.16; in 1.16 it is not a furnace fuel.
  */
 public class NightmareFuelItem extends Item {
 	public NightmareFuelItem(Properties properties) {

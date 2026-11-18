@@ -66,11 +66,15 @@ public final class LegacyCandyGameTests {
 		var result = ExtraBotanyItems.candyBag.use(helper.getLevel(), player, InteractionHand.MAIN_HAND);
 		helper.assertTrue(result.getResult().consumesAction() && player.getMainHandItem().getCount() == 3,
 				"Opening a candy bag did not consume exactly one");
+		// 1.12 ConfigHandler.REWARDBAG6：3 个糖果（每种权重 25）、南瓜派 15、金锭 10、附魔金苹果 1，只出一种。
+		// ConfigHandler.REWARDBAG6 of 1.12: 3 candies (weight 25 each), pumpkin pie 15, gold ingot 10, enchanted golden apple 1; only one entry drops.
 		var drops = helper.getLevel().getEntitiesOfClass(ItemEntity.class, player.getBoundingBox().inflate(2));
-		int count = drops.stream().mapToInt(e -> e.getItem().getCount()).sum();
-		helper.assertTrue(count == 3, "Candy bag did not produce exactly three candies: " + count);
-		helper.assertTrue(drops.stream().allMatch(e -> List.of(ExtraBotanyItems.candyEins, ExtraBotanyItems.candyZwei,
-				ExtraBotanyItems.candyDrei).contains(e.getItem().getItem())), "Candy bag produced an invalid item");
+		helper.assertTrue(drops.size() == 1, "Candy bag must drop one entry: " + drops.size());
+		ItemStack drop = drops.getFirst().getItem();
+		boolean candy = List.of(ExtraBotanyItems.candyEins, ExtraBotanyItems.candyZwei, ExtraBotanyItems.candyDrei).contains(drop.getItem());
+		boolean other = drop.is(net.minecraft.world.item.Items.PUMPKIN_PIE) || drop.is(net.minecraft.world.item.Items.GOLD_INGOT)
+				|| drop.is(net.minecraft.world.item.Items.ENCHANTED_GOLDEN_APPLE);
+		helper.assertTrue(candy ? drop.getCount() == 3 : other && drop.getCount() == 1, "Candy bag produced an invalid item: " + drop);
 		io.github.lounode.extrabotany.common.helper.ItemNBTHelper.setString(legacyBag, "LootTable", "invalid loot id!");
 		helper.assertTrue(io.github.lounode.extrabotany.common.item.RewardBagItem.getLoot(legacyBag)
 				.equals(ResourceLocation.parse("extrabotany:reward_bags/candy")), "Malformed legacy override must retain default candy loot");

@@ -19,7 +19,6 @@ import static io.github.lounode.extrabotany.common.lib.ResourceLocationHelper.pr
  */
 public class ElementiumShieldItem extends ManasteelShieldItem {
 
-	private static final int MANA_PER_DAMAGE = 70;
 
 	public ElementiumShieldItem(Properties properties, Tier tier) {
 		super(properties, tier);
@@ -41,14 +40,11 @@ public class ElementiumShieldItem extends ManasteelShieldItem {
 	@Override
 	public void onShieldBlock(ItemStack stack, LivingEntity blocker, DamageSource source, float damage) {
 		super.onShieldBlock(stack, blocker, source, damage);
-		Entity entity = source.getEntity();
+		// 1.12 ItemElementiumShield 点燃直接攻击的实体（箭也算）。 / 1.12 ItemElementiumShield ignites the entity that hit directly (an arrow too).
+		Entity entity = source.getDirectEntity();
 		if (entity != null && !entity.fireImmune()) {
 			entity.igniteForSeconds(5);
 		}
 	}
 
-	@Override
-	public int getManaPerDamage() {
-		return MANA_PER_DAMAGE;
-	}
 }

@@ -12,11 +12,10 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -46,7 +45,6 @@ import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -60,7 +58,9 @@ import static io.github.lounode.extrabotany.common.lib.ResourceLocationHelper.pr
  * Excalibur. A relic. A swing with the attack cooldown complete shoots a sword beam. The beam turns to enemies that are near, and gives damage when it hits. In the main hand it adds 30% to the movement speed.
  */
 public class ExcaliburItem extends ManasteelSwordItem implements LensEffectItem {
-	private static final int MANA_PER_DAMAGE = 200;
+	// 1.16 ItemExcaliber：剑气 160 魔力，每次命中 160 / 3；伤害 = 1.16 泰拉钢的攻击 3 + 3，穿甲。 / 1.16 ItemExcaliber: 160 mana for a beam, 160 / 3 for each hit; damage = the 3 of 1.16 terrasteel + 3, armor piercing.
+	private static final int MANA_PER_DAMAGE = 160;
+	public static final float BURST_DAMAGE = 6F;
 	public static final double SEARCH_TARGET_RADIUS = 5.0D;
 	private static final Map<Player, Long> LAST_BURST_TICK = new WeakHashMap<>();
 
@@ -87,12 +87,8 @@ public class ExcaliburItem extends ManasteelSwordItem implements LensEffectItem 
 		if (!stack.is(ExtraBotanyItems.excalibur)) {
 			return;
 		}
-		var relic = io.github.lounode.extrabotany.xplat.EXplatAbstractions.INSTANCE.findRelic(stack);
-		if (relic == null || !relic.isRightPlayer(player)
-
-		) {
-			return;
-		}
+		// 1.16 不检查主人：谁拿着都能挥出剑气，不是主人的人会受到遗物的伤害。
+		// 1.16 does not check the owner: anyone who holds it can swing a beam, and a player who is not the owner gets the relic damage.
 		trySpawnBurstUnsafe(player, attackStrength);
 	}
 
@@ -177,7 +173,7 @@ public class ExcaliburItem extends ManasteelSwordItem implements LensEffectItem 
 			}
 			burst.setMana(mana - cost);
 
-			float damage = 5F + ItemTiers.EXCALIBUR.getAttackDamageBonus();
+			float damage = BURST_DAMAGE;
 			//DamageSource source1 = ((DamageSourceAccessor)player.damageSources()).source(DamageTypes.PLAYER_ATTACK, player);
 			DamageSource source = ExtraBotanyDamageTypes.Sources.excaliburDamage(player.level().registryAccess(), player);
 			entity.hurt(source, damage);
@@ -194,7 +190,6 @@ public class ExcaliburItem extends ManasteelSwordItem implements LensEffectItem 
 				.filter(ExcaliburItem::canTargetEntity)
 				.filter(living -> living.hurtTime == 0)
 				.filter(living -> living != burstEntity.getOwner())
-				.sorted(Comparator.comparingInt(ExcaliburItem::getEntityPriority))
 				.findFirst()
 				.ifPresent(target -> {
 					Vec3 thisVec = VecHelper.fromEntityCenter(burstEntity);
@@ -208,19 +203,12 @@ public class ExcaliburItem extends ManasteelSwordItem implements LensEffectItem 
 				});
 	}
 
-	private static boolean canTargetEntity(LivingEntity entity) {
-		return entity instanceof Mob || entity instanceof Player;
-	}
-
-	private static int getEntityPriority(LivingEntity entity) {
-		if (entity instanceof Mob) {
-			return 3;
-		} else if (entity instanceof Player) {
-			return 2;
-		} else if (entity instanceof Animal) {
-			return 1;
-		}
-		return 0;
+	/**
+	 * 剑气只转向敌对生物，不转向玩家、宠物和村民。来源：ExtraMeteorP 1.16 {@code ItemExcaliber}（1.12 相同）。
+	 * The beam turns only to hostile creatures, never to players, pets or villagers. Source: ExtraMeteorP 1.16 {@code ItemExcaliber} (1.12 is the same).
+	 */
+	public static boolean canTargetEntity(LivingEntity entity) {
+		return entity instanceof Enemy && !(entity instanceof Player);
 	}
 
 	@Override
@@ -261,10 +249,6 @@ public class ExcaliburItem extends ManasteelSwordItem implements LensEffectItem 
 		super.inventoryTick(stack, world, entity, slot, selected);
 	}
 
-	@Override
-	public boolean isValidRepairItem(ItemStack toRepair, ItemStack repair) {
-		return super.isValidRepairItem(toRepair, repair);
-	}
 
 	@Override
 	public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flags) {

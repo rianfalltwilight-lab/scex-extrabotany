@@ -1,0 +1,26 @@
+{
+  "parent": "extrabotany:main/ultimate_hammer_craft",
+  "criteria": {
+    "code_triggered": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:ultimate_hammer_upgrade.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:gilded_potato_mashed"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:ultimate_hammer_upgrade"
+    }
+  },
+  "requirements": [
+    [
+      "code_triggered"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

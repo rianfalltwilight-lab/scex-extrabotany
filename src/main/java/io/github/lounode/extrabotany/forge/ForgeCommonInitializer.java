@@ -63,7 +63,6 @@ import io.github.lounode.extrabotany.common.data.ExtraBotanyDataMaps;
 import io.github.lounode.extrabotany.common.entity.ExtraBotanyEntityType;
 import io.github.lounode.extrabotany.common.entity.ExtraBotanyMemoryType;
 import io.github.lounode.extrabotany.common.fluid.ExtraBotanyFluids;
-import io.github.lounode.extrabotany.common.impl.WindImpl;
 import io.github.lounode.extrabotany.common.item.ExtraBotanyItems;
 import io.github.lounode.extrabotany.common.item.UniversalRunes;
 import io.github.lounode.extrabotany.common.item.material.ArmorsMaterial;
@@ -119,6 +118,11 @@ public class ForgeCommonInitializer {
 			ExtraBotanyBlocks.registerFlowerPotPlants(consumer);
 			ExtrabotanyFlowerBlocks.registerFlowerPotPlants(consumer);
 			UniversalRunes.init();
+			// 1.12 BehaviourHammer：发射器用锤子敲祭坛。 / 1.12 BehaviourHammer: a dispenser strikes a pedestal with a hammer.
+			var hammerBehavior = new io.github.lounode.extrabotany.common.block.dispenser.HammerDispenseBehavior();
+			net.minecraft.core.registries.BuiltInRegistries.ITEM.stream()
+					.filter(item -> item instanceof io.github.lounode.extrabotany.common.item.equipment.tool.hammer.ManasteelHammerItem)
+					.forEach(item -> net.minecraft.world.level.block.DispenserBlock.registerBehavior(item, hammerBehavior));
 		});
 	}
 
@@ -154,6 +158,7 @@ public class ForgeCommonInitializer {
 
 		//GUI & Recipe
 		bind(modEventBus, Registries.RECIPE_SERIALIZER, ExtraBotanyItems::registerRecipeSerializers);
+		bind(modEventBus, Registries.MENU, ExtraBotanyItems::registerMenuTypes);
 		bind(modEventBus, Registries.RECIPE_TYPE, ExtraBotanyRecipeTypes::submitRecipeTypes);
 		bind(modEventBus, Registries.RECIPE_SERIALIZER, ExtraBotanyRecipeTypes::submitRecipeSerializers);
 
@@ -204,7 +209,6 @@ public class ForgeCommonInitializer {
 
 	private void registerEvents() {
 		IEventBus bus = NeoForge.EVENT_BUS;
-		bus.addListener((LevelTickEvent.Post event) -> WindImpl.EventHandler.onLevelTick(event.getLevel()));
 		NeoForgeEventBridge.register(bus);
 
 		RewardBagManager.registerListener();
@@ -266,7 +270,8 @@ public class ForgeCommonInitializer {
 
 	private static final Supplier<Map<Item, Function<ItemStack, ManaItem>>> MANA_ITEM = Suppliers.memoize(() -> Map.of(
 			ExtraBotanyItems.manaRingMaster, MasterBandOfManaItem.ExtendManaItemImpl::new,
-			ExtraBotanyItems.silentEternity, SilentEternityItem.Reservoir::new
+			ExtraBotanyItems.silentEternity, SilentEternityItem.Reservoir::new,
+			ExtraBotanyItems.ultimateHammer, io.github.lounode.extrabotany.common.item.equipment.tool.hammer.UltimateHammerItem.ManaStore::new
 	));
 	private static final Supplier<Map<Item, Function<ItemStack, Relic>>> RELIC = Suppliers.memoize(() -> Map.ofEntries(
 			Map.entry(ExtraBotanyItems.manaRingMaster, MasterBandOfManaItem::makeRelic),

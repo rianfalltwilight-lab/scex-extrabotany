@@ -47,6 +47,15 @@
       "type": "patchouli:crafting",
       "recipe": "extrabotany:lens_trace",
       "text": "extrabotany.page.more_lens9"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.more_lens10"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:lens_cloud",
+      "text": "extrabotany.page.more_lens11"
     }
   ]
 }

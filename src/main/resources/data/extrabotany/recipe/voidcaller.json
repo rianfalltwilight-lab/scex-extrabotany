@@ -5,20 +5,20 @@
     "A": {
       "item": "botania:gaia_spirit"
     },
-    "H": {
+    "B": {
       "item": "extrabotany:hero_medal"
     },
-    "P": {
+    "C": {
       "tag": "extrabotany:photonium_ingots"
     },
-    "S": {
+    "D": {
       "tag": "extrabotany:shadowium_ingots"
     }
   },
   "pattern": [
-    "ASA",
-    "PHP",
-    "ASA"
+    "AAA",
+    "CBD",
+    "AAA"
   ],
   "result": {
     "count": 3,

@@ -25,16 +25,16 @@ import static io.github.lounode.extrabotany.common.lib.ResourceLocationHelper.pr
 /** ExtraBotany's registered armor materials for Minecraft 1.21's holder-based API. */
 public final class ArmorsMaterial {
 	public static final int STARRY_IDOL_DURABILITY_FACTOR = 16;
-	public static final int PLEIADS_MAID_COMBAT_DURABILITY_FACTOR = 50;
-	public static final int GOBLIN_SLAYER_DURABILITY_FACTOR = 21;
-	public static final int SHADOW_WARRIOR_DURABILITY_FACTOR = 23;
+	public static final int PLEIADS_MAID_COMBAT_DURABILITY_FACTOR = 40;
+	public static final int GOBLIN_SLAYER_DURABILITY_FACTOR = 27;
+	public static final int SHADOW_WARRIOR_DURABILITY_FACTOR = 24;
 	public static final int MIKU_DURABILITY_FACTOR = 5;
 	public static final int SHOOTING_GUARDIAN_DURABILITY_FACTOR = 34;
 	public static final int SILENT_SAGES_DURABILITY_FACTOR = 50;
 
 	private static final List<RegistryHelper.HolderProxy<ArmorMaterial>> ALL = new ArrayList<>();
-	// 这三种材料的护甲值来自原版 1.16。原版的数组顺序是靴子、护腿、胸甲、头盔。
-	// The armor values of these three materials come from the original 1.16. The array sequence of the original is boots, leggings, chestplate, helmet.
+	// 初音、射手、沉默贤者以及下面的女仆、哥布林杀手、暗影战士的耐久、护甲、附魔值和韧性来自原版 1.16 的 ExtraBotanyAPI.ArmorMaterial。原版的数组顺序是靴子、护腿、胸甲、头盔。装备音效留到 E7。
+	// The durability, armor, enchantability and toughness of Miku, Shooting Guardian, Silent Sages and of Maid, Goblin Slayer and Shadow Warrior below come from ExtraBotanyAPI.ArmorMaterial of the original 1.16. The array sequence of the original is boots, leggings, chestplate, helmet. The equip sounds also come from it (parity audit E7: maid diamond, goblin slayer and shadow warrior iron).
 	public static final Holder<ArmorMaterial> MIKU = create("miku",
 			Map.of(ArmorItem.Type.BOOTS, 2, ArmorItem.Type.LEGGINGS, 4, ArmorItem.Type.CHESTPLATE, 5, ArmorItem.Type.HELMET, 1),
 			22, net.minecraft.sounds.SoundEvents.ARMOR_EQUIP_LEATHER, () -> Ingredient.of(ExtraBotanyItems.manaDrink), 0, 0);
@@ -57,25 +57,25 @@ public final class ArmorsMaterial {
 			Map.of(
 					ArmorItem.Type.BOOTS, 4,
 					ArmorItem.Type.LEGGINGS, 7,
-					ArmorItem.Type.CHESTPLATE, 8,
-					ArmorItem.Type.HELMET, 3),
-			50, ExtraBotanySounds.ARMOR_EQUIP_MAID, () -> Ingredient.of(ExtraBotanyItems.dasRheingold), 4, 0);
+					ArmorItem.Type.CHESTPLATE, 9,
+					ArmorItem.Type.HELMET, 4),
+			32, net.minecraft.sounds.SoundEvents.ARMOR_EQUIP_DIAMOND, () -> Ingredient.of(ExtraBotanyItems.dasRheingold), 3, 0);
 
 	public static final Holder<ArmorMaterial> GOBLIN_SLAYER = create("goblin_slayer",
 			Map.of(
 					ArmorItem.Type.BOOTS, 3,
-					ArmorItem.Type.LEGGINGS, 6,
-					ArmorItem.Type.CHESTPLATE, 6,
-					ArmorItem.Type.HELMET, 3),
-			40, ExtraBotanySounds.ARMOR_EQUIP_GOBLIN, () -> Ingredient.of(ExtraBotanyItems.photonium), 2.5F, 0);
+					ArmorItem.Type.LEGGINGS, 5,
+					ArmorItem.Type.CHESTPLATE, 7,
+					ArmorItem.Type.HELMET, 2),
+			30, net.minecraft.sounds.SoundEvents.ARMOR_EQUIP_IRON, () -> Ingredient.of(ExtraBotanyItems.photonium), 1, 0);
 
 	public static final Holder<ArmorMaterial> SHADOW_WARRIOR = create("shadow_warrior",
 			Map.of(
-					ArmorItem.Type.BOOTS, 3,
-					ArmorItem.Type.LEGGINGS, 7,
+					ArmorItem.Type.BOOTS, 2,
+					ArmorItem.Type.LEGGINGS, 5,
 					ArmorItem.Type.CHESTPLATE, 6,
-					ArmorItem.Type.HELMET, 3),
-			28, ExtraBotanySounds.ARMOR_EQUIP_WARRIOR, () -> Ingredient.of(ExtraBotanyItems.shadowium), 1.5F, 0);
+					ArmorItem.Type.HELMET, 2),
+			26, net.minecraft.sounds.SoundEvents.ARMOR_EQUIP_IRON, () -> Ingredient.of(ExtraBotanyItems.shadowium), 1, 0);
 
 	private static Holder<ArmorMaterial> create(String name, Map<ArmorItem.Type, Integer> defense,
 			int enchantmentValue, Holder<SoundEvent> equipSound, Supplier<Ingredient> repairIngredient,

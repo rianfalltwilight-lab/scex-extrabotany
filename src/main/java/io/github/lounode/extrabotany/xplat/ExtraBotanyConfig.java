@@ -79,7 +79,6 @@ public class ExtraBotanyConfig {
 
 		//Bellflower
 		int bellflowerMaxMana();
-		double bellflowerGenerateModify();
 
 		//Stonesia
 		int stonesiaMaxMana();
@@ -115,7 +114,6 @@ public class ExtraBotanyConfig {
 
 		//BloodEnchantress
 		int bloodEnchantressMaxMana();
-		int bloodEnchantressProduceMana();
 
 		//Functional
 		//StardustLotus
@@ -140,7 +138,6 @@ public class ExtraBotanyConfig {
 		int annoyingflowerMaxMana();
 		int annoyingflowerFishingCost();
 		int annoyingflowerCooldown();
-		int annoyingflowerFoodBoostMax();
 		int annoyingflowerFoodBoostTimes();
 		double annoyingflowerFoodBoostCooldownMultiplier();
 

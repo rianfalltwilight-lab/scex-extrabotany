@@ -1,0 +1,29 @@
+{
+  "type": "botania:runic_altar",
+  "catalysts": [],
+  "ingredients": [
+    {
+      "tag": "c:ingots/manasteel"
+    },
+    {
+      "tag": "c:ingots/manasteel"
+    },
+    {
+      "item": "minecraft:wheat_seeds"
+    },
+    {
+      "item": "botania:rune_of_earth"
+    },
+    {
+      "item": "minecraft:stone"
+    }
+  ],
+  "mana": 2000,
+  "output": {
+    "count": 1,
+    "id": "extrabotany:spider_ring"
+  },
+  "reagent": {
+    "item": "botania:livingrock"
+  }
+}

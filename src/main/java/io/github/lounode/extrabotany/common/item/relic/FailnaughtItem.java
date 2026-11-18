@@ -1,74 +1,59 @@
 package io.github.lounode.extrabotany.common.item.relic;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.HitResult;
-
 
 import vazkii.botania.api.internal.ManaBurst;
 import vazkii.botania.api.item.Relic;
 import vazkii.botania.api.mana.BurstProperties;
 import vazkii.botania.api.mana.LensEffectItem;
 import vazkii.botania.api.mana.ManaItemHandler;
-import vazkii.botania.common.entity.ManaBurstEntity;
 import vazkii.botania.common.helper.PlayerHelper;
 import vazkii.botania.common.item.equipment.tool.bow.LivingwoodBowItem;
 import vazkii.botania.common.item.relic.RelicImpl;
 
+import io.github.lounode.extrabotany.common.ExtraBotanyDamageTypes;
 import io.github.lounode.extrabotany.common.entity.MagicArrowEntity;
 import io.github.lounode.extrabotany.common.lib.LibAdvancementNames;
 import io.github.lounode.extrabotany.common.sounds.ExtraBotanySounds;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 
 import static io.github.lounode.extrabotany.common.lib.ResourceLocationHelper.prefix;
 
 /**
- * 百中弓。遗物。它不使用箭，而是消耗魔力射出魔力脉冲。拉弓越久，脉冲的等级越高、伤害越大、消耗的魔力越多。它支持力量、冲击、火矢、多重射击和快速装填附魔，每种附魔在生效时额外消耗魔力。
- * Failnaught. A relic. It does not use arrows. It uses mana to shoot a mana burst. A longer draw gives a higher tier of the burst, more damage and a higher mana cost. It supports the Power, Punch, Flame, Multishot and Quick Charge enchantments, and each enchantment uses more mana when it takes effect.
+ * 百中弓。遗物。它不使用箭，拉弓后由主人消耗魔力射出一支魔法箭。魔法箭沿途对 2 格内的生物每 tick 造成穿甲伤害。
+ * Failnaught. A relic. It does not use arrows: after a draw, its owner uses mana to shoot a magic arrow. On its way the magic arrow gives armor-piercing damage to the creatures within 2 blocks on each tick.
+ *
+ * <p>来源：ExtraMeteorP 1.16 {@code ItemFailnaught} 和 {@code EntityMagicArrow}。拉弓 i tick（至少 8），等级 = (i − 8) / 5；魔力 min(800, 350 + 20 × 等级)；伤害 min(50, 7 + 0.5 × 等级 + 攻击力) + 力量等级；存在 min(150, 5 + 4i) tick；速度 3。重燃的四档脉冲、命中扣魔力和冲击、火矢、多重射击、快速装填效果已经去掉。
+ * <p>Source: {@code ItemFailnaught} and {@code EntityMagicArrow} of ExtraMeteorP 1.16. A draw of i ticks (at least 8) gives the rank (i − 8) / 5; the mana is min(800, 350 + 20 × rank); the damage is min(50, 7 + 0.5 × rank + attack damage) plus the Power level; it lives min(150, 5 + 4i) ticks; its speed is 3. The four burst tiers of Reburn, the mana cost on each hit and the effects of Punch, Flame, Multishot and Quick Charge are removed.
  */
 public class FailnaughtItem extends LivingwoodBowItem implements LensEffectItem {
 	private static final float ADVANCEMENT_REQUIRE = 100.0F;
-	private static final float ATTACK_BOX_RADIUS = 2.0F;
-	private static final int HIT_ENTITY_COST = 50;
-	public static final float MINIMUM_SHOOT_PROCESS = 0.1F;
-
-	public static final float[] TIER_PROCESS = { 0, 0, 0.35F, 0.7F, 0.9F };
-	public static final int[] MANA_PER_USE_MAX = { 0, 350, 500, 650, 800 };
-
-	private static final List<ResourceKey<Enchantment>> SUPPORT_ENCHANTMENTS = Arrays.asList(
-			Enchantments.POWER,
-			Enchantments.PUNCH,
-			Enchantments.FLAME,
-			Enchantments.MULTISHOT,
-			Enchantments.QUICK_CHARGE,
-			Enchantments.VANISHING_CURSE
-	);
-	private static final float DEFAULT_CHARGE_SPEED = 0.25F;
-	private static final float QUICK_CHARGE_BONUS_PER_LEVEL = 0.1F;
+	public static final float ATTACK_BOX_RADIUS = 2.0F;
+	public static final int MIN_DRAW_TICKS = 8;
+	public static final int MAX_DAMAGE = 50;
+	public static final float SPEED = 3.0F;
 
 	public FailnaughtItem(Properties props) {
 		super(props);
@@ -76,108 +61,61 @@ public class FailnaughtItem extends LivingwoodBowItem implements LensEffectItem 
 
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level world, Player player, InteractionHand hand) {
-		ItemStack itemstack = player.getItemInHand(hand);
-		int multiShoutLevel = getEnchantmentLevel(itemstack, world, Enchantments.MULTISHOT);
-		float chargeProgress = getChargeProcess(itemstack, player);
-
-		boolean flag = false;
-
-		var relic = io.github.lounode.extrabotany.xplat.EXplatAbstractions.INSTANCE.findRelic(itemstack);
-		if (relic != null &&
-				relic.isRightPlayer(player) &&
-				ManaItemHandler.instance().requestManaExactForTool(itemstack, player,
-						getManaForUse(chargeProgress) * (multiShoutLevel > 0 ? 3 : 1), false)
-
-		) {
-			flag = true;
-		}
-
-		if (!player.getAbilities().instabuild && !flag) {
-			return InteractionResultHolder.fail(itemstack);
-		} else {
-			player.startUsingItem(hand);
-			return InteractionResultHolder.consume(itemstack);
-		}
+		player.startUsingItem(hand);
+		return InteractionResultHolder.consume(player.getItemInHand(hand));
 	}
 
-	/*
-	* Normal: 80tick
-	* QC1: 57tick
-	* QC2: 44tick
-	* QC3: 36tick
-	* */
+	public static int getRank(int drawTicks) {
+		return (drawTicks - MIN_DRAW_TICKS) / 5;
+	}
+
+	public static int getManaCost(int drawTicks) {
+		return Math.min(800, 350 + getRank(drawTicks) * 20);
+	}
+
+	public static int getDamage(int drawTicks, double attackDamage, int powerLevel) {
+		return (int) Math.min(MAX_DAMAGE, 7 + getRank(drawTicks) * 0.5F + attackDamage) + powerLevel;
+	}
+
+	public static int getLife(int drawTicks) {
+		return Math.min(150, 5 + drawTicks * 4);
+	}
+
 	@Override
 	public void releaseUsing(ItemStack stack, Level world, LivingEntity livingEntity, int timeLeft) {
-		if (world.isClientSide()) {
+		if (world.isClientSide() || !(livingEntity instanceof Player player)) {
 			return;
 		}
-		if (livingEntity instanceof Player player) {
-			float chargeProgress = getChargeProcess(stack, player);
-
-			int quickChargeLevel = getEnchantmentLevel(stack, world, Enchantments.QUICK_CHARGE);
-			if (quickChargeLevel > 0) {
-				ManaItemHandler.instance().requestManaExactForTool(stack, player, 100 * quickChargeLevel, true);
-			}
-
-			if (chargeProgress < MINIMUM_SHOOT_PROCESS) {
-				return;
-			}
-
-			int multiShoutLevel = getEnchantmentLevel(stack, world, Enchantments.MULTISHOT);
-			var relic = io.github.lounode.extrabotany.xplat.EXplatAbstractions.INSTANCE.findRelic(stack);
-			if (relic != null &&
-					relic.isRightPlayer(player) &&
-					(player.getAbilities().instabuild
-							||
-							ManaItemHandler.instance().requestManaExactForTool(stack, player,
-									getManaForUse(chargeProgress) * (multiShoutLevel > 0 ? 3 : 1), true))) {
-				int manaInBurst = getManaForUse(chargeProgress);
-
-				float spreadAngle = 10.0f;
-
-				for (int i = 0; i < (multiShoutLevel > 0 ? 3 : 1); i++) {
-					ManaBurstEntity burst = getBurst(player, stack, manaInBurst, getTier(chargeProgress));
-
-					if (multiShoutLevel > 0 && i > 0) {
-						float angle = (i == 1 ? -spreadAngle : spreadAngle) * Mth.DEG_TO_RAD;
-						burst.setDeltaMovement(burst.getDeltaMovement().yRot(angle));
-					}
-
-					player.level().addFreshEntity(burst);
-				}
-
-				player.level().playSound(null, player.getX(), player.getY(), player.getZ(), ExtraBotanySounds.FAILNAUGHT_SHOOT, SoundSource.PLAYERS, 1F, 1F);
-			}
+		int drawTicks = getUseDuration(stack, player) - timeLeft;
+		if (drawTicks < MIN_DRAW_TICKS) {
+			return;
 		}
+		var relic = io.github.lounode.extrabotany.xplat.EXplatAbstractions.INSTANCE.findRelic(stack);
+		if (relic == null || !relic.isRightPlayer(player)
+				|| !ManaItemHandler.instance().requestManaExactForTool(stack, player, getManaCost(drawTicks), true)) {
+			return;
+		}
+		int power = stack.getEnchantmentLevel(world.registryAccess().lookupOrThrow(Registries.ENCHANTMENT).getOrThrow(Enchantments.POWER));
+		MagicArrowEntity arrow = getArrow(player, stack, drawTicks,
+				getDamage(drawTicks, player.getAttributeValue(Attributes.ATTACK_DAMAGE), power));
+		world.addFreshEntity(arrow);
+		world.playSound(null, player.getX(), player.getY(), player.getZ(), ExtraBotanySounds.FAILNAUGHT_SHOOT, SoundSource.PLAYERS, 1F, 1F);
 	}
 
-	public ManaBurstEntity getBurst(Player player, ItemStack stack, int mana, int tier) {
-		MagicArrowEntity burst = new MagicArrowEntity(player);
-
-		float motionModifier = 7F;
-
-		burst.setColor(0x20FF20);
-		burst.setMana(mana);
-		burst.setStartingMana(mana);
-		burst.setManaLossPerTick(MANA_PER_USE_MAX[tier] / 87.5f);
-		burst.setGravity(0F);
-		burst.setDeltaMovement(burst.getDeltaMovement().scale(motionModifier));
-
-		burst.setSourceLens(stack.copy());
-
-		float chargeProcess = getChargeProcess(stack, player);
-		float tierProcess = getProcessInTier(chargeProcess);
-
-		float baseDamage = 10;
-		int powerLevel = getEnchantmentLevel(stack, player.level(), Enchantments.POWER);
-		if (powerLevel > 0 &&
-				ManaItemHandler.instance().requestManaExactForTool(stack, player, 50 * powerLevel, true)) {
-			baseDamage = baseDamage + 0.5f + 0.5f * powerLevel;
-		}
-		float damage = baseDamage * (tier - 1 + tierProcess);
-
-		burst.setDamage(damage);
-		return burst;
+	public static MagicArrowEntity getArrow(Player player, ItemStack stack, int drawTicks, float damage) {
+		MagicArrowEntity arrow = new MagicArrowEntity(player);
+		int life = getLife(drawTicks);
+		arrow.setColor(0x20FF20);
+		arrow.setMana(1000);
+		arrow.setStartingMana(1000);
+		// 魔力在 life tick 之后一次扣光，所以箭正好存在 life tick。 / The mana is all lost after life ticks, so the arrow lives exactly life ticks.
+		arrow.setMinManaLoss(life);
+		arrow.setManaLossPerTick(1000);
+		arrow.setGravity(0F);
+		arrow.setDeltaMovement(player.getLookAngle().scale(SPEED));
+		arrow.setSourceLens(stack.copy());
+		arrow.setDamage(damage);
+		return arrow;
 	}
 
 	@Override
@@ -185,7 +123,8 @@ public class FailnaughtItem extends LivingwoodBowItem implements LensEffectItem 
 
 	@Override
 	public boolean collideBurst(ManaBurst burst, HitResult pos, boolean isManaBlock, boolean shouldKill, ItemStack stack) {
-		return shouldKill;
+		// 1.16 的魔法箭不和方块碰撞。 / The magic arrow of 1.16 does not collide with blocks.
+		return false;
 	}
 
 	@Override
@@ -195,54 +134,23 @@ public class FailnaughtItem extends LivingwoodBowItem implements LensEffectItem 
 			return;
 		}
 		Entity thrower = entity.getOwner();
-
 		if (!(thrower instanceof Player player) || !thrower.isAlive()) {
 			entity.discard();
 			return;
 		}
-
 		AABB axis = new AABB(entity.getX(), entity.getY(), entity.getZ(), entity.xOld, entity.yOld, entity.zOld).inflate(ATTACK_BOX_RADIUS);
 		List<LivingEntity> entities = entity.level().getEntitiesOfClass(LivingEntity.class, axis).stream()
 				.filter(e -> e != thrower)
 				.filter(e -> !(e instanceof Player other && !player.canHarmPlayer(other)))
-				.filter(e -> e.hurtTime == 0)
 				.toList();
-		float chargeProcess = getChargeProcess(stack, player);
-		int tier = getTier(chargeProcess);
-		float tierProcess = getProcessInTier(chargeProcess);
-
+		float damage = entity instanceof MagicArrowEntity arrow ? arrow.getDamage() : 0F;
 		for (LivingEntity living : entities) {
-			int mana = burst.getMana();
-			if (mana < HIT_ENTITY_COST) {
-				return;
-			}
-			burst.setMana(mana - HIT_ENTITY_COST);
-
-			// 以前这里把整个脉冲实体存成 NBT，只为了读出一个伤害值。
-			// Before, this saved the full burst entity to NBT, only to read one damage value.
-			float damage = entity instanceof MagicArrowEntity arrow ? arrow.getDamage() : 0F;
-			DamageSource source = player.damageSources().playerAttack(player);
+			DamageSource source = ExtraBotanyDamageTypes.Sources.piercingDamage(entity.level().registryAccess(), player);
 			living.hurt(source, damage);
-
-			int punchLevel = getEnchantmentLevel(stack, entity.level(), Enchantments.PUNCH);
-			if (punchLevel > 0 &&
-					ManaItemHandler.instance().requestManaExactForTool(stack, player, 20 * punchLevel, true)) {
-				living.knockback(punchLevel * 0.5f,
-						entity.getX() - living.getX(),
-						entity.getZ() - living.getZ());
-			}
-
-			if (getEnchantmentLevel(stack, entity.level(), Enchantments.FLAME) > 0 &&
-					ManaItemHandler.instance().requestManaExactForTool(stack, player, 10, true)) {
-				living.igniteForSeconds(100);
-			}
-
 			if (living instanceof Skeleton skeleton && !skeleton.isAlive()) {
 				float fx = (float) (player.getX() - living.getX());
 				float fz = (float) (player.getZ() - living.getZ());
-				float horizontalDistanceSq = Mth.sqrt(fx * fx + fz * fz);
-
-				if (horizontalDistanceSq > ADVANCEMENT_REQUIRE) {
+				if (Math.sqrt(fx * fx + fz * fz) > ADVANCEMENT_REQUIRE) {
 					PlayerHelper.grantCriterion((ServerPlayer) player, prefix("main/" + LibAdvancementNames.HUNDRED_BLOCK_PIERCE), "code_triggered");
 				}
 			}
@@ -254,62 +162,14 @@ public class FailnaughtItem extends LivingwoodBowItem implements LensEffectItem 
 		return 72000;
 	}
 
+	/** 拉弓动画的速度：和原版的弓一样，20 tick 拉满。 / The speed of the draw animation: as a vanilla bow, full after 20 ticks. */
 	public float chargeVelocityMultiplier(ItemStack itemStack, LivingEntity livingEntity) {
-		if (livingEntity instanceof Player player) {
-			int quickChargeLevel = getEnchantmentLevel(itemStack, livingEntity.level(), Enchantments.QUICK_CHARGE);
-			if (ManaItemHandler.instance().requestManaExactForTool(itemStack, player, 100 * quickChargeLevel, false)) {
-				return DEFAULT_CHARGE_SPEED + QUICK_CHARGE_BONUS_PER_LEVEL * quickChargeLevel;
-			}
-		}
-
-		return DEFAULT_CHARGE_SPEED;
+		return 1F;
 	}
 
 	@Override
 	public boolean doParticles(ManaBurst burst, ItemStack stack) {
 		return true;
-	}
-
-	public float getChargeProcess(ItemStack stack, LivingEntity entity) {
-		return Mth.clamp((getUseDuration(stack, entity) - entity.getUseItemRemainingTicks()) * chargeVelocityMultiplier(stack, entity) / 20.0F, 0.0F, 1.0F);
-	}
-
-	public int getTier(float chargeProcess) {
-		chargeProcess = Mth.clamp(chargeProcess, 0.0f, 1.0f);
-
-		if (chargeProcess < TIER_PROCESS[2]) {
-			return 1; // 0.0 - 0.35
-		} else if (chargeProcess < TIER_PROCESS[3]) {
-			return 2; // 0.35 - 0.7
-		} else if (chargeProcess < TIER_PROCESS[4]) {
-			return 3; // 0.7 - 0.9
-		} else {
-			return 4; // 0.9 - 1.0
-		}
-	}
-
-	public float getProcessInTier(float chargeProcess) {
-		return switch (getTier(chargeProcess)) {
-			case 1 -> chargeProcess / TIER_PROCESS[2];
-			case 2 -> (chargeProcess - TIER_PROCESS[2]) / (TIER_PROCESS[3] - TIER_PROCESS[2]);
-			case 3 -> (chargeProcess - TIER_PROCESS[3]) / (TIER_PROCESS[4] - TIER_PROCESS[3]);
-			case 4 -> (chargeProcess - TIER_PROCESS[4]) / (1.0f - TIER_PROCESS[4]);
-			default -> 0;
-		};
-	}
-
-	public int getManaForUse(float chargeProcess) {
-		chargeProcess = Mth.clamp(chargeProcess, 0.0f, 1.0f);
-		int tier = getTier(chargeProcess);
-		float tierProcess = getProcessInTier(chargeProcess);
-
-		return switch (tier) {
-			case 1 -> (int) (MANA_PER_USE_MAX[1] * tierProcess);
-			case 2 -> (int) (MANA_PER_USE_MAX[1] + (MANA_PER_USE_MAX[2] - MANA_PER_USE_MAX[1]) * tierProcess);
-			case 3 -> (int) (MANA_PER_USE_MAX[2] + (MANA_PER_USE_MAX[3] - MANA_PER_USE_MAX[2]) * tierProcess);
-			case 4 -> (int) (MANA_PER_USE_MAX[3] + (MANA_PER_USE_MAX[4] - MANA_PER_USE_MAX[3]) * tierProcess);
-			default -> 0;
-		};
 	}
 
 	@Override
@@ -341,31 +201,5 @@ public class FailnaughtItem extends LivingwoodBowItem implements LensEffectItem 
 
 	public static Relic makeRelic(ItemStack stack) {
 		return new RelicImpl(stack, null);
-	}
-
-	@Override
-	public boolean isEnchantable(ItemStack pStack) {
-		return true;
-	}
-
-	@Override
-	public int getEnchantmentValue() {
-		return 30;
-	}
-
-	@Override
-	public boolean supportsEnchantment(ItemStack stack, Holder<Enchantment> enchantment) {
-		return SUPPORT_ENCHANTMENTS.stream().anyMatch(enchantment::is);
-	}
-
-	@Override
-	public boolean isPrimaryItemFor(ItemStack stack, Holder<Enchantment> enchantment) {
-		return supportsEnchantment(stack, enchantment);
-	}
-
-	private static int getEnchantmentLevel(ItemStack stack, Level level, ResourceKey<Enchantment> enchantment) {
-		Holder<Enchantment> holder = level.registryAccess().lookupOrThrow(Registries.ENCHANTMENT)
-				.getOrThrow(enchantment);
-		return stack.getEnchantmentLevel(holder);
 	}
 }

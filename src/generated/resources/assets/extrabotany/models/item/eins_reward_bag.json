@@ -1,5 +1,13 @@
 {
   "parent": "minecraft:item/generated",
+  "overrides": [
+    {
+      "model": "extrabotany:item/eins_reward_bag_christmas",
+      "predicate": {
+        "extrabotany:seasonal_christmas": 1.0
+      }
+    }
+  ],
   "textures": {
     "layer0": "extrabotany:item/eins_reward_bag"
   }

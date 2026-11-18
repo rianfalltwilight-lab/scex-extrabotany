@@ -9,16 +9,13 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
 import net.neoforged.neoforge.event.PlayLevelSoundEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
-import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingHealEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.living.LivingShieldBlockEvent;
-import net.neoforged.neoforge.event.entity.living.MobEffectEvent;
 import net.neoforged.neoforge.event.entity.player.AdvancementEvent;
 import net.neoforged.neoforge.event.entity.player.AttackEntityEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-import net.neoforged.neoforge.event.level.LevelEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
@@ -32,11 +29,7 @@ import io.github.lounode.extrabotany.common.handler.AllAdvancementsHandler;
 import io.github.lounode.extrabotany.common.handler.EgoRequirementHandler;
 import io.github.lounode.extrabotany.common.handler.FlamescionHandler;
 import io.github.lounode.extrabotany.common.handler.HerrscherHandler;
-import io.github.lounode.extrabotany.common.impl.WindImpl;
-import io.github.lounode.extrabotany.common.item.equipment.armor.goblin_slayer.GoblinSlayerHelmetItem;
-import io.github.lounode.extrabotany.common.item.equipment.armor.pleiades_combat_maid.PleiadesCombatMaidSuitItem;
-import io.github.lounode.extrabotany.common.item.equipment.armor.pleiades_combat_maid.SanguinePleiadesCombatMaidSuitItem;
-import io.github.lounode.extrabotany.common.item.equipment.armor.shadow_warrior.ShadowWarriorHelmetItem;
+import io.github.lounode.extrabotany.common.item.equipment.armor.pleiades_combat_maid.PleiadesCombatMaidArmorItem;
 import io.github.lounode.extrabotany.common.item.equipment.armor.shooting_guardian.ShootingGuardianHelmetItem;
 import io.github.lounode.extrabotany.common.item.equipment.bauble.AquaStoneItem;
 import io.github.lounode.extrabotany.common.item.equipment.bauble.CosmeticBaubleItem;
@@ -44,7 +37,6 @@ import io.github.lounode.extrabotany.common.item.equipment.bauble.FeatherOfJingw
 import io.github.lounode.extrabotany.common.item.equipment.bauble.PeaceAmuletItem;
 import io.github.lounode.extrabotany.common.item.equipment.bauble.PotatoChipsItem;
 import io.github.lounode.extrabotany.common.item.equipment.bauble.NatureOrbItem;
-import io.github.lounode.extrabotany.common.item.equipment.bauble.PureDaisyPendantItem;
 import io.github.lounode.extrabotany.common.item.equipment.bauble.SilentEternityItem;
 import io.github.lounode.extrabotany.common.item.equipment.shield.ManasteelShieldItem;
 import io.github.lounode.extrabotany.common.item.equipment.shield.ElementiumShieldItem;
@@ -79,16 +71,13 @@ public final class NeoForgeEventBridge {
         bus.addListener(MoonPendantItem::onInvulnerabilityCheck);
         bus.addListener(EventPriority.LOWEST, PotatoChipsItem::onPlayerDeath);
         bus.addListener(ShootingGuardianHelmetItem::onUseItemTick);
-        bus.addListener(NeoForgeEventBridge::onLevelLoad);
-        bus.addListener(NeoForgeEventBridge::onLevelUnload);
         bus.addListener(NeoForgeEventBridge::onIncomingDamage);
         bus.addListener(NeoForgeEventBridge::onDamagePost);
         bus.addListener(NeoForgeEventBridge::onLivingHeal);
-        bus.addListener(NeoForgeEventBridge::onLivingDeath);
-        bus.addListener(NeoForgeEventBridge::onEffectApplicable);
-        bus.addListener(NeoForgeEventBridge::onEffectAdded);
-        bus.addListener(NeoForgeEventBridge::onEffectRemoved);
-        bus.addListener(NeoForgeEventBridge::onEffectExpired);
+        // 对照原版审计 E5：血染女仆服改回符文祭坛配方，嗜血击杀计数去掉；加回 1.12 的箱子注入和糖果袋怪物。
+        // Parity audit E5: the sanguine maid suit went back to a runic altar recipe and the Bloodthirst kill count is gone; the chest injection and the candy bag monsters of 1.12 are back.
+        bus.addListener(io.github.lounode.extrabotany.common.handler.OriginalLootHandler::onLootTableLoad);
+        bus.addListener(EventPriority.LOWEST, io.github.lounode.extrabotany.common.handler.OriginalLootHandler::onFinalizeSpawn);
         bus.addListener(NeoForgeEventBridge::onShieldBlock);
         bus.addListener(NeoForgeEventBridge::onAttackEntity);
         bus.addListener(NeoForgeEventBridge::onLeftClickEmpty);
@@ -103,14 +92,6 @@ public final class NeoForgeEventBridge {
         bus.addListener((AdvancementEvent.AdvancementEarnEvent event) -> AllAdvancementsHandler.onAdvancementEarned(event.getEntity(), event.getAdvancement()));
         bus.addListener(NeoForgeEventBridge::onSoundAtPosition);
         bus.addListener(NeoForgeEventBridge::onSoundAtEntity);
-    }
-
-    private static void onLevelLoad(LevelEvent.Load event) {
-        WindImpl.EventHandler.onLevelLoad(event);
-    }
-
-    private static void onLevelUnload(LevelEvent.Unload event) {
-        WindImpl.EventHandler.onLevelUnLoad(event);
     }
 
 
@@ -131,20 +112,13 @@ public final class NeoForgeEventBridge {
         FlamescionHandler.onIncomingDamage(event);
         WarmMobEffect.EventHandler.onEntityHurt(event);
         ThirrorMobEffect.EventHandler.onLivingAttack(event);
-        CoreOfTheVoidItem.onLivingAttack(event);
-        if (event.isCanceled()) {
-            return;
-        }
         LinkMobEffect.onEntityDamaged(event);
         ShootingGuardianHelmetItem.onIncomingDamage(event);
-        ShadowWarriorHelmetItem.EventHandler.onPlayerAttacked(event);
-        GoblinSlayerHelmetItem.EventHandler.onPlayerAttack(event);
-        PleiadesCombatMaidSuitItem.EventHandler.onEntityAttacked(event);
-        PleiadesCombatMaidSuitItem.EventHandler.onPlayerAttacked(event);
+        PleiadesCombatMaidArmorItem.EventHandler.onEntityAttacked(event);
+        PleiadesCombatMaidArmorItem.EventHandler.onPlayerAttacked(event);
     }
 
     private static void onDamagePost(LivingDamageEvent.Post event) {
-        SanguinePleiadesCombatMaidSuitItem.EventHandler.onAttackLiving(event);
         ShootingGuardianHelmetItem.onDamageDealt(event);
     }
 
@@ -155,28 +129,6 @@ public final class NeoForgeEventBridge {
         if (!Float.isFinite(event.getAmount()) || event.getAmount() <= 0) event.setAmount(0);
         else if (curse != null) event.setAmount(event.getAmount() / Math.max(1, curse.getAmplifier()));
         SilentEternityItem.onHeal(event);
-    }
-
-    private static void onLivingDeath(LivingDeathEvent event) {
-        SanguinePleiadesCombatMaidSuitItem.EventHandler.onKilled(event);
-    }
-
-    private static void onEffectApplicable(MobEffectEvent.Applicable event) {
-        CoreOfTheVoidItem.onEffectAdd(event);
-    }
-
-    private static void onEffectAdded(MobEffectEvent.Added event) {
-        SanguinePleiadesCombatMaidSuitItem.EventHandler.onEffectAdded(event);
-    }
-
-    private static void onEffectRemoved(MobEffectEvent.Remove event) {
-        if (event.getEffectInstance() != null) {
-            SanguinePleiadesCombatMaidSuitItem.EventHandler.onEffectRemove(event);
-        }
-    }
-
-    private static void onEffectExpired(MobEffectEvent.Expired event) {
-        SanguinePleiadesCombatMaidSuitItem.EventHandler.onEffectExpired(event);
     }
 
     private static void onShieldBlock(LivingShieldBlockEvent event) {
@@ -224,13 +176,16 @@ public final class NeoForgeEventBridge {
 
     private static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
         NatureOrbItem.onPlayerInteract(event);
-        PureDaisyPendantItem.EventHandler.onPlayerInteract(event);
         if (event.isCanceled()) {
             event.setCancellationResult(InteractionResult.SUCCESS);
         }
     }
 
     private static void onBreakSpeed(PlayerEvent.BreakSpeed event) {
+        // 1.12 ItemHammer.onMining：主手拿任何锤子，挖掘速度 × 1.25。 / 1.12 ItemHammer.onMining: any hammer in the main hand digs 1.25 times faster.
+        if (event.getEntity().getMainHandItem().is(io.github.lounode.extrabotany.common.lib.ExtraBotanyTags.Items.HAMMERS)) {
+            event.setNewSpeed(event.getNewSpeed() * 1.25F);
+        }
         RheinHammerItem.onDig(event);
     }
 

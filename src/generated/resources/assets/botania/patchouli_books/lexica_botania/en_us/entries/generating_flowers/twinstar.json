@@ -14,6 +14,12 @@
       "type": "botania:petal_apothecary",
       "recipe": "extrabotany:petal_apothecary/twinstar",
       "text": "extrabotany.page.twinstar1"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "extrabotany:textures/gui/lexicon/geminiorchid.png"
+      ]
     }
   ]
 }

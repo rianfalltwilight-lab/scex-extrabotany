@@ -30,14 +30,16 @@ public class DamageTypeTagProvider extends TagsProvider<DamageType> {
 
 	public DamageTypeTagProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
 		super(packOutput, Registries.DAMAGE_TYPE, lookupProvider, LibMisc.MOD_ID, null);
+		// 1.16 DamageHandler.NETURAL_PIERCING：穿甲（也就挡不住盾）并且是绝对伤害。王者圣剑、精卫之羽和百中弓都用它。
+		// 1.16 DamageHandler.NETURAL_PIERCING: armor piercing (so a shield does not block it either) and absolute. The Excalibur, the Feather of Jingwei and the Failnaught all use it.
 		map.put(EXCALIBUR_BEAM_DAMAGE, List.of(
-				PEACE_AMULET_AVAILABLE, BYPASSES_ARMOR, BYPASSES_SHIELD
+				PEACE_AMULET_AVAILABLE, BYPASSES_ARMOR, BYPASSES_SHIELD, BYPASSES_RESISTANCE, BYPASSES_EFFECTS, BYPASSES_ENCHANTMENTS
 		));
 		map.put(LINK_DAMAGE, List.of(
 				NO_IMPACT, WITCH_RESISTANT_TO
 		));
 		map.put(JINGWEI_PUNCH_DAMAGE, List.of(
-				PEACE_AMULET_AVAILABLE, IS_FIRE
+				PEACE_AMULET_AVAILABLE, BYPASSES_ARMOR, BYPASSES_SHIELD, BYPASSES_RESISTANCE, BYPASSES_EFFECTS, BYPASSES_ENCHANTMENTS
 		));
 		map.put(REVERSE_HEAL_DAMAGE, List.of(
 				BYPASSES_ARMOR, BYPASSES_SHIELD, BYPASSES_RESISTANCE, BYPASSES_EFFECTS, BYPASSES_ENCHANTMENTS,
@@ -48,7 +50,7 @@ public class DamageTypeTagProvider extends TagsProvider<DamageType> {
 				NO_IMPACT, WITCH_RESISTANT_TO
 		));
 		map.put(io.github.lounode.extrabotany.common.ExtraBotanyDamageTypes.PIERCING_DAMAGE, List.of(
-				PEACE_AMULET_AVAILABLE, BYPASSES_ARMOR, BYPASSES_RESISTANCE, BYPASSES_EFFECTS, BYPASSES_ENCHANTMENTS
+				PEACE_AMULET_AVAILABLE, BYPASSES_ARMOR, BYPASSES_SHIELD, BYPASSES_RESISTANCE, BYPASSES_EFFECTS, BYPASSES_ENCHANTMENTS
 		));
 		map.put(io.github.lounode.extrabotany.common.ExtraBotanyDamageTypes.MAGIC_PIERCING_DAMAGE, List.of(
 				PEACE_AMULET_AVAILABLE, BYPASSES_ARMOR, BYPASSES_RESISTANCE, BYPASSES_EFFECTS, BYPASSES_ENCHANTMENTS,
@@ -84,23 +86,22 @@ public class DamageTypeTagProvider extends TagsProvider<DamageType> {
 		this.tag(IS_FREEZING);
 		this.tag(IS_LIGHTNING);
 		this.tag(IS_FIRE);
+		// 1.16 ItemMaidHelm 的列表。 / The list of 1.16 ItemMaidHelm.
 		this.tag(ExtraBotanyTags.DamageTypes.MAID_PROTECTION)
 				.add(
-						DamageTypes.CRAMMING,
-						DamageTypes.IN_WALL,
-						DamageTypes.STARVE,
+						DamageTypes.FALLING_ANVIL,
 						DamageTypes.CACTUS,
+						DamageTypes.DROWN,
+						DamageTypes.FALL,
+						DamageTypes.FALLING_BLOCK,
+						DamageTypes.IN_FIRE,
+						DamageTypes.LAVA,
+						DamageTypes.ON_FIRE,
+						DamageTypes.LIGHTNING_BOLT,
 						DamageTypes.FLY_INTO_WALL,
-						DamageTypes.FALLING_ANVIL
-				)
-				.addTag(IS_FALL)
-				.addTag(IS_DROWNING)
-				.addTag(IS_FREEZING)
-				.addTag(IS_LIGHTNING)
-				.addTag(IS_FIRE);
+						DamageTypes.HOT_FLOOR,
+						DamageTypes.SWEET_BERRY_BUSH
+				);
 		this.tag(IS_EXPLOSION);
-		this.tag(ExtraBotanyTags.DamageTypes.SHADOW_WARRIOR_PROTECTION)
-				.addTag(IS_EXPLOSION)
-				.addTag(IS_FALL);
 	}
 }

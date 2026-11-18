@@ -73,6 +73,9 @@ public final class EntityRenderers {
 		consumer.accept(ExtraBotanyEntityType.GAIA_III, GaiaRenderer::new);
 		consumer.accept(ExtraBotanyEntityType.EGO, EgoRenderer::new);
 		consumer.accept(ExtraBotanyEntityType.SKULL_MISSILE, SkullMissileRenderer::new);
+		consumer.accept(ExtraBotanyEntityType.SKULL_MINION, SkullMinionRenderer::new);
+		consumer.accept(ExtraBotanyEntityType.DARK_PIXIE, DarkPixieRenderer::new);
+		consumer.accept(ExtraBotanyEntityType.FLYING_BOAT, FlyingBoatRenderer::new);
 		consumer.accept(ExtraBotanyEntityType.SKULL_LANDMINE_BLUE, SkullLandMineRenderer::new);
 		consumer.accept(ExtraBotanyEntityType.SKULL_LANDMINE_RED, SkullLandMineRenderer::new);
 		consumer.accept(ExtraBotanyEntityType.SKULL_LANDMINE_GREEN, SkullLandMineRenderer::new);

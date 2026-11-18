@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:gems/dragonstone"
+    },
+    "B": {
+      "item": "botania:dragonstone_block"
+    }
+  },
+  "pattern": [
+    " A ",
+    " B ",
+    "A A"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:tri_bloodstone"
+  }
+}

@@ -28,6 +28,9 @@ public class TwinstarBlockEntity extends ExtraGeneratingFlowerBlockEntity implem
 	public static final int RANGE = 1;
 	public static final int MAX_MANA = 1000;
 
+	// Both ends start at 700 K, as in ExtraMeteorP 1.16 and 1.12 SubTileGeminiOrchid. One fluid alone gives the difference to 700 K (lava 1300 K: 6 mana; water 300 K: 4 mana).
+	public static final int BASE_TEMPERATURE = 700;
+	// Default caps of the config (no cap).
 	public static final int TEMPERATURE_MIN = 0;
 	public static final int TEMPERATURE_MAX = Integer.MAX_VALUE;
 	public static final int COOLDOWN = 8;
@@ -69,8 +72,8 @@ public class TwinstarBlockEntity extends ExtraGeneratingFlowerBlockEntity implem
 	public int getThermoelectric() {
 		BlockPos _pos = getEffectivePos();
 
-		int tempMax = TEMPERATURE_MIN;
-		int tempMin = TEMPERATURE_MAX;
+		int tempMax = BASE_TEMPERATURE;
+		int tempMin = BASE_TEMPERATURE;
 
 		for (var pos : BlockPos.betweenClosed(_pos.offset(-RANGE, 0, -RANGE), _pos.offset(RANGE, 0, RANGE))) {
 			if (!getLevel().isLoaded(pos)) {
@@ -84,10 +87,6 @@ public class TwinstarBlockEntity extends ExtraGeneratingFlowerBlockEntity implem
 
 			tempMax = Math.max(tempMax, temp);
 			tempMin = Math.min(tempMin, temp);
-		}
-
-		if (tempMax == TEMPERATURE_MIN && tempMin == TEMPERATURE_MAX) {
-			return 0;
 		}
 
 		return Math.max(0, Math.min(getTemperatureMax(), tempMax) - Math.max(getTemperatureMin(), tempMin));

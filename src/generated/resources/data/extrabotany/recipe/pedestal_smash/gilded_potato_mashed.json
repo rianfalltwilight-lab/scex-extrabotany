@@ -1,6 +1,6 @@
 {
   "type": "extrabotany:pedestal_smash",
-  "exp": 5,
+  "exp": 1,
   "input": {
     "item": "extrabotany:gilded_potato"
   },

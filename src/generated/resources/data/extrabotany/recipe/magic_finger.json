@@ -1,21 +1,16 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "category": "misc",
-  "key": {
-    "C": {
+  "ingredients": [
+    {
       "item": "minecraft:carrot"
     },
-    "H": {
+    {
       "item": "extrabotany:hero_medal"
     },
-    "P": {
+    {
       "item": "botania:mana_powder"
     }
-  },
-  "pattern": [
-    " P ",
-    "PCP",
-    " H "
   ],
   "result": {
     "count": 1,

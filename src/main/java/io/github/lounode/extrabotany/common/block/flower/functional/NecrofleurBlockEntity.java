@@ -17,14 +17,14 @@ import io.github.lounode.extrabotany.common.brew.ExtraBotanyMobEffects;
 import io.github.lounode.extrabotany.xplat.ExtraBotanyConfig;
 
 /**
- * 死之花。每秒它在范围里找一个生命值不超过一半的生物，对它造成魔法伤害，并给它治疗反转效果。红石信号让它停止工作。
- * Necrofleur. On each second it finds one creature in the range that has half of its health or less, gives magic damage to it, and gives it the Heal Reverse effect. A redstone signal stops it.
+ * 死之花。每秒它在范围里找一个生命值低于一半的生物，对它造成魔法伤害，并给它 15 秒的巫毒诅咒 V（治疗量除以 4）。红石信号让它停止工作。
+ * Necrofleur. On each second it finds one creature in the range that has less than half of its health, gives magic damage to it, and gives it Witch Curse V for 15 seconds (the healing is divided by 4). A redstone signal stops it.
  *
  * <p>伤害来源是这个生物自己。原版也是这样做的，所以怪物不会因为这朵花去攻击别的生物。
  * <p>The source of the damage is the creature itself. The original does the same, thus a monster does not attack other creatures because of this flower.
  *
- * <p>来源：重制版（Lounode）。它对应 ExtraMeteorP 1.12 的 {@code SubTileNecrofleur}。
- * <p>Source: Reburn (Lounode). It corresponds to {@code SubTileNecrofleur} of ExtraMeteorP 1.12.
+ * <p>来源：ExtraMeteorP 1.12 的 {@code SubTileNecrofleur}。重燃把效果换成了治疗反转，这里改回巫毒诅咒。
+ * <p>Source: {@code SubTileNecrofleur} of ExtraMeteorP 1.12. Reburn changed the effect to Heal Reverse; here it is Witch Curse again.
  */
 public class NecrofleurBlockEntity extends ExtraFunctionalFlowerBlockEntity {
 
@@ -37,6 +37,8 @@ public class NecrofleurBlockEntity extends ExtraFunctionalFlowerBlockEntity {
 	public static final int COOLDOWN = 20;
 
 	public static final int DAMAGE_COST = 200;
+	public static final int CURSE_TICKS = 300;
+	public static final int CURSE_AMPLIFIER = 4;
 
 	public NecrofleurBlockEntity(BlockPos pos, BlockState state) {
 		super(ExtrabotanyFlowerBlocks.NECROFLEUR, pos, state);
@@ -65,9 +67,9 @@ public class NecrofleurBlockEntity extends ExtraFunctionalFlowerBlockEntity {
 			if (getMana() < getDamageCost()) {
 				break;
 			}
-			if (entity.getHealth() <= entity.getMaxHealth() * 0.5F) {
+			if (entity.getHealth() < entity.getMaxHealth() * 0.5F) {
 				entity.hurt(entity.damageSources().indirectMagic(entity, entity), getDamage());
-				entity.addEffect(new MobEffectInstance(ExtraBotanyMobEffects.HEAL_REVERSE, 20 * 15));
+				entity.addEffect(new MobEffectInstance(ExtraBotanyMobEffects.WITCH_CURSE, CURSE_TICKS, CURSE_AMPLIFIER));
 
 				addMana(-getDamageCost());
 				syncThrottled();

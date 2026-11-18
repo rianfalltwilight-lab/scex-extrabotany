@@ -147,8 +147,20 @@ public class StarryIdolArmorItem extends ArmorItem implements CustomCreativeTabC
 		ItemNBTHelper.setBoolean(stack, TAG_PHANTOM_INK, ink);
 	}
 
+	/**
+	 * 星空歌姬套本身不进创造物品栏（只保留初音套），继承它的其他套装照常显示。
+	 * The Starry Idol set itself is not in the creative tab (only the Miku set is kept); the other sets that extend it are shown as usual.
+	 */
 	@Override
 	public void addToCreativeTab(Item me, CreativeModeTab.Output output) {
+		if (isStarryIdolPiece(me)) {
+			return;
+		}
 		output.accept(new ItemStack(me));
+	}
+
+	public static boolean isStarryIdolPiece(Item item) {
+		return item == ExtraBotanyItems.starryIdolHeadgear || item == ExtraBotanyItems.starryIdolSuit
+				|| item == ExtraBotanyItems.starryIdolSkirt || item == ExtraBotanyItems.starryIdolBoots;
 	}
 }

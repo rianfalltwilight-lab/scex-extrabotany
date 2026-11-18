@@ -87,12 +87,8 @@ public final class RelicSwordGameTests {
 		Relic relic = Relic.LOOKUP.find(stack);
 		helper.assertTrue(relic != null, "Missing relic capability on " + item);
 
+		// 1.16 ItemSwordRelic：不检查主人，不是主人的人也能用技能（他会受到遗物的伤害）。 / 1.16 ItemSwordRelic: no owner check; a player who is not the owner can also use the skill (and gets the relic damage).
 		relic.bindToUUID(UUID.randomUUID());
-		((LeftClickItem) item).onLeftClick(player, null);
-		helper.assertTrue(mana.getMana() == 5000 && countOwned(helper, projectile, player) == 0,
-				"A player that does not own the relic used the skill of " + item);
-
-		relic.bindToUUID(player.getUUID());
 		((LeftClickItem) item).onLeftClick(player, null);
 		helper.assertTrue(mana.getMana() == 5000 - manaCost, "Wrong mana cost for " + item + ": " + (5000 - mana.getMana()));
 		helper.assertTrue(countOwned(helper, projectile, player) == expectedCount,
@@ -229,8 +225,9 @@ public final class RelicSwordGameTests {
 		helper.succeed();
 	}
 
+	// Original 1.16 ItemManaDrink and ModItems.MANADRINK_PROP: food 0, Resistance, Speed and Jump Boost, the bottle back; no healing and no mana (those were 1.12).
 	@GameTest(template = "empty", timeoutTicks = 20)
-	public static void manaDrinkHealsAndGivesMana(GameTestHelper helper) {
+	public static void manaDrinkGivesTheEffectsOf116(GameTestHelper helper) {
 		ItemStack stack = new ItemStack(ExtraBotanyItems.manaDrink, 2);
 		Player player = playerHolding(helper, stack);
 		ManaItem mana = supplyMana(player, 0);
@@ -238,9 +235,10 @@ public final class RelicSwordGameTests {
 
 		ItemStack result = stack.getItem().finishUsingItem(stack, helper.getLevel(), player);
 		helper.assertTrue(result.getCount() == 1, "The drink was not used up");
-		helper.assertTrue(player.getHealth() == 15F, "The drink must give back 5 health");
-		helper.assertTrue(mana.getMana() == 10000, "The drink must give 10000 mana, gave " + mana.getMana());
-		helper.assertTrue(player.hasEffect(MobEffects.DAMAGE_BOOST) && player.hasEffect(MobEffects.JUMP), "Missing effects");
+		helper.assertTrue(player.getHealth() == 10F, "The drink must not heal");
+		helper.assertTrue(mana.getMana() == 0, "The drink must not give mana, gave " + mana.getMana());
+		helper.assertTrue(player.hasEffect(MobEffects.DAMAGE_RESISTANCE) && player.hasEffect(MobEffects.MOVEMENT_SPEED)
+				&& player.hasEffect(MobEffects.JUMP) && !player.hasEffect(MobEffects.DAMAGE_BOOST), "Wrong effects");
 		helper.assertTrue(player.getInventory().countItem(ExtraBotanyItems.manaGlassBottle) == 1, "The bottle was not given back");
 		helper.succeed();
 	}

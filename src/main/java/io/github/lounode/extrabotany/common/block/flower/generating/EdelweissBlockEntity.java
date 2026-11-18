@@ -36,8 +36,8 @@ import static io.github.lounode.extrabotany.common.lib.ResourceLocationHelper.pr
  * 雪绒花。它吃掉紧挨着它的实体来产生魔力。哪些实体能吃、能产生多少魔力，由雪绒花配方决定（默认只有雪傀儡）。
  * Edelweiss. It eats the entities adjacent to it to make mana. The Edelweiss recipes tell which entities it can eat and how much mana they give (by default, only the snow golem).
  *
- * <p>来源：重制版（Lounode）。它对应 ExtraMeteorP 1.12 的 {@code SubTileEdelweiss}。
- * <p>Source: Reburn (Lounode). It corresponds to {@code SubTileEdelweiss} of ExtraMeteorP 1.12.
+ * <p>来源：ExtraMeteorP 1.16 的 {@code SubTileEdelweiss}：每只雪傀儡 1600 魔力，之后休息 5 tick，必须绑定魔力发射器。上限取 1.12 的 25000（见 {@link #MAX_MANA}）。
+ * <p>Source: {@code SubTileEdelweiss} of ExtraMeteorP 1.16: 1600 mana for each snow golem, then a rest of 5 ticks, and it must be bound to a mana spreader. The maximum is the 25000 of 1.12 (see {@link #MAX_MANA}).
  */
 public class EdelweissBlockEntity extends ExtraGeneratingFlowerBlockEntity {
 
@@ -45,8 +45,9 @@ public class EdelweissBlockEntity extends ExtraGeneratingFlowerBlockEntity {
 
 	private static final int RANGE = 1;
 
-	public static final int MAX_MANA = 12800;
-	public static final int COOLDOWN = 40;
+	/** 1.16 没有改上限，用的是植物魔法默认的 20，雪傀儡的 1600 几乎全被截掉；所以取 1.12 的 25000。 / 1.16 kept the default maximum of Botania, 20, which cut off nearly all of the 1600 of a snow golem; thus this takes the 25000 of 1.12. */
+	public static final int MAX_MANA = 25000;
+	public static final int COOLDOWN = 5;
 
 	private int cooldown;
 	// Scoped to one tick only; public lookups outside a tick always read the current manager.
@@ -68,6 +69,10 @@ public class EdelweissBlockEntity extends ExtraGeneratingFlowerBlockEntity {
 			return;
 		}
 		if (getMana() >= getMaxMana()) {
+			return;
+		}
+		// 1.16 只有绑定了魔力发射器才吃。 / In 1.16 it only eats when it is bound to a mana spreader.
+		if (!isValidBinding()) {
 			return;
 		}
 

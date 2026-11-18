@@ -17,7 +17,8 @@ import java.util.function.Supplier;
  */
 public enum ItemTiers implements Tier {
 	EXCALIBUR(2031, 9.0F, 4, BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 30, () -> ExtraBotanyItems.dasRheingold),
-	ACHILLES_SHIELD(4600, 9.0F, 4.0F, BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 26, () -> ExtraBotanyItems.orichalcos);
+	// 1.12 ItemAchilleshield 用植物魔法的泰拉钢材料（2300 次、附魔 26、泰拉钢锭修理），盾牌的耐久再乘 2。 / 1.12 ItemAchilleshield uses the terrasteel material of Botania (2300 uses, enchantability 26, repaired with terrasteel ingots), and the shield doubles the durability.
+	ACHILLES_SHIELD(2300, 9.0F, 4.0F, BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 26, () -> vazkii.botania.common.item.BotaniaItems.TERRASTEEL_INGOT);
 
 	private final int maxUses;
 	private final float efficiency;

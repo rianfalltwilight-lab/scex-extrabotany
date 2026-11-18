@@ -304,8 +304,8 @@ public final class VoidHerrscherGameTests {
 	}
 
 	/**
-	 * 每名参战的玩家得到的战利品：潘多拉魔盒、三个限量补给袋和唱片。
-	 * The loot for each fighter: a Pandora's Box, three bags of the type Supply Bag Limited Edition and the music disc.
+	 * 每名参战的玩家得到的战利品：潘多拉魔盒和三个限量补给袋。1.12 的表里没有唱片（对照原版审计 E5）。
+	 * The loot for each fighter: a Pandora's Box and three bags of the type Supply Bag Limited Edition. The table of 1.12 has no music disc (parity audit E5).
 	 */
 	@GameTest(template = "projectile_arena", timeoutTicks = 20)
 	public static void herrscherLootTable(GameTestHelper helper) {
@@ -325,7 +325,7 @@ public final class VoidHerrscherGameTests {
 		helper.assertTrue(loot.stream().anyMatch(stack -> stack.is(ExtraBotanyItems.pandorasBox)), "The loot does not have the Pandora's Box");
 		helper.assertTrue(loot.stream().anyMatch(stack -> stack.is(ExtraBotanyItems.limitedEditionSupplyBag) && stack.getCount() == 3),
 				"The loot does not have three Limited Edition Supply Bags");
-		helper.assertTrue(loot.stream().anyMatch(stack -> stack.is(ExtraBotanyItems.recordHerrscherOfTheVoid)), "The loot does not have the music disc");
+		helper.assertTrue(loot.stream().noneMatch(stack -> stack.is(ExtraBotanyItems.recordHerrscherOfTheVoid)), "The loot still has the music disc of Reburn");
 		helper.succeed();
 	}
 

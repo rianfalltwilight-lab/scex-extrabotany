@@ -1,6 +1,6 @@
 {
   "type": "extrabotany:pedestal_smash",
-  "exp": 5,
+  "exp": 1,
   "input": {
     "item": "extrabotany:spirit_fuel"
   },
@@ -11,5 +11,5 @@
   "smash_tools": {
     "tag": "extrabotany:hammers"
   },
-  "strike": 10
+  "strike": 5
 }

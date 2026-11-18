@@ -26,12 +26,12 @@ import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 import io.github.lounode.extrabotany.common.block.flower.ExtraFunctionalFlowerBlockEntity;
+import vazkii.botania.api.block.PetalApothecary;
 import vazkii.botania.api.block_entity.RadiusDescriptor;
 import vazkii.botania.common.internal_caps.ItemLifetime;
 import vazkii.botania.common.helper.EntityHelper;
 import vazkii.botania.common.helper.PlayerHelper;
 
-import io.github.lounode.extrabotany.api.block.Pedestal;
 import io.github.lounode.extrabotany.common.block.flower.ExtrabotanyFlowerBlocks;
 import io.github.lounode.extrabotany.common.lib.ExtraBotanyTags;
 import io.github.lounode.extrabotany.common.lib.LibAdvancementNames;
@@ -43,14 +43,14 @@ import java.util.List;
 import static io.github.lounode.extrabotany.common.lib.ResourceLocationHelper.prefix;
 
 /**
- * 神烦花。它消耗魔力来钓鱼，钓到的物品掉在花的周围。范围里的祭坛上必须放着水桶。
- * Annoyingflower. It uses mana to fish, and the caught items drop around the flower. A pedestal in the range must hold a water bucket.
+ * 神烦花。它消耗魔力来钓鱼，钓到的物品掉在花的周围。同一层、水平 3 格内必须有装着水的花药台。
+ * Annoyingflower. It uses mana to fish, and the caught items drop around the flower. A Petal Apothecary that holds water must be on its layer, 3 blocks or less away horizontally.
  *
- * <p>把带有 {@code annoying_flower_eatable} 标签的食物丢给它之后，后面的几次钓鱼使用宝藏战利品表，冷却也更短。红石信号让它停止工作。
- * <p>After an item with the tag {@code annoying_flower_eatable} is thrown to it, the subsequent catches use the treasure loot table and have a shorter cooldown. A redstone signal stops it.
+ * <p>把带有 {@code annoying_flower_eatable} 标签的食物（默认熟鸡肉）丢给它之后，后面的 3 次钓鱼使用宝藏战利品表，间隔也更短。红石信号让它停止工作。
+ * <p>After an item with the tag {@code annoying_flower_eatable} (by default cooked chicken) is thrown to it, the next 3 catches use the treasure loot table and have a shorter interval. A redstone signal stops it.
  *
- * <p>来源：重制版（Lounode）。它对应 ExtraMeteorP 的 {@code SubTileAnnoyingFlower}。
- * <p>Source: Reburn (Lounode). It corresponds to {@code SubTileAnnoyingFlower} of ExtraMeteorP.
+ * <p>来源：ExtraMeteorP 1.16 的 {@code SubTileAnnoyingFlower}：每次 300 魔力，间隔 900 tick，喂食后 360 tick。1.16 喂食后的次数从不减少，宝藏钓鱼会一直持续；这里按 1.12 每钓一次减一。重燃的“最多 12 次”和祭坛水桶已经去掉。
+ * <p>Source: {@code SubTileAnnoyingFlower} of ExtraMeteorP 1.16: 300 mana each time, an interval of 900 ticks, 360 ticks after feeding. In 1.16 the count from feeding never goes down, so the treasure fishing lasts forever; here it goes down by one for each catch, as in 1.12. The "12 at most" of Reburn and the water bucket on a pedestal are removed.
  */
 public class AnnoyingFlowerBlockEntity extends ExtraFunctionalFlowerBlockEntity {
 	private long nextWaterScan;
@@ -64,13 +64,12 @@ public class AnnoyingFlowerBlockEntity extends ExtraFunctionalFlowerBlockEntity 
 
 	public static final int MAX_MANA = 1000;
 	public static final int FISHING_COST = 300;
-	public static final int COOLDOWN_AFTER_WORK = 20 * 45;
+	public static final int COOLDOWN_AFTER_WORK = 900;
 	public static final int FOOD_BOOST_TIMES = 3;
 	public static final double FOOD_BOOST_COOLDOWN_MULTIPLIER = 0.4D;
-	public static final int FOOD_BOOST_MAX = 12;
 
 	@Nullable
-	private BlockPos cachedPedestalPos;
+	private BlockPos cachedApothecaryPos;
 	private int cooldown;
 	private int boostLeft;
 
@@ -164,9 +163,7 @@ public class AnnoyingFlowerBlockEntity extends ExtraFunctionalFlowerBlockEntity 
 					//getLevel().blockEvent(getBlockPos(), getBlockState().getBlock(), START_BURN_EVENT, item.getId());
 					//TODO 吃掉的粒子效果
 					getLevel().gameEvent(null, GameEvent.BLOCK_ACTIVATE, getBlockPos());
-					int boostTime = Math.max(0, getBoostLeft() + getFoodBoostTimes());
-					boostTime = Math.min(getFoodBoostMax(), boostTime);
-					setBoostLeft(boostTime);
+					setBoostLeft(Math.max(0, getBoostLeft() + getFoodBoostTimes()));
 					sync();
 					return true;
 				}
@@ -201,38 +198,35 @@ public class AnnoyingFlowerBlockEntity extends ExtraFunctionalFlowerBlockEntity 
 		return loot.isEmpty() ? ItemStack.EMPTY : loot.get(0);
 	}
 
+	/**
+	 * 同一层、水平 {@value #RANGE} 格内有没有装着水的花药台。
+	 * Tells if a Petal Apothecary that holds water is on the layer of the flower, {@value #RANGE} blocks or less away horizontally.
+	 */
 	public boolean hasWater() {
 		BlockPos pos = getEffectivePos();
-
-		if (cachedPedestalPos != null) {
-			BlockEntity tile = getLevel().isLoaded(cachedPedestalPos) ? getLevel().getBlockEntity(cachedPedestalPos) : null;
-			if (tile instanceof Pedestal pedestal && pedestal.getItem().is(Items.WATER_BUCKET)) {
+		if (cachedApothecaryPos != null) {
+			if (isWaterApothecary(cachedApothecaryPos)) {
 				return true;
 			}
-			cachedPedestalPos = null;
+			cachedApothecaryPos = null;
 		}
-
-		for (BlockPos pos_ : BlockPos.betweenClosed(pos.offset(-RANGE, 0, -RANGE),
-				pos.offset(RANGE, RANGE, RANGE))) {
-			if (!getLevel().isLoaded(pos_)) {
-				continue;
-			}
-			BlockEntity tile = getLevel().getBlockEntity(pos_);
-			if (tile instanceof Pedestal pedestal && pedestal.getItem().is(Items.WATER_BUCKET)) {
-				cachedPedestalPos = pos_.immutable();
+		for (BlockPos pos_ : BlockPos.betweenClosed(pos.offset(-RANGE, 0, -RANGE), pos.offset(RANGE, 0, RANGE))) {
+			if (isWaterApothecary(pos_)) {
+				cachedApothecaryPos = pos_.immutable();
 				return true;
 			}
 		}
-
 		return false;
+	}
+
+	private boolean isWaterApothecary(BlockPos pos) {
+		return getLevel().isLoaded(pos)
+				&& getLevel().getBlockEntity(pos) instanceof PetalApothecary apothecary
+				&& apothecary.getFluid() == PetalApothecary.State.WATER;
 	}
 
 	public double getFoodBoostCooldownMultiplier() {
 		return ExtraBotanyConfig.common().annoyingflowerFoodBoostCooldownMultiplier();
-	}
-
-	public int getFoodBoostMax() {
-		return ExtraBotanyConfig.common().annoyingflowerFoodBoostMax();
 	}
 
 	public int getFoodBoostTimes() {

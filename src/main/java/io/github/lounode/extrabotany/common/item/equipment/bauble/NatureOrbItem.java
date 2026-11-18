@@ -7,6 +7,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.neoforged.neoforge.common.EffectCures;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.CreativeModeTab;
@@ -47,7 +48,8 @@ public class NatureOrbItem extends BaubleItem implements CustomCreativeTabConten
 	public static final int HEAL_DELAY = 60;
 	public static final float HEAL_AMOUNT = 1.0F;
 	public static final int REMOVE_HARMFUL_POTION_DELAY = 40;
-	public static final int REMOVE_HARMFUL_POTION_COST = 200;
+	/** 1.16 ItemNatureOrb.clearPotions：每清除一个效果 50 能量。 / 1.16 ItemNatureOrb.clearPotions: 50 energy for each removed effect. */
+	public static final int REMOVE_HARMFUL_POTION_COST = 50;
 
 	private static final String TAG_ENERGY = "NatureEnergy";
 
@@ -188,9 +190,17 @@ public class NatureOrbItem extends BaubleItem implements CustomCreativeTabConten
 		return 0;
 	}
 
+	/**
+	 * 1.16 只清除能被牛奶清除的负面效果。 / 1.16 only removes the harmful effects that milk can remove.
+	 */
+	public static boolean isMilkCurableHarmful(MobEffectInstance effect) {
+		return effect.getEffect().value().getCategory() == MobEffectCategory.HARMFUL
+				&& effect.getCures().contains(EffectCures.MILK);
+	}
+
 	public static int clearHarmfulPotion(LivingEntity entity) {
 		List<MobEffectInstance> effects = entity.getActiveEffects().stream()
-				.filter(effect -> effect.getEffect().value().getCategory() == MobEffectCategory.HARMFUL)
+				.filter(NatureOrbItem::isMilkCurableHarmful)
 				.toList();
 
 		effects.forEach(e -> entity.removeEffect(e.getEffect()));

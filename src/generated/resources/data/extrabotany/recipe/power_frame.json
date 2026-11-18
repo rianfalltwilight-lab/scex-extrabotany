@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "item": "botania:livingrock"
+    },
+    "M": {
+      "tag": "c:ingots/manasteel"
+    },
+    "P": {
+      "item": "botania:pixie_dust"
+    }
+  },
+  "pattern": [
+    "MMM",
+    "PLP",
+    "MMM"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:power_frame"
+  }
+}

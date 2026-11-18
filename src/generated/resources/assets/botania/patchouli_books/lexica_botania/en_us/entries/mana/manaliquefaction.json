@@ -11,6 +11,12 @@
       "type": "patchouli:crafting",
       "recipe": "extrabotany:manaliquefaction",
       "text": "extrabotany.page.manaliquefaction1"
+    },
+    {
+      "type": "patchouli:image",
+      "images": [
+        "extrabotany:textures/gui/lexicon/manafluid.png"
+      ]
     }
   ]
 }

@@ -1255,6 +1255,271 @@ The maintainer asked for one more self-check. This section is the result.
 第 1、3、4 项只在客户端或者重启之后才看得出来，没有自动测试；它们列在 `ACCEPTANCE.md` 的 4.12 和 4.14 里。第 2 项的线程问题不能用测试稳定地重现；测试只确认新的做法结果正确。
 Items 1, 3 and 4 can only be seen on the client or after a restart, and have no automatic test; they are in 4.12 and 4.14 of `ACCEPTANCE.md`. The thread problem of item 2 cannot be reproduced reliably in a test; the tests only confirm that the result of the new method is correct.
 
+## 对照原版审计 E0：能玩性问题和明确的错误（2026-11-18）/ Parity audit E0: playability problems and clear bugs (2026-11-18)
+
+2026-11-18 对照原版 1.12（`4ad2cc9`）和 1.16（`f96f6d3`）重新审计了整个模组。这一批只修不需要做取舍的问题。之后的批次按两条规则：原版有对应物的重燃设计改回原版；只有 1.12 有的内容取 1.12，两个版本都有的取 1.16。
+On 2026-11-18 the full mod was audited again against the original 1.12 (`4ad2cc9`) and 1.16 (`f96f6d3`). This batch only corrects problems that need no choice. The later batches follow two rules: a Reburn design that has a counterpart in the original goes back to the original; content that only 1.12 has follows 1.12, and content that both versions have follows 1.16.
+
+| # | 问题 / Problem | 改正 / Correction | 原版出处 / Source in the original |
+|---|---|---|---|
+| 1 | 魔力饮品没有任何来源：魔力玻璃瓶对魔力池使用得到的是"默认的鸡尾酒"。犹大的誓约·KIRA 因此不能合成，初音套不能修理。 / The Mana Drink had no source: a Managlass Bottle used on a mana pool gave a "default cocktail". Thus the Judah Oath KIRA could not be crafted, and the Miku armor could not be repaired. | 瓶子得到魔力饮品；鸡尾酒由酿造瓶和魔力饮品合成。旧的默认鸡尾酒仍然可以喝。 / The bottle gives a Mana Drink; a cocktail is crafted from a brew flask and a Mana Drink. An old default cocktail can still be drunk. | 1.16 `ItemEmptyBottle`、`CocktailRecipe` |
+| 2 | 能量框架没有配方。 / The Power Frame had no recipe. | 3 魔力钢锭 / 妖精粉、活石、妖精粉 / 3 魔力钢锭。 / 3 manasteel / pixie dust, livingrock, pixie dust / 3 manasteel. | 1.16 `recipes/powerframe.json`（1.12 充能垫相同 / the same as the 1.12 Charge Pad） |
+| 3 | 镀金土豆泥不能吃。 / The Gilded Mashed Potato could not be eaten. | 5 饥饿值 / 0.2，抗性 IV、缓慢 IV、伤害吸收 II 各 30 秒，总是可以吃。 / 5 food / 0.2, Resistance IV, Slowness IV and Absorption II for 30 seconds each, always edible. | 1.16 `ModItems.GILDEDMASHEDPOTATO_PROP` |
+| 4 | 鲜血妖姬把每个生物的受伤次数存在一个按访问续期的缓存里。生物一直在范围里时记录永远不过期，被打满 11 次后这朵花对它永久停机；循环用 `break`，排在它后面的生物也一起不产能。 / The Blood Enchantress kept the hits of each creature in a cache that each read renewed. While the creature stayed in the range the record never expired, and after 11 hits the flower stopped for it for good; the loop used `break`, so the creatures after it also gave no mana. | 恢复"血之诱惑"效果（`extrabotany:blood_temptation`）：每次伤害加一级，最高 amplifier 10，持续 100 + 200 × 原等级 tick。效果消失后生物重新产能。产能数值留到 E1。 / The "Blood Temptation" effect (`extrabotany:blood_temptation`) is back: one level for each hit, amplifier 10 at most, for 100 + 200 × the old amplifier ticks. When the effect ends, the creature gives mana again. The mana numbers are left for E1. | 1.16 `SubTileBloodyEnchantress`、`PotionBloodTempation`、`ExtraBotanyAPI.addPotionEffect` |
+| 5 | 双子兰只有一种液体时产量是 0。 / The Twinstar made nothing with only one fluid. | 冷热两端都从 700 K 开始：只有岩浆 6 点 / 8 tick，只有水 4 点 / 8 tick。 / Both ends start at 700 K: lava alone gives 6 mana per 8 ticks, water alone 4. | 1.16 / 1.12 `SubTileGeminiOrchid` |
+| 6 | 革命酿造少了霉运 III。 / The Revolution brew lacked Bad Luck III. | 霉运 III + 急迫 III，90 秒。 / Bad Luck III and Haste III, 90 seconds. | 1.16 / 1.12 `ModBrew.revolution` |
+| 7 | 魔力鸡尾酒的效果时长和普通酿造相同，饮用 32 tick。 / The Mana Cocktail had the duration of a usual brew and took 32 ticks to drink. | 时长 × 1.3，饮用 20 tick。 / Duration × 1.3, 20 ticks to drink. | 1.16 `ItemCocktail` |
+| 8 | 成龙指环和跑酷指环按住跳跃键贴墙就能无限蹬墙跳。 / The Jackie Chan Ring and the Parkour Ring jumped from a wall again and again while the jump key was held. | 每次要重新按跳跃键，落地之前最多 5 次（跑酷指环 8 次）。 / Each jump needs a new press of the key, at most 5 times before landing (8 for the Parkour Ring). | 1.12 `ItemWallJumpingRing`、`WallJumpingShim`、`ItemParkourRing` |
+| 9 | 盖亚守护者III用挑战券召唤时给 825 经验，读档后给 1000：带召唤位置的构造器没有设置经验。 / Guardian of Gaia III gave 825 experience when a ticket summoned it and 1000 after a reload: the constructor with the summon position did not set the experience. | 两种都是 1225。 / 1225 in both cases. | 1.12 `EntityGaiaIII`（`experienceValue = 1225`） |
+| 10 | 王者圣剑的剑气转向任何生物和玩家，而且优先转向玩家。 / The Excalibur beam turned to any creature and to players, and preferred players. | 只转向敌对生物，不转向玩家、宠物和村民。伤害、魔力等数值留到 E3。 / It turns only to hostile creatures, never to players, pets or villagers. Damage, mana and the other numbers are left for E3. | 1.16 / 1.12 `ItemExcaliber` |
+| 11 | 圣水手雷的增益只给投掷者，负面效果给其他所有生物，包括其他玩家，不检查 PvP。 / The Holy Water Grenade gave the beneficial effects only to the thrower, and the harmful effects to all other creatures, other players included, without a PvP check. | 增益给所有玩家，负面效果只给非玩家生物。范围、伤害等留到 E3。 / Beneficial effects go to all players, harmful effects only to creatures that are not players. Range, damage and the rest are left for E3. | 1.16 / 1.12 `EntitySplashGrenade` |
+| 12 | 回音花（重燃）的声音表满 32 种时挤掉最旧的声音并清零计数，轮换足够多种声音就一直拿满额魔力。 / When the sound table of the Resoncund (Reburn) was full at 32 sounds, it pushed out the oldest sound and reset its count, so enough different sounds in turn always gave the full mana. | 表满时新的声音不产能，旧计数保留到过期。 / When the table is full, a new sound gives no mana, and the old counts stay until they expire. | — |
+| 13 | 伐木花（重燃）的破坏被领地拒绝时，每 tick 都重新扫描范围。 / When a claim refused the break of the Woodienia (Reburn), it scanned its range again on each tick. | 和找不到原木一样，等一会儿再扫描。 / The same as with no log, it waits before the next scan. | — |
+| 14 | 商友兰（重燃）的价格系数配置为 1.0（不打折）时，效果等级 -1 被截成 0，仍然打 1% 的折并消耗魔力。 / With a price factor of 1.0 (no discount) in the config, the Trade Orchid (Reburn) made an effect of amplifier -1, which was cut to 0, so it still gave 1% off and used mana. | 不给效果，不消耗魔力。它对每个村民每 2 秒收 1000 魔力的维持费是重燃的设计，保留。 / No effect, no mana. Its upkeep of 1000 mana for each villager every 2 seconds is the design of Reburn and stays. | — |
+
+文档改正 / Corrections to the documents:
+
+- `OVERVIEW` 把蕴魔瑾列为重燃新增。它是 1.12 的 `SubTileEnchantedOrchid`（中文名、花瓣配方相同）。 / `OVERVIEW` listed the Enchanter as a Reburn addition. It is `SubTileEnchantedOrchid` of 1.12 (the same Chinese name and petal recipe).
+- 上文第十二批第 8 项说原版 1.16 的叮当舞花也受红石控制。1.16 的 `SubTileTinkleFlower` 没有红石检查，只有 1.12 有。 / Item 8 of batch 12 above says that the Tinkle of the original 1.16 also reacts to redstone. `SubTileTinkleFlower` of 1.16 has no redstone check; only 1.12 has one.
+- 上文"数据生成"表第 4 项说 EGO 唱片和另外两张唱片在盖亚守护者III的同一个掉落池里。现在它是本我单独的 20% 掉落（`entities/ego.json`）。 / Item 4 of the "Data generation" table above says that the EGO record is in the same drop pool of Guardian of Gaia III as the other two records. Now it is a separate 20% drop of the Ego (`entities/ego.json`).
+- `scex/LEGACY_CANDY_COMPAT.md` 写律者唱片 201 秒，实际是 48 秒。 / `scex/LEGACY_CANDY_COMPAT.md` gave 201 seconds for the Herrscher record; it is 48 seconds.
+
+新增 `E0ParityGameTests` 的 9 个测试；`BrewRecipeGameTests`、`P2FlowerGameTests`、`P2FlowerProtectionGameTests` 按新的规则改了断言。全部 292 个 GameTest 通过。墙跳只在客户端执行，测试只检查次数上限；手感需要进游戏确认。
+9 new tests in `E0ParityGameTests`; `BrewRecipeGameTests`, `P2FlowerGameTests` and `P2FlowerProtectionGameTests` have assertions changed to the new rules. All 292 GameTests pass. The wall jump runs only on the client, and the test only checks the limits; the feel must be checked in the game.
+
+## 对照原版审计 E1：花（2026-11-18）/ Parity audit E1: the flowers (2026-11-18)
+
+按已定的规则：两个原版都有的花取 1.16，只有 1.12 有的花取 1.12，重燃加的细节去掉。花的类注释里的"来源"也改成了实际依据的原版类。
+By the rules that were decided: a flower that both originals have follows 1.16, a flower that only 1.12 has follows 1.12, and the details that Reburn added are removed. The "source" in the class comment of each flower now names the original class that it follows.
+
+| # | 花 / Flower | 以前（重燃） / Before (Reburn) | 现在 / Now | 原版出处 / Source in the original |
+|---|---|---|---|---|
+| 1 | 叮当舞花 / Tinkle | 每次 100，速度 × 100，受红石控制 / 100 each time, speed × 100, stopped by redstone | 每 20 tick 每个玩家按"披风位置到玩家的距离 × 10"加 0–8，满 10 产 30，余数保留；不受红石控制；计数存档 / Each 20 ticks each player adds 0–8 by "distance from the cape position × 10", 30 mana per 10, the remainder kept; no redstone; the count is saved | 1.16 `SubTileTinkleFlower` |
+| 2 | 风铃草 / Bellflower | 重燃的风力模型、周围方块减产、扇水仙吹死、风力 HUD | 能看到天空且 Y > 90；每 10 tick 产 (10 + 下雨 3) × Y / 90；上限 300；被动花 / Sees the sky and Y > 90; (10 + 3 in rain) × Y / 90 each 10 ticks; maximum 300; passive | 1.16 `SubTileBellFlower` |
+| 3 | 石中姬 / Stonesia | 一次性加配方值（石头 20、钻石矿 750），上限 3200，也吃上一层 | 吃一块后每 tick 产 5，产完才吃下一块；配方值是 1.12 的燃烧 tick × 5（石头 50、圆石 25、钻石矿 3750）；只吃同一层 8 格；上限 800；受红石控制 / After a block, 5 each tick until it is used up; the recipe value is the burn ticks of 1.12 × 5 (stone 50, cobblestone 25, diamond ore 3750); only the 8 blocks of its layer; maximum 800; stopped by redstone | 1.12 `SubTileStonesia`、`ModRecipe.initStonesiaRecipe` |
+| 4 | 雪绒花 / Edelweiss | 每只雪傀儡 3200，上限 12800，冷却 40，不要求绑定 | 1600，休息 5 tick，必须绑定发射器；上限 25000 / 1600, rest 5 ticks, must be bound to a spreader; maximum 25000 | 1.16 `SubTileEdelweiss`；上限取 1.12（1.16 没有覆盖植物魔法默认的 20）/ maximum from 1.12 (1.16 kept the Botania default of 20) |
+| 5 | 全知瑾 / Omniviolet | 不要求绑定 | 必须绑定发射器（其余数值本来就和 1.16 相同）/ Must be bound to a spreader (the other numbers already matched 1.16) | 1.16 `SubTileOmniViolet` |
+| 6 | 鲜血妖姬 / Blood Enchantress | 燃烧期间每 tick 再产 22（一只生物约 704），普通伤害，不要求绑定 | 每只生物一次 22 × 12 × (1 − 0.04 × 等级 − 0.02 × 等级和)，即新生物 264；3 点魔法伤害；每只生物休息 20 tick，休息时不产；必须绑定发射器 / One time 22 × 12 × (1 − 0.04 × amplifier − 0.02 × sum) per creature, 264 for a fresh one; 3 magic damage; 20 ticks of rest per creature, no mana while resting; must be bound to a spreader | 1.16 `SubTileBloodyEnchantress` |
+| 7 | 神烦花 / Annoyingflower | 祭坛上的水桶；香香鸡；加速次数最多 12 | 同一层 3 格内装水的花药台；熟鸡肉（标签 `annoying_flower_eatable`）；每次 300，间隔 900 tick，喂食后 360；没有上限，每钓一次减一 / A Petal Apothecary with water on its layer within 3; cooked chicken (tag `annoying_flower_eatable`); 300 each time, 900 ticks, 360 when fed; no limit, one less for each catch | 1.16 `SubTileAnnoyingFlower`；"每次减一"取 1.12（1.16 从不减少，宝藏钓鱼永远持续）/ "one less" from 1.12 (1.16 never lowers it, so the treasure fishing lasts forever) |
+| 8 | 死之花 / Necrofleur | 治疗反转 15 秒；生命值不超过一半 | 巫毒诅咒 V 300 tick（治疗 ÷ 4）；生命值低于一半 / Witch Curse V for 300 ticks (healing ÷ 4); below half health | 1.12 `SubTileNecrofleur` |
+| 9 | 镜姬 / Mirrowtunia | 每人 100 | 每人 90 / 90 for each player | 1.12 `SubTileMirrortunia` |
+| 10 | 魔链星 / Manalink | 花下面必须是泥土，漂浮的永远不工作；上限 800 | 中间那格不检查，漂浮的也能工作；上限 10000 / The middle block is not examined, a floating one works; maximum 10000 | 1.12 `SubTileManalinkium.canTPExist` |
+| 11 | 蕴魔瑾 / Enchanter | 每块 250000，三维半径 3，不要黑莲花，上限 1600 | 先丢一朵黑莲花；每块 200000，每 tick 400；下面一层水平 4 格内的草方块；上限 10000 / A Black Lotus first; 200000 per block at 400 a tick; a grass block on the layer below within 4; maximum 10000 | 1.12 `SubTileEnchantedOrchid` |
+| 12 | 蕴魔土 / Enchanted Soil | 所有花双倍速度，包括被动花 | 被动产能花（风铃草、双子兰、日曜/月耀百合、水绣球）不加速，只是不枯萎 / Passive generating flowers (Bellflower, Twinstar, Sunshine/Moonlight Lily, Hydroangeas) are not made faster, they only do not decay | 1.12 植物魔法 `SubTileGenerating.isOvergrowthAffected` |
+
+去掉的东西 / Removed:
+
+- 风的系统：`api.level.Wind`（公开 API，只有风铃草用）、`WindImpl`、`DisplayWindLevel` 和 `DaffomillBlockEntityAccessor` 两个 mixin、风铃草的法杖 HUD（换成植物魔法默认的）、`extrabotany:bellflower_ignore` 标签、隐藏进度 `a_baldrupt`（被扇水仙吹死）和它的四种语言文字、`message.extrabotany.chat.wind_level`。
+  The wind system: `api.level.Wind` (a public API that only the Bellflower used), `WindImpl`, the two mixins `DisplayWindLevel` and `DaffomillBlockEntityAccessor`, the wand HUD of the Bellflower (now the Botania default), the tag `extrabotany:bellflower_ignore`, the hidden advancement `a_baldrupt` (killed by a Daffomill) with its text in four languages, and `message.extrabotany.chat.wind_level`.
+- 配置项 `bellflower.generateModify`、`annoyingflower.foodBoostMax`、`bloodEnchantress.produceMana`。
+  The config entries `bellflower.generateModify`, `annoyingflower.foodBoostMax` and `bloodEnchantress.produceMana`.
+- 方块状态：叮当舞花不再有 `powered` 属性，石中姬有了。旧存档里的花照常加载。
+  Block states: the Tinkle no longer has the `powered` property, and the Stonesia has it. Flowers in old saves load as usual.
+
+配置迁移 / Config migration:
+
+已有的 `extrabotany-common.toml` 存着旧默认值，会盖住新默认值。新增 `server.parityRevision`（默认 0）：加载时如果小于 1，把仍然等于旧默认值的项改成新默认值（叮当舞花 100→30、石中姬上限 3200→800、雪绒花上限 12800→25000、冷却 40→5、镜姬 100→90、蕴魔瑾 250000→200000），玩家自己改过的值不动，然后写成 1。以后的批次改默认值时把修订号加一。
+An existing `extrabotany-common.toml` holds the old defaults, which would override the new ones. The new `server.parityRevision` (default 0): at load, when it is less than 1, each entry that still equals its old default gets the new default (Tinkle 100→30, Stonesia maximum 3200→800, Edelweiss maximum 12800→25000 and cooldown 40→5, Mirrowtunia 100→90, Enchanter 250000→200000); a value that the player changed is kept; then it is set to 1. A later batch that changes defaults adds one to the revision.
+
+留到以后 / Left for later:
+
+- 1.12 的自然宝珠催化（石中姬每 tick 多 2、镜姬反射 V）属于 E2 的自然宝珠。 / The Nature Orb catalysis of 1.12 (2 more each tick for the Stonesia, Reflect V for the Mirrowtunia) belongs to the Nature Orb of E2.
+- 神烦花吃熟鸡肉以后，模组自己的香香鸡不再被吃。香香鸡仍然是食物。 / Since the Annoyingflower eats cooked chicken, the mod's own Fried Chicken is no longer eaten by it. The Fried Chicken is still food.
+- 风铃草的铃声音效现在不播放（1.16 没有），注册保留到 E7 统一处理音效。 / The ring sound of the Bellflower no longer plays (1.16 has none); its registration stays until E7 handles the sounds.
+
+新增 `E1ParityGameTests` 的 12 个测试；`FlowerGameTests`、`ExtraBotanyGameTests`、`FlowerHotPathGameTests`、`P2FlowerProtectionGameTests`、`P2MachineChunkGameTests`、`E0ParityGameTests` 按新的规则改了断言，删掉了风力同步测试。全部 303 个 GameTest 通过。
+12 new tests in `E1ParityGameTests`; `FlowerGameTests`, `ExtraBotanyGameTests`, `FlowerHotPathGameTests`, `P2FlowerProtectionGameTests`, `P2MachineChunkGameTests` and `E0ParityGameTests` have assertions changed to the new rules, and the wind synchronization test is removed. All 303 GameTests pass.
+
+## 对照原版审计 E2：装备（2026-11-18）/ Parity audit E2: the equipment (2026-11-18)
+
+规则同 E1：两个原版都有的取 1.16，只有 1.12 有的取 1.12，重燃加的细节去掉。
+The rules are those of E1: what both originals have follows 1.16, what only 1.12 has follows 1.12, and the details that Reburn added are removed.
+
+| # | 物品 / Item | 以前（重燃） / Before (Reburn) | 现在 / Now | 原版出处 / Source in the original |
+|---|---|---|---|---|
+| 1 | 哥布林猎人套 / Goblin Slayer | 光子材料的速度 II；头盔对亡灵 +50%、对 `goblins` 一击必杀；材料 21 / {3,6,6,3} / 40 / 2.5 | 白天全套：每件 +50% 基础生命上限、+4% 基础移速；全套每件 15% 折扣；猪灵中立；材料 27 / {3,5,7,2} / 30 / 1；每点耐久 70 魔力 | 1.16 `ItemGoblinSlayerArmor`、`ItemMikuArmor`、`ExtraBotanyAPI.ArmorMaterial` |
+| 2 | 暗影武士套 / Shadow Warrior | 每件 +5 生命、5% 小精灵、暗影材料夜视；头盔免疫摔落和爆炸；材料 23 / {3,7,6,3} / 28 / 1.5 | 夜晚全套：每件 +25% 基础生命、+12.5% 攻速、+5% 攻击，夜视；15% 折扣；材料 24 / {2,5,6,2} / 26 / 1 | 1.16 `ItemShadowWarriorArmor` |
+| 3 | 战斗女仆套 / Combat Maid | 胸甲 30% 折扣；每 80 tick 75 魔力回血；空手 +10；击退抗性；更宽的免疫列表；材料 50 / {4,7,8,3} / 50 / 4 | 每件 +5 生命；全套：每件 15% 折扣，头盔每 tick 送 1 魔力，每 40 tick 20 魔力回 1 血、每个能被牛奶清除的负面效果 100 魔力，空手 +8（200 魔力），吸血十分之一（80 魔力），免疫 1.16 的 12 种环境伤害；材料 40 / {4,7,9,4} / 32 / 3 | 1.16 `ItemMaidArmor`、`ItemMaidHelm` |
+| 4 | 血染女仆服 / Sanguine suit | 常驻 +15 生命；攻击给力量 II、30% 吸血 | 只有夜晚全套时：生命 15、+30% 移速、+100% 攻击、+20% 攻速、夜视 | 1.12 `ItemCombatMaidChestDarkened`、`ItemCombatMaidArmor`（只有 1.12 有） |
+| 5 | 星空歌姬 / Starry Idol | 有配方，在创造物品栏 | 没有配方，不在创造物品栏；手册条目和进度"天哪是初音"改用初音套 | 决定 6 |
+| 6 | 空之律者核心 / Core of the Void | 飞行 100/tick；+0.1 移速、+0.6 飞行速度；弹射物免疫；负面效果清除；没魔力时反噬 | 只有飞行，35/tick | 1.16 `ItemCoreGod` |
+| 7 | 精卫之羽 / Feather of Jingwei | 4 + 攻击力，火焰伤害，受护甲减免 | 5 + 攻击力，穿甲（不再是火焰伤害） | 1.16 `EntityAuraFire`、`DamageHandler.NETURAL_PIERCING` |
+| 8 | 梦魇燃料、精神燃料 / Fuels | 熔炉 3200、12800；梦魇 0 饥饿、效果 II | 不是熔炉燃料；两者 4 饥饿；瞬间伤害 / 治疗 III，其余效果 I | 1.16 `ModItems.NIGHTMAREFUEL_PROP`、`SPIRITFUEL_PROP` |
+| 9 | 魔力饮品 / Mana Drink | 1.12：回 5 血、4 种效果含力量、10000 魔力 | 0 饥饿；抗性、速度、跳跃 60 秒；返还瓶子 | 1.16 `ItemManaDrink`、`MANADRINK_PROP`（1.16 的类没调用父类，效果实际上不生效；这里按食物属性的本意给） |
+| 10 | 纯白雏菊吊坠 / Pure Daisy Pendant | 佩戴后空手右键 | 拿在手里对方块使用，50 魔力；每 64 次冷却 3000 tick，只在佩戴时减少；佩戴时白天每 6 秒回 1 血 | 1.12 `ItemPureDaisyPendant`（只有 1.12 有；1.12 先转化后扣魔力，这里先扣） |
+| 11 | 自然蕴息宝珠 / Nature Orb | 清除所有负面效果，每个 200 | 只清除能被牛奶清除的，每个 50 | 1.16 `ItemNatureOrb.clearPotions` |
+| 12 | 自然宝珠催化 / Catalysis | 没有 | 同层水平 7 格内基座上的宝珠：石中姬每 tick +2（每 20 tick 25 能量），镜姬反射 V（20 能量） | 1.12 `SubTileGeneratingNature`、`SubTileFunctionalNature`（E1 留下的） |
+| 13 | Curios 槽位 / Slots | 护符 1 个 | 护符 2 个（`curios/slots/charm.json`） | 1.16 `CurioIntegration` |
+| 14 | 透镜 / Lenses | 堆叠 16；推送、熔炼、魔力、追踪的组合属性不同 | 不可堆叠；属性按 1.16（追踪是 CONTROL） | 1.16 `ModItems` |
+
+实现说明 / Notes:
+
+- 昼夜加成和 1.16 一样记在盔甲物品的标记上（`isday` / `isnight`）。标记变化时物品变了，游戏自动重新计算这件的属性；属性来自 NeoForge 的 `getDefaultAttributeModifiers(ItemStack)`。
+  The day and night bonuses are kept, as in 1.16, as a flag on the armor item (`isday` / `isnight`). When the flag changes, the item changes, and the game calculates the attributes of the piece again; they come from `getDefaultAttributeModifiers(ItemStack)` of NeoForge.
+- 1.16 的女仆、哥布林、暗影三套都继承初音套，所以全套时每件 15%，四件合计 60%。这和 1.16 相同。
+  In 1.16 the Maid, Goblin and Shadow sets all extend the Miku set, so with the full set each piece gives 15%, 60% for four. This is the same as 1.16.
+- 去掉的东西：头盔的事件处理（哥布林、暗影）、`shadow_warrior_protection` 伤害类型标签、熔炉燃料数据映射、虚空核心的反噬和净化处理。反噬伤害类型和音效的注册保留，E7 再统一处理音效。
+  Removed: the event handlers of the helmets (Goblin, Shadow), the damage type tag `shadow_warrior_protection`, the furnace fuel data map, and the backfire and cure handlers of the Core of the Void. The registrations of the backfire damage type and sound stay; E7 handles the sounds.
+- 血染女仆服的获得方式（嗜血期间击杀 50 个）是重燃的；1.12 是符文祭坛配方，属于 E5。装备音效属于 E7。
+  The way to get the Sanguine suit (50 kills during Bloodthirst) is from Reburn; in 1.12 it is a Runic Altar recipe, which belongs to E5. The equip sounds belong to E7.
+
+新增 `E2ParityGameTests` 的 12 个测试；`ItemAuditGameTests`、`FullLegacyGameTests`、`NatureOrbGameTests`、`RelicSwordGameTests`、`LegacyAccessoryParityGameTests` 按新的规则改了断言。全部 314 个 GameTest 通过。昼夜切换时的属性刷新需要进游戏确认。
+12 new tests in `E2ParityGameTests`; `ItemAuditGameTests`, `FullLegacyGameTests`, `NatureOrbGameTests`, `RelicSwordGameTests` and `LegacyAccessoryParityGameTests` have assertions changed to the new rules. All 314 GameTests pass. The refresh of the attributes at dawn and dusk must be checked in the game.
+
+## 对照原版审计 E3：武器（2026-11-18）/ Parity audit E3: the weapons (2026-11-18)
+
+规则同 E1、E2。王者圣剑、百中弓、圣水手雷和遗物剑两个原版都有，取 1.16；勇士盾、三种金属盾、锤子和王之花园只有 1.12 有，取 1.12。
+The rules are those of E1 and E2. The Excalibur, the Failnaught, the Holy Water Grenade and the relic swords are in both originals and follow 1.16; the Achilles Shield, the three metal shields, the hammers and the King's Garden are only in 1.12 and follow 1.12.
+
+| # | 物品 / Item | 以前（重燃） / Before (Reburn) | 现在 / Now | 原版出处 / Source in the original |
+|---|---|---|---|---|
+| 1 | 王者圣剑 / Excalibur | 剑气 200 魔力、9 点；只有主人能挥；可用莱茵之金修理；稀有度"罕见" | 160 魔力、6 点绝对穿甲（也不能被盾挡）；谁拿着都能挥；不能修理；遗物稀有度 | 1.16 `ItemExcaliber`、`DamageHandler.NETURAL_PIERCING`、`ModItems.relic()` |
+| 2 | 百中弓 / Failnaught | 重燃的四档脉冲，最高 40，受护甲减免；命中扣魔力；冲击、火矢、多重射击、快速装填 | 至少拉 8 tick；等级 (i − 8) / 5；魔力 min(800, 350 + 20 × 等级)；伤害 min(50, 7 + 0.5 × 等级 + 攻击力) + 力量；存在 min(150, 5 + 4i) tick；沿途 2 格内每 tick 绝对穿甲伤害；穿过方块；只有力量生效 | 1.16 `ItemFailnaught`、`EntityMagicArrow` |
+| 3 | 遗物剑 / Relic swords | 只有主人能用左键技能；可以在铁砧修理 | 谁拿着都能用（不是主人的人会受到遗物伤害）；不能修理 | 1.16 `ItemSwordRelic` 各子类、`ModItems.relic()` 的 `setNoRepair` |
+| 4 | 圣水手雷 / Holy Water Grenade | 半径 4，按距离衰减；没有伤害；叠 4 | 方框半径 5；非玩家受 10 点魔法伤害；效果时长 × 0.6，不按距离衰减；直接命中再 5 点；叠 32 | 1.16 `EntitySplashGrenade`、`ModItems` |
+| 5 | 三种金属盾 / Metal shields | 耐久 × 1.5（450 / 1080 / 3450）；修理 60–70；泰拉钢盾给生命恢复 | 耐久 × 2（600 / 1440 / 4600）；每点 120 魔力；泰拉钢盾把一半伤害还给直接攻击者并点燃 5 秒；源质钢盾点燃直接攻击者 | 1.12 `ItemShieldCopy`、`ItemManasteelShield`、`ItemElementiumShield`、`ItemTerrasteelShield` |
+| 6 | 勇士盾 / Achilles Shield | 解放需要 10；没有冲撞；反射被注释掉；耐久 4600 但材料是奥利哈刚 | 解放需要 12（两个方向都要）；举盾移动撞 1 格内生物：13 + 1.5 × 锋利的魔法伤害、击退 1.5 × (1 + 击退)；挡下的弹射物算作持盾者的，非箭弹射物掉头；500 魔力反伤；小精灵几率 1；泰拉钢材料，耐久 2300 × 2 | 1.12 `ItemAchilleshield` |
+| 7 | 锤子 / Hammers | 物品展示框挂在祭坛侧面自动锤击（重燃） | 发射器对着祭坛：每次 5 下、锤子 5 点耐久；主手任何锤子挖掘 × 1.25；展示框自动锤击和进度"转圈圈"已去掉 | 1.12 `BehaviourHammer`、`ItemHammer.onMining` |
+| 8 | 王之花园 / King's Garden | 漂浮的花不算 | 漂浮的花也算（1.12 按花的种类判断） | 1.12 `BlockPedestal` |
+
+说明 / Notes:
+
+- 1.12 的泰拉钢盾和勇士盾用攻击伤害或魔法伤害反弹；这里用荆棘伤害，并且跳过荆棘伤害，否则两个举盾的玩家会互相无限反弹。
+  The Terrasteel and Achilles shields of 1.12 returned the damage as attack or magic damage; here it is thorns damage, and thorns damage is skipped, or two blocking players would bounce it back and forth forever.
+- 1.12 的冲撞只在 motionX 或 motionZ 为正时生效（写错了），这里改成任何水平移动。1.12 的弹射物反射把它朝原方向以速度 15 射出，等于没有反射；这里箭由原版盾牌弹回，其他弹射物掉头，并且都算作持盾者射出的。
+  The ram of 1.12 only worked when motionX or motionZ was positive (a mistake); here any horizontal movement counts. The projectile reflection of 1.12 shot it in its own direction at speed 15, which reflected nothing; here arrows are bounced back by the vanilla shield, other projectiles turn around, and all count as shot by the holder.
+- 虚空万藏的百中弓形态保留重燃的规则（虚空万藏不在 E3 里）。王之花园烦人花武器的音效属于 E7。1.12 金属盾的击退倍率是它自己的盾牌系统，这里用原版的盾牌击退。
+  The Failnaught form of the Void Archives keeps the rules of Reburn (the Void Archives are not in E3). The sound of the Annoyingflower weapon of the King's Garden belongs to E7. The knockback multipliers of the 1.12 metal shields belonged to their own shield system; here the vanilla shield knockback is used.
+
+新增 `E3ParityGameTests` 的 9 个测试；删除了只测展示框锤击的 `P1PedestalGameTests`（3 个）；`RelicSwordGameTests`、`FirstFractalGameTests`、`ItemAuditGameTests`、`P2EquipmentSafetyGameTests`、`P2EquipmentBowGameTests`、`PedestalStateGameTests`、`PedestalLegacyParityGameTests` 按新的规则改了。全部 320 个 GameTest 通过。冲撞和反射的手感需要进游戏确认。
+9 new tests in `E3ParityGameTests`; `P1PedestalGameTests` (3 tests), which only covered the item frame strikes, is removed; `RelicSwordGameTests`, `FirstFractalGameTests`, `ItemAuditGameTests`, `P2EquipmentSafetyGameTests`, `P2EquipmentBowGameTests`, `PedestalStateGameTests` and `PedestalLegacyParityGameTests` are changed to the new rules. All 320 GameTests pass. The feel of the ram and the reflection must be checked in the game.
+
+## 对照原版审计 E4：Boss（2026-11-18）/ Parity audit E4: the bosses (2026-11-18)
+
+盖亚守护者III、它的仆从、骷髅导弹和骷髅地雷只有 1.12 有，按 1.12 重写；空之律者也只有 1.12 有。
+Guardian of Gaia III, its minions, the skull missiles and the skull landmines are only in 1.12 and are rewritten after 1.12; the Herrscher of the Void is also only in 1.12.
+
+| # | 内容 / Topic | 以前（重燃） / Before (Reburn) | 现在 / Now | 原版出处 / Source in the original |
+|---|---|---|---|---|
+| 1 | 盖亚守护者III 召唤 / Summon | 人数倍率 1 + 0.25n；护甲 30；200 tick 出场无敌；场地半径 15；召唤时不查物品栏 | 600 × 人数；无护甲；5 层护盾；场地和普通盖亚仪式相同（半径 12）；带着别的模组物品不能召唤；名字是召唤者；末影龙吼声 | 1.12 `EntityGaiaIII.spawn` |
+| 2 | 阶段 / Ranks | 无 | 75% 二阶段、40% 三阶段：各 5 层护盾、4 个骷髅仆从、8 把审判之剑、聊天提示 | `onLivingUpdate` |
+| 3 | 普通攻击 / Usual attacks | 每 15 tick 四枚导弹；每次传送放 6 个地雷 | 每 40 tick 一枚导弹（40% 再加一枚带火的）；二阶段每 55 tick 一枚带火的；三阶段每 65 tick 两枚带凋零的并回 1 血；地雷阵每 250 / 210 / 170 tick，8 + 3n（+5 / +9）个，5 的倍数红、6 的倍数绿 | `onLivingUpdate`、`spawnMissile` |
+| 4 | 特殊攻击 / Skills | 无 | 点名（20% 最大生命 + 6 的真实伤害）、导弹雨（17 + 4n 枚）、审判之剑、召唤仆从，按 1.12 的冷却和顺序；有预警消息 | `onLivingUpdate` |
+| 5 | 受伤 / Damage | 上限 30 | 每层护盾挡一次；一次最多 30，生命一次最多减 30；累计 80 瞬移；场外攻击的玩家被拉回 | `attackEntityFrom`、`setHealth`、`damageEntity` |
+| 6 | 场地规则 / Arena rules | — | 巫毒诅咒（90 秒后 3 级）；离开场地被拉回并得到霉运 V；瞬移路径伤害 6 并打碎方块 | `onLivingUpdate`、`keepInsideArena`、`teleportRandomly` |
+| 7 | 骷髅仆从（新实体 `extrabotany:skull_minion`）/ Skull minion | 无 | 生命 24；2 层护盾；每次最多 10；55 tick 后每 15 tick 带火导弹 4；每 400 tick 让玩家丢下手持物品；三阶段每 160 tick 给 Boss 回 1；1.12 的四种贴图 | 1.12 `EntitySkullMinion`、`RenderSkullMinion` |
+| 8 | 骷髅地雷 / Skull landmine | 上下 ±2.5；失明 + 凋零 III，牛奶可解 | 上下 ±50；6 点；失明、缓慢 IV、牛奶解不掉的凋零 II | 1.12 `EntitySkullLandmine` |
+| 9 | 新手减伤 / Novice factor | 无 | 没拿到"盖亚的试炼"的玩家：导弹、地雷、红色地雷、点名伤害 × 0.7 | 1.12 `StatHandler.hasStat(player, GAIA_DEFEAT)` |
+| 10 | 空之律者回血 / Herrscher healing | 受击无敌时 heal() 被挡掉 | 三阶段每 80 tick 一定回 1 | 1.12 `EntityVoidHerrscher` |
+| 11 | 彩虹核心 / Rainbow core | 2% 掉普通外观核心 | 2% 掉彩虹外观核心；新增 `rainbow` 外观和七层彩虹翅膀渲染（模型资源本来就在） | 1.12 `loot_tables/void_herrscher.json`、`ItemCoreGod` 外观 2 |
+| 12 | 暗影妖精（新实体 `extrabotany:dark_pixie`）/ Dark pixie | 暗影之刃召唤粉色妖精 | 黑色的暗影妖精（1.12 贴图） | 1.12 `EntityDarkPixie`、`RenderDarkPixie` |
+
+说明 / Notes:
+
+- 1.12 在二阶段抽到"导弹雨"后什么也不做，冷却停在 0 直到三阶段；这里改回点名。1.12 的困难模式没有入口，不做。1.12 的提示消息只在客户端发；这里由服务端发给场内玩家。
+  In rank II, 1.12 does nothing after it draws the "missile rain" and the cooldown stays at 0 until rank III; here it goes back to the random-player attack. The hard mode of 1.12 has no way in and is not made. The messages of 1.12 were sent only on the client; here the server sends them to the players in the arena.
+- 暗影之刃 1.16 也有，但 1.16 里只是没有效果的铁剑（没做完的移植），所以例外地按 1.12。E2 已经按 1.16 去掉了暗影武士套的妖精，所以暗影妖精只来自暗影之刃。
+  The Shadow Katana is also in 1.16, but there it is only an iron sword with no effect (an unfinished port), so as an exception it follows 1.12. E2 already removed the pixies of the Shadow Warrior set after 1.16, so the dark pixies only come from the Shadow Katana.
+- 删除了重燃的 `GaiaIIIAI`、`GaiaSpawnSkullLandMine`、`GaiaSpawnSkullMissile`；盖亚守护者III和空之律者一样使用 `ScriptedBossAI`（缴械、清增益、打碎作弊方块）。旧存档里正在打的盖亚守护者III会按新的规则继续。
+  The `GaiaIIIAI`, `GaiaSpawnSkullLandMine` and `GaiaSpawnSkullMissile` of Reburn are removed; Guardian of Gaia III uses `ScriptedBossAI` (disarm, remove buffs, smash cheat blocks) as the Herrscher of the Void does. A Guardian of Gaia III in the middle of a fight in an old save continues with the new rules.
+- 1.12 的能量框架改动（MAC-03）和磁通魔力场、液化器默认开关（MAC-06）不在这一批。
+  The Power Frame changes of 1.12 (MAC-03) and the default switches of the Flux Manafield and the Liquefier (MAC-06) are not in this batch.
+
+新增 `E4ParityGameTests` 的 7 个测试；`GaiaDisarmGameTests` 改成"带着禁止物品不能召唤，开战后再拿起的被缴械"。全部 327 个 GameTest 通过。整场战斗的节奏和难度需要进游戏打一场确认。
+7 new tests in `E4ParityGameTests`; `GaiaDisarmGameTests` now checks "no summon with forbidden items, and items picked up after the start are disarmed". All 327 GameTests pass. The rhythm and the difficulty of the full fight must be checked by one fight in the game.
+
+## 对照原版审计 E5：配方、战利品和奖励袋（2026-11-18）/ Parity audit E5: recipes, loot and bags (2026-11-18)
+
+规则和前几批相同：两个版本都有的物品按 1.16 的配方，只有 1.12 有的按 1.12。1.12 独有的方块（自然祭坛）保留它在 1.12 的全部配方，即使产物是两个版本共有的物品，所以镀金土豆泥和灵魂碎片现在各有两条获取途径。
+The rule is the same as in the earlier batches: an item that both versions have uses the recipe of 1.16, an item that only 1.12 has uses 1.12. A block that only 1.12 has (the pedestal) keeps all its recipes of 1.12, also when the product is an item that both versions have, so the gilded mashed potato and the spirit fragment now each have two ways to get them.
+
+| # | 内容 / Topic | 以前（重燃） / Before (Reburn) | 现在 / Now | 原版出处 / Source in the original |
+|---|---|---|---|---|
+| 1 | 工作台（1.16）/ Crafting (1.16) | 莱茵之金 1 个；圣水手雷 1 个；挑战券、相机、魔弓、精卫之羽、手杖、次元催化器、贤者魔力指环是重燃配方；药水透镜少两样；王者圣剑在锻造台 | 莱茵之金 4 个；圣水手雷 8 个；这些物品用 1.16 的配方；药水透镜加龙石和纯净末影精华（旧称末影空气瓶）；王者圣剑回到工作台；镀金土豆泥加工作台配方 | 1.16 `data/extrabotany/recipes/*.json`、`RecipeProvider`、`HolyGrenadeRecipe` |
+| 2 | 律者核心 / Core of the Void | 光辉石英块 × 6、奥利哈钢、只能从补给袋开出的空的律者核心；外观用糖果袋 / 鸡尾酒 / 镀金土豆，另有彩虹和重置配方 | 光辉石英 × 6、英雄勋章、天翼族之冠；外观用薰衣草 / 魔力 / 烈焰石英；彩虹外观只从空之律者掉落；没有重置 | 1.16 `coregod.json`、`coregod_1..3.json` |
+| 3 | 工作台（1.12）/ Crafting (1.12) | 王之花园用源初；犹大的誓约用盖亚之魂；不随想之茧用灵魂燃料；虚空之召形状不同；三面金属盾形状不同；精灵锤用梦之木棍；魔术手指有序；阿喀琉斯之盾在锻造台 | 都改回 1.12 | 1.12 `ModCraftingRecipe` |
+| 4 | 符文祭坛 / Runic altar | 镀金土豆 1 个 800；暗影 / 光子锭 4200；奥利哈钢 150000；成龙 / 蜘蛛指环在工作台；血染女仆服靠嗜血击杀 50 个 | 镀金土豆 4 个 2000；暗影 / 光子锭 6000（1 个）和 15000（3 个）；奥利哈钢只在泰拉凝聚板；两枚指环 2000；血染女仆服 50000（女仆服 + 四件暗影战士），嗜血计数删除 | 1.16 `RuneRecipeProvider`、`runic_altar/*.json`；1.12 `ModRuneRecipe` |
+| 5 | 花药台 / Petal apothecary | 七种两个版本都有的花用 1.12 的配方 | 铃铛花、烦人花、雪绒花、双子兰、日曜 / 月耀百合、叮当花用 1.16 | 1.16 `petal_apothecary/*.json` |
+| 6 | 次元催化器 / Dimension catalyst | 雪球 → 末影珍珠 2000；烈焰棒翻倍 2000 | 钻石 → 末影珍珠 20000；烈焰棒翻倍 20000 | 1.16 `ManaInfusionProvider` |
+| 7 | 精灵交易、自然祭坛 / Elven trade, pedestal | 没有精灵交易；锤击 5 和 10 下、5 经验 | 噩梦燃料 → 灵魂燃料 → 灵魂碎片；锤击加圆石 → 砂砾 → 燧石 → 火药，五条都是 5 下、1 经验 | 1.16 `elven_trade/*.json`；1.12 `ModPedestalRecipe`、`TilePedestal` |
+| 8 | 奖励袋 / Reward bags | Eins 16 种花瓣；Zwei 16 种符文；九又四分之三权重不同、有盖亚之魂 | Eins 万能花瓣 4 / 8 / 6；Zwei 元素符文 × 2 或七罪符文；Drei、Vier、潘多拉魔盒本来就和 1.16 相同；九又四分之三按 1.12（泰拉钢 × 5 等） | 1.16 `ModItems.categoryListA..D`、`ItemTreasureBox`；1.12 `ConfigHandler.REWARDBAG5` |
+| 9 | 糖果袋 / Candy bag | 3 次各 1 个糖果 | 1 次：糖果 × 3、南瓜派、金锭或附魔金苹果；僵尸类和骷髅生成时 2% 在副手拿着糖果袋，必定掉落（实体标签 `extrabotany:candy_bag_holders`，清空即关闭） | 1.12 `ConfigHandler.REWARDBAG6`、`ItemHalloweenCandy.onSpawn` |
+| 10 | 限量补给袋 / Supply bag | 101 份，第一次必出空的律者核心 | 1.12 的 100 份；空的律者核心不再出现，物品保留但不进创造栏 | 1.12 `ItemRewardBagSpecial` |
+| 11 | Boss 掉落 / Boss loot | 盖亚守护者III 20% 唱片；空之律者 100% 唱片 | 两者都没有唱片；两张唱片是"终局"进度的奖励 | 1.12 `loot_tables/*.json`、`StatHandler` |
+| 12 | 箱子战利品 / Chest loot | 无 | 七种箱子各加一个奖池：瓶装火焰 / 星光 / 妖精（地牢还有灵魂碎片）；1.12 的村庄铁匠箱对应现在的武器匠箱 | 1.12 `LootHandler`、`loot_tables/inject/*.json` |
+| 13 | 进度奖励 / Advancement rewards | 无 | 完成 6 / 12 / 18 个主进度时得到"新生" / "双倍的快乐" / "半人半妖"，各掉一个弥散指环 / 魔术手指 / 精卫之羽 | 1.12 `StatHandler` |
+
+说明 / Notes:
+
+- 审计里的 INV-49（"Eins 只给 1 个花瓣"）是误报：旧表在奖池上设置了 6 个。现在 Eins 按 1.16 给万能花瓣，这一条不再相关。
+  INV-49 of the audit ("Eins gives only 1 petal") was a false finding: the old table set the count of 6 on the pool. Now Eins gives universal petals after 1.16, so this item no longer matters.
+- 现在的植物魔法没有过度生长种子，Vier 袋里继续用附魔土代替。英雄勋章换 8 个 Drei 袋的 1.12 配方没有加：Drei 袋两个版本都有，1.16 没有这个配方。
+  The current Botania has no overgrowth seed, so the Vier bag keeps the enchanted soil in its place. The 1.12 recipe that turns a Hero Medal into 8 Drei bags is not added: both versions have the Drei bag, and 1.16 has no such recipe.
+- 律者核心的外观配方仍是普通的无序配方，不复制绑定信息；遗物在下一个玩家拿起时重新绑定。樱花誓约（犹大的誓约 + 三位一体血石）等 E6 恢复血石后再改，现在仍用七罪符文。问号和柠檬装饰品（空之律者和"终局"的另一部分奖励）也在 E6。
+  The appearance recipes of the Core of the Void are still plain shapeless recipes and do not copy the binding; the relic binds again when the next player picks it up. The Sakura oath (Judah's Oath + tri-bloodstone) changes when E6 restores the bloodstone; it still uses the sin rune. The question mark and lemon cosmetics (the other part of the rewards of the Herrscher and of "End Day") are also in E6.
+- 限量补给袋的存档版本升到 4：旧的 101 份奖池作废，玩家下次打开时得到新的 100 份奖池。
+  The save version of the supply bag went to 4: the old 101-lot pools are dropped, and a player gets a new 100-lot pool at the next opening.
+
+新增 `E5ParityGameTests` 的 10 个测试；`FullLegacyGameTests`（补给袋）、`LegacyCandyGameTests`（糖果袋）、`VoidHerrscherGameTests`（掉落）和 `BrewRecipeGameTests`（手雷数量）按新的规则改写。全部 337 个 GameTest 通过。
+10 new tests in `E5ParityGameTests`; `FullLegacyGameTests` (supply bag), `LegacyCandyGameTests` (candy bag), `VoidHerrscherGameTests` (loot) and `BrewRecipeGameTests` (grenade count) are rewritten for the new rules. All 337 GameTests pass.
+
+## 对照原版审计 E6：补回 1.12 的内容（2026-11-18）/ Parity audit E6: the 1.12 content comes back (2026-11-18)
+
+按第 4 条决定补回只有 1.12 有的内容。充能垫和镀金小土豆不补。新注册名用现在的命名方式；中文名用 1.12 的（这些东西 1.16 没有）。
+After decision 4, the content that only 1.12 has comes back. The charge pad and the gilded tiny potato do not. The new registry names follow the current naming; the Chinese names are those of 1.12 (1.16 does not have these items).
+
+| # | 内容 / Topic | 现在 / Now | 原版出处 / Source in the original |
+|---|---|---|---|
+| 1 | 飞船 / Airships（`manasteel_flying_boat`、`elementium_flying_boat`、`terrasteel_flying_boat`，实体 `flying_boat`） | 像船一样划，按跳跃键上升 0.35 格每 tick，松开后在空中下降 0.15；最高离地 32 / 64 / 255 格；前进 × 1 / 1.3 / 1.6；骑手每 tick 1 魔力，没有魔力被放下；三张 1.12 船身贴图。配方：魔力钢 + 魔力石板 + 龙息，再用元素钢、泰拉钢逐级升级 | 1.12 `EntityFlyingBoat`、`ItemFlyingBoat`、`RenderFlyingBoat`、`ModCraftingRecipe` |
+| 2 | 旅行手袋 / Mini Handbag（`mini_handbag`） | 24 格随身容器，界面带 4 个盔甲栏（1.12 的界面贴图）；物品存在手袋的容器组件里；手袋不能放进手袋 | 1.12 `ItemMasterHandbag`、`ContainerHandbag`、`GuiHandbag` |
+| 3 | 魔力透镜：云朵 / Cloud Lens（`lens_cloud`） | 速度 × 0.75、魔力 × 5、损耗 × 4；脉冲经过生物时每个生物花 400 魔力放出半径 3 的药水云，效果持续四分之一；和药水透镜一样用鸡尾酒装入酿造 | 1.12 `LensCloud`、`recipe_lenscloud` |
+| 4 | 镀金究极锤 / Ultimate Hammer（`ultimate_hammer`） | 耐久 3000、速度 10.5；用魔力自修（修复等级越高越快越省）；也能当斧和铲；可存 50000 魔力。放在自然祭坛上升级：5 个镀金土豆泥升级修复（最多 III），元素钢剑升级锋利（最多 X，攻击时花魔力加魔法伤害和负面效果），泰拉钢锤解锁 3 × 3 范围挖掘（右键开关）。符文祭坛 100000：泰拉钢锤 + 3 个镀金土豆泥 + 金块。新进度"PONPONPON"和"裏表ラバーズ" | 1.12 `ItemHammerUltimate`、`BlockPedestal`、`ModRuneRecipe` |
+| 5 | 三重血玉 / Tri-Bloodstone（`tri_bloodstone`） | 龙石块 + 3 颗龙石；樱花誓约改回犹大的誓约 + 三重血玉（以前是七罪符文） | 1.12 `recipe_tribloodstone`、`SAKURAOATH` |
+| 6 | 问号、柠檬 / Question mark, lemon（`question`、`lemon`） | 问号用棕色花瓣 + 灵魂碎片合成，头顶画三个；柠檬是击败空之律者的进度奖励；Thug Life 去掉重燃的配方，回到"终局"的进度奖励 | 1.12 `ItemCosmetic`、`StatHandler` |
+
+说明 / Notes:
+
+- 1.12 的飞船直接改坐标升降，会穿过方块；这里用同样的速度但经过碰撞，摔落也不会把飞船摔成木板。上升键是跳跃键（1.12 的 `keyUp` 就是跳跃键）。
+  The 1.12 airship changed its position directly and went through blocks; here the same speeds go through the collision, and a fall does not break it into planks. The rise key is the jump key (the `keyUp` of 1.12 is the jump key).
+- 1.12 的究极锤存的魔力不对外输出，修理和锋利用的是玩家身上别的魔力物品，这里相同。
+  The mana that the 1.12 Ultimate Hammer stores is never exported; the repair and the sharpness use the other mana items of the player. The same here.
+- 问号和柠檬在头上的位置按其他装饰品的换算从 1.12 推出，需要进游戏看一眼。
+  The positions of the question mark and the lemon on the head are converted from 1.12 in the same way as the other cosmetics and must be checked in the game.
+
+- E4 的两个盖亚 III 场地测试和 `GaiaDisarmGameTests` 的召唤测试把场地建在离自身结构 180 到 300 格的地方，随机排布时会覆盖同时运行的别的测试（这次撞上了本我的测试，大约四次一次）。它们现在放在单独的批次 `e4_gaia_arena` 里。
+  The two Guardian of Gaia III arena tests of E4 and the summon test of `GaiaDisarmGameTests` build their arena 180 to 300 blocks away from their own structure, and with the random layout they overwrote another test running at the same time (this time a test of the Ego, about one run in four). They are now in a batch of their own, `e4_gaia_arena`.
+
+新增 `E6ParityGameTests` 的 7 个测试。全部 344 个 GameTest 通过（连续 3 次）。飞船的手感、手袋界面和两个装饰品的位置需要进游戏看。
+7 new tests in `E6ParityGameTests`. All 344 GameTests pass (3 runs in a row). The feel of the airships, the handbag screen and the positions of the two cosmetics must be checked in the game.
+
+## 对照原版审计 E7：美术、音效和中文名（2026-11-18）/ Parity audit E7: art, sounds and Chinese names (2026-11-18)
+
+贴图先按像素逐张比对：本地 425 张里有 103 张只和重燃相同。其中有原版对应物的按规则换回（两个版本都有的用 1.16，只有 1.12 有的用 1.12）；重燃独有的物品保留自己的贴图。
+The textures were compared pixel by pixel first: 103 of the 425 local textures were only equal to Reburn. Those with an original counterpart went back after the rule (1.16 when both versions have the item, 1.12 when only 1.12 has it); items that only Reburn has keep their own textures.
+
+| # | 内容 / Topic | 现在 / Now | 原版出处 / Source in the original |
+|---|---|---|---|
+| 1 | 花 / Flowers | 风铃草、鲜血妖姬、日耀 / 月光百合、全知瑾、叮当舞花、双子兰用 1.16 的画；蕴魔瑾、魔链星、镜姬、死之花（含小死之花）、石中姬用 1.12 的画 | 1.16 `textures/block`；1.12 `assets/botania/textures/blocks` |
+| 2 | 方块 / Blocks | 次元催化器（1.16 静态图，魔力池上的叠加图也是它，删掉重燃的 4 帧动画和叠加图）；奥利哈刚块、光子块、暗影块（1.12） | 1.16 `MiscellaneousIcons`；1.12 `blocks/block*.png` |
+| 3 | 锤子、盾牌 / Hammers, shields | 魔力钢 / 源质钢 / 泰拉钢锤是 1.12 的平头锤（泰拉钢锤开关两种状态同图）；三面金属盾是 1.12 的圆盾；删掉没人用的旧泰拉钢盾图 | 1.12 `items/*hammer.png`、`*shield.png` |
+| 4 | 物品 / Items | 挑战券、莱茵河的黄金、香香鸡、镀金服务器、镀金土豆泥、圣水手雷（两层）、秘制鸡尾酒（空瓶 + 液体层）、律者唱片、自然蕴息宝珠、奥利哈刚锭、光子锭、暗影锭、天空锭、勇士盾的展开图（1.16）；王之花园的两把花武器（1.12） | 1.16 `textures/item` |
+| 5 | 音效 / Sounds | 盖亚守护者III 音乐换回 1.12 的 `dbg.ogg`（134.6 秒，唱片长度同步）；三首 Boss 音乐音量 1.3 → 1.0；王之花园召唤神烦花时播放 1.12 的叫声；女仆 / 哥布林杀手 / 暗影武士的装备音效按 1.16（钻石 / 铁 / 铁）；删掉重燃没有用到的风铃草铃声 | 1.12 `ModSounds`、`ItemKingGarden`；1.16 `ExtraBotanyAPI.ArmorMaterial` |
+| 6 | 节日外观 / Festive looks | 十月里黑暗精灵戴南瓜头；圣诞期间（12 月 16 日到 1 月 2 日）五种奖励袋换 1.12 的圣诞图标 | 1.12 `RenderDarkPixie`、`rewardbag*.json` |
+| 7 | 手册插图 / Lexicon art | 双子兰、魔链星、星移莲、液态魔力液化器的条目加上 1.12 图鉴的插图 | 1.12 `textures/gui/*.png` |
+| 8 | 中文名 / Chinese names | 按原版改了 131 个中文条目（物品名和正文里的同一名字），例如日耀百合、月光百合、星移莲、镀金服务器、奥利哈刚锭、哥布林杀手、昴星团战斗女仆、魔力鸡尾酒（原来的"魔力鸡尾酒"按原版叫秘制鸡尾酒）、泰拉钢锤、墙跳 / 墙行指环、驭魔之戒、贤者魔力指环、律者核心、寄给自己的邀请函、限量补给包、黑暗精灵、剑域。"诅咒指环"还给 death_ring；重燃的 curse_ring 按它的凋灵骷髅头效果改叫"凋零指环" | 1.16 `zh_cn.json`；1.12 `zh_cn.lang` |
+
+说明 / Notes:
+
+- 没换的：骷髅导弹、三色地雷和它们的南瓜外观（本地的骷髅贴图是原版画重新排布、配合现在的头颅模型，南瓜版要改渲染器）；女仆、哥布林杀手、暗影武士的盔甲贴图（本地这三套用重燃的模型，多出的部件画在原版贴图没有的位置，换图会让它们消失）；盖亚守护者III的外观；审判之剑的几帧（两个版本各一套，本地用 1.12 的）。这些都需要先改模型或渲染器。
+  Not changed: the skull missile, the three-colored landmines and their pumpkin looks (the local skull textures are the original art rearranged for the current skull model; the pumpkin versions need a renderer change); the armor textures of the maid, goblin slayer and shadow warrior sets (these three sets use Reburn models whose extra parts are painted where the original textures have nothing, so a swap would make those parts vanish); the look of Guardian of Gaia III; some frames of the swords of judgment (each version has a set; the local one is from 1.12). These all need a model or renderer change first.
+- 相机的三个音效是重燃加的（1.16 的相机没有声音），这一批没有动；相机还没有逐行对照原版。
+  The three camera sounds were added by Reburn (the 1.16 camera is silent) and were not touched in this batch; the camera has not been compared line by line with the original yet.
+- 云朵透镜的中文名保留全角冒号，和其他透镜一致（1.12 原文是半角）。
+  The Chinese name of the Cloud Lens keeps the full-width colon, consistent with the other lenses (1.12 used a half-width one).
+
+新增 `E7ParityGameTests` 的 3 个测试；`DataPackGameTests` 的唱片长度改成 134.6 秒。全部 347 个 GameTest 通过（连续 2 次）。贴图和音效需要进游戏看和听。
+3 new tests in `E7ParityGameTests`; the disc length in `DataPackGameTests` is now 134.6 seconds. All 347 GameTests pass (2 runs in a row). The textures and sounds must be checked in the game.
+
 ## 待办 / Open items
 
 没有未完成的移植项目。需要在游戏里确认的项目和需要你决定的事项集中在 [`ACCEPTANCE.md`](ACCEPTANCE.md) 里。

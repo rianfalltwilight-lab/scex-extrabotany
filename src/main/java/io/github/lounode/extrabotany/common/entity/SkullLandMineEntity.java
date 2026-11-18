@@ -33,8 +33,38 @@ public abstract class SkullLandMineEntity extends MagicLandMineEntity {
 	private static final ResourceLocation DEFAULT_SKULL = prefix("textures/entity/skull_missile/skull_missile.png");
 	public static final float LANDMINE_WIDTH = 5F;
 
+	/** 1.12：上下各 50 格（2.5 × 20）都在范围里，跳起来躲不掉。 / 1.12: 50 blocks up and down (2.5 × 20) are in range, so a jump does not escape it. */
+	public static final float VERTICAL_RANGE = 50F;
+	public static final float SKULL_DAMAGE = 6F;
+
 	public SkullLandMineEntity(EntityType<? extends SkullLandMineEntity> type, Level level) {
 		super(type, level);
+		setDamage(SKULL_DAMAGE);
+	}
+
+	/**
+	 * 1.12 {@code EntitySkullLandmine}：范围里的玩家受 6 点间接魔法伤害（没打过盖亚守护者III的 × 0.7），得到失明 25 tick、缓慢 IV 50 tick 和牛奶解不掉的凋零 II 150 tick。
+	 * 1.12 {@code EntitySkullLandmine}: the players in range take 6 indirect magic damage (× 0.7 for one who has not beaten Guardian of Gaia III), and get Blindness for 25 ticks, Slowness IV for 50 ticks and Wither II for 150 ticks, which milk cannot remove.
+	 */
+	@Override
+	public void explode() {
+		explodeParticle();
+		if (!level().isClientSide()) {
+			level().playSound(null, getX(), getY(), getZ(), vazkii.botania.common.handler.BotaniaSounds.GAIA_TRAP, net.minecraft.sounds.SoundSource.NEUTRAL, 0.3F, 1F);
+			for (Player player : getVictimPlayers()) {
+				if (player.isSpectator() || player.isCreative()) {
+					continue;
+				}
+				float factor = io.github.lounode.extrabotany.common.entity.gaia.GaiaIII.noviceFactor(player);
+				player.hurt(damageSources().indirectMagic(this, getOwner()), getDamage() * factor);
+				player.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.BLINDNESS, 25, 0));
+				player.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.MOVEMENT_SLOWDOWN, 50, 3));
+				var wither = new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.WITHER, 150, 1);
+				wither.getCures().clear();
+				player.addEffect(wither);
+			}
+			discard();
+		}
 	}
 
 	@Override
@@ -44,7 +74,7 @@ public abstract class SkullLandMineEntity extends MagicLandMineEntity {
 
 	@Override
 	public List<? extends LivingEntity> getVictims(Class<? extends LivingEntity> entityClass) {
-		return level().getEntitiesOfClass(entityClass, new AABB(getX(), getY(), getZ(), getX(), getY(), getZ()).inflate(LANDMINE_WIDTH / 2));
+		return level().getEntitiesOfClass(entityClass, new AABB(getX(), getY(), getZ(), getX(), getY(), getZ()).inflate(LANDMINE_WIDTH / 2, VERTICAL_RANGE, LANDMINE_WIDTH / 2));
 	}
 
 	public ResourceLocation getTexture() {
@@ -102,7 +132,8 @@ public abstract class SkullLandMineEntity extends MagicLandMineEntity {
 						if (player instanceof ServerPlayer serverPlayer) {
 							PlayerHelper.grantCriterion(serverPlayer, prefix("main/" + LibAdvancementNames.LANDMINE_ACTIVE), "code_triggered");
 						}
-						io.github.lounode.extrabotany.common.handler.DamageHandler.INSTANCE.dealTrueDamage(getOwner(), player, player.getMaxHealth() * 0.30F + 8F);
+						io.github.lounode.extrabotany.common.handler.DamageHandler.INSTANCE.dealTrueDamage(getOwner(), player,
+								(player.getMaxHealth() * 0.30F + 8F) * io.github.lounode.extrabotany.common.entity.gaia.GaiaIII.noviceFactor(player));
 					}
 				}
 				return;

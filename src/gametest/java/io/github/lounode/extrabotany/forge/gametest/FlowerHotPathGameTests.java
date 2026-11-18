@@ -194,6 +194,8 @@ public final class FlowerHotPathGameTests {
         private Entity rejected;
         private boolean throwOnLookup;
         private CountingEdelweiss(BlockPos pos) { super(pos, ExtrabotanyFlowerBlocks.edelweiss.defaultBlockState()); }
+        // These tests check the recipe lookup, not the binding rule of 1.16 (see E1ParityGameTests).
+        @Override public boolean isValidBinding() { return true; }
         @Override public int getManaFromEntity(Entity entity) {
             if (throwOnLookup) { throw new LookupFailure(); }
             calls.merge(entity, 1, Integer::sum);

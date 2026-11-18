@@ -99,15 +99,13 @@ public final class P2EquipmentSafetyGameTests {
 		};
 		NeoForge.EVENT_BUS.addListener(EventPriority.HIGHEST, listener);
 		try {
-			Arrow arrow = EntityType.ARROW.create(helper.getLevel());
-			arrow.setOwner(attacker);
-			arrow.setPos(attacker.getEyePosition());
-			defender.hurt(defender.damageSources().arrow(arrow, attacker), 8F);
+			// 1.12 把伤害还给直接攻击者，所以这里用近战。 / 1.12 returns the damage to the direct attacker, so this uses a melee hit.
+			defender.hurt(attacker.damageSources().playerAttack(attacker), 8F);
 			helper.assertTrue(entries.get() == 2, "Expected initial hit and one reflection, got " + entries.get());
-			helper.assertTrue(defender.getHealth() == defender.getMaxHealth(), "Initial arrow must be blocked");
+			helper.assertTrue(defender.getHealth() == defender.getMaxHealth(), "Initial hit must be blocked");
 			helper.assertTrue(attacker.getHealth() == attacker.getMaxHealth(), "Second shield may block thorns, but must not reflect it again");
-			helper.assertTrue(defender.hasEffect(MobEffects.REGENERATION), "Shield must still grant regeneration");
-			helper.assertTrue(attacker.hasEffect(MobEffects.REGENERATION), "Second shield must execute its blocked-thorns handler");
+			helper.assertTrue(attacker.isOnFire(), "The first shield must ignite the attacker");
+			helper.assertFalse(defender.isOnFire(), "The second shield must not return thorns damage");
 		} finally {
 			NeoForge.EVENT_BUS.unregister(listener);
 		}

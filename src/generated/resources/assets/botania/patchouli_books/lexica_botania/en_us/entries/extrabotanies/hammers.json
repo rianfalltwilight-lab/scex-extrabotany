@@ -32,6 +32,15 @@
     },
     {
       "type": "patchouli:text",
+      "text": "extrabotany.page.ultimate_hammer0"
+    },
+    {
+      "type": "botania:runic_altar",
+      "recipe": "extrabotany:runic_altar/ultimate_hammer",
+      "text": "extrabotany.page.ultimate_hammer1"
+    },
+    {
+      "type": "patchouli:text",
       "text": "extrabotany.page.hammers6"
     },
     {

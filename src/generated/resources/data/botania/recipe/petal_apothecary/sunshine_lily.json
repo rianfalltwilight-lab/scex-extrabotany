@@ -2,7 +2,7 @@
   "type": "botania:petal_apothecary",
   "ingredients": [
     {
-      "tag": "botania:petals/yellow"
+      "tag": "botania:petals/white"
     },
     {
       "tag": "botania:petals/yellow"
@@ -11,7 +11,7 @@
       "tag": "botania:petals/yellow"
     },
     {
-      "tag": "botania:petals/orange"
+      "tag": "botania:petals/yellow"
     }
   ],
   "output": {

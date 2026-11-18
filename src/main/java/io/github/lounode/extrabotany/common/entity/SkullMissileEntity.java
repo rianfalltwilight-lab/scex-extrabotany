@@ -174,10 +174,12 @@ public class SkullMissileEntity extends ThrowableProjectile {
 		getTarget().ifPresent(target -> {
 			if (hit.getEntity() == target) {
 				//TODO ConfigAble damage
-				target.hurt(getDamageSource(), getDamage());
+				// 1.12 EntitySkullMissile：没打过盖亚守护者III的玩家伤害 × 0.7。 / 1.12 EntitySkullMissile: × 0.7 for a player who has not beaten Guardian of Gaia III.
+				float factor = target instanceof Player player ? io.github.lounode.extrabotany.common.entity.gaia.GaiaIII.noviceFactor(player) : 1F;
+				target.hurt(getDamageSource(), getDamage() * factor);
 				target.hurt(damageSources().generic(), .5F);
 				if (target instanceof LivingEntity living) {
-					io.github.lounode.extrabotany.common.handler.DamageHandler.INSTANCE.dealTrueDamage(getOwner(), living, getTrueDamage());
+					io.github.lounode.extrabotany.common.handler.DamageHandler.INSTANCE.dealTrueDamage(getOwner(), living, getTrueDamage() * factor);
 					if (isFire()) living.igniteForSeconds(5);
 					if (hasEffect()) living.addEffect(new net.minecraft.world.effect.MobEffectInstance(net.minecraft.world.effect.MobEffects.WITHER, 200, 1));
 				}

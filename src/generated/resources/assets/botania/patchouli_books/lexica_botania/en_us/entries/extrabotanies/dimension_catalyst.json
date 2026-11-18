@@ -34,7 +34,7 @@
     },
     {
       "type": "botania:mana_infusion",
-      "recipes": "extrabotany:mana_infusion/snowball_to_ender_pearl",
+      "recipes": "extrabotany:mana_infusion/diamond_to_ender_pearl",
       "text": "extrabotany.page.dimension_catalyst5"
     },
     {

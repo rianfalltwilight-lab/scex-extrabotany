@@ -103,7 +103,7 @@ public final class GaiaDisarmGameTests {
         } finally { io.github.lounode.extrabotany.forge.ForgeExtrabotanyConfig.setGuardianItemCheck(enabled); }
         helper.succeed();
     }
-    @GameTest(template = "empty", timeoutTicks = 40)
+    @GameTest(template = "empty", timeoutTicks = 40, batch = "e4_gaia_arena") // 场地建在远处，和 E4 的场地测试同一批 / The arena is far away; same batch as the arena tests of E4
     public static void summonWithForbiddenCurioAndCombatDisarm(GameTestHelper helper) {
         var level = helper.getLevel();
         // Separate arena, clear of other concurrently running test structures.
@@ -131,11 +131,21 @@ public final class GaiaDisarmGameTests {
         var difficulty = level.getDifficulty();
         try {
             level.getServer().getWorldData().setDifficulty(net.minecraft.world.Difficulty.NORMAL);
+            // 1.12 EntityGaiaIII.spawn：带着别的模组物品不能召唤。 / 1.12 EntityGaiaIII.spawn: no summon with items of other mods.
+            helper.assertFalse(GaiaIII.spawn(player, new ItemStack(io.github.lounode.extrabotany.common.item.ExtraBotanyItems.challengeTicket), level, center),
+                    "The summon must fail with forbidden items, as in 1.12");
+            player.getInventory().setItem(12, ItemStack.EMPTY);
+            player.setItemSlot(EquipmentSlot.MAINHAND, ItemStack.EMPTY);
+            handler.getStacks().setStackInSlot(0, ItemStack.EMPTY);
             helper.assertTrue(GaiaIII.spawn(player, new ItemStack(io.github.lounode.extrabotany.common.item.ExtraBotanyItems.challengeTicket), level, center),
                     "Summon failed: difficulty=" + level.getDifficulty() + " beacon=" + level.getBlockEntity(center)
                             + " otherGaia=" + arena.countGaiaAround(level, io.github.lounode.extrabotany.common.entity.gaia.Gaia.class)
                             + " botaniaGaia=" + arena.countGaiaAround(level, vazkii.botania.common.entity.GaiaGuardianEntity.class));
         } finally { level.getServer().getWorldData().setDifficulty(difficulty); }
+        // 开战后再拿起禁止的物品，战斗中的缴械要把它们拿走。 / Forbidden items picked up after the start must be taken by the combat disarm.
+        player.getInventory().setItem(12, original.copy());
+        player.setItemSlot(EquipmentSlot.MAINHAND, original.copy());
+        handler.getStacks().setStackInSlot(0, original.copy());
         var gaia = level.getEntitiesOfClass(GaiaIII.class, arena.getArenaBB()).getFirst();
         gaia.getBrain().setMemory(net.minecraft.world.entity.ai.memory.MemoryModuleType.NEAREST_PLAYERS, java.util.List.of(player));
         new Disarm().step(level, gaia);

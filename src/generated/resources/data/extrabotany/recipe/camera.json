@@ -3,13 +3,13 @@
   "category": "equipment",
   "key": {
     "B": {
-      "tag": "extrabotany:shadowium_ingots"
+      "item": "botania:smokey_quartz"
     },
     "G": {
-      "item": "botania:gaia_ingot"
+      "tag": "c:ingots/terrasteel"
     },
     "S": {
-      "item": "minecraft:spyglass"
+      "item": "extrabotany:hero_medal"
     }
   },
   "pattern": [

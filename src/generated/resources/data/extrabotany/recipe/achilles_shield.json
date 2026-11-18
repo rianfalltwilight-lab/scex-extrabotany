@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "tag": "c:ingots/terrasteel"
+    },
+    "B": {
+      "item": "minecraft:shield"
+    },
+    "C": {
+      "tag": "extrabotany:orichalcos_ingots"
+    }
+  },
+  "pattern": [
+    "ACA",
+    "ABA",
+    "ABA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:achilles_shield"
+  }
+}

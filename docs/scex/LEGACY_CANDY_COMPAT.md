@@ -40,7 +40,7 @@ Java 在可维护源码中按行为契约重新实现。资源取自用户明确
 `music_disc_herrscher_of_the_void`：已全部加入本轮。两个符文在现役本来就是
 普通材料 Item，现恢复原配方（9种原料合成8件），这不是用占位类替代功能。
 唱片保留 EPIC、不可堆叠默认属性、真实 `herrscher_of_the_void` 歌曲、
-`music.herrscher` 声音、201秒/comparator1；同名 salvation.ogg 与现役逐字节一致。
+`music.herrscher` 声音、48秒/comparator1（这里原来写的 201 秒有误，见 PORT_AUDIT 数据生成表第 5 项）；同名 salvation.ogg 与现役逐字节一致。
 恢复唱片标签及 Gaia III 原20%唱片池中的两种等权条目。额外资源来源与哈希见
 `compatibility/confirmed-item-resource-provenance.json`。
 

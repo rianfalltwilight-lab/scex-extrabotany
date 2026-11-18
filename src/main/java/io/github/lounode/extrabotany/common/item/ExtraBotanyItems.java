@@ -79,10 +79,15 @@ public final class ExtraBotanyItems {
 	// These registry IDs come from old versions. They stay as they are, so that the items in old saves do not go away.
 	public static final Item binder = make(prefix("binder"), new BinderItem(unstackable()));
 	public static final Item universalPetal = make(prefix("universal_petal"), new Item(defaultBuilder()));
-	public static final Item emptyCoreOfTheVoid = make(prefix("empty_core_of_the_void"), new Item(unstackable().rarity(Rarity.EPIC)));
+	public static final Item emptyCoreOfTheVoid = make(prefix("empty_core_of_the_void"), new HiddenItem(unstackable().rarity(Rarity.EPIC)));
+	// 1.16 ModItems.MANADRINK_PROP. / 1.16 ModItems.MANADRINK_PROP.
 	public static final Item manaDrink = make(prefix("mana_drink"), new ManaDrinkItem(defaultBuilder()
-			.food(new FoodProperties.Builder().nutrition(1).saturationModifier(0.1F).alwaysEdible().build())));
-	public static final Item lensSuperconductor = make(prefix("lens_superconductor"), new LensItem(stackTo16(), new SuperconductorLens(), LensItem.PROP_POWER));
+			.food(new FoodProperties.Builder().nutrition(0).saturationModifier(0F).alwaysEdible()
+					.effect(() -> new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 1200, 0), 1.0F)
+					.effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1200, 0), 1.0F)
+					.effect(() -> new MobEffectInstance(MobEffects.JUMP, 1200, 0), 1.0F)
+					.build())));
+	public static final Item lensSuperconductor = make(prefix("lens_superconductor"), new LensItem(unstackable(), new SuperconductorLens(), LensItem.PROP_POWER));
 
 	//Mana Item
 	public static final Item zadkiel = make(prefix(LibItemNames.ZADKIEL), new ZadkielItem(unstackable()));
@@ -130,6 +135,9 @@ public final class ExtraBotanyItems {
 	public static final Item goggleStandard = make(prefix("goggle_standard"), new CosmeticBaubleItem(CosmeticBaubleItem.Variant.GOGGLE_STANDARD, unstackable()));
 	public static final Item blackGlasses = make(prefix("black_glasses"), new CosmeticBaubleItem(CosmeticBaubleItem.Variant.BLACK_GLASSES, unstackable()));
 	public static final Item thugLife = make(prefix("thug_life"), new CosmeticBaubleItem(CosmeticBaubleItem.Variant.THUG_LIFE, unstackable()));
+	// 对照原版审计 E6：1.12 ItemCosmetic 的问号和柠檬。 / Parity audit E6: the question mark and the lemon of ItemCosmetic of 1.12.
+	public static final Item question = make(prefix("question"), new CosmeticBaubleItem(CosmeticBaubleItem.Variant.QUESTION, unstackable()));
+	public static final Item lemon = make(prefix("lemon"), new CosmeticBaubleItem(CosmeticBaubleItem.Variant.LEMON, unstackable()));
 	public static final Item superCrown = make(prefix("super_crown"), new CosmeticBaubleItem(CosmeticBaubleItem.Variant.SUPER_CROWN, unstackable()));
 	public static final Item mask = make(prefix("mask"), new CosmeticBaubleItem(CosmeticBaubleItem.Variant.MASK, unstackable()));
 	public static final Item redScarf = make(prefix("red_scarf"), new CosmeticBaubleItem(CosmeticBaubleItem.Variant.RED_SCARF, unstackable()));
@@ -222,6 +230,9 @@ public final class ExtraBotanyItems {
 			new OrichalcosHammer(HammerTiers.ORICHALCOS, 5, -3.0F, unstackableCustomDamage().rarity(Rarity.EPIC).fireResistant()));
 	public static final Item rheinHammer = make(prefix(LibItemNames.RHEIN_HAMMER),
 			new RheinHammerItem(unstackableCustomDamage().rarity(Rarity.EPIC).fireResistant()));
+	// 对照原版审计 E6：1.12 ItemHammerUltimate（ItemPickaxe：攻击 1 + 3，速度 −2.8）。 / Parity audit E6: ItemHammerUltimate of 1.12 (ItemPickaxe: attack 1 + 3, speed −2.8).
+	public static final Item ultimateHammer = make(prefix("ultimate_hammer"),
+			new io.github.lounode.extrabotany.common.item.equipment.tool.hammer.UltimateHammerItem(HammerTiers.ULTIMATE, 1, -2.8F, unstackableCustomDamage().rarity(Rarity.RARE)));
 	//Shield
 	public static final Item manasteelShield = make(prefix(LibItemNames.MANASTEEL_SHIELD),
 			new ManasteelShieldItem(unstackableCustomDamage()));
@@ -273,8 +284,8 @@ public final class ExtraBotanyItems {
 
 	//Relic
 	public static final Item camera = make(prefix(LibItemNames.CAMERA), new CameraItem(unstackable().rarity(Rarity.UNCOMMON).fireResistant()));
-	public static final Item failnaught = make(prefix(LibItemNames.FAILNAUGHT), new FailnaughtItem(unstackable().rarity(Rarity.UNCOMMON).fireResistant()));
-	public static final Item excalibur = make(prefix(LibItemNames.EXCALIBUR), new ExcaliburItem(unstackable().rarity(Rarity.UNCOMMON).fireResistant()));
+	public static final Item failnaught = make(prefix(LibItemNames.FAILNAUGHT), new FailnaughtItem(relic()));
+	public static final Item excalibur = make(prefix(LibItemNames.EXCALIBUR), new ExcaliburItem(relic()));
 	//Armor
 
 	//Material
@@ -289,14 +300,35 @@ public final class ExtraBotanyItems {
 	public static final Item gaiaQuartz = make(prefix(LibItemNames.GAIA_QUARTZ), new Item(defaultBuilder()));
 	public static final Item elementiumQuartz = make(prefix(LibItemNames.ELEMENTIUM_QUARTZ), new Item(defaultBuilder()));
 
-	public static final Item lensPush = make(prefix(LibItemNames.LENS_PUSH), new LensItem(stackTo16(), new PushLens(), LensItem.PROP_INTERACTION | LensItem.PROP_TOUCH));
-	public static final Item lensSmelt = make(prefix(LibItemNames.LENS_SMELT), new LensItem(stackTo16(), new SmeltLens(), LensItem.PROP_TOUCH | LensItem.PROP_INTERACTION));
-	public static final Item lensMana = make(prefix(LibItemNames.LENS_MANA), new LensItem(stackTo16(), new ManaLens(), LensItem.PROP_TOUCH | LensItem.PROP_INTERACTION));
-	public static final Item lensPotion = make(prefix(LibItemNames.LENS_POTION), new PotionLensItem(stackTo16(), new PotionLens(), LensItem.PROP_INTERACTION));
-	public static final Item lensTrace = make(prefix(LibItemNames.LENS_TRACE), new LensItem(stackTo16(), new TraceLens(), LensItem.PROP_TOUCH | LensItem.PROP_INTERACTION));
+	// 1.16 ModItems：透镜不可堆叠，组合属性按 1.16。 / 1.16 ModItems: lenses do not stack, and the combination properties follow 1.16.
+	public static final Item lensPush = make(prefix(LibItemNames.LENS_PUSH), new LensItem(unstackable(), new PushLens(), LensItem.PROP_INTERACTION));
+	public static final Item lensSmelt = make(prefix(LibItemNames.LENS_SMELT), new LensItem(unstackable(), new SmeltLens(), LensItem.PROP_TOUCH));
+	public static final Item lensMana = make(prefix(LibItemNames.LENS_MANA), new LensItem(unstackable(), new ManaLens(), LensItem.PROP_INTERACTION));
+	public static final Item lensPotion = make(prefix(LibItemNames.LENS_POTION), new PotionLensItem(unstackable(), new PotionLens(), LensItem.PROP_INTERACTION));
+	public static final Item lensTrace = make(prefix(LibItemNames.LENS_TRACE), new LensItem(unstackable(), new TraceLens(), LensItem.PROP_CONTROL));
+	// 对照原版审计 E6：1.12 才有的内容。 / Parity audit E6: content that only 1.12 has.
+	public static final Item lensCloud = make(prefix("lens_cloud"), new PotionLensItem(unstackable(), new io.github.lounode.extrabotany.common.item.lens.CloudLens(), LensItem.PROP_INTERACTION));
+	public static final Item triBloodstone = make(prefix("tri_bloodstone"), new Item(defaultBuilder().rarity(Rarity.RARE)));
+	public static final Item miniHandbag = make(prefix("mini_handbag"), new io.github.lounode.extrabotany.common.item.handbag.MiniHandbagItem(unstackable()));
+	public static final Item manasteelFlyingBoat = make(prefix("manasteel_flying_boat"),
+			new io.github.lounode.extrabotany.common.entity.vehicle.FlyingBoatItem(io.github.lounode.extrabotany.common.entity.vehicle.FlyingBoatEntity.Kind.MANASTEEL, unstackable()));
+	public static final Item elementiumFlyingBoat = make(prefix("elementium_flying_boat"),
+			new io.github.lounode.extrabotany.common.entity.vehicle.FlyingBoatItem(io.github.lounode.extrabotany.common.entity.vehicle.FlyingBoatEntity.Kind.ELEMENTIUM, unstackable()));
+	public static final Item terrasteelFlyingBoat = make(prefix("terrasteel_flying_boat"),
+			new io.github.lounode.extrabotany.common.entity.vehicle.FlyingBoatItem(io.github.lounode.extrabotany.common.entity.vehicle.FlyingBoatEntity.Kind.TERRASTEEL, unstackable().rarity(Rarity.UNCOMMON)));
+	public static final net.minecraft.world.inventory.MenuType<io.github.lounode.extrabotany.common.item.handbag.MiniHandbagMenu> MINI_HANDBAG_MENU =
+			net.neoforged.neoforge.common.extensions.IMenuTypeExtension.create(io.github.lounode.extrabotany.common.item.handbag.MiniHandbagMenu::fromNetwork);
 	public static final Item dasRheingold = make(prefix(LibItemNames.DAS_RHEINGOLD), new DasRheingoldItem(defaultBuilder()));
 	public static final Item gildedPotato = make(prefix(LibItemNames.GILDED_POTATO), new GildedPotatoItem(defaultBuilder()));
-	public static final Item gildedPotatoMashed = make(prefix(LibItemNames.GILDED_POTATO_MASHED), new Item(defaultBuilder()));
+	// Source: ExtraMeteorP 1.16 ModItems.GILDEDMASHEDPOTATO_PROP (1.12 had the same effects with 4 food).
+	public static final Item gildedPotatoMashed = make(prefix(LibItemNames.GILDED_POTATO_MASHED), new Item(defaultBuilder()
+			.food(new FoodProperties.Builder().nutrition(5).saturationModifier(0.2F).alwaysEdible()
+					.effect(() -> new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 600, 3), 1.0F)
+					.effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 600, 3), 1.0F)
+					.effect(() -> new MobEffectInstance(MobEffects.ABSORPTION, 600, 1), 1.0F)
+					.build()
+			)
+	));
 	public static final Item friedChicken = make(prefix(LibItemNames.FRIED_CHICKEN), new Item(defaultBuilder()
 			.food(new FoodProperties.Builder()
 					.nutrition(8)
@@ -307,23 +339,24 @@ public final class ExtraBotanyItems {
 	));
 	public static final Item heroMedal = make(prefix(LibItemNames.HERO_MEDAL), new Item(defaultBuilder().rarity(Rarity.UNCOMMON)));//OT
 	public static final Item challengeTicket = make(prefix(LibItemNames.CHALLENGE_TICKET), new ChallangeTicketItem(defaultBuilder()));
+	// 1.16 ModItems.NIGHTMAREFUEL_PROP 和 SPIRITFUEL_PROP。1.16 不是熔炉燃料。 / 1.16 ModItems.NIGHTMAREFUEL_PROP and SPIRITFUEL_PROP. In 1.16 they are not furnace fuels.
 	public static final Item nightmareFuel = make(prefix(LibItemNames.NIGHTMARE_FUEL), new NightmareFuelItem(defaultBuilder()
-			.food(new FoodProperties.Builder().nutrition(0).saturationModifier(0.3F).alwaysEdible()
-					.effect(() -> new MobEffectInstance(MobEffects.HARM, 1, 1), 1.0F)
-					.effect(() -> new MobEffectInstance(MobEffects.BLINDNESS, 500, 1), 1.0F)
-					.effect(() -> new MobEffectInstance(MobEffects.WEAKNESS, 500, 1), 1.0F)
-					.effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 500, 1), 1.0F)
-					.effect(() -> new MobEffectInstance(MobEffects.UNLUCK, 500, 1), 1.0F)
+			.food(new FoodProperties.Builder().nutrition(4).saturationModifier(0.3F).alwaysEdible()
+					.effect(() -> new MobEffectInstance(MobEffects.HARM, 1, 2), 1.0F)
+					.effect(() -> new MobEffectInstance(MobEffects.BLINDNESS, 500), 1.0F)
+					.effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 500), 1.0F)
+					.effect(() -> new MobEffectInstance(MobEffects.UNLUCK, 500), 1.0F)
+					.effect(() -> new MobEffectInstance(MobEffects.WEAKNESS, 500), 1.0F)
 					.build()
 			)
 	));
 	public static final Item spiritFuel = make(prefix(LibItemNames.SPIRIT_FUEL), new SpiritFuelItem(defaultBuilder()
 			.food(new FoodProperties.Builder().nutrition(4).saturationModifier(0.3F).alwaysEdible()
-					.effect(() -> new MobEffectInstance(MobEffects.HEAL, 1, 1), 1.0F)
-					.effect(() -> new MobEffectInstance(MobEffects.NIGHT_VISION, 500, 1), 1.0F)
-					.effect(() -> new MobEffectInstance(MobEffects.DAMAGE_BOOST, 500, 1), 1.0F)
-					.effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 500, 1), 1.0F)
-					.effect(() -> new MobEffectInstance(MobEffects.LUCK, 500, 1), 1.0F)
+					.effect(() -> new MobEffectInstance(MobEffects.HEAL, 1, 2), 1.0F)
+					.effect(() -> new MobEffectInstance(MobEffects.NIGHT_VISION, 500), 1.0F)
+					.effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 500), 1.0F)
+					.effect(() -> new MobEffectInstance(MobEffects.LUCK, 500), 1.0F)
+					.effect(() -> new MobEffectInstance(MobEffects.DAMAGE_BOOST, 500), 1.0F)
 					.build()
 			)
 	));
@@ -361,9 +394,9 @@ public final class ExtraBotanyItems {
 			new Item(unstackable().rarity(Rarity.EPIC).jukeboxPlayable(ExtraBotanyJukeboxSongs.EGO)));
 
 	//Brews
-	public static final Item manaCocktail = make(prefix(LibItemNames.MANA_COCKTAIL), new ManaCocktailItem(unstackable().craftRemainder(manaGlassBottle), 8, 32, () -> manaGlassBottle));
+	public static final Item manaCocktail = make(prefix(LibItemNames.MANA_COCKTAIL), new ManaCocktailItem(unstackable().craftRemainder(manaGlassBottle), 8, 20, () -> manaGlassBottle));
 	public static final Item infiniteWine = make(prefix(LibItemNames.INFINITE_WINE), new InfiniteWineItem(unstackable().rarity(Rarity.RARE).craftRemainder(manaGlassBottle), 12, 18, () -> manaGlassBottle));
-	public static final Item holyWaterGrenade = make(prefix(LibItemNames.HOLY_WATER_GRENADE), new HolyWaterGrenadeItem(stackTo4()));
+	public static final Item holyWaterGrenade = make(prefix(LibItemNames.HOLY_WATER_GRENADE), new HolyWaterGrenadeItem(defaultBuilder().stacksTo(32)));
 	public static final Item voidCaller = make(prefix("voidcaller"), new VoidCallerItem(defaultBuilder().rarity(Rarity.EPIC)));
 
 	// 下面的分组只给标签生成器使用。加新物品时，把它放进对应的分组，然后重新运行 runData。
@@ -375,7 +408,7 @@ public final class ExtraBotanyItems {
 	public static final Item[] HAMMERS = {
 			manasteelHammer, elementiumHammer, terrasteelHammer, gaiaHammer,
 			photoniumHammer, shadowiumHammer, aerialiteHammer, orichalcosHammer,
-			rheinHammer
+			rheinHammer, ultimateHammer
 	};
 
 	public static final Item[] SWORDS = {
@@ -451,24 +484,20 @@ public final class ExtraBotanyItems {
 		return XplatAbstractions.instance().defaultItemBuilder();
 	}
 
-	private static Item.Properties stackTo16() {
-		return defaultBuilder().stacksTo(16);
-	}
-
-	private static Item.Properties stackTo4() {
-		return defaultBuilder().stacksTo(4);
-	}
-
 	private static Item.Properties unstackable() {
 		return defaultBuilder().stacksTo(1);
 	}
 
 	/**
-	 * 遗物的物品属性：不可堆叠、史诗稀有度、防火。
-	 * The item properties of a relic: not stackable, epic rarity, fire resistant.
+	 * 遗物的物品属性：不可堆叠、史诗稀有度、防火、不能在铁砧或工作台修理（1.16 {@code ModItems.relic()} 的 {@code setNoRepair}）。
+	 * The item properties of a relic: not stackable, epic rarity, fire resistant, and no repair in an anvil or a crafting grid ({@code setNoRepair} of 1.16 {@code ModItems.relic()}).
 	 */
 	private static Item.Properties relic() {
-		return unstackable().rarity(Rarity.EPIC).fireResistant();
+		return unstackable().rarity(Rarity.EPIC).fireResistant().setNoRepair();
+	}
+
+	public static void registerMenuTypes(BiConsumer<net.minecraft.world.inventory.MenuType<?>, ResourceLocation> r) {
+		r.accept(MINI_HANDBAG_MENU, prefix("mini_handbag"));
 	}
 
 	public static void registerRecipeSerializers(BiConsumer<RecipeSerializer<?>, ResourceLocation> r) {

@@ -8,8 +8,8 @@
       "text": "extrabotany.page.jackie_chan_ring0"
     },
     {
-      "type": "patchouli:crafting",
-      "recipe": "extrabotany:jackie_chan_ring",
+      "type": "botania:runic_altar",
+      "recipe": "extrabotany:runic_altar/jackie_chan_ring",
       "text": "extrabotany.page.jackie_chan_ring1"
     }
   ]

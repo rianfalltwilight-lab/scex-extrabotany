@@ -89,13 +89,17 @@ public class KingGardenItem extends Item {
 	/**
 	 * 返回这朵花对应的武器种类编号。它不是王之花园接受的花时返回 -1。
 	 * Returns the weapon type number of this flower. The value is -1 when the garden does not accept it.
+	 *
+	 * <p>1.12 按特殊花的种类判断，所以漂浮的花也算；这里把 {@code floating_} 前缀去掉再找。
+	 * <p>1.12 judged by the kind of the special flower, so a floating flower also counts; here the {@code floating_} prefix is removed before the search.
 	 */
 	public static int getFlowerType(ItemStack flower) {
 		if (flower.isEmpty()) {
 			return -1;
 		}
-		String id = BuiltInRegistries.ITEM.getKey(flower.getItem()).toString();
-		return Arrays.asList(FLOWERS).indexOf(id);
+		ResourceLocation key = BuiltInRegistries.ITEM.getKey(flower.getItem());
+		String path = key.getPath().startsWith("floating_") ? key.getPath().substring("floating_".length()) : key.getPath();
+		return Arrays.asList(FLOWERS).indexOf(key.getNamespace() + ":" + path);
 	}
 
 	/**
@@ -148,6 +152,11 @@ public class KingGardenItem extends Item {
 		level.addFreshEntity(weapon);
 		level.playSound(null, weapon.getX(), weapon.getY(), weapon.getZ(), BotaniaSounds.TREASURE_WEAPON_SPAWN, SoundSource.PLAYERS,
 				1F, 1F + level.getRandom().nextFloat() * 3F);
+		// 1.12 ItemKingGarden：烦人花（第 12 种）出现时另外播放它的声音。 / ItemKingGarden of 1.12: the annoying flower (type 12) also plays its sound.
+		if (types[spawned] == 12) {
+			level.playSound(null, weapon.getX(), weapon.getY(), weapon.getZ(), io.github.lounode.extrabotany.common.sounds.ExtraBotanySounds.FLOWER_WEAPON_ANNOYING,
+					SoundSource.PLAYERS, 1F, 1F);
+		}
 		CustomData.update(DataComponents.CUSTOM_DATA, stack, tag -> tag.putInt(TAG_SPAWNED, spawned + 1));
 	}
 

@@ -2,19 +2,22 @@
   "type": "botania:petal_apothecary",
   "ingredients": [
     {
-      "tag": "botania:petals/yellow"
-    },
-    {
-      "tag": "botania:petals/yellow"
-    },
-    {
       "tag": "botania:petals/lime"
     },
     {
       "tag": "botania:petals/lime"
     },
     {
-      "item": "extrabotany:spirit_fragment"
+      "tag": "botania:petals/yellow"
+    },
+    {
+      "tag": "botania:petals/yellow"
+    },
+    {
+      "tag": "botania:petals/yellow"
+    },
+    {
+      "tag": "botania:petals/yellow"
     }
   ],
   "output": {

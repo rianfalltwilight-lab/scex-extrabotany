@@ -1,0 +1,24 @@
+{
+  "category": "botania:extrabotanies",
+  "icon": "extrabotany:manasteel_flying_boat",
+  "name": "extrabotany.entry.flying_boat",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.flying_boat0"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:manasteel_flying_boat"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "extrabotany.page.flying_boat1"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:elementium_flying_boat",
+      "recipe2": "extrabotany:terrasteel_flying_boat"
+    }
+  ]
+}

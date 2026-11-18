@@ -2,23 +2,23 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "C": {
-      "item": "minecraft:chest"
+    "X": {
+      "item": "extrabotany:spirit_fragment"
     },
-    "M": {
-      "item": "extrabotany:the_origin"
-    },
-    "T": {
+    "Y": {
       "tag": "c:ingots/terrasteel"
     },
-    "W": {
+    "Z": {
+      "item": "minecraft:chest"
+    },
+    "A": {
       "tag": "minecraft:wool"
     }
   },
   "pattern": [
-    "MTM",
-    "MCM",
-    "MWM"
+    "XYX",
+    "XZX",
+    "XAX"
   ],
   "result": {
     "count": 1,

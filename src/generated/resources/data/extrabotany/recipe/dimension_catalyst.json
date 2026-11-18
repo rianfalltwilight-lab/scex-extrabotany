@@ -5,23 +5,20 @@
     "C": {
       "item": "botania:alchemy_catalyst"
     },
+    "N": {
+      "item": "extrabotany:nightmare_fuel"
+    },
     "P": {
       "item": "minecraft:ender_pearl"
     },
-    "Q": {
-      "item": "extrabotany:elementium_quartz"
-    },
     "R": {
       "item": "botania:livingrock"
-    },
-    "S": {
-      "item": "extrabotany:the_chaos"
     }
   },
   "pattern": [
     "RPR",
-    "QCQ",
-    "RSR"
+    "NCN",
+    "RNR"
   ],
   "result": {
     "count": 1,

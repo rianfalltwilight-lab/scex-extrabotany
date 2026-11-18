@@ -5,8 +5,12 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
@@ -15,15 +19,17 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
-import org.jetbrains.annotations.Nullable;
-
+import vazkii.botania.api.mana.ManaItemHandler;
 import vazkii.botania.client.gui.TooltipHandler;
 
 import io.github.lounode.extrabotany.api.ExtraBotanyAPI;
-import io.github.lounode.extrabotany.common.lib.ResourcesLib;
 import io.github.lounode.extrabotany.common.item.ExtraBotanyItems;
-import io.github.lounode.extrabotany.common.item.equipment.armor.starry_idol.StarryIdolArmorItem;
+import io.github.lounode.extrabotany.common.item.equipment.armor.miku.MikuArmorItem;
+import io.github.lounode.extrabotany.common.item.equipment.bauble.NatureOrbItem;
+import io.github.lounode.extrabotany.common.lib.ExtraBotanyTags;
+import io.github.lounode.extrabotany.common.lib.ResourcesLib;
 import io.github.lounode.extrabotany.xplat.ExtraBotanyConfig;
 
 import java.util.List;
@@ -32,10 +38,19 @@ import java.util.function.Supplier;
 import static io.github.lounode.extrabotany.common.lib.ResourceLocationHelper.prefix;
 
 /**
- * 昴宿星团战斗女仆套装的盔甲。每一件增加击退抗性和 5 点最大生命值。
- * The armor of the Pleiades Combat Maid set. Each piece adds knockback resistance and 5 maximum health.
+ * 昴宿星团战斗女仆套装的盔甲。每一件增加 5 点最大生命值。穿着整套时：魔力消耗减少（每件 15%）；每 tick 给物品栏送 1 点魔力；每 2 秒用 20 魔力回 1 点生命，并用每个 100 魔力清除能被牛奶清除的负面效果；空手攻击用 200 魔力多造成 8 点伤害；攻击时用 80 魔力恢复伤害的十分之一；不受 {@code maid_protection} 标签的环境伤害。
+ * The armor of the Pleiades Combat Maid set. Each piece adds 5 maximum health. With the full set: mana costs are lower (15% for each piece); it sends 1 mana to the inventory on each tick; each 2 seconds it heals 1 for 20 mana and removes the harmful effects that milk can remove for 100 mana each; an attack with empty hands does 8 more damage for 200 mana; an attack heals a tenth of the damage for 80 mana; the environmental damage of the tag {@code maid_protection} has no effect.
+ *
+ * <p>来源：ExtraMeteorP 1.16 的 {@code ItemMaidArmor} 和 {@code ItemMaidHelm}（继承 {@code ItemMikuArmor}）。重燃的 30% 折扣、空手 +10、每 80 tick 75 魔力回血和更宽的免疫列表已经去掉。
+ * <p>Source: {@code ItemMaidArmor} and {@code ItemMaidHelm} of ExtraMeteorP 1.16 (they extend {@code ItemMikuArmor}). The 30% discount, the +10 with empty hands, the healing of 75 mana each 80 ticks and the wider immunity list of Reburn are removed.
  */
-public class PleiadesCombatMaidArmorItem extends StarryIdolArmorItem {
+public class PleiadesCombatMaidArmorItem extends MikuArmorItem {
+	public static final float HEALTH_PER_PIECE = 5;
+	public static final int HEAL_COST = 20;
+	public static final int CLEAR_COST = 100;
+	public static final int EMPTY_HAND_COST = 200;
+	public static final float EMPTY_HAND_BONUS = 8F;
+	public static final int LIFE_STEAL_COST = 80;
 
 	public static final Supplier<ItemStack[]> ARMOR_SET = Suppliers.memoize(() -> new ItemStack[] {
 			new ItemStack(ExtraBotanyItems.pleiadesCombatMaidHeadgear),
@@ -56,13 +71,48 @@ public class PleiadesCombatMaidArmorItem extends StarryIdolArmorItem {
 	public ItemAttributeModifiers getDefaultAttributeModifiers() {
 		var modifierId = prefix("pleiades_combat_maid_" + getType().getName());
 		var slot = EquipmentSlotGroup.bySlot(getType().getSlot());
-		int reduction = getMaterial().value().getDefense(getType());
 		return super.getDefaultAttributeModifiers()
-				.withModifierAdded(Attributes.KNOCKBACK_RESISTANCE,
-						new AttributeModifier(modifierId, (double) reduction / 20,
-								AttributeModifier.Operation.ADD_VALUE), slot)
 				.withModifierAdded(Attributes.MAX_HEALTH,
-						new AttributeModifier(modifierId, 5, AttributeModifier.Operation.ADD_VALUE), slot);
+						new AttributeModifier(modifierId, HEALTH_PER_PIECE, AttributeModifier.Operation.ADD_VALUE), slot);
+	}
+
+	@Override
+	public void inventoryTick(ItemStack stack, Level level, Entity entity, int slot, boolean selected) {
+		super.inventoryTick(stack, level, entity, slot, selected);
+		// 1.16 的套装效果写在头盔里。 / In 1.16 the set effects are in the helmet.
+		if (level.isClientSide() || getType() != Type.HELMET || !(entity instanceof Player player)
+				|| !isWorn(player, stack) || !hasArmorSet(player)) {
+			return;
+		}
+		ManaItemHandler.instance().dispatchManaExact(stack, player, 1, true);
+		if (player.tickCount % 40 == 0) {
+			if (player.isHurt() && ManaItemHandler.instance().requestManaExactForTool(stack, player, HEAL_COST, true)) {
+				player.heal(1F);
+			}
+			clearPotions(stack, player);
+		}
+	}
+
+	private static void clearPotions(ItemStack stack, Player player) {
+		List<net.minecraft.core.Holder<MobEffect>> effects = player.getActiveEffects().stream()
+				.filter(NatureOrbItem::isMilkCurableHarmful)
+				.map(MobEffectInstance::getEffect)
+				.distinct()
+				.toList();
+		for (var effect : effects) {
+			if (ManaItemHandler.instance().requestManaExactForTool(stack, player, CLEAR_COST, true)) {
+				player.removeEffect(effect);
+			}
+		}
+	}
+
+	/** 穿着整套时返回头盔，否则返回空。 / Returns the helmet with the full set, otherwise empty. */
+	public static ItemStack getFullSetHelmet(Player player) {
+		ItemStack helmet = player.getItemBySlot(EquipmentSlot.HEAD);
+		if (helmet.getItem() instanceof PleiadesCombatMaidArmorItem maid && maid.hasArmorSet(player)) {
+			return helmet;
+		}
+		return ItemStack.EMPTY;
 	}
 
 	@Override
@@ -101,15 +151,10 @@ public class PleiadesCombatMaidArmorItem extends StarryIdolArmorItem {
 
 	@Override
 	public boolean hasArmorSetItem(Player player, EquipmentSlot slot) {
-		if (player == null || player.getInventory() == null || player.getInventory().armor == null) {
+		if (player == null) {
 			return false;
 		}
-
 		ItemStack stack = player.getItemBySlot(slot);
-		if (stack.isEmpty()) {
-			return false;
-		}
-
 		return switch (slot) {
 			case HEAD -> stack.is(ExtraBotanyItems.pleiadesCombatMaidHeadgear);
 			case CHEST -> stack.is(ExtraBotanyItems.pleiadesCombatMaidSuit) || stack.is(ExtraBotanyItems.sanguinePleiadesCombatMaidSuit);
@@ -122,5 +167,34 @@ public class PleiadesCombatMaidArmorItem extends StarryIdolArmorItem {
 	@Override
 	public ItemStack[] getArmorSetStacks() {
 		return ARMOR_SET.get();
+	}
+
+	public static class EventHandler {
+		/** 穿着整套的玩家打别的生物。 / A player with the full set hits another creature. */
+		public static void onEntityAttacked(LivingIncomingDamageEvent event) {
+			if (!(event.getSource().getDirectEntity() instanceof Player player) || event.getEntity() == player) {
+				return;
+			}
+			ItemStack helmet = getFullSetHelmet(player);
+			if (helmet.isEmpty()) {
+				return;
+			}
+			if (player.getMainHandItem().isEmpty() && player.getOffhandItem().isEmpty()
+					&& ManaItemHandler.instance().requestManaExactForTool(helmet, player, EMPTY_HAND_COST, true)) {
+				event.setAmount(event.getAmount() + EMPTY_HAND_BONUS);
+			}
+			if (player.isHurt() && ManaItemHandler.instance().requestManaExactForTool(helmet, player, LIFE_STEAL_COST, true)) {
+				player.heal(event.getAmount() / 10F);
+			}
+		}
+
+		/** 穿着整套的玩家受到环境伤害。 / A player with the full set takes environmental damage. */
+		public static void onPlayerAttacked(LivingIncomingDamageEvent event) {
+			LivingEntity target = event.getEntity();
+			if (target instanceof Player player && !getFullSetHelmet(player).isEmpty()
+					&& event.getSource().is(ExtraBotanyTags.DamageTypes.MAID_PROTECTION)) {
+				event.setCanceled(true);
+			}
+		}
 	}
 }

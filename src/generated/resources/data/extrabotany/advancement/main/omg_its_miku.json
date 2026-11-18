@@ -5,16 +5,16 @@
       "conditions": {
         "armor": {
           "chest": {
-            "items": "extrabotany:starry_idol_suit"
+            "items": "extrabotany:miku_chest"
           },
           "feet": {
-            "items": "extrabotany:starry_idol_boots"
+            "items": "extrabotany:miku_boots"
           },
           "head": {
-            "items": "extrabotany:starry_idol_headgear"
+            "items": "extrabotany:miku_helm"
           },
           "legs": {
-            "items": "extrabotany:starry_idol_skirt"
+            "items": "extrabotany:miku_legs"
           }
         }
       },
@@ -27,7 +27,7 @@
     },
     "icon": {
       "count": 1,
-      "id": "extrabotany:starry_idol_headgear"
+      "id": "extrabotany:miku_helm"
     },
     "title": {
       "translate": "advancement.extrabotany:omg_its_miku"

@@ -15,6 +15,11 @@
       "type": "patchouli:crafting",
       "recipe": "extrabotany:judah_oath_kira",
       "recipe2": "extrabotany:judah_oath_sakura"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "extrabotany:tri_bloodstone",
+      "text": "extrabotany.page.tri_bloodstone0"
     }
   ]
 }

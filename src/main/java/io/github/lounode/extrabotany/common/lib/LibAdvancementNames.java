@@ -2,11 +2,18 @@ package io.github.lounode.extrabotany.common.lib;
 
 public class LibAdvancementNames {
 	public static final String ROOT = "root";
+	// 对照原版审计 E5：1.12 StatHandler 的三个计数奖励进度。 / Parity audit E5: the three counting reward advancements of StatHandler of 1.12.
+	public static final String MANA_DRIVER_GET = "mana_driver_get";
+	public static final String MAGIC_FINGER_GET = "magic_finger_get";
+	public static final String JINGWEI_FEATHER_GET = "jingwei_feather_get";
+	public static final String ENDGAME_GOAL = "endgame_goal";
+	// 对照原版审计 E6：1.12 的 ultimatehammerCraft、ultimatehammerUpgrade。 / Parity audit E6: ultimatehammerCraft and ultimatehammerUpgrade of 1.12.
+	public static final String ULTIMATE_HAMMER_CRAFT = "ultimate_hammer_craft";
+	public static final String ULTIMATE_HAMMER_UPGRADE = "ultimate_hammer_upgrade";
 	public static final String SENBON_ZAKURA = "senbon_zakura";
 	public static final String PANDA_DO_NOT_WEAR_RINGS = "panda_do_not_wear_rings";
 	public static final String OVERLOAD = "overload";
 	public static final String LOAD_OF_RING = "load_of_ring";
-	public static final String KURUKURU = "kurukuru";
 	public static final String GOODTEK = "goodtek";
 	public static final String CRAFT_PEDESTAL = "craft_pedestal";
 	public static final String DEEP_DARK_FANTASY = "deep_dark_fantasy";
@@ -31,7 +38,6 @@ public class LibAdvancementNames {
 	public static final String GOBLIN_KILLER = "goblin_killer";
 	public static final String CUTE_DRESS = "cute_dress";
 	public static final String CORRUPTION = "corruption";
-	public static final String A_BALDRUPT = "a_baldrupt";
 	public static final String MUROMI_SAN = "muromi_san";
 	public static final String ITS_ONLY_THE_FAIRY_TALE = "its_only_the_fairy_tale";
 	public static final String PROJECT_DIVA_DESU = "project_diva_desu";

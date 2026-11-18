@@ -1,0 +1,33 @@
+{
+  "parent": "extrabotany:main/goodtek",
+  "criteria": {
+    "has_item": {
+      "conditions": {
+        "items": [
+          {
+            "items": "extrabotany:ultimate_hammer"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.extrabotany:ultimate_hammer_craft.desc"
+    },
+    "icon": {
+      "count": 1,
+      "id": "extrabotany:ultimate_hammer"
+    },
+    "title": {
+      "translate": "advancement.extrabotany:ultimate_hammer_craft"
+    }
+  },
+  "requirements": [
+    [
+      "has_item"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

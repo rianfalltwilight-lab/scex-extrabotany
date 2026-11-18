@@ -8,8 +8,8 @@
       "text": "extrabotany.page.spider_ring0"
     },
     {
-      "type": "patchouli:crafting",
-      "recipe": "extrabotany:spider_ring",
+      "type": "botania:runic_altar",
+      "recipe": "extrabotany:runic_altar/spider_ring",
       "text": "extrabotany.page.spider_ring1"
     }
   ]

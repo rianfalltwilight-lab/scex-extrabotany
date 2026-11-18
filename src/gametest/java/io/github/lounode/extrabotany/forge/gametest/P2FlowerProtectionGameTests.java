@@ -62,13 +62,13 @@ public final class P2FlowerProtectionGameTests {
 			NeoForge.EVENT_BUS.addListener(listener);
 			try {
 				flower.tickFlower();
-				h.assertTrue(events.get() == 1 && countStone(h, pos) == 17 && flower.getMana() == 0 && flower.getCooldown() == 0,
+				h.assertTrue(events.get() == 1 && countStone(h, pos) == 17 && flower.getMana() == 0 && flower.getBurnMana() == 0 && flower.getCooldown() == 0,
 						"Cancelled stone break changed blocks, generated mana, or started a cooldown");
 				h.assertTrue(level.getEntitiesOfClass(ItemEntity.class, new AABB(pos).inflate(3)).isEmpty(), "Cancelled stone break dropped items");
 				cancel.set(false);
 				flower.tickFlower();
 				h.assertTrue(events.get() == 2 && countStone(h, pos) == 16
-						&& flower.getMana() == flower.getManaFormBlock(Blocks.STONE.defaultBlockState())
+						&& flower.getBurnMana() == flower.getManaFormBlock(Blocks.STONE.defaultBlockState())
 						&& flower.getCooldown() == flower.getAfterWorkCooldown(), "Allowed stone break did not commit exactly once");
 				h.assertTrue(level.getEntitiesOfClass(ItemEntity.class, new AABB(pos).inflate(3)).isEmpty(), "Stonesia began dropping consumed stones");
 			} finally {
@@ -120,6 +120,10 @@ public final class P2FlowerProtectionGameTests {
 				h.assertTrue(events.get() == 1 && level.getBlockState(log).is(Blocks.OAK_LOG)
 						&& flower.getMana() == mana && flower.getCooldown() == 0, "Cancelled log break spent mana or removed the log");
 				h.assertTrue(joinedDrops.isEmpty() && level.getEntitiesOfClass(ItemEntity.class, new AABB(log).inflate(2)).isEmpty(), "Cancelled log break dropped an item");
+				// A refused break waits before the next scan, the same as a range with no log (E0 of the parity audit).
+				flower.tickFlower();
+				h.assertTrue(events.get() == 1, "A refused break was tried again on the next tick");
+				clearIdleScanDelay(flower);
 				cancel.set(false);
 				flower.tickFlower();
 				h.assertTrue(events.get() == 2 && level.getBlockState(log).isAir()
@@ -147,7 +151,7 @@ public final class P2FlowerProtectionGameTests {
 		var level = h.getLevel();
 		for (boolean owned : new boolean[] {true, false}) {
 			BlockPos pos = new BlockPos((owned ? 10280 : 10290) * 16 + 8, level.getMaxBuildHeight() - 10, 10280 * 16 + 8);
-			BlockPos grass = pos.east(2);
+			BlockPos grass = pos.below().east(2);
 			Player owner = h.makeMockPlayer(GameType.SURVIVAL);
 			UUID expected = owned ? owner.getUUID() : UNOWNED;
 			level.setBlock(pos.below(), Blocks.DIRT.defaultBlockState(), 18);
@@ -156,6 +160,7 @@ public final class P2FlowerProtectionGameTests {
 			var original = (EnchanterBlockEntity) level.getBlockEntity(pos);
 			original.setPlacedBy(level, pos, original.getBlockState(), owned ? owner : null, ItemStack.EMPTY);
 			original.setConsumedMana(original.getTransformCost());
+			original.setHasLotus(true);
 			var flower = reload(h, original, EnchanterBlockEntity.class);
 			AtomicBoolean cancel = new AtomicBoolean(true);
 			AtomicInteger events = new AtomicInteger();
@@ -177,7 +182,7 @@ public final class P2FlowerProtectionGameTests {
 				cancel.set(false);
 				for (int tick = 0; tick < 20; tick++) flower.tickFlower();
 				h.assertTrue(events.get() == 2 && level.getBlockState(grass).is(ExtraBotanyBlocks.enchantedSoil)
-						&& flower.getConsumedMana() == 0, "Allowed soil conversion did not commit exactly once");
+						&& flower.getConsumedMana() == 0 && !flower.hasLotus(), "Allowed soil conversion did not commit exactly once");
 			} finally {
 				NeoForge.EVENT_BUS.unregister(listener);
 				for (var block : new BlockPos[] {pos, pos.below(), grass}) level.setBlock(block, Blocks.AIR.defaultBlockState(), 18);
@@ -199,5 +204,15 @@ public final class P2FlowerProtectionGameTests {
 		replacement.loadWithComponents(original.saveWithoutMetadata(h.getLevel().registryAccess()), h.getLevel().registryAccess());
 		h.getLevel().setBlockEntity(replacement);
 		return type.cast(replacement);
+	}
+
+	private static void clearIdleScanDelay(WoodieniaBlockEntity flower) {
+		try {
+			var field = WoodieniaBlockEntity.class.getDeclaredField("nextIdleScan");
+			field.setAccessible(true);
+			field.setLong(flower, 0L);
+		} catch (ReflectiveOperationException e) {
+			throw new IllegalStateException(e);
+		}
 	}
 }

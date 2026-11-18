@@ -91,9 +91,6 @@ public class BlockTagProvider extends IntrinsicHolderTagsProvider<Block> {
 				BotaniaBlocks.GAIA_MANA_SPREADER
 		);
 		tag(ExtraBotanyTags.Blocks.CHARGERS).add(powerFrame, manaCharger);
-		tag(ExtraBotanyTags.Blocks.BELLFLOWER_IGNORE)
-				.addTag(ExtraBotanyTags.Blocks.MANA_POOLS)
-				.addTag(ExtraBotanyTags.Blocks.MANA_SPREADERS);
 
 		tag(BotaniaTags.Blocks.MUNDANE_FLOATING_FLOWERS);
 		tag(BotaniaTags.Blocks.SMALL_MYSTICAL_FLOWERS);

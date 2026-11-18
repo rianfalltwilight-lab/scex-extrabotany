@@ -93,8 +93,8 @@ public final class ItemAuditGameTests {
 	}
 
 	/**
-	 * 泰拉钢盾牌只在真正格挡住伤害时给生命恢复。玩家举着盾牌、但是伤害没有被格挡时（例如从背后来的伤害），不触发效果。
-	 * The Terrasteel Shield only gives Regeneration when the damage is really blocked. When the player has the shield up but the damage is not blocked (for example, damage from behind), the effect does not start.
+	 * 泰拉钢盾牌只在真正格挡住伤害时点燃攻击者（1.12）。玩家举着盾牌、但是伤害没有被格挡时（例如从背后来的伤害），不触发效果。
+	 * The Terrasteel Shield only ignites the attacker when the damage is really blocked (1.12). When the player has the shield up but the damage is not blocked (for example, damage from behind), the effect does not start.
 	 */
 	@GameTest(template = "empty", timeoutTicks = 20)
 	public static void shieldEffectsNeedARealBlock(GameTestHelper helper) {
@@ -102,13 +102,15 @@ public final class ItemAuditGameTests {
 		player.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(ExtraBotanyItems.terrasteelShield));
 		player.startUsingItem(InteractionHand.OFF_HAND);
 		helper.assertTrue(player.getUseItem().is(ExtraBotanyItems.terrasteelShield), "The player does not use the shield");
-		DamageSource source = player.damageSources().generic();
+		Player attacker = player(helper);
+		DamageSource source = attacker.damageSources().playerAttack(attacker);
 
 		ManasteelShieldItem.EventHandler.onShieldBlockDamage(new LivingShieldBlockEvent(player, new DamageContainer(source, 4F), false));
-		helper.assertFalse(player.hasEffect(MobEffects.REGENERATION), "Damage that was not blocked started the shield effect");
+		helper.assertFalse(attacker.isOnFire(), "Damage that was not blocked started the shield effect");
 
 		ManasteelShieldItem.EventHandler.onShieldBlockDamage(new LivingShieldBlockEvent(player, new DamageContainer(source, 4F), true));
-		helper.assertTrue(player.hasEffect(MobEffects.REGENERATION), "A real block did not start the shield effect");
+		helper.assertTrue(attacker.isOnFire(), "A real block did not start the shield effect");
+		helper.assertFalse(player.hasEffect(MobEffects.REGENERATION), "The Regeneration of Reburn is still there");
 		helper.succeed();
 	}
 
@@ -154,15 +156,15 @@ public final class ItemAuditGameTests {
 	}
 
 	/**
-	 * 梦魇燃料和精神燃料的燃烧时间来自 NeoForge 的数据映射。
-	 * The burn times of the Nightmare Fuel and the Spirit Fuel come from the data map of NeoForge.
+	 * 梦魇燃料和精神燃料在 1.16 不是熔炉燃料（对照原版审计 E2）。
+	 * The Nightmare Fuel and the Spirit Fuel are not furnace fuels in 1.16 (parity audit E2).
 	 */
 	@GameTest(template = "empty", timeoutTicks = 20)
 	public static void fuelsComeFromTheDataMap(GameTestHelper helper) {
 		int nightmare = new ItemStack(ExtraBotanyItems.nightmareFuel).getBurnTime(RecipeType.SMELTING);
 		int spirit = new ItemStack(ExtraBotanyItems.spiritFuel).getBurnTime(RecipeType.SMELTING);
-		helper.assertTrue(nightmare == 3200, "Nightmare Fuel burn time is " + nightmare);
-		helper.assertTrue(spirit == 12800, "Spirit Fuel burn time is " + spirit);
+		helper.assertTrue(nightmare == 0, "Nightmare Fuel burn time is " + nightmare);
+		helper.assertTrue(spirit == 0, "Spirit Fuel burn time is " + spirit);
 		helper.succeed();
 	}
 

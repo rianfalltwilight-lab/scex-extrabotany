@@ -3,19 +3,19 @@
   "category": "equipment",
   "key": {
     "G": {
-      "item": "minecraft:gold_block"
+      "item": "minecraft:gold_ingot"
     },
-    "P": {
-      "item": "minecraft:prismarine_crystals"
+    "R": {
+      "item": "botania:livingrock"
     },
     "T": {
       "item": "botania:livingwood_twig"
     }
   },
   "pattern": [
-    "TGP",
-    " TG",
-    "T T"
+    " RG",
+    " TR",
+    "T  "
   ],
   "result": {
     "count": 1,

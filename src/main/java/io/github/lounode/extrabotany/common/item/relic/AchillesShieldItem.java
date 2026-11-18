@@ -33,39 +33,40 @@ import java.util.List;
 import static io.github.lounode.extrabotany.common.lib.ResourceLocationHelper.prefix;
 
 /**
- * 勇士盾。遗物。它是盾牌，也是武器。用它攻击时，每次命中给持有者 2 点伤害吸收，最多 20 点。伤害吸收达到 10 点后，潜行并使用可以"解放"：攻击伤害和移动速度大幅提高，命中时有雷霆召唤者的连锁闪电，但是伤害吸收每半秒减少 1 点，用完后解放结束。格挡成功时，消耗 500 点魔力把挡下的伤害全部反弹给攻击者。
- * Achilles Shield. A relic. It is a shield and also a weapon. Each hit with it gives the holder 2 absorption, to a maximum of 20. With 10 absorption or more, a sneak-use starts the "release": the attack damage and the movement speed increase much, and a hit has the chain lightning of the Thundercaller, but the absorption decreases by 1 for each half second, and the release ends when the absorption is used up. A successful block uses 500 mana to return all the blocked damage to the attacker.
+ * 勇士盾。遗物。它是盾牌，也是武器。用它攻击时，每次命中给持有者 2 点伤害吸收，最多 20 点。伤害吸收至少 12 点时，潜行并使用可以切换"解放"：攻击伤害从 6 变成 15，移动速度 +40%，用它攻击会召唤雷击，不能再举盾；解放时每 10 tick 消耗 1 点伤害吸收，用完自动结束。
+ * Achilles Shield. A relic. It is a shield and also a weapon. Each hit with it gives the holder 2 absorption, to a maximum of 20. With at least 12 absorption, a sneak-use switches the "release": the attack damage becomes 15 instead of 6, the movement speed +40%, its hits call lightning, and it can no longer block; while released it uses 1 absorption each 10 ticks, and the release ends when none is left.
+ *
+ * <p>举盾移动时，撞到 1 格内的生物造成 13 + 1.5 × 锋利等级的魔法伤害并击退。格挡时用 500 魔力把伤害还给直接攻击者，并把弹射物反射回去。
+ * <p>When the holder moves with the shield raised, it rams the creatures within 1 block for 13 + 1.5 × Sharpness magic damage and knocks them back. A block returns the damage to the direct attacker for 500 mana, and sends projectiles back.
+ *
+ * <p>来源：ExtraMeteorP 1.12 {@code ItemAchilleshield}（只有 1.12 有）。
+ * <p>Source: {@code ItemAchilleshield} of ExtraMeteorP 1.12 (only 1.12 has it).
  */
 public class AchillesShieldItem extends ManasteelShieldItem {
 
 	public static final String TAG_RELEASED = "released";
 
-	private static final float RELEASE_ABSORPTION_REQUIRE = 10.0F;
+	public static final float RELEASE_ABSORPTION_REQUIRE = 12.0F;
+	public static final float RAM_DAMAGE = 13.0F;
+	public static final int REFLECT_COST = 500;
 	private static final float MAX_ABSORPTION = 20.0F;
 
 	public AchillesShieldItem(Properties properties) {
-		super(properties.durability(ItemTiers.ACHILLES_SHIELD.getUses()), ItemTiers.ACHILLES_SHIELD);
+		super(properties, ItemTiers.ACHILLES_SHIELD);
 	}
 
 	@Override
 	public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
 		ItemStack stack = player.getItemInHand(hand);
-		if (!isReleased(stack)) {
-			if (hand == InteractionHand.MAIN_HAND &&
-					player.isSecondaryUseActive() &&
-					player.getAbsorptionAmount() >= RELEASE_ABSORPTION_REQUIRE) {
-				setReleased(stack, true);
-				return InteractionResultHolder.success(stack);
-			}
-			return super.use(level, player, hand);
-		} else {
-			if (hand == InteractionHand.MAIN_HAND &&
-					player.isSecondaryUseActive()) {
-				setReleased(stack, false);
-				return InteractionResultHolder.success(stack);
-			}
-			return InteractionResultHolder.pass(stack);
+		// 1.12：潜行并且伤害吸收至少 12 时切换解放；没有解放时举盾。 / 1.12: with sneak and at least 12 absorption, switch the release; when not released, raise the shield.
+		if (player.isSecondaryUseActive() && player.getAbsorptionAmount() >= RELEASE_ABSORPTION_REQUIRE) {
+			setReleased(stack, !isReleased(stack));
+			return InteractionResultHolder.success(stack);
 		}
+		if (!isReleased(stack)) {
+			return super.use(level, player, hand);
+		}
+		return InteractionResultHolder.pass(stack);
 	}
 
 	@Override
@@ -78,10 +79,11 @@ public class AchillesShieldItem extends ManasteelShieldItem {
 			}
 
 			if (isReleased(stack) && player.tickCount % 10 == 0) {
-				if (player.getAbsorptionAmount() <= 0F) {
+				if (player.getAbsorptionAmount() > 0F) {
+					player.setAbsorptionAmount(player.getAbsorptionAmount() - 1);
+				} else {
 					setReleased(stack, false);
 				}
-				player.setAbsorptionAmount(player.getAbsorptionAmount() - 1);
 			}
 		}
 	}
@@ -91,6 +93,31 @@ public class AchillesShieldItem extends ManasteelShieldItem {
 		super.onUseTick(level, entity, stack, remainingUseDuration);
 		if (isReleased(stack)) {
 			entity.stopUsingItem();
+			return;
+		}
+		if (!level.isClientSide()) {
+			ram(stack, entity);
+		}
+	}
+
+	/**
+	 * 举盾冲撞：持盾者在水平方向移动时，撞 1 格内的生物。1.12 只在 motionX 或 motionZ 为正时生效，这里改成任何水平移动。
+	 * The shield ram: while the holder moves horizontally, it hits the creatures within 1 block. 1.12 only worked when motionX or motionZ was positive; here any horizontal movement counts.
+	 */
+	public static void ram(ItemStack stack, LivingEntity user) {
+		var motion = user.getDeltaMovement();
+		if (motion.horizontalDistanceSqr() < 1.0E-6) {
+			return;
+		}
+		var dir = motion.normalize();
+		var registries = user.level().registryAccess().lookupOrThrow(net.minecraft.core.registries.Registries.ENCHANTMENT);
+		int knockback = stack.getEnchantmentLevel(registries.getOrThrow(net.minecraft.world.item.enchantment.Enchantments.KNOCKBACK));
+		int sharpness = stack.getEnchantmentLevel(registries.getOrThrow(net.minecraft.world.item.enchantment.Enchantments.SHARPNESS));
+		for (LivingEntity target : user.level().getEntitiesOfClass(LivingEntity.class, user.getBoundingBox().inflate(1), e -> e != user)) {
+			target.knockback(1.5F * (1 + knockback), -dir.x, -dir.z);
+			if (user instanceof Player) {
+				target.hurt(user.damageSources().magic(), RAM_DAMAGE + 1.5F * sharpness);
+			}
 		}
 	}
 
@@ -107,34 +134,21 @@ public class AchillesShieldItem extends ManasteelShieldItem {
 	@Override
 	public void onShieldBlock(ItemStack stack, LivingEntity blocker, DamageSource source, float damage) {
 		super.onShieldBlock(stack, blocker, source, damage);
-		Entity attacker = source.getEntity();
-		if (attacker == null) {
+		Entity direct = source.getDirectEntity();
+		if (direct == null || source.is(net.minecraft.world.damagesource.DamageTypes.THORNS)) {
 			return;
 		}
-		/* 不好调，蒜鸟
-		if (source.is(DamageTypeTags.IS_PROJECTILE) && source.getDirectEntity() instanceof Projectile projectile) {
-			Entity target = projectile.getOwner();
-			if (target != null) {
-				Vec3 vec3 = target.getDeltaMovement();
-				double d0 = target.getX() + vec3.x - blocker.getX();
-				double d1 = target.getEyeY() - (double)1.1F - blocker.getY();
-				double d2 = target.getZ() + vec3.z - blocker.getZ();
-				double d3 = Math.sqrt(d0 * d0 + d2 * d2);
-		
-				projectile.setOwner(blocker);
-				projectile.setDeltaMovement(0, 0 ,0);
-				projectile.setXRot(0);
-				projectile.setYRot(0);
-				projectile.setYRot(projectile.getXRot() - -20.0F);
-				projectile.shoot(d0, d1 + d3 * 0.2, d2, 0.75F, 8.0F);
+		// 1.12 用魔法伤害；这里用荆棘伤害，两面勇士盾不会互相无限反弹。 / 1.12 used magic damage; here thorns damage, so two Achilles Shields do not bounce it forever.
+		if (blocker instanceof Player player && ManaItemHandler.instance().requestManaExactForTool(stack, player, REFLECT_COST, true)) {
+			direct.hurt(player.damageSources().thorns(player), damage);
+		}
+		// 1.12 把挡下的弹射物算作持盾者射出的。箭由原版的盾牌弹回；其他弹射物这里掉头。
+		// 1.12 makes the blocked projectile count as shot by the holder. Arrows are bounced back by the vanilla shield; other projectiles turn around here.
+		if (direct instanceof net.minecraft.world.entity.projectile.Projectile projectile) {
+			projectile.setOwner(blocker);
+			if (!(projectile instanceof net.minecraft.world.entity.projectile.AbstractArrow)) {
+				projectile.setDeltaMovement(projectile.getDeltaMovement().scale(-1));
 			}
-		
-			return;
-		}
-		*/
-
-		if (blocker instanceof Player player && ManaItemHandler.INSTANCE.requestManaExactForTool(stack, player, 500, true)) {
-			attacker.hurt(player.damageSources().thorns(player), damage);
 		}
 	}
 
@@ -169,7 +183,7 @@ public class AchillesShieldItem extends ManasteelShieldItem {
 				new AttributeModifier(prefix("achilles_attack_damage"), isReleased(stack) ? 15 : 6,
 						AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND);
 		event.addModifier(PixieHandler.PIXIE_SPAWN_CHANCE,
-				PixieHandler.makeModifier(prefix("achilles_pixie_chance"), 0.5F),
+				PixieHandler.makeModifier(prefix("achilles_pixie_chance"), 1.0F),
 				EquipmentSlotGroup.OFFHAND);
 	}
 

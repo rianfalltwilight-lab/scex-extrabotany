@@ -1,63 +1,34 @@
 package io.github.lounode.extrabotany.common.block.flower.generating;
 
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec3;
 
 import org.jetbrains.annotations.Nullable;
 
-import io.github.lounode.extrabotany.common.block.flower.ExtraGeneratingFlowerBlockEntity;
-import vazkii.botania.api.block_entity.RadiusDescriptor;
-import vazkii.botania.common.block.BotaniaBlocks;
-import vazkii.botania.common.block.block_entity.flower.functional.DaffomillBlockEntity;
-import vazkii.botania.common.helper.PlayerHelper;
-
 import io.github.lounode.extrabotany.api.block.PassiveFlower;
-import io.github.lounode.extrabotany.api.level.Wind;
+import io.github.lounode.extrabotany.common.block.flower.ExtraGeneratingFlowerBlockEntity;
 import io.github.lounode.extrabotany.common.block.flower.ExtrabotanyFlowerBlocks;
-import io.github.lounode.extrabotany.common.lib.ExtraBotanyTags;
-import io.github.lounode.extrabotany.common.lib.LibAdvancementNames;
-import io.github.lounode.extrabotany.common.sounds.ExtraBotanySounds;
-import io.github.lounode.extrabotany.common.util.SoundEventUtil;
-import io.github.lounode.extrabotany.mixin.accessor.DaffomillBlockEntityAccessor;
 import io.github.lounode.extrabotany.xplat.ExtraBotanyConfig;
-
-import static io.github.lounode.extrabotany.common.lib.ResourceLocationHelper.prefix;
+import vazkii.botania.api.block_entity.RadiusDescriptor;
 
 /**
- * 风铃草。被动产能花。它必须能看到天空。风力越大，它产生的魔力越多。周围的方块越多，它产生的魔力越少。
- * Bellflower. A passive generating flower. It must see the sky. A higher wind level gives more mana. More blocks around the flower give less mana.
+ * 风铃草。被动产能花。它必须能看到天空，并且高于 Y = {@value #BASE_Y}。它越高，产生的魔力越多；下雨时更多。和别的被动花一样，它经过一段时间后枯萎。
+ * Bellflower. A passive generating flower. It must see the sky and be higher than Y = {@value #BASE_Y}. The higher it is, the more mana it makes; rain gives more. As the other passive flowers, it decays after some time.
  *
- * <p>正在工作的扇水仙如果对着它吹，它就会枯死。和别的被动花一样，它经过一段时间后也会枯萎。
- * <p>If an active Daffomill blows at it, it dies. As the other passive flowers, it also decays after some time.
- *
- * <p>来源：重制版（Lounode）。它对应 ExtraMeteorP 1.12 的 {@code SubTileBellFlower}。
- * <p>Source: Reburn (Lounode). It corresponds to {@code SubTileBellFlower} of ExtraMeteorP 1.12.
+ * <p>来源：ExtraMeteorP 1.16 的 {@code SubTileBellFlower}。每 {@value #INTERVAL} tick 产生 (10 + 下雨时 3) × Y / 90 魔力。重燃的风力模型、周围方块减产和扇水仙吹死都是重燃加的，已经去掉。
+ * <p>Source: {@code SubTileBellFlower} of ExtraMeteorP 1.16. Each {@value #INTERVAL} ticks it makes (10 + 3 when it rains) × Y / 90 mana. The wind model of Reburn, the loss from nearby blocks and the death by a Daffomill were Reburn additions, and they are removed.
  */
 public class BellflowerBlockEntity extends ExtraGeneratingFlowerBlockEntity implements PassiveFlower {
 
-	public static final String TAG_DYING = "dying";
-	private static final String TAG_WIND_LEVEL = "windLevel";
-
-	public static int MAX_MANA = 300;
-	public static final double GENERATE_MODIFY = 1;
-	private static final int SPACE_REQUIRE = 2;
-	private static final double WIND_LEVEL_MODIFY = 0.5D;
+	public static final int MAX_MANA = 300;
+	public static final int BASE_Y = 90;
+	public static final int BASE_GENERATE = 10;
+	public static final int RAIN_GENERATE = 3;
+	public static final int INTERVAL = 10;
+	private static final int RANGE = 2;
 
 	private int passiveDecayTicks;
-	private boolean dying;
-	private int dyingTicks;
-	/**
-	 * 服务端算出的风力。它同步到客户端，法杖界面显示它。客户端不能自己算风力，因为每一端的风是分别随机生成的。
-	 * The wind level that the server calculated. It is synchronized to the client, and the wand HUD shows it. The client cannot calculate the wind level itself, because each side makes its wind at random independently.
-	 */
-	private double windLevel;
 
 	public BellflowerBlockEntity(BlockPos pos, BlockState state) {
 		super(ExtrabotanyFlowerBlocks.BELLFLOWER, pos, state);
@@ -66,149 +37,36 @@ public class BellflowerBlockEntity extends ExtraGeneratingFlowerBlockEntity impl
 	@Override
 	public void tickFlower() {
 		super.tickFlower();
-
-		if (isDying()) {
-			if (dyingTicks == 0) {
-				// One immediate update starts the client animation; it was re-sent every tick.
-				sync();
-			}
-			dyingAnime();
-			dyingTicks++;
-			return;
-		}
-
 		if (getLevel().isClientSide()) {
 			return;
 		}
 
 		checkToDecay(this);
-
-		if (!getLevel().canSeeSky(getEffectivePos())) {
+		if (isRemoved()) {
 			return;
 		}
 
-		if (ticksExisted % 5 != 0) {
-			return;
-		}
-
-		if (ticksExisted % (20 * 5) == 0 && getLevel().getRandom().nextInt(2) == 0) {
-			getLevel().playSound(null, getEffectivePos(), ExtraBotanySounds.BELL_FLOWER_RING, SoundSource.BLOCKS,
-					0.5F, SoundEventUtil.randomPitch(getLevel()));
-		}
-		addMana(Math.max(0, getGenerateMana()));
-		syncThrottled();
-	}
-
-	private void dyingAnime() {
-		if (dyingTicks < 3 * 20) {
-			if (dyingTicks % 10 == 0) {
-				for (int i = 0; i < 3; i++) {
-					double offsetX = getLevel().getRandom().nextDouble() * 2 - 1;
-					double offsetY = getLevel().getRandom().nextDouble() * 0.5;
-					double offsetZ = getLevel().getRandom().nextDouble() * 2 - 1;
-
-					Vec3 particlePos = Vec3.atCenterOf(getBlockPos())
-							.add(offsetX, offsetY, offsetZ);
-
-					getLevel().addParticle(
-							ParticleTypes.ANGRY_VILLAGER,
-							particlePos.x,
-							particlePos.y,
-							particlePos.z,
-							0, 0.05, 0
-					);
-				}
+		if (ticksExisted % INTERVAL == 0) {
+			int mana = getGenerateMana();
+			if (mana > 0) {
+				addMana(mana);
+				syncThrottled();
 			}
-			return;
-		}
-		if (getLevel().isClientSide()) {
-			return;
-		}
-		getLevel().destroyBlock(getBlockPos(), false);
-		if (Blocks.DEAD_BUSH.defaultBlockState().canSurvive(getLevel(), getBlockPos())) {
-			getLevel().setBlockAndUpdate(getBlockPos(), Blocks.DEAD_BUSH.defaultBlockState());
-		}
-
-		var players = PlayerHelper.getRealPlayersIn(getLevel(), new AABB(getBlockPos()).inflate(16));
-		for (var player : players) {
-			if (PlayerHelper.hasAdvancement((ServerPlayer) player, prefix("main/" + LibAdvancementNames.A_BALDRUPT))) {
-				continue;
-			}
-			PlayerHelper.grantCriterion((ServerPlayer) player, prefix("main/" + LibAdvancementNames.A_BALDRUPT), "code_triggered");
 		}
 	}
 
+	/**
+	 * 这一次产生的魔力。看不到天空或者不高于 Y = {@value #BASE_Y} 时是 0。
+	 * The mana of this time. It is 0 when the flower cannot see the sky or is not higher than Y = {@value #BASE_Y}.
+	 */
 	public int getGenerateMana() {
-		double windLevel = Wind.instance().getWindLevel(getLevel(), new Vec3(getEffectivePos().getX(), getEffectivePos().getY(), getEffectivePos().getZ()));
-		if (Math.abs(windLevel - this.windLevel) >= 0.005) {
-			this.windLevel = windLevel;
-			syncThrottled();
-		}
-		double negativeBlockModify = countNegativeBlocks();
-
-		return (int) (((windLevel - negativeBlockModify) * getWindLevelModify()) * getGenerateModify());
-	}
-
-	public int countNegativeBlocks() {
-		int negative = 0;
-
 		BlockPos pos = getEffectivePos();
-		for (BlockPos pos_ : BlockPos.betweenClosed(
-				pos.offset(-getSpaceRequire(), 0, -getSpaceRequire()),
-				pos.offset(getSpaceRequire(), getSpaceRequire(), getSpaceRequire()))) {
-			if (pos_.equals(pos) || !getLevel().isLoaded(pos_)) {
-				continue;
-			}
-			BlockState state = getLevel().getBlockState(pos_);
-			if (state.is(ExtrabotanyFlowerBlocks.bellflower) || state.is(ExtrabotanyFlowerBlocks.bellflowerFloating)) {
-				negative++;
-			}
-			if (!state.isAir() && !state.is(ExtraBotanyTags.Blocks.BELLFLOWER_IGNORE)) {
-				negative++;
-			}
-
-			if (state.is(BotaniaBlocks.DAFFOMILL) || state.is(BotaniaBlocks.FLOATING_DAFFOMILL)) {
-				checkBeBlew(pos_);
-			}
+		int y = pos.getY();
+		if (y <= BASE_Y || !getLevel().canSeeSky(pos)) {
+			return 0;
 		}
-
-		return negative;
-	}
-
-	public void checkBeBlew(BlockPos daffomillPos) {
-		if (!getLevel().isLoaded(daffomillPos)) {
-			return;
-		}
-		var tile = getLevel().getBlockEntity(daffomillPos);
-		if (!(tile instanceof DaffomillBlockEntity daffomill)) {
-			return;
-		}
-		if (daffomill.isPowered()) {
-			return;
-		}
-		if (((DaffomillBlockEntityAccessor) daffomill).getWindTicks() <= 0) {
-			return;
-		}
-		var aabb = ((DaffomillBlockEntityAccessor) daffomill).extrabotany_aabbForOrientation();
-		Vec3 posVec = Vec3.atCenterOf(getBlockPos());
-
-		if (!aabb.contains(posVec)) {
-			return;
-		}
-
-		dying = true;
-	}
-
-	public int getSpaceRequire() {
-		return SPACE_REQUIRE;
-	}
-
-	public double getWindLevelModify() {
-		return WIND_LEVEL_MODIFY;
-	}
-
-	public double getGenerateModify() {
-		return ExtraBotanyConfig.common().bellflowerGenerateModify();
+		int rain = getLevel().isRaining() ? RAIN_GENERATE : 0;
+		return (BASE_GENERATE + rain) * y / BASE_Y;
 	}
 
 	@Override
@@ -223,23 +81,19 @@ public class BellflowerBlockEntity extends ExtraGeneratingFlowerBlockEntity impl
 
 	@Override
 	public @Nullable RadiusDescriptor getRadius() {
-		return null;
+		return RadiusDescriptor.Rectangle.square(getEffectivePos(), RANGE);
 	}
 
 	@Override
 	public void readFromPacketNBT(CompoundTag cmp) {
 		super.readFromPacketNBT(cmp);
 		setPassiveDecayTicks(cmp.getInt(TAG_PASSIVE_DECAY_TICKS));
-		dying = cmp.getBoolean(TAG_DYING);
-		windLevel = cmp.getDouble(TAG_WIND_LEVEL);
 	}
 
 	@Override
 	public void writeToPacketNBT(CompoundTag cmp) {
 		super.writeToPacketNBT(cmp);
 		cmp.putInt(TAG_PASSIVE_DECAY_TICKS, getPassiveDecayTicks());
-		cmp.putBoolean(TAG_DYING, dying);
-		cmp.putDouble(TAG_WIND_LEVEL, windLevel);
 	}
 
 	@Override
@@ -250,13 +104,5 @@ public class BellflowerBlockEntity extends ExtraGeneratingFlowerBlockEntity impl
 	@Override
 	public void setPassiveDecayTicks(int ticks) {
 		this.passiveDecayTicks = ticks;
-	}
-
-	public boolean isDying() {
-		return dying;
-	}
-
-	public double getWindLevel() {
-		return windLevel;
 	}
 }

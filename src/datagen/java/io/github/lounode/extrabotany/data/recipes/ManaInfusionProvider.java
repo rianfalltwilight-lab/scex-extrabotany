@@ -49,14 +49,14 @@ public class ManaInfusionProvider extends ExtraBotanyRecipeProvider {
 		consumer.accept(new FinishedRecipe(id("nightmare_fuel"), new ItemStack(ExtraBotanyItems.nightmareFuel), Ingredient.of(Items.COAL), 2000));
 		consumer.accept(new FinishedRecipe(id("fried_chicken"), new ItemStack(ExtraBotanyItems.friedChicken), Ingredient.of(Items.COOKED_CHICKEN), 600));
 		//Dimension
-		consumer.accept(FinishedRecipe.dimension(id("snowball_to_ender_pearl"), new ItemStack(Items.ENDER_PEARL), ingr(Items.SNOWBALL), 2000));
+		consumer.accept(FinishedRecipe.dimension(id("diamond_to_ender_pearl"), new ItemStack(Items.ENDER_PEARL), ingr(Items.DIAMOND), 20000));
 		consumer.accept(FinishedRecipe.dimension(id("diamond_horse_armor_to_shulker_shell"), new ItemStack(Items.SHULKER_SHELL), ingr(Items.DIAMOND_HORSE_ARMOR), 20000));
 		consumer.accept(FinishedRecipe.dimension(id("apple_to_chorus_fruit"), new ItemStack(Items.CHORUS_FRUIT), ingr(Items.APPLE), 500));
 		consumer.accept(FinishedRecipe.dimension(id("stone_to_end_stone"), new ItemStack(Items.END_STONE), ingr(Items.STONE), 500));
 		consumer.accept(FinishedRecipe.dimension(id("cobblestone_to_nether_rack"), new ItemStack(Items.NETHERRACK), ingr(Items.COBBLESTONE), 500));
 		consumer.accept(FinishedRecipe.dimension(id("sand_to_soul_sand"), new ItemStack(Items.SOUL_SAND), ingr(Items.SAND), 500));
 		consumer.accept(FinishedRecipe.dimension(id("iron_ore_to_quartz_ore"), new ItemStack(Items.NETHER_QUARTZ_ORE), ingr(Items.IRON_ORE), 2000));
-		consumer.accept(FinishedRecipe.dimension(id("blaze_rod_dupe"), new ItemStack(Items.BLAZE_ROD, 2), ingr(Items.BLAZE_ROD), 2000));
+		consumer.accept(FinishedRecipe.dimension(id("blaze_rod_dupe"), new ItemStack(Items.BLAZE_ROD, 2), ingr(Items.BLAZE_ROD), 20000));
 		consumer.accept(FinishedRecipe.dimension(id("nether_star_to_totem_of_undying"), new ItemStack(Items.TOTEM_OF_UNDYING), ingr(Items.NETHER_STAR), 50000));
 		consumer.accept(FinishedRecipe.dimension(id("the_origin_to_elytra"), new ItemStack(Items.ELYTRA), ingr(ExtraBotanyItems.theOrigin), 50000));
 		//Mini

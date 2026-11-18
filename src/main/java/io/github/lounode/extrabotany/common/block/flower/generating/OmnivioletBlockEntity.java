@@ -31,8 +31,8 @@ import io.github.lounode.extrabotany.xplat.ExtraBotanyConfig;
  * 全知瑾。它烧掉丢给它的书和成书来产生魔力。哪些物品能烧、能烧多久，由全知瑾配方决定。周围的书架让它每 tick 产生更多魔力，规则和附魔台相同。
  * Omniviolet. It burns the books and written books that are thrown to it to make mana. The Omniviolet recipes tell which items it can burn and for how long. Bookshelves around it give more mana on each tick, with the same rule as the enchanting table.
  *
- * <p>来源：重制版（Lounode）。它对应 ExtraMeteorP 1.12 的 {@code SubTileOmniViolet}。
- * <p>Source: Reburn (Lounode). It corresponds to {@code SubTileOmniViolet} of ExtraMeteorP 1.12.
+ * <p>来源：ExtraMeteorP 1.16 的 {@code SubTileOmniViolet}：书 50 tick、成书 65 tick，每 tick 8 × min(7, 1 + 附魔能量 × 0.05) 魔力，上限 1500，必须绑定魔力发射器。
+ * <p>Source: {@code SubTileOmniViolet} of ExtraMeteorP 1.16: a book 50 ticks, a written book 65 ticks, 8 × min(7, 1 + enchant power × 0.05) mana on each tick, a maximum of 1500, and it must be bound to a mana spreader.
  */
 public class OmnivioletBlockEntity extends ExtraGeneratingFlowerBlockEntity {
 
@@ -69,6 +69,10 @@ public class OmnivioletBlockEntity extends ExtraGeneratingFlowerBlockEntity {
 			return;
 		}
 		if (isIdleBackoff()) {
+			return;
+		}
+		// 1.16 只有绑定了魔力发射器才吃书。 / In 1.16 it only eats books when it is bound to a mana spreader.
+		if (!isValidBinding()) {
 			return;
 		}
 

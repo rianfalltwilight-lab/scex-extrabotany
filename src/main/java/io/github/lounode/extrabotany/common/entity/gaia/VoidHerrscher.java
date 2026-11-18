@@ -487,7 +487,11 @@ public class VoidHerrscher extends Gaia {
 		if (rankIII && tickCount % 80 == 0) {
 			spawnMissile(2);
 			spawnMissile(2);
-			heal(1F);
+			// 1.12 EntityVoidHerrscher：每 80 tick 回 1。这里的受击无敌时间比 1.12 多，用 heal() 会被它挡掉，所以直接加生命。
+			// 1.12 EntityVoidHerrscher: 1 health each 80 ticks. The hit invulnerability here is longer than in 1.12 and would stop heal(), so the health is added directly.
+			if (getHealth() > 0) {
+				setHealth(Math.min(getMaxHealth(), getHealth() + 1F));
+			}
 		}
 		if (isRankII() && tickCount % 110 == 0) {
 			spawnMissile(1);

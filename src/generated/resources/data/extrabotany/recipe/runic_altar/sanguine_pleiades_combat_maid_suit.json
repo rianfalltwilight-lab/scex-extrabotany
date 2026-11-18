@@ -1,0 +1,29 @@
+{
+  "type": "botania:runic_altar",
+  "catalysts": [],
+  "ingredients": [
+    {
+      "item": "extrabotany:pleiades_combat_maid_suit"
+    },
+    {
+      "item": "extrabotany:shadow_warrior_helmet"
+    },
+    {
+      "item": "extrabotany:shadow_warrior_chestplate"
+    },
+    {
+      "item": "extrabotany:shadow_warrior_leggings"
+    },
+    {
+      "item": "extrabotany:shadow_warrior_boots"
+    }
+  ],
+  "mana": 50000,
+  "output": {
+    "count": 1,
+    "id": "extrabotany:sanguine_pleiades_combat_maid_suit"
+  },
+  "reagent": {
+    "item": "botania:livingrock"
+  }
+}

@@ -92,16 +92,15 @@ public final class P2MachineChunkGameTests {
 			BlockPos pos = edge(h, floating ? 10360 : 10350);
 			var bell = at(h, new BellflowerBlockEntity(pos, (floating ? ExtrabotanyFlowerBlocks.bellflowerFloating : ExtrabotanyFlowerBlocks.bellflower).defaultBlockState()));
 			bell.setFloating(floating);
-			bell.countNegativeBlocks();
-			bell.checkBeBlew(pos.west());
+			bell.getGenerateMana();
 			absent(h, pos, "bellflower");
 			var annoying = at(h, new AnnoyingFlowerBlockEntity(pos, (floating ? ExtrabotanyFlowerBlocks.annoyingflowerFloating : ExtrabotanyFlowerBlocks.annoyingflower).defaultBlockState()));
 			annoying.setFloating(floating);
-			h.assertTrue(!annoying.hasWater(), "Absent water pedestal counted as present");
+			h.assertTrue(!annoying.hasWater(), "Absent water apothecary counted as present");
 			absent(h, pos, "annoying flower");
 			var enchanter = at(h, new EnchanterBlockEntity(pos, (floating ? ExtrabotanyFlowerBlocks.enchanterFloating : ExtrabotanyFlowerBlocks.enchanter).defaultBlockState()));
 			enchanter.setFloating(floating);
-			h.assertTrue(enchanter.getRandomPos() == null, "Absent grass counted as a conversion target");
+			h.assertTrue(enchanter.findGrass() == null, "Absent grass counted as a conversion target");
 			absent(h, pos, "enchanter");
 			var twinstar = at(h, new TwinstarBlockEntity(pos, (floating ? ExtrabotanyFlowerBlocks.twinstarFloating : ExtrabotanyFlowerBlocks.twinstar).defaultBlockState()));
 			twinstar.setFloating(floating);
@@ -115,9 +114,7 @@ public final class P2MachineChunkGameTests {
 			serenitian.setFloating(floating);
 			for (int tick = 0; tick < 20; tick++) serenitian.tickFlower();
 			absent(h, pos, "serenitian");
-			var stonesia = at(h, new StonesiaBlockEntity(pos, (floating ? ExtrabotanyFlowerBlocks.stonesiaFloating : ExtrabotanyFlowerBlocks.stonesia).defaultBlockState()) {
-				@Override public BlockPos getRadomBlockPos() { return pos.west(); }
-			});
+			var stonesia = at(h, new StonesiaBlockEntity(pos, (floating ? ExtrabotanyFlowerBlocks.stonesiaFloating : ExtrabotanyFlowerBlocks.stonesia).defaultBlockState()));
 			stonesia.setFloating(floating);
 			stonesia.tickFlower();
 			absent(h, pos, "stonesia selected candidate");
@@ -133,7 +130,7 @@ public final class P2MachineChunkGameTests {
 		BlockPos poolPos = pos.east(), waterPos = pos.south(), flowerPos = pos.west();
 		level.setBlock(pos, ExtraBotanyBlocks.manaBuffer.defaultBlockState(), 18);
 		level.setBlock(poolPos, BotaniaBlocks.MANA_POOL.defaultBlockState(), 18);
-		level.setBlock(waterPos, ExtraBotanyBlocks.livingrockPedestal.defaultBlockState(), 18);
+		level.setBlock(waterPos, BotaniaBlocks.PETAL_APOTHECARY.defaultBlockState(), 18);
 		level.setBlock(flowerPos, ExtrabotanyFlowerBlocks.twinstarFloating.defaultBlockState(), 18);
 		try {
 			var pool = (ManaPoolBlockEntity) level.getBlockEntity(poolPos);
@@ -141,9 +138,9 @@ public final class P2MachineChunkGameTests {
 			var buffer = (ManaBufferBlockEntity) level.getBlockEntity(pos);
 			buffer.serverTick();
 			h.assertTrue(buffer.getCurrentMana() == 1000 && pool.getCurrentMana() == 1000, "Loaded neighbor mana transfer stopped");
-			((PedestalBlockEntity) level.getBlockEntity(waterPos)).setItem(new ItemStack(Items.WATER_BUCKET));
+			((vazkii.botania.api.block.PetalApothecary) level.getBlockEntity(waterPos)).setFluid(vazkii.botania.api.block.PetalApothecary.State.WATER);
 			var annoying = at(h, new AnnoyingFlowerBlockEntity(pos, ExtrabotanyFlowerBlocks.annoyingflower.defaultBlockState()));
-			h.assertTrue(annoying.hasWater() && annoying.hasWater(), "Loaded pedestal lookup or cached lookup stopped");
+			h.assertTrue(annoying.hasWater() && annoying.hasWater(), "Loaded apothecary lookup or cached lookup stopped");
 			var twinstar = (TwinstarBlockEntity) level.getBlockEntity(flowerPos);
 			twinstar.setPassiveDecayTicks(100);
 			var serenitian = at(h, new SerenitianBlockEntity(pos, ExtrabotanyFlowerBlocks.serenitian.defaultBlockState()));

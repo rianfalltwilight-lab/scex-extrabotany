@@ -161,6 +161,5 @@ public final class PedestalStateGameTests {
         @Override public void setChanged() { dirtyCalls++; super.setChanged(); }
         @Override public int getChargeAmount() { return chargeAmount; }
         @Override public void updateTier() { }
-        @Override public void updateAutomaticHammers() { }
     }
 }

@@ -33,7 +33,7 @@ import io.github.lounode.extrabotany.common.item.ExtraBotanyItems;
 import io.github.lounode.extrabotany.common.item.equipment.armor.goblin_slayer.GoblinSlayerArmorItem;
 import io.github.lounode.extrabotany.common.item.equipment.armor.pleiades_combat_maid.PleiadesCombatMaidArmorItem;
 import io.github.lounode.extrabotany.common.item.equipment.armor.shadow_warrior.ShadowWarriorArmorItem;
-import io.github.lounode.extrabotany.common.item.equipment.armor.starry_idol.StarryIdolArmorItem;
+import io.github.lounode.extrabotany.common.item.equipment.armor.miku.MikuArmorItem;
 import io.github.lounode.extrabotany.common.item.relic.MasterBandOfManaItem;
 import io.github.lounode.extrabotany.common.lib.ExtraBotanyTags;
 import io.github.lounode.extrabotany.common.lib.LibAdvancementNames;
@@ -86,11 +86,6 @@ public class AdvancementProvider extends vazkii.botania.data.AdvancementProvider
 					.parent(root)
 					.addCriterion("craft_pedestal", onPickup(ExtraBotanyTags.Items.PEDESTALS))
 					.save(consumer, mainId(LibAdvancementNames.CRAFT_PEDESTAL));
-			AdvancementHolder kurukuru = Advancement.Builder.advancement()
-					.display(simple(ExtraBotanyBlocks.livingrockPedestal, LibAdvancementNames.KURUKURU, AdvancementType.GOAL))
-					.parent(pedestal)
-					.addCriterion("code_triggered", impossible())
-					.save(consumer, mainId(LibAdvancementNames.KURUKURU));
 			AdvancementHolder goodtek = Advancement.Builder.advancement()
 					.display(simple(ExtraBotanyItems.manasteelHammer, LibAdvancementNames.GOODTEK, AdvancementType.TASK))
 					.parent(pedestal)
@@ -202,9 +197,9 @@ public class AdvancementProvider extends vazkii.botania.data.AdvancementProvider
 					.addCriterion(CODE_TRIGGE, impossible())
 					.save(consumer, mainId(LibAdvancementNames.SPONGE_HAMMER));
 			AdvancementHolder omgItsMiku = Advancement.Builder.advancement()
-					.display(simple(ExtraBotanyItems.starryIdolHeadgear, LibAdvancementNames.OMG_ITS_MIKU, AdvancementType.TASK))
+					.display(simple(ExtraBotanyItems.mikuHelm, LibAdvancementNames.OMG_ITS_MIKU, AdvancementType.TASK))
 					.parent(root)
-					.addCriterion("has_armor_set", armorSet(StarryIdolArmorItem.ARMOR_SET))
+					.addCriterion("has_armor_set", armorSet(MikuArmorItem.ARMOR_SET))
 					.save(consumer, mainId(LibAdvancementNames.OMG_ITS_MIKU));
 			AdvancementHolder sevenSamurai = Advancement.Builder.advancement()
 					.display(simple(ExtraBotanyItems.shadowWarriorHelmet, LibAdvancementNames.SEVEN_SAMURAI, AdvancementType.CHALLENGE))
@@ -226,11 +221,6 @@ public class AdvancementProvider extends vazkii.botania.data.AdvancementProvider
 					.parent(cuteDress)
 					.addCriterion("has_item", onPickup(ExtraBotanyItems.sanguinePleiadesCombatMaidSuit))
 					.save(consumer, mainId(LibAdvancementNames.CORRUPTION));
-			AdvancementHolder aBaldrupt = Advancement.Builder.advancement()
-					.display(hidden(BotaniaBlocks.DAFFOMILL, LibAdvancementNames.A_BALDRUPT, AdvancementType.TASK))
-					.parent(goodtek)
-					.addCriterion("code_triggered", impossible())
-					.save(consumer, mainId(LibAdvancementNames.A_BALDRUPT));
 			AdvancementHolder muromiSan = Advancement.Builder.advancement()
 					.display(simple(ExtrabotanyFlowerBlocks.annoyingflower, LibAdvancementNames.MUROMI_SAN, AdvancementType.GOAL))
 					.parent(goodtek)
@@ -281,6 +271,35 @@ public class AdvancementProvider extends vazkii.botania.data.AdvancementProvider
 					.parent(AdvancementSubProvider.createPlaceholder(mainId(LibAdvancementNames.HERRSCHER_DEFEAT)))
 					.addCriterion("code_triggered", impossible())
 					.save(consumer, mainId(LibAdvancementNames.LUCKY_DRAW));
+			// 对照原版审计 E5：1.12 的 manadriverGet、magicfingerGet、jingweifeatherGet。完成 6、12、18 个进度时由 AllAdvancementsHandler 授予，并掉落物品。
+			// Parity audit E5: manadriverGet, magicfingerGet and jingweifeatherGet of 1.12. AllAdvancementsHandler grants them at 6, 12 and 18 completed advancements, and an item drops.
+			AdvancementHolder manaDriverGet = Advancement.Builder.advancement()
+					.display(simple(ExtraBotanyItems.dispersiveRing, LibAdvancementNames.MANA_DRIVER_GET, AdvancementType.CHALLENGE))
+					.parent(deepDarkFantasy)
+					.addCriterion("code_triggered", impossible())
+					.save(consumer, mainId(LibAdvancementNames.MANA_DRIVER_GET));
+			// 对照原版审计 E6：1.12 的 ultimatehammerCraft（父进度是锻造）和 ultimatehammerUpgrade。
+			// Parity audit E6: ultimatehammerCraft (the parent is the forging advancement) and ultimatehammerUpgrade of 1.12.
+			AdvancementHolder ultimateHammerCraft = Advancement.Builder.advancement()
+					.display(simple(ExtraBotanyItems.ultimateHammer, LibAdvancementNames.ULTIMATE_HAMMER_CRAFT, AdvancementType.TASK))
+					.parent(goodtek)
+					.addCriterion("has_item", onPickup(ExtraBotanyItems.ultimateHammer))
+					.save(consumer, mainId(LibAdvancementNames.ULTIMATE_HAMMER_CRAFT));
+			Advancement.Builder.advancement()
+					.display(simple(ExtraBotanyItems.gildedPotatoMashed, LibAdvancementNames.ULTIMATE_HAMMER_UPGRADE, AdvancementType.TASK))
+					.parent(ultimateHammerCraft)
+					.addCriterion("code_triggered", impossible())
+					.save(consumer, mainId(LibAdvancementNames.ULTIMATE_HAMMER_UPGRADE));
+			AdvancementHolder magicFingerGet = Advancement.Builder.advancement()
+					.display(simple(ExtraBotanyItems.magicFinger, LibAdvancementNames.MAGIC_FINGER_GET, AdvancementType.CHALLENGE))
+					.parent(manaDriverGet)
+					.addCriterion("code_triggered", impossible())
+					.save(consumer, mainId(LibAdvancementNames.MAGIC_FINGER_GET));
+			Advancement.Builder.advancement()
+					.display(simple(ExtraBotanyItems.featherOfJingwei, LibAdvancementNames.JINGWEI_FEATHER_GET, AdvancementType.CHALLENGE))
+					.parent(magicFingerGet)
+					.addCriterion("code_triggered", impossible())
+					.save(consumer, mainId(LibAdvancementNames.JINGWEI_FEATHER_GET));
 		}
 	}
 

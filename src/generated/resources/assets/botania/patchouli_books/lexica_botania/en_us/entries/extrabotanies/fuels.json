@@ -23,6 +23,14 @@
       "text": "extrabotany.page.fuels3"
     },
     {
+      "type": "botania:elven_trade",
+      "recipes": "extrabotany:elven_trade/spirit_fuel"
+    },
+    {
+      "type": "botania:elven_trade",
+      "recipes": "extrabotany:elven_trade/spirit_fragment"
+    },
+    {
       "type": "patchouli:text",
       "text": "extrabotany.page.fuels4"
     }

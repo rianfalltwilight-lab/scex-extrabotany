@@ -43,21 +43,6 @@
       "conditions": [
         {
           "condition": "botania:killed_by_player"
-        }
-      ],
-      "entries": [
-        {
-          "type": "minecraft:item",
-          "name": "extrabotany:music_disc_herrscher_of_the_void"
-        }
-      ],
-      "rolls": 1.0
-    },
-    {
-      "bonus_rolls": 0.0,
-      "conditions": [
-        {
-          "condition": "botania:killed_by_player"
         },
         {
           "chance": 0.02,
@@ -67,6 +52,12 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:set_custom_data",
+              "tag": "{variant:\"rainbow\"}"
+            }
+          ],
           "name": "extrabotany:core_of_the_void"
         }
       ],

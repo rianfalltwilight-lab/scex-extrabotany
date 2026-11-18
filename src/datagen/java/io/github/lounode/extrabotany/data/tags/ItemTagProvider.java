@@ -12,6 +12,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 
@@ -110,7 +111,7 @@ public class ItemTagProvider extends ItemTagsProvider {
 		this.copy(ExtraBotanyTags.Blocks.PEDESTALS, ExtraBotanyTags.Items.PEDESTALS);
 		this.copy(ExtraBotanyTags.Blocks.MANA_POOLS, ExtraBotanyTags.Items.MANA_POOLS);
 		this.copy(ExtraBotanyTags.Blocks.CHARGERS, ExtraBotanyTags.Items.CHARGERS);
-		this.tag(ExtraBotanyTags.Items.ANNOYING_FLOWER_EATABLE).add(friedChicken);
+		this.tag(ExtraBotanyTags.Items.ANNOYING_FLOWER_EATABLE).add(Items.COOKED_CHICKEN);
 		this.tag(ExtraBotanyTags.Items.SHIELDS).add(manasteelShield, elementiumShield, terrasteelShield, achillesShield);
 
 		addCommonMaterialTags();

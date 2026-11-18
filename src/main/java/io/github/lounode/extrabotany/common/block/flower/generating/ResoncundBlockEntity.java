@@ -35,6 +35,9 @@ import java.util.concurrent.TimeUnit;
  * 回音花。它听到范围里的声音时产生魔力。同一种声音听得越多，产生的魔力越少。一种声音 30 秒没有出现之后，它的计数被清除。
  * Resoncund. It makes mana when it hears a sound in the range. The more times it hears the same sound, the less mana that sound gives. When a sound does not occur for 30 seconds, its count is cleared.
  *
+ * <p>它最多同时记住 {@link #CACHE_SIZE} 种声音。记满之后，新的声音不产生魔力，直到旧的声音过期。以前记满时最旧的声音会被挤掉、计数清零，轮换足够多种声音就能一直拿满额魔力。
+ * <p>It remembers at most {@link #CACHE_SIZE} sounds at a time. When that is full, a new sound gives no mana until an old sound expires. Before, a full table pushed out the oldest sound and reset its count, so enough different sounds in turn always gave the full mana.
+ *
  * <p>所有服务端的回音花登记在一张静态的表里，声音事件从这张表里找到它们。花被移除或者区块卸载时，它从表里注销。
  * <p>All the Resoncund flowers of the server are recorded in a static list, and the sound events find them in this list. When a flower is removed or its chunk is unloaded, it is removed from the list.
  *
@@ -46,7 +49,7 @@ public class ResoncundBlockEntity extends ExtraGeneratingFlowerBlockEntity {
 	public static final String TAG_SOUND_HEARD = "soundHeard";
 
 	private static final int RANGE = 4;
-	private static final int CACHE_SIZE = 32;
+	public static final int CACHE_SIZE = 32;
 	private static final int MAX_PRODUCE = 500;
 	private static final int MIN_PRODUCE = 0;
 
@@ -59,8 +62,8 @@ public class ResoncundBlockEntity extends ExtraGeneratingFlowerBlockEntity {
 	 */
 	private static volatile List<ResoncundBlockEntity> snapshot = List.of();
 
+	// No maximumSize: an eviction would reset the count of a sound (see the class comment). onSoundHeard keeps the size.
 	private final LoadingCache<SoundEvent, Integer> SOUND_HEARD = CacheBuilder.newBuilder()
-			.maximumSize(getCacheSize())
 			.expireAfterAccess(30, TimeUnit.SECONDS)
 			.build(CacheLoader.from(() -> 0));
 
@@ -123,7 +126,14 @@ public class ResoncundBlockEntity extends ExtraGeneratingFlowerBlockEntity {
 	}
 
 	public void onSoundHeard(SoundEvent soundEvent) {
-		int count = SOUND_HEARD.getUnchecked(soundEvent);
+		Integer known = SOUND_HEARD.getIfPresent(soundEvent);
+		if (known == null) {
+			SOUND_HEARD.cleanUp();
+			if (SOUND_HEARD.size() >= getCacheSize()) {
+				return;
+			}
+		}
+		int count = known == null ? 0 : known;
 		long decayedProduce = (long) getMaxProduce() - (long) count * getLossPerHeard();
 		int produce = (int) Math.max(getMinProduce(), decayedProduce);
 

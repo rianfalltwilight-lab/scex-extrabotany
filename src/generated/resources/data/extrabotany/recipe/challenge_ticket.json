@@ -1,24 +1,13 @@
 {
-  "type": "minecraft:crafting_shaped",
+  "type": "minecraft:crafting_shapeless",
   "category": "misc",
-  "key": {
-    "A": {
-      "item": "botania:gaia_spirit"
+  "ingredients": [
+    {
+      "item": "extrabotany:the_chaos"
     },
-    "F": {
-      "tag": "extrabotany:photonium_ingots"
-    },
-    "P": {
+    {
       "item": "botania:gaia_ingot"
-    },
-    "S": {
-      "tag": "extrabotany:shadowium_ingots"
     }
-  },
-  "pattern": [
-    "ASA",
-    "FPF",
-    "ASA"
   ],
   "result": {
     "count": 1,

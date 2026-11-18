@@ -35,12 +35,11 @@ public class ExtraBotanySounds {
 
 	public static final SoundEvent MUSIC_GAIA3 = makeSoundEvent("music.gaia3");
 	public static final SoundEvent MUSIC_HERRSCHER = makeSoundEvent("music.herrscher");
-	public static final Holder<SoundEvent> ARMOR_EQUIP_MAID = makeSoundEventHolder("item.armor.equip_maid");
 	public static final Holder<SoundEvent> ARMOR_EQUIP_IDOL = makeSoundEventHolder("item.armor.equip_idol");
 	public static final SoundEvent HAMMER_USE = makeSoundEvent("item.hammer.use");
-	public static final Holder<SoundEvent> ARMOR_EQUIP_GOBLIN = makeSoundEventHolder("item.armor.equip_goblin");
-	public static final Holder<SoundEvent> ARMOR_EQUIP_WARRIOR = makeSoundEventHolder("item.armor.equip_warrior");
-	public static final SoundEvent BELL_FLOWER_RING = makeSoundEvent("block.bellflower.ring");
+	// 对照原版审计 E7：1.12 ModSounds.annoyingflower，王之花园召唤烦人花时播放。重燃的风铃草铃声没有地方使用，已删除。
+	// Parity audit E7: ModSounds.annoyingflower of 1.12, played when the King's Garden summons the annoying flower. The bellflower ring of Reburn was used nowhere and is removed.
+	public static final SoundEvent FLOWER_WEAPON_ANNOYING = makeSoundEvent("entity.flower_weapon.annoying_flower");
 
 	private static SoundEvent makeSoundEvent(String name) {
 		return makeSoundEventHolder(name).value();

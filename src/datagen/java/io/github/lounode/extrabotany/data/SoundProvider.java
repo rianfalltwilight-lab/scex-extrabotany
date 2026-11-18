@@ -44,11 +44,11 @@ public class SoundProvider extends SoundDefinitionsProvider {
 			}
 		}
 
-		// 三首 Boss 音乐：流式播放，没有字幕。
-		// The three boss music tracks: they are streamed and have no subtitle.
+		// 三首 Boss 音乐：流式播放，没有字幕，音量和原版一样是 1.0（对照原版审计 E7）。
+		// The three boss music tracks: they are streamed, have no subtitle, and play at volume 1.0 as in the original (parity audit E7).
 		for (SoundEvent music : List.of(MUSIC_GAIA3, MUSIC_EGO, MUSIC_HERRSCHER)) {
 			remaining.remove(music);
-			add(music, definition().with(sound(filePath(music)).stream().volume(1.3F)));
+			add(music, definition().with(sound(filePath(music)).stream()));
 		}
 
 		// 借用另一个声音事件的事件。
@@ -59,10 +59,7 @@ public class SoundProvider extends SoundDefinitionsProvider {
 		borrow(remaining, PLAYER_BACKFIRE, SoundEvents.PLAYER_HURT_FREEZE, 1F);
 		borrow(remaining, WALKING_CANE_USE, SoundEvents.FISHING_BOBBER_RETRIEVE, 1F);
 		borrow(remaining, HAMMER_USE, BotaniaSounds.TERRA_SHATTERER_MODE, 1F);
-		borrow(remaining, ARMOR_EQUIP_MAID.value(), BotaniaSounds.EQUIP_MANAWEAVE.value(), 1F);
 		borrow(remaining, ARMOR_EQUIP_IDOL.value(), BotaniaSounds.EQUIP_MANAWEAVE.value(), 1F);
-		borrow(remaining, ARMOR_EQUIP_GOBLIN.value(), SoundEvents.ARMOR_EQUIP_IRON.value(), 1F);
-		borrow(remaining, ARMOR_EQUIP_WARRIOR.value(), SoundEvents.ARMOR_EQUIP_CHAIN.value(), 1F);
 
 		// 王者圣剑和百中弓使用泰拉之刃的声音文件，音量更小、音调更高。
 		// Excalibur and the Failnaught use the sound file of the Terra Blade, at a lower volume and a higher pitch.

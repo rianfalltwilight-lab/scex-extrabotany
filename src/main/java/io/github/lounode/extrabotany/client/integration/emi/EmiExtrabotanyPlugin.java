@@ -124,7 +124,7 @@ public class EmiExtrabotanyPlugin implements EmiPlugin {
 			if (brew != ExtraBotanyBrews.manaCocktail) {
 				ItemStack flask = BotaniaItems.BREW_FLASK.getDefaultInstance();
 				BrewUtil.setBrew(flask, brew);
-				addBrewRecipe(registry, "mana_cocktail_change_brew", brewId, ManaCocktailItem.getDefaultCocktail(), flask);
+				addBrewRecipe(registry, "mana_cocktail_change_brew", brewId, new ItemStack(ExtraBotanyItems.manaDrink), flask);
 			}
 			addBrewRecipe(registry, "infinite_wine", brewId, cocktail, ExtraBotanyItems.heroMedal.getDefaultInstance());
 			addBrewRecipe(registry, "infinite_wine_change_brew", brewId, cocktail, ExtraBotanyItems.infiniteWine.getDefaultInstance());

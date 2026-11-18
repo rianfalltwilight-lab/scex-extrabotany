@@ -29,14 +29,20 @@ public final class P2FlowerGameTests {
 		var flower = (TwinstarBlockEntity) level.getBlockEntity(pos);
 		try {
 			h.assertTrue(flower.getThermoelectric() == 0, "No fluid produced a temperature difference");
-			level.setBlock(pos.west(), Blocks.WATER.defaultBlockState(), 18);
-			h.assertTrue(flower.getThermoelectric() == 0 && flower.getGenerateMana() == 0,
-					"A single fluid used the configured minimum instead of its actual temperature");
-			level.setBlock(pos.east(), Blocks.WATER.defaultBlockState(), 18);
-			h.assertTrue(flower.getThermoelectric() == 0, "Equal-temperature fluids produced mana");
-			level.setBlock(pos.east(), Blocks.LAVA.defaultBlockState(), 18);
 			int cold = EXplatAbstractions.INSTANCE.getFluidTemperature(Fluids.WATER);
 			int hot = EXplatAbstractions.INSTANCE.getFluidTemperature(Fluids.LAVA);
+			int base = TwinstarBlockEntity.BASE_TEMPERATURE;
+			// Original 1.16/1.12: both ends start at 700 K, so one fluid alone already makes mana.
+			level.setBlock(pos.west(), Blocks.WATER.defaultBlockState(), 18);
+			h.assertTrue(flower.getThermoelectric() == base - cold && flower.getGenerateMana() == (base - cold) / 100,
+					"Water alone did not use the 700 K start of the original");
+			level.setBlock(pos.east(), Blocks.WATER.defaultBlockState(), 18);
+			h.assertTrue(flower.getThermoelectric() == base - cold, "Two water blocks changed the cold end");
+			level.setBlock(pos.west(), Blocks.AIR.defaultBlockState(), 18);
+			level.setBlock(pos.east(), Blocks.LAVA.defaultBlockState(), 18);
+			h.assertTrue(flower.getThermoelectric() == hot - base && flower.getGenerateMana() == (hot - base) / 100,
+					"Lava alone did not use the 700 K start of the original");
+			level.setBlock(pos.west(), Blocks.WATER.defaultBlockState(), 18);
 			h.assertTrue(hot - cold > 200, "Fixture does not contain distinct hot and cold fluids");
 			int difference = Math.max(0, Math.min(flower.getTemperatureMax(), hot) - Math.max(flower.getTemperatureMin(), cold));
 			h.assertTrue(flower.getThermoelectric() == difference && flower.getGenerateMana() == difference / 100,

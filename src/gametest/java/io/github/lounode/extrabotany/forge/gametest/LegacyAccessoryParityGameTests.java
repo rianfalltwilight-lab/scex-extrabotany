@@ -51,8 +51,9 @@ public final class LegacyAccessoryParityGameTests {
         helper.succeed();
     }
 
+    // Original 1.16 ItemCoreGod: only flight; the cure of harmful effects was a Reburn addition (parity audit E2).
     @GameTest(template = "empty", timeoutTicks = 20)
-    public static void ownedVoidCoreCuresOnceAfterSaveAndRequiresEnoughMana(GameTestHelper helper) {
+    public static void ownedVoidCoreKeepsItsOwnerAndNoLongerCures(GameTestHelper helper) {
         var player = helper.makeMockPlayer(GameType.SURVIVAL);
         var mana = supplyMana(player, 1000);
         var core = (CoreOfTheVoidItem) ExtraBotanyItems.coreOfTheVoid;
@@ -63,19 +64,10 @@ public final class LegacyAccessoryParityGameTests {
         helper.assertTrue(EXplatAbstractions.INSTANCE.findRelic(stack).isRightPlayer(player),
                 "Relic ownership did not survive item reload");
         player.addEffect(new MobEffectInstance(MobEffects.POISON, 600));
-        player.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 600));
-        player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 600));
         core.onWornTick(stack, player);
-        helper.assertTrue(!player.hasEffect(MobEffects.POISON) && !player.hasEffect(MobEffects.WEAKNESS)
-                && player.hasEffect(MobEffects.MOVEMENT_SPEED), "Cure failed or removed a beneficial effect");
-        helper.assertTrue(mana.getMana() == 800, "The cure must charge once for all active harmful effects");
-        core.onWornTick(stack, player);
-        helper.assertTrue(mana.getMana() == 800, "An idle core charged for an absent harmful effect");
-        mana.addMana(199 - mana.getMana());
-        player.addEffect(new MobEffectInstance(MobEffects.POISON, 600));
-        core.onWornTick(stack, player);
-        helper.assertTrue(player.hasEffect(MobEffects.POISON) && mana.getMana() == 199,
-                "An underfunded cure removed an effect or consumed partial payment");
+        helper.assertTrue(player.hasEffect(MobEffects.POISON) && mana.getMana() == 1000,
+                "The core still cures harmful effects or spends mana while worn");
+        helper.assertTrue(CoreOfTheVoidItem.getFlyCost() == 35, "Flight must cost 35 mana a tick");
         helper.succeed();
     }
 

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:ingots/elementium"
+    },
+    "B": {
+      "item": "extrabotany:manasteel_flying_boat"
+    }
+  },
+  "pattern": [
+    "ABA",
+    "AAA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "extrabotany:elementium_flying_boat"
+  }
+}

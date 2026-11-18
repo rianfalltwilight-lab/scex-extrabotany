@@ -66,6 +66,6 @@ public class ColorHandler {
 		ItemColor lensHandler = (s, t) -> t == 0 ? FastColor.ARGB32.opaque(((LensItem) s.getItem()).getLensColor(s, Minecraft.getInstance().level)) : -1;
 		items.register(lensHandler,
 				ExtraBotanyItems.lensPush, ExtraBotanyItems.lensSmelt, ExtraBotanyItems.lensMana,
-				ExtraBotanyItems.lensPotion, ExtraBotanyItems.lensTrace);
+				ExtraBotanyItems.lensPotion, ExtraBotanyItems.lensTrace, ExtraBotanyItems.lensCloud);
 	}
 }

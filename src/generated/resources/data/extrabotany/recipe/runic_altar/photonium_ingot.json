@@ -3,22 +3,19 @@
   "catalysts": [],
   "ingredients": [
     {
-      "item": "botania:elementium_ingot"
+      "tag": "c:ingots/elementium"
     },
     {
       "item": "extrabotany:gilded_potato_mashed"
     },
     {
-      "item": "extrabotany:spirit_fragment"
+      "item": "extrabotany:spirit_fuel"
     },
     {
-      "item": "extrabotany:spirit_fragment"
-    },
-    {
-      "item": "extrabotany:spirit_fragment"
+      "item": "extrabotany:spirit_fuel"
     }
   ],
-  "mana": 4200,
+  "mana": 6000,
   "output": {
     "count": 1,
     "id": "extrabotany:photonium_ingot"

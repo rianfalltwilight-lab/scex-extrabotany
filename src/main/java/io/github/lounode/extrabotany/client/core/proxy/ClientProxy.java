@@ -31,18 +31,30 @@ public class ClientProxy extends vazkii.botania.client.core.proxy.ClientProxy im
 		return ClientAdvancements.hasDone(id.toString());
 	}
 
+	// 本机玩家在空中已经蹬墙跳了几次，以及上一 tick 是否按着跳跃键。来源：ExtraMeteorP 1.12 ItemWallJumpingRing。
+	// How many wall jumps the local player made in the air, and if the jump key was down in the last tick. Source: ExtraMeteorP 1.12 ItemWallJumpingRing.
+	private int wallJumps;
+	private boolean wallJumpKeyDown;
+
 	@Override
-	public void tryWallJump(LivingEntity entity) {
+	public void tryWallJump(LivingEntity entity, int maxJumps) {
 		if (!(entity instanceof LocalPlayer player) || player != Minecraft.getInstance().player) {
 			return;
 		}
-		// 玩家还在上升时不能再跳，除非玩家在梯子或者藤蔓上。
-		// The player cannot jump again while the player still goes up, unless the player is on a ladder or a vine.
-		if (player.getDeltaMovement().y() > 0 && !player.onClimbable()) {
+		if (player.onGround()) {
+			wallJumps = 0;
 			return;
 		}
 		if (player.input.jumping && player.horizontalCollision) {
-			player.jumpFromGround();
+			// 必须重新按下跳跃键，按住不放不会连续跳。
+			// The jump key must be pressed again; holding it down does not jump again and again.
+			if (!wallJumpKeyDown && wallJumps < maxJumps) {
+				player.jumpFromGround();
+				wallJumps++;
+			}
+			wallJumpKeyDown = true;
+		} else {
+			wallJumpKeyDown = false;
 		}
 	}
 }

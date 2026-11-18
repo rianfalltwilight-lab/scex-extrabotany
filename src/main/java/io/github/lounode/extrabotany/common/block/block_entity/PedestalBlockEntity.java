@@ -19,7 +19,6 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.decoration.ItemFrame;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -180,7 +179,6 @@ public class PedestalBlockEntity extends ExposedSimpleInventoryBlockEntity imple
 	private int tier;
 	private int solarTicks;
 	private boolean pendingSync;
-	private List<ItemFrame> automaticHammers = List.of();
 
 	public PedestalBlockEntity(BlockPos pos, BlockState state) {
 		this(ExtraBotanyBlockEntities.PEDESTAL, pos, state);
@@ -208,6 +206,7 @@ public class PedestalBlockEntity extends ExposedSimpleInventoryBlockEntity imple
 
 		List<Function<Void, Map.Entry<InteractionResult, Boolean>>> handlers = Arrays.asList(
 				(Void v) -> handleExtractFinishItem(state, world, pos, player, hand, hit),
+				(Void v) -> upgradeUltimateHammer(world, player),
 				(Void v) -> handleSmashNew(state, world, pos, player, hand, hit),
 				(Void v) -> configureKingGarden(world, pos, player),
 				(Void v) -> handleReversePlaceItem(state, world, pos, player, hand, hit),
@@ -435,6 +434,35 @@ public class PedestalBlockEntity extends ExposedSimpleInventoryBlockEntity imple
 		return superItemStack;
 	}
 
+	/**
+	 * 对照原版审计 E6：1.12 BlockPedestal 的究极锤升级。祭坛上放着究极锤时，手里的镀金土豆泥（5 个）、元素钢剑或泰拉钢锤用来升级它。
+	 * Parity audit E6: the Ultimate Hammer upgrade of BlockPedestal of 1.12. With an Ultimate Hammer on the pedestal, gilded mashed potatoes (5), an elementium sword or a terrasteel hammer in the main hand upgrade it.
+	 */
+	private Map.Entry<InteractionResult, Boolean> upgradeUltimateHammer(Level world, Player player) {
+		ItemStack hammer = getItem();
+		ItemStack held = player.getMainHandItem();
+		if (!(hammer.getItem() instanceof io.github.lounode.extrabotany.common.item.equipment.tool.hammer.UltimateHammerItem) || held.isEmpty()) {
+			return new AbstractMap.SimpleEntry<>(InteractionResult.CONSUME, false);
+		}
+		boolean potato = held.is(io.github.lounode.extrabotany.common.item.ExtraBotanyItems.gildedPotatoMashed);
+		// 客户端只用副本判断，真正的升级在服务端。 / The client only checks with copies; the real upgrade is on the server.
+		if (world.isClientSide()) {
+			return new AbstractMap.SimpleEntry<>(io.github.lounode.extrabotany.common.item.equipment.tool.hammer.UltimateHammerItem.tryUpgrade(hammer.copy(), held.copy())
+					? InteractionResult.CONSUME_PARTIAL : InteractionResult.CONSUME, false);
+		}
+		if (!io.github.lounode.extrabotany.common.item.equipment.tool.hammer.UltimateHammerItem.tryUpgrade(hammer, held)) {
+			return new AbstractMap.SimpleEntry<>(InteractionResult.CONSUME, false);
+		}
+		setStrikes(0);
+		markUpdated();
+		if (potato && player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
+			vazkii.botania.common.helper.PlayerHelper.grantCriterion(serverPlayer,
+					io.github.lounode.extrabotany.common.lib.ResourceLocationHelper.prefix("main/" + io.github.lounode.extrabotany.common.lib.LibAdvancementNames.ULTIMATE_HAMMER_UPGRADE), "code_triggered");
+		}
+		world.playSound(null, getBlockPos(), SoundEvents.ANVIL_USE, SoundSource.PLAYERS, .5F, 1F);
+		return new AbstractMap.SimpleEntry<>(InteractionResult.CONSUME_PARTIAL, false);
+	}
+
 	private Map.Entry<InteractionResult, Boolean> configureKingGarden(Level world, BlockPos pos, Player player) {
 		var garden = getItem();
 		if (!(garden.getItem() instanceof KingGardenItem)
@@ -492,32 +520,6 @@ public class PedestalBlockEntity extends ExposedSimpleInventoryBlockEntity imple
 		// This also flushes partial strikes and the final charge of a now-full orb.
 		if (self.pendingSync && self.tickCount % 10 == 0) {
 			self.markUpdated();
-		}
-
-		if (self.tickCount % 20 == 0) {
-			int lastHammers = self.automaticHammers.size();
-			self.updateAutomaticHammers();
-			if (lastHammers != self.automaticHammers.size() && self.automaticHammers.size() == 4) {
-				Player nearestPlayer = level.getNearestPlayer(
-						pos.getX(), pos.getY(), pos.getZ(),
-						10, false
-				);
-				if (nearestPlayer != null) {
-					PlayerHelper.grantCriterion((ServerPlayer) nearestPlayer, prefix("main/" + LibAdvancementNames.KURUKURU), "code_triggered");
-				}
-			}
-		}
-
-		if (self.tickCount % 10 == 0 && !self.isEmpty()) {
-			for (ItemFrame frame : self.automaticHammers) {
-				if (!frame.isAlive()) {
-					continue;
-				}
-				// Frames are cached between scans, but players can replace their items at any time.
-				if (self.tryAutoSmash(frame.getItem())) {
-					break;
-				}
-			}
 		}
 
 		self.tickCount++;
@@ -580,11 +582,11 @@ public class PedestalBlockEntity extends ExposedSimpleInventoryBlockEntity imple
 		self.tickCount++;
 	}
 
+	/**
+	 * 用这把锤子在祭坛上敲一下（发射器使用）。没有配方接受这把锤子和祭坛上的物品时返回 {@code false}。
+	 * Strikes the pedestal one time with this hammer (a dispenser uses it). Returns {@code false} when no recipe accepts the hammer and the item on the pedestal.
+	 */
 	public boolean tryAutoSmash(ItemStack hammer) {
-		ItemFrame frame = hammer.getFrame();
-		if (frame != null && (!frame.isAlive() || frame.getItem() != hammer)) {
-			return false;
-		}
 		for (var holder : ExtraBotanyRecipeTypes.getRecipeHolders(level, ExtraBotanyRecipeTypes.PEDESTAL_SMASH_TYPE)) {
 			PedestalRecipe recipe = holder.value();
 			if (!recipe.getSmashTools().test(hammer)) {
@@ -601,11 +603,7 @@ public class PedestalBlockEntity extends ExposedSimpleInventoryBlockEntity imple
 			int efficiency = getEnchantmentLevel(hammer, Enchantments.EFFICIENCY);
 
 			if (hammer.isDamageableItem() && level instanceof ServerLevel serverLevel) {
-				hammer.hurtAndBreak(1, serverLevel, (LivingEntity) null, brokenItem -> {
-					if (frame != null && frame.getItem() == hammer) {
-						frame.setItem(ItemStack.EMPTY);
-					}
-				});
+				hammer.hurtAndBreak(1, serverLevel, (LivingEntity) null, brokenItem -> {});
 			}
 
 			this.setStrikes(this.strikes + 1 /*+ efficiency*/);
@@ -638,19 +636,6 @@ public class PedestalBlockEntity extends ExposedSimpleInventoryBlockEntity imple
 			return true;
 		}
 		return false;
-	}
-
-	public Map<ItemStack, ItemFrame> getPerhapsHammers() {
-		return level.getEntitiesOfClass(ItemFrame.class,
-				new AABB(worldPosition).inflate(2.0)
-		).stream()
-				.filter(frame -> frame.getPos().relative(frame.getDirection().getOpposite()).equals(worldPosition))
-				.filter(itemFrame -> !itemFrame.getItem().isEmpty())
-				.collect(Collectors.toMap(ItemFrame::getItem, itemFrame -> itemFrame, (oldFrame, newFrame) -> newFrame));
-	}
-
-	public void updateAutomaticHammers() {
-		this.automaticHammers = List.copyOf(getPerhapsHammers().values());
 	}
 
 	@Override

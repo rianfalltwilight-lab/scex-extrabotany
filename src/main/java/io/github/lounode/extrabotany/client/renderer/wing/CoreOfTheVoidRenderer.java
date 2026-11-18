@@ -33,6 +33,7 @@ public final class CoreOfTheVoidRenderer implements AccessoryRenderer {
 		registerWings(CoreOfTheVoidItem.VARIANT_FLANDRE, new PairedWings(prefix("wing/flandre"), 0.2, 0.25F));
 		registerWings(CoreOfTheVoidItem.VARIANT_JIM, new PairedWings(prefix("wing/jim"), 0.5, 1F));
 		registerWings(CoreOfTheVoidItem.VARIANT_STEAMPUNK, new PairedWings(prefix("wing/steampunk"), 0.5, 1F));
+		registerWings(CoreOfTheVoidItem.VARIANT_RAINBOW, new RainbowWings());
 	}
 
 	/**
